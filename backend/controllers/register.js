@@ -3,11 +3,10 @@ const connection = require("../models/db");
 const register =(req,res)=>{
 
 const role_id=req.params.id;
-const card_id=req.body;
 const {firstName,lastName,gender,adders,email,password} =req.body;
 const query= 'INSERT INTO USERS (firstName,lastName,gender,adders,email,password) values(?,?,?,?,?,?)';
 
-const data =[firstName,lastName,gender,adders,email,password,role_id,card_id];
+const data =[firstName,lastName,gender,adders,email,password,role_id];
 
 
 connection.query(query,data,(err,result)=>{
