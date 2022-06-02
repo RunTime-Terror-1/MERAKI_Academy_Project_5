@@ -5,7 +5,7 @@ const register = (req, res) => {
   const { firstName, lastName, gender, adders, email, password } = req.body;
 
   const userQuery =
-    "INSERT INTO USERS (firstName,lastName,gender,adders,email,password) values(?,?,?,?,?,?)";
+    "INSERT INTO USERS (firstName,lastName,gender,email,password) values(?,?,?,?,?,?)";
   //hash password
   const data = [firstName, lastName, gender, adders, email, password, role_id];
 
