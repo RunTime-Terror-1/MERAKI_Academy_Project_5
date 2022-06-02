@@ -35,7 +35,9 @@ CREATE TABLE address (
     city VARCHAR(255),
     notes VARCHAR(255),
     buldingNumber VARCHAR(255),
-     PRIMARY KEY (id)
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    PRIMARY KEY (id)
 );
 
 
