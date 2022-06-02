@@ -8,6 +8,7 @@ const mealsRouter = require("./routes/meals");
 const registerRouter = require("./routes/register");
 const loginRouter = require("./routes/login");
 const roleRouter = require("./routes/role");
+const userRouter = require("./routes/users")
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use("/register", registerRouter);
 app.use("/meals", mealsRouter);
 app.use("/login", loginRouter);
 app.use("/role", roleRouter);
+app.use("/users", userRouter);
 
 
 const PORT = process.env.PORT || 5000;
