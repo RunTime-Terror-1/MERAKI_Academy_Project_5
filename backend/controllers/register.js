@@ -4,7 +4,9 @@ const register =(req,res)=>{
 
 const role_id=req.params.id;
 const {firstName,lastName,gender,adders,email,password} =req.body;
-const query= 'INSERT INTO USERS (firstName,lastName,gender,adders,email,password) values(?,?,?,?,?,?)';
+const query1= 'INSERT INTO USERS (firstName,lastName,gender,adders,email,password) values(?,?,?,?,?,?)';
+const query2= 'INSERT INTO USERS (firstName,lastName,gender,adders,email,password) values(?,?,?,?,?,?)';
+const query3= 'INSERT INTO USERS (firstName,lastName,gender,adders,email,password) values(?,?,?,?,?,?)';
 
 const data =[firstName,lastName,gender,adders,email,password,role_id];
 
