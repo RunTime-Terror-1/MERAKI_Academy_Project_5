@@ -61,24 +61,22 @@ const createAdmin = (req, res) => {
   });
 };
 const deleteAdmin = (req, res) => {
-    const adminId = req.params.adminId; 
-    
-    const query =
-      "DELETE FROM users WHERE id=?";
-    connection.query(query, [adminId], (err, result) => {
-      if (err) {
-        res.status(500).json({
-          success: false,
-          massage: "server error",
-          err: err,
-        });
-      }
-      res.status(201).json({
-        success: true,
-        massage: "Admin Deleted",
+  const adminId = req.params.adminId;
+
+  const query = "DELETE FROM users WHERE id=?";
+  connection.query(query, [adminId], (err, result) => {
+    if (err) {
+      res.status(500).json({
+        success: false,
+        massage: "server error",
+        err: err,
       });
+    }
+    res.status(201).json({
+      success: true,
+      massage: "Admin Deleted",
     });
-  };
+  });
+};
 
-
-module.exports = { deleteUserById, getAllUsers,createAdmin };
+module.exports = { deleteUserById, getAllUsers, createAdmin, deleteAdmin };
