@@ -51,8 +51,7 @@ const createPermission = (req, res) => {
             });
           }
         });
-      }
-       else {
+      } else {
         res.status(500).json({
           success: false,
           message: "permission not created",
@@ -65,3 +64,5 @@ const createPermission = (req, res) => {
 module.exports = {
   createNewRole,createPermission
 };
+
+//!......................................
