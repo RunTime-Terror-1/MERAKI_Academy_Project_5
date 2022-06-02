@@ -1,5 +1,5 @@
 const connection = require("../models/db");
-const bcrypt =require=require("bcrypt");
+const bcrypt =require("bcrypt");
 const jwt =require("jsonwebtoken");
 
 
