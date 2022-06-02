@@ -1,11 +1,18 @@
 const connection = require("../models/db");
+const bcrypt =require=require("bcrypt");
+const jwt =require("jsonwebtoken");
+
 
 const register = (req, res) => {
-  //create user
-  const { firstName, lastName, gender, email, password } = req.body;
+
+    const salt =10;
+    const hashpassword=await bcrypt.hash(password,salt);
+    const role_id=req.params.id;
+    //create user
+  const { firstName, lastName, email, password } = req.body;
 
   const userQuery =
-    "INSERT INTO USERS (firstName,lastName,gender,email,password) values(?,?,?,?,?,?)";
+    "INSERT INTO USERS (firstName,lastName,email,password) values(?,?,?,?,?)";
   //hash password
   const data = [firstName, lastName, gender, adders, email, password, role_id];
 
