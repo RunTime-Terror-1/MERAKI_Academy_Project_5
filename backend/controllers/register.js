@@ -3,24 +3,25 @@ const bcrypt =require=require("bcrypt");
 const jwt =require("jsonwebtoken");
 
 
-const register = (req, res) => {
-
+const register = async(req, res) => {
+    const { firstName, lastName, email, password } = req.body;
     const salt =10;
-    const hashpassword=await bcrypt.hash(password,salt);
-    const role_id=req.params.id;
+    const hashpassword= await bcrypt.hash(password,salt);
+    const role_id=req.params.roleId;
     //create user
-  const { firstName, lastName, email, password } = req.body;
+  
 
   const userQuery =
-    "INSERT INTO USERS (firstName,lastName,email,password) values(?,?,?,?,?)";
+    "INSERT INTO USERS (firstName,lastName,email,password,role_id) values(?,?,?,?,?,?)";
   //hash password
-  const data = [firstName, lastName, gender, adders, email, password, role_id];
+  const data = [firstName, lastName,  email, password, role_id];
 
   connection.query(userQuery, data, (err, result) => {
     if (err) {
-      return res.json({
+      return res.status(403).json({
         success: false,
         message: "The email already exists",
+
       });
     }
     //create cart after create user
@@ -29,7 +30,7 @@ const register = (req, res) => {
     connection.query(cartQuery, [result.insertId], (err, result) => {
       if (err) {
         return res.status(500).json({
-          success: true,
+          success: false,
           message: "Field in creating cart",
         });
       }
@@ -40,7 +41,7 @@ const register = (req, res) => {
     connection.query(addressQuery, [result.insertId], (err, result) => {
       if (err) {
         return res.status(500).json({
-          success: true,
+          success: false,
           message: "Field in creating Address",
         });
       }
@@ -54,3 +55,7 @@ const register = (req, res) => {
     });
   });
 };
+
+module.exports={
+    register
+}
