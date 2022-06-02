@@ -17,7 +17,7 @@ connection.query(query,data,(err,result)=>{
             message:'The email already exists'
         });
     }
-    const query='INSERT INTO USERS (role_id,card_id) values (?,?)';
+    const query='INSERT INTO USERS (role_id) values (?)';
     
     connection.query(query,data,(err,result)=>{
     if(err){
