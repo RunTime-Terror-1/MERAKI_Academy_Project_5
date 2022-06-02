@@ -45,7 +45,6 @@ CREATE TABLE meals(
     imgUrl VARCHAR(255) NOT NULL,
     category VARCHAR(255) NOT NULL,
     price INT NOT NULL,
-    size VARCHAR(255) NOT NULL,
     is_deleted TINYINT DEFAULT 0,
     PRIMARY KEY (id)
 );
