@@ -25,3 +25,29 @@ const createNewMeal=(req,res)=>{
       });
 };
 
+//!........................................
+
+const getAllMeals=(req,res)=>{
+
+    const query = `SELECT * FROM meals WHERE is_deleted=0;`;
+    connection.query(query, (err, result) => {
+      if (err) {
+        res.status(500).json({
+          success: false,
+          massage: "server error",
+          err: err,
+        });
+      }
+      res.status(200).json({
+        success: true,
+        massage: "All the Meals",
+        meals: result,
+      });
+    });
+
+};
+//!....................................
+module.exports = {
+    createNewMeal,getAllMeals
+  };
+  

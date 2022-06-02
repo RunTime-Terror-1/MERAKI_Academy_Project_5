@@ -1,9 +1,9 @@
 const express = require("express");
 
-// const { } = require("../controllers/login");
+const {createNewMeal,getAllMeals}=require("../controllers/meals")
 
 const mealsRouter = express.Router();
 
-
-
+mealsRouter.post("/",createNewMeal)
+mealsRouter.get("/",getAllMeals)
 module.exports = mealsRouter;
