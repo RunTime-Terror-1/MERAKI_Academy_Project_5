@@ -49,6 +49,7 @@ CREATE TABLE sizes (
     id INT AUTO_INCREMENT NOT NULL,
     size VARCHAR(255) NOT NULL,
     name VARCHAR(255),
+    price INT NOT NULL,
     FOREIGN KEY (name) REFERENCES meals(name),
     is_deleted TINYINT DEFAULT 0,
     PRIMARY KEY (id)
