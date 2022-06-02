@@ -2,7 +2,7 @@ const connection = require("../models/db");
 
 const register = (req, res) => {
   //create user
-  const { firstName, lastName, gender, adders, email, password } = req.body;
+  const { firstName, lastName, gender, email, password } = req.body;
 
   const userQuery =
     "INSERT INTO USERS (firstName,lastName,gender,email,password) values(?,?,?,?,?,?)";
