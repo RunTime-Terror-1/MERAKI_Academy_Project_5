@@ -5,7 +5,7 @@ const deleteMealById = (req, res) => {
   const query = "Delete form meals where id=?";
   connection.query(query, [mealId], (err, result) => {
     if (err) {
-      return res.status(200).json({
+      return res.status(500).json({
         success: false,
         message: "Server Error",
         err: err.message,
@@ -22,11 +22,11 @@ const deleteMealById = (req, res) => {
 
 const updateMealById = (req, res) => {
     const mealId = req.params.mealId;
-    const {name,category,price,size} = req.body;
-    const query = "UPDATE meals SET name=? , category=?,price=?, size=? form meals where id=?";
-    connection.query(query, [name,category,price,size,mealId], (err, result) => {
+    const {name,category,imgUrl,price,size} = req.body;
+    const query = "UPDATE meals SET name=? ,imgUrl=? ,category=?,price=?, size=? form meals where id=?";
+    connection.query(query, [name,category,imgUrl,price,size,mealId], (err, result) => {
       if (err) {
-        return res.status(200).json({
+        return res.status(500).json({
           success: false,
           message: "Server Error",
           err: err.message,
