@@ -1,3 +1,6 @@
+
+DROP DATABASE RUNTIME_TERROR;
+
 CREATE DATABASE RUNTIME_TERROR;
 
 USE RUNTIME_TERROR;
@@ -6,20 +9,6 @@ CREATE TABLE roles (
     id INT AUTO_INCREMENT NOT NULL,
     role VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
-);
-
-CREATE TABLE carts (
-    id INT AUTO_INCREMENT NOT NULL,
-    user_id INT,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-);
-
-CREATE TABLE address (
-    id INT AUTO_INCREMENT NOT NULL,
-    street VARCHAR(255),
-    city VARCHAR(255),
-    notes VARCHAR(255),
-    buldingNumber VARCHAR(255),
 );
 
 CREATE TABLE users(
@@ -33,6 +22,22 @@ CREATE TABLE users(
     is_deleted TINYINT DEFAULT 0,
     PRIMARY KEY (id)
 );
+CREATE TABLE carts (
+    id INT AUTO_INCREMENT NOT NULL,
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+      PRIMARY KEY (id)
+);
+
+CREATE TABLE address (
+    id INT AUTO_INCREMENT NOT NULL,
+    street VARCHAR(255),
+    city VARCHAR(255),
+    notes VARCHAR(255),
+    buldingNumber VARCHAR(255),
+     PRIMARY KEY (id)
+);
+
 
 CREATE TABLE meals(
     id INT AUTO_INCREMENT NOT NULL,
@@ -49,6 +54,7 @@ CREATE TABLE sizes (
     id INT AUTO_INCREMENT NOT NULL,
     size VARCHAR(255) NOT NULL,
     name VARCHAR(255),
+    price INT NOT NULL,
     FOREIGN KEY (name) REFERENCES meals(name),
     is_deleted TINYINT DEFAULT 0,
     PRIMARY KEY (id)
@@ -73,10 +79,11 @@ CREATE TABLE orders (
     receipt FLOAT NOT NULL,
     location VARCHAR(255) NOT NULL,
     user_id INT,
+    meal_id INT,
     FOREIGN KEY (meal_id) REFERENCES meals(id),
     FOREIGN KEY (user_id) REFERENCES users(id),
     is_deleted TINYINT DEFAULT 0,
-    PRIMARY KEY (id),
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE permissions (

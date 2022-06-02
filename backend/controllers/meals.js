@@ -47,10 +47,10 @@ const updateMealById = (req, res) => {
 const createNewMeal=(req,res)=>{
 
 
-    const {name,imgUrl,category,price}=req.body
+    const {name,imgUrl,category,price,size}=req.body
 
     const query = `INSERT INTO meals (name, imgUrl,category,price) VALUES (?,?,?,?);`;
-    const data = [name, imgUrl,category,price];
+    const data = [name, imgUrl,category,price,size];
 
     connection.query(query, data, (err, result) => {
         if (err) {
