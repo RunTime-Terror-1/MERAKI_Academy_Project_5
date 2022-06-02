@@ -1,6 +1,7 @@
 const express = require("express");
 
-const {deleteMealById,updateMealById} = require("../controllers/meals")
+
+const {deleteMealById,updateMealById,createNewMeal,getAllMeals} = require("../controllers/meals")
 
 const mealsRouter = express.Router();
 
@@ -13,5 +14,7 @@ mealsRouter.put("/:mealId",updateMealById)
 mealsRouter.delete("/delete/:mealId",deleteMealById)
 
 
+mealsRouter.post("/",createNewMeal)
+mealsRouter.get("/",getAllMeals)
 
 module.exports = mealsRouter;
