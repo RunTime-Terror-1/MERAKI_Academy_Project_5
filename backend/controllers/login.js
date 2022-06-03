@@ -10,36 +10,41 @@ const login = (req, res) => {
   connection.query(query, data, (err, result) => {
     if (err) {
       return res.status(500).json({
-        succses :false,
-        message :"server error",
-        
+        succses: false,
+        message: "server error",
       });
     }
 
     if (!result.length) {
       return res.status(404).json({
-        succses: false,
+        success: false,
         message: "email dosen't exist",
       });
     } else {
       bcrypt.compare(password, result[0].password),
-        (err, response) => {
+        (err, isMatch) => {
           if (err) {
             return res.status(404).json({
-              compareErr: err,
-              succses: false,
-              message:"password incoreect"
-              
+              success: false,
+              message: "Server Error",
             });
           }
-          const query="SELECT * FROM carts WHERE userId = ?";
-
-          if (response) {
+          const query = "SELECT * FROM carts WHERE  user_id = ?";
+          let cartId = -1;
+          connection.query(query, [result[0].id], (err, cartResult) => {
+            if (err) {
+              return res.status(500).json({
+                success: false,
+                message: "Server error",
+              });
+            }
+            cartId = cartResult[0].id;
+          });
+          if (isMatch) {
             const payload = {
-              userId: result[0].userId,
-              role: result[0].role.Id,
-              cart: result[0].cartId,
-              
+              userId: result[0].id,
+              roleId: result[0].role_id,
+              cartId,
             };
 
             const option = {
@@ -50,14 +55,14 @@ const login = (req, res) => {
             const token = jwt.sign(payload, SECRET, option);
 
             return res.status(200).json({
-              succses: true,
-              message: "welocme",
+              success: true,
+              message: "Welcome",
               token,
             });
           } else {
             return res.status(403).json({
-              succses: false,
-              message: "incorrect password",
+              success: false,
+              message: "Incorrect password",
             });
           }
         };
