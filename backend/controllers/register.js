@@ -1,61 +1,53 @@
 const connection = require("../models/db");
-const bcrypt =require("bcrypt");
-const jwt =require("jsonwebtoken");
 
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
-const register = async(req, res) => {
-    const { firstName, lastName, email, password } = req.body;
-    const salt =10;
-    const hashpassword= await bcrypt.hash(password,salt);
-    const role_id=req.params.roleId;
-    //create user
-  
+const register = async (req, res) => {
+  const role_id = req.params.roleId;
+  const { firstName, lastName, email, password } = req.body;
 
-  const userQuery =
-    "INSERT INTO USERS (firstName,lastName,email,password,role_id) values(?,?,?,?,?,?)";
-  //hash password
-  const data = [firstName, lastName,  email, password, role_id];
+  const encryptedPassword = await bcrypt.hash(password, saltRounds);
 
-  connection.query(userQuery, data, (err, result) => {
+  const query = `INSERT INTO users (firstName, lastName,  email, password, role_id) VALUES (?,?,?,?,?)`;
+  const data = [firstName, lastName, email, encryptedPassword, role_id];
+  connection.query(query, data, (err, result) => {
     if (err) {
-      return res.status(403).json({
+      return res.status(409).json({
         success: false,
-        message: "The email already exists",
-
+        massage: "The email already exists",
+        err,
       });
     }
-    //create cart after create user
-    //connection .query(query,data,function)
-    const cartQuery = "INSERT INTO carts (user_id) values(?)";
-    connection.query(cartQuery, [result.insertId], (err, result) => {
-      if (err) {
-        return res.status(500).json({
-          success: false,
-          message: "Field in creating cart",
-        });
-      }
-    });
+    if (result) {
+      const cartQuery = "INSERT INTO carts (user_id) values(?)";
+      connection.query(cartQuery, [result.insertId], (err, res2) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            message: "Field in creating cart",
+          });
+        }
+        const addressQuery = "INSERT INTO Address (user_id) values(?)";
+        connection.query(addressQuery, [result.insertId], (err, re3) => {
+          if (err) {
+            return res.status(500).json({
+              success: false,
+              message: err,
+            });
+          }
 
-    //create addressafter create user
-    const addressQuery = "INSERT INTO Address (user_id) values(?)";
-    connection.query(addressQuery, [result.insertId], (err, result) => {
-      if (err) {
-        return res.status(500).json({
-          success: false,
-          message: "Field in creating Address",
+          res.status(201).json({
+            success: true,
+            message: "Account Created Successfully",
+            results: result,
+          });
         });
-      }
-    });
-
-    //send message to client
-    res.status(201).json({
-      success: true,
-      message: "Account Created Successfully",
-      results: result,
-    });
+      });
+    }
   });
 };
 
-module.exports={
-    register
-}
+module.exports = {
+  register,
+};
