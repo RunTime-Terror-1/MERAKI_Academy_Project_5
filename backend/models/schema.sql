@@ -1,4 +1,3 @@
-
 DROP DATABASE RUNTIME_TERROR;
 
 CREATE DATABASE RUNTIME_TERROR;
@@ -22,11 +21,12 @@ CREATE TABLE users(
     is_deleted TINYINT DEFAULT 0,
     PRIMARY KEY (id)
 );
+
 CREATE TABLE carts (
     id INT AUTO_INCREMENT NOT NULL,
     user_id INT,
     FOREIGN KEY (user_id) REFERENCES users(id),
-      PRIMARY KEY (id)
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE address (
@@ -40,6 +40,25 @@ CREATE TABLE address (
     PRIMARY KEY (id)
 );
 
+CREATE TABLE restarents (
+    id INT AUTO_INCREMENT NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    lat VARCHAR(255) NOT NULL,
+    long VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    owner_id INT,
+    FOREIGN KEY (owner_id) REFERENCES users(id),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE restarent-employee (
+    id INT AUTO_INCREMENT NOT NULL,
+    employee _id INT,
+    restarent_id INT,
+    FOREIGN KEY (restarent_id) REFERENCES restarentS(id),
+    FOREIGN KEY (employee _id) REFERENCES users(id),
+    PRIMARY KEY (id)
+);
 
 CREATE TABLE meals(
     id INT AUTO_INCREMENT NOT NULL,
