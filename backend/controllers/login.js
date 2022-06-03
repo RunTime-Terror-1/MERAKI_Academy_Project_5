@@ -10,7 +10,7 @@ const login = (req, res) => {
   connection.query(query, data, (err, result) => {
     if (err) {
       return res.status(500).json({
-        succses: false,
+        success: false,
         message: "server error",
       });
     }
@@ -21,43 +21,41 @@ const login = (req, res) => {
         message: "email doesn't exist",
       });
     } else {
-      bcrypt.compare(password, result[0].password),
+      bcrypt.compare(password, result[0].password,
         (err, isMatch) => {
           if (err) {
-            return res.status(404).json({
+            return res.status(500).json({
               success: false,
               message: "Server Error",
             });
           }
-          const query = "SELECT * FROM carts WHERE  user_id = ?";
-          let cartId = -1;
-          connection.query(query, [result[0].id], (err, cartResult) => {
-            if (err) {
-              return res.status(500).json({
-                success: false,
-                message: "Server error",
-              });
-            }
-            cartId = cartResult[0].id;
-          });
+      
           if (isMatch) {
-            const payload = {
-              userId: result[0].id,
-              roleId: result[0].role_id,
-              cartId,
-            };
+            const query = "SELECT * FROM carts WHERE  user_id = ?";
+            connection.query(query, [result[0].id], (err, cartResult) => {
+              if (err) {
+                return res.status(500).json({
+                  success: false,
+                  message: "Server error",
+                });
+              }
 
-            const option = {
-              expireIn: "1h",
-            };
+              const payload = {
+                userId: result[0].id,
+                roleId: result[0].role_id,
+                cartId: cartResult[0].id,
+              };
 
-            const SECRET = process.env.SECRET;
-            const token = jwt.sign(payload, SECRET, option);
+          
 
-            return res.status(200).json({
-              success: true,
-              message: "Welcome",
-              token,
+              const SECRET = process.env.SECRET;
+              const token = jwt.sign(payload, SECRET);
+
+              return res.status(200).json({
+                success: true,
+                message: "Welcome",
+                token,
+              });
             });
           } else {
             return res.status(403).json({
@@ -65,7 +63,7 @@ const login = (req, res) => {
               message: "Incorrect password",
             });
           }
-        };
+        });
     }
   });
 };
