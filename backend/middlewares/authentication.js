@@ -23,13 +23,13 @@ const authentication = (req, res, next) => {
         next();
       }
     });
-//   } catch (err) {
-//     console.log("what err")
-//     res.status(500).json({
-//       success: false,
-//       message: `Server Error`,
-//       err: err.message,
-//     });
+  } catch (err) {
+    console.log("what err")
+    res.status(500).json({
+      success: false,
+      message: `Server Error`,
+      err: err.message,
+    });
   }
 };
 
