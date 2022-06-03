@@ -18,7 +18,7 @@ const login = (req, res) => {
     if (!result.length) {
       return res.status(404).json({
         success: false,
-        message: "email dosen't exist",
+        message: "email doesn't exist",
       });
     } else {
       bcrypt.compare(password, result[0].password),

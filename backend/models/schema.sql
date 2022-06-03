@@ -44,19 +44,19 @@ CREATE TABLE restarents (
     id INT AUTO_INCREMENT NOT NULL,
     location VARCHAR(255) NOT NULL,
     lat VARCHAR(255) NOT NULL,
-    long VARCHAR(255) NOT NULL,
+    lng VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
     owner_id INT,
     FOREIGN KEY (owner_id) REFERENCES users(id),
     PRIMARY KEY (id)
 );
 
-CREATE TABLE restarent-employee (
+CREATE TABLE restarent_employee (
     id INT AUTO_INCREMENT NOT NULL,
-    employee _id INT,
+    employee_id INT,
     restarent_id INT,
     FOREIGN KEY (restarent_id) REFERENCES restarentS(id),
-    FOREIGN KEY (employee _id) REFERENCES users(id),
+    FOREIGN KEY (employee_id) REFERENCES users(id),
     PRIMARY KEY (id)
 );
 
