@@ -80,12 +80,12 @@ const getMealbyResturant = (req, res) => {
 //! ..................... End   getMealbyResturant ...............
 
 const addMealToCart = (req, res) => {
-
+    const {quantity,subTotal} = req.body;
     const cart_id = req.token.cartId
     const mealId = req.params.meal_id;
 
     const query = `INSERT INTO cartItems(quantity,subTotal,cart_id,meal_id) VALUES (?,?,?,?);`;
-    const data = ["2", "85", cart_id, mealId];
+    const data = [quantity,subTotal, cart_id, mealId];
     connection.query(query, data, (err, result) => {
    
         if (err) {
