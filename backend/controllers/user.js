@@ -49,7 +49,7 @@ const getRestaurantByName = (req, res) => {
 
 //! ...........END getRestaurantByName ....................
 const getMealbyResturant = (req, res) => {
-    const { restaurant_id, mealName } = req.params
+    const {restaurant_id, mealName } = req.params
 
 
     const query = `SELECT * FROM meals WHERE name=? AND restaurant_id=?;`;
@@ -79,14 +79,16 @@ const getMealbyResturant = (req, res) => {
 
 };
 
+
+
 //! ..................... End   getMealbyResturant ...............
 
 const addMealToCart = (req, res) => {
-    console.log(25)
-    console.log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
-    console.log(req.params.mealName)
+    // console.log(25)
+    // console.log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+    // console.log(req.params.mealName)
     console.log(req.token.cartId)
-    // console.log(req)
+    
 
     res.status(200).json({
         success: true,
@@ -99,5 +101,6 @@ module.exports = {
     getAllRestaurants,
     getRestaurantByName,
     getMealbyResturant,
-    addMealToCart
+    addMealToCart,
+    getMealby
 };
