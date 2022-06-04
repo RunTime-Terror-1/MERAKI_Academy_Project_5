@@ -23,7 +23,7 @@ const createOwner = async (req, res) => {
   });
 };
 const deleteOwner = async (req, res) => {
-  const { ownerId, name} = req.body;
+  const { ownerId, name } = req.body;
 
   const query = `DELETE FROM users WHERE id=?`;
 
@@ -53,8 +53,53 @@ const deleteOwner = async (req, res) => {
     });
   });
 };
+const getAllRequests = (req, res) => {
+  const query = "SELECT * FROM requests WHERE is_deleted =0";
+  connection.query(query, [], (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        massage: "Server Error",
+        err,
+      });
+    }
+    if (result.length) {
+      res.status(200).json({
+        success: true,
+        message: "All Requests",
+        requests: result,
+      });
+    } else {
+      res.status(404).json({
+        success: true,
+        message: "No Request",
+      });
+    }
+  });
+};
+const acceptRequest = (req, res) => {
+  const { id, state } = req.body;
+  const query = `UPDATE requests  SET state =? WHERE id=?`;
+  connection.query(query, [state,id], (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        massage: "Server Error",
+        err,
+      });
+    }
+  
+    res.status(200).json({
+      success: true,
+      massage: "Request State Change",
+    });
+
+  });
+};
 
 module.exports = {
   createOwner,
-  deleteOwner
+  deleteOwner,
+  getAllRequests,
+  acceptRequest,
 };

@@ -123,3 +123,13 @@ CREATE TABLE role_permission (
     FOREIGN KEY (permission_id) REFERENCES permissions (id),
     PRIMARY KEY (id)
 );
+
+CREATE TABLE requests(
+    id INT NOT NULL AUTO_INCREMENT NOT NULL,
+    restaurantName VARCHAR(255),
+    state VARCHAR(255),
+    owner_Id INT,
+    FOREIGN KEY (owner_Id) REFERENCES users (id),
+    is_deleted TINYINT DEFAULT 0,
+    PRIMARY KEY (id)
+);
