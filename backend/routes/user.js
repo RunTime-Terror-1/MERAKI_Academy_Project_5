@@ -3,15 +3,19 @@ const express = require("express");
 
 //controllers
    
-    const {getAllRestaurants,getRestaurantByName,} = require("../controllers/role");
+    const {getAllRestaurants,getRestaurantByName,getMealbyResturant,} = require("../controllers/user");
 
 const userRouter = express.Router();
 
 // get
-roleRouter.get("/",getAllRestaurants );
+userRouter.get("/",getAllRestaurants );
 
 // get (params methods)
-roleRouter.get("/:name",getRestaurantByName );
+userRouter.get("/:name",getRestaurantByName );
+
+// get ( Double params methods)
+userRouter.get("/:restaurant_id/:mealName",getMealbyResturant)
+
 
 
 module.exports = userRouter;
