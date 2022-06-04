@@ -2,7 +2,7 @@ const connection = require("../models/db");
 
 
 const getAllRestaurants = (req, res) => {
-    const query = `SELECT * FROM restarents `;
+    const query = `SELECT * FROM restaurants `;
     connection.query(query, (err, result) => {
         if (err) {
             res.status(500).json({
@@ -23,10 +23,10 @@ const getAllRestaurants = (req, res) => {
 
 const getRestaurantByName = (req, res) => {
 
-    const restarentName = req.params.name;
+    const restaurantName = req.params.name;
 
-    const query = `SELECT * FROM restarents WHERE name=?;`;
-    const data = [restarentName];
+    const query = `SELECT * FROM restaurants WHERE name=?;`;
+    const data = [restaurantName];
 
     connection.query(query, data, (err, result) => {
         if (err) {
@@ -35,20 +35,20 @@ const getRestaurantByName = (req, res) => {
         if (result.length) {
             res.status(200).json({
                 success: true,
-                massage: `the restaurant name is: ${restarentName}`,
+                massage: `the restaurant name is: ${restaurantName}`,
                 result: result,
             });
         } else {
             res.status(404).json({
                 success: false,
-                massage: `the resturant name is ${restarentName} is not found now `,
+                massage: `the restaurant name is ${restaurantName} is not found now `,
             });
         }
     });
 };
 
 //! ...........END getRestaurantByName ....................
-const getMealbyResturant = (req, res) => {
+const getMealByRestaurant = (req, res) => {
     const { restaurant_id, mealName } = req.params
 
 
@@ -104,7 +104,7 @@ const addMealToCart = (req, res) => {
 };
 //! ...End addMeealtocart..........
 
-const deleteMealfromCart = (req, res) => {
+const deleteMealFromCart = (req, res) => {
 
     const cart_id = req.token.cartId
     const mealId = req.params.meal_id;
@@ -144,8 +144,8 @@ const deleteMealfromCart = (req, res) => {
 module.exports = {
     getAllRestaurants,
     getRestaurantByName,
-    getMealbyResturant,
+    getMealByRestaurant: getMealByRestaurant,
     addMealToCart,
-    deleteMealfromCart
+    deleteMealFromCart: deleteMealFromCart
 
 };
