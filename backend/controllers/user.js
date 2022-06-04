@@ -48,47 +48,56 @@ const getRestaurantByName = (req, res) => {
 };
 
 //! ...........END getRestaurantByName ....................
-const getMealbyResturant=(req,res)=>{
-    const{restaurant_id,mealName}=req.params
+const getMealbyResturant = (req, res) => {
+    const { restaurant_id, mealName } = req.params
 
 
     const query = `SELECT * FROM meals WHERE name=? AND restaurant_id=?;`;
 
-    const data = [mealName,restaurant_id];
+    const data = [mealName, restaurant_id];
     connection.query(query, data, (err, result) => {
         if (err) {
-          res.status(500).json({
-            success: false,
-            massage: "Server Error",
-            err: err,
-          });
+            res.status(500).json({
+                success: false,
+                massage: "Server Error",
+                err: err,
+            });
         }
         if (!result.length) {
-          res.status(404).json({
-            success: false,
-            massage: "The meal is Not Found",
-          });
+            res.status(404).json({
+                success: false,
+                massage: "The meal is Not Found",
+            });
         }
         res.status(200).json({
-          success: true,
-          massage: `The meal ${mealName} is found`,
-          result: result,
+            success: true,
+            massage: `The meal ${mealName} is found`,
+            result: result,
         });
-      });
-  
+    });
+
 
 };
 
 //! ..................... End   getMealbyResturant ...............
 
-const addMealToCart=(req,res)=>{
+const addMealToCart = (req, res) => {
+    console.log(25)
+    console.log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+    console.log(req.params.mealName)
+    console.log(req.token.cartId)
+    // console.log(req)
 
+    res.status(200).json({
+        success: true,
+        massage: "ggg",
 
-    
+    });
 }
 
 module.exports = {
     getAllRestaurants,
     getRestaurantByName,
     getMealbyResturant,
+    addMealToCart
 };

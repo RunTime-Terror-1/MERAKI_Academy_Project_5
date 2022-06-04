@@ -2,10 +2,10 @@ const express = require("express");
 
 
 //controllers
-const { getAllRestaurants, getRestaurantByName, getMealbyResturant, } = require("../controllers/user");
+const { getAllRestaurants, getRestaurantByName, getMealbyResturant,addMealToCart} = require("../controllers/user");
 
 // Middleware
-const authentication = require("../middlewares/authorization");
+const authentication = require("../middlewares/authentication");
 
 
 //!..........Create user router........................
@@ -22,8 +22,9 @@ userRouter.get("/", getAllRestaurants);
 userRouter.get("/:name", getRestaurantByName);
 
 // get ( Double params methods)
-userRouter.get("/:restaurant_id/:mealName", authentication, getMealbyResturant)
+userRouter.get("/:restaurant_id/:mealName",  getMealbyResturant)
 
+userRouter.post("/:mealName",authentication,addMealToCart);
 
 
 
