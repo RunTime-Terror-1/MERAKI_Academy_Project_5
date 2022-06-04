@@ -81,6 +81,11 @@ const getMealbyResturant=(req,res)=>{
 
 //! ..................... End   getMealbyResturant ...............
 
+const addMealToCart=(req,res)=>{
+
+
+    
+}
 
 module.exports = {
     getAllRestaurants,
