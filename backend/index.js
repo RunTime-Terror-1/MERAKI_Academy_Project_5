@@ -10,8 +10,6 @@ const loginRouter = require("./routes/login");
 const roleRouter = require("./routes/role");
 const superAdminRouter = require("./routes/superAdmin");
 const ownerRouter = require("./routes/owner");
-
-
 const userRouter =require("./routes/user")
 
 
@@ -30,9 +28,6 @@ app.use("/login", loginRouter);
 app.use("/role", roleRouter);
 app.use("/superAdmin", superAdminRouter);
 app.use("/owner", ownerRouter);
-
-
-
 app.use("/user", userRouter);
 
 const PORT = process.env.PORT || 5000;

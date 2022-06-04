@@ -41,8 +41,51 @@ const createRestaurant = async (req, res) => {
     });
   });
 };
+const createEmployee = async (req, res) => {
+  const { firstName, lastName, email, password } = req.body;
+  const encryptedPassword = await bcrypt.hash(password, saltRounds);
 
+  const query = `INSERT INTO users (firstName, lastName,  email, password, role_id) VALUES (?,?,?,?,?)`;
+  const data = [firstName, lastName, email, encryptedPassword, 3];
+  connection.query(query, data, (err, result) => {
+    if (err) {
+      return res.status(409).json({
+        success: false,
+        massage: "The email already exists",
+        err,
+      });
+    }
+    res.status(201).json({
+      success: true,
+      message: "Employee Created Successfully",
+      results: result,
+    });
+  });
+};
+const deleteEmployee = (req, res) => {
+  const { employeeId } = req.body;
+
+  const query = `UPDATE users SET is_deleted =1 WHERE id=?`;
+
+  connection.query(query, [employeeId], (err, result) => {
+    if (err) {
+      return res.status(409).json({
+        success: false,
+        massage: "Server Error",
+        err,
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Owner Deleted Successfully",
+      results: result,
+    });
+  });
+};
 module.exports = {
   createRequest,
   createRestaurant,
+  createEmployee,
+  deleteEmployee,
 };
