@@ -1,30 +1,24 @@
 const express = require("express");
 
-const {
-  deleteUserById,
-  getAllUsers,
-  createAdmin,
-  deleteAdmin,
-  getAllRestaurants,
-} = require("../controllers/superAdmin");
+const { createOwner,deleteOwner } = require("../controllers/superAdmin");
 const authentication = require("../middlewares/authentication");
 const authorization = require("../middlewares/authorization");
 
 const superAdminRouter = express.Router();
-//get
-superAdminRouter.get("/", getAllUsers);
-superAdminRouter.get(
-  "/restaurants",
+//post
+superAdminRouter.post(
+  "/owner",
   authentication,
   authorization("1"),
-  getAllRestaurants
+  createOwner
 );
 
 //delete
-superAdminRouter.delete("/:userId", deleteUserById);
-superAdminRouter.delete("/admin/:adminId", deleteAdmin);
-
-//post
-superAdminRouter.post("/admin", createAdmin);
+superAdminRouter.delete(
+    "/delete/owner",
+    authentication,
+    authorization("1"),
+    deleteOwner
+  );
 
 module.exports = superAdminRouter;

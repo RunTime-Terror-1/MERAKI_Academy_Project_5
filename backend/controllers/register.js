@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 const register = async (req, res) => {
+  
   const role_id = req.params.roleId;
   const { firstName, lastName, email, password } = req.body;
 
