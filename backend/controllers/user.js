@@ -20,7 +20,35 @@ const getAllRestaurants = (req, res) => {
     });
   };
 
+const getRestaurantByName=(req,res)=>{
+
+    const restarentName = req.params.name;
+
+    const query = `SELECT * FROM restarents WHERE name=?;`;
+    const data = [restarentName];
+  
+    connection.query(query, data, (err, result) => {
+      if (err) {
+        res.status(500).json({ err });
+      }
+      if (result.length) {
+        res.status(200).json({
+          success: true,
+          massage: `the restaurant name is: ${restarentName}`,
+          result: result,
+        });
+      } else {
+        res.status(404).json({
+          success: false,
+          massage: `the resturant name is ${restarentName} is not found now `,
+        });
+      }
+    });
+}
+
+
   module.exports = {
     getAllRestaurants,
+    getRestaurantByName,
   };
   

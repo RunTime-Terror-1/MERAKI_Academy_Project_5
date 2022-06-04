@@ -3,10 +3,15 @@ const express = require("express");
 
 //controllers
    
-    const {getAllRestaurants,} = require("../controllers/role");
+    const {getAllRestaurants,getRestaurantByName,} = require("../controllers/role");
 
 const userRouter = express.Router();
 
-roleRouter.post("/",getAllRestaurants );
+// get
+roleRouter.get("/",getAllRestaurants );
+
+// get (params methods)
+roleRouter.get("/:name",getRestaurantByName );
+
 
 module.exports = userRouter;
