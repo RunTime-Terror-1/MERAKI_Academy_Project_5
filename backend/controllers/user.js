@@ -19,3 +19,8 @@ const getAllRestaurants = (req, res) => {
       });
     });
   };
+
+  module.exports = {
+    getAllRestaurants,
+  };
+  
