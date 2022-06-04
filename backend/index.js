@@ -12,11 +12,16 @@ const superAdminRouter = require("./routes/superAdmin");
 const ownerRouter = require("./routes/owner");
 
 
+const userRouter =require("./routes/user")
+
+
 const app = express();
 
 //built-in middleware
 app.use(express.json());
 app.use(cors());
+
+
 
 // router middleware
 app.use("/register", registerRouter);
@@ -26,6 +31,9 @@ app.use("/role", roleRouter);
 app.use("/superAdmin", superAdminRouter);
 app.use("/owner", ownerRouter);
 
+
+
+app.use("/user", userRouter);
 
 const PORT = process.env.PORT || 5000;
 
