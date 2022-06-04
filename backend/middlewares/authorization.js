@@ -4,7 +4,6 @@ const authorization = (string) => {
  
   return function (req, res, next) {
     const user_id = req.token.userId;
-    console.log(string,req.token.roleId);
     const data = [user_id];
     const query = `SELECT * FROM users U WHERE U.id = (?)`;
     connection.query(query, data, (err, result) => {

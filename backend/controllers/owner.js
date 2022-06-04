@@ -20,40 +20,13 @@ const createRequest = async (req, res) => {
     });
   });
 };
-const deleteOwner = async (req, res) => {
-  const { ownerId, name } = req.body;
 
-  const query = `DELETE FROM users WHERE id=?`;
-
-  connection.query(query, [ownerId], (err, result) => {
-    if (err) {
-      return res.status(409).json({
-        success: false,
-        massage: "Server Error",
-        err,
-      });
-    }
-
-    const query = `DELETE FROM restaurants WHERE name=?`;
-    connection.query(query, [name], (err, result) => {
-      if (err) {
-        return res.status(409).json({
-          success: false,
-          massage: "Server Error",
-          err,
-        });
-      }
-      res.status(200).json({
-        success: true,
-        message: "Owner Deleted Successfully",
-        results: result,
-      });
-    });
-  });
-};
-const getAllRequests = (req, res) => {
-  const query = "SELECT * FROM requests WHERE is_deleted =0";
-  connection.query(query, [], (err, result) => {
+const createRestaurant = async (req, res) => {
+  const ownerId = req.token.userId;
+  const { location, lat, lng, name } = req.body;
+  const query = `INSERT INTO restaurants  (location,lat,lng,name,owner_Id) VALUES (?,?,?,?,?)`;
+  const data = [location, lat, lng, name, ownerId];
+  connection.query(query, data, (err, result) => {
     if (err) {
       return res.status(500).json({
         success: false,
@@ -61,42 +34,15 @@ const getAllRequests = (req, res) => {
         err,
       });
     }
-    if (result.length) {
-      res.status(200).json({
-        success: true,
-        message: "All Requests",
-        requests: result,
-      });
-    } else {
-      res.status(404).json({
-        success: true,
-        message: "No Request",
-      });
-    }
-  });
-};
-const acceptRequest = (req, res) => {
-  const { id, state } = req.body;
-  const query = `UPDATE requests  SET state =? WHERE id=?`;
-  connection.query(query, [state, id], (err, result) => {
-    if (err) {
-      return res.status(500).json({
-        success: false,
-        massage: "Server Error",
-        err,
-      });
-    }
-
-    res.status(200).json({
+    res.status(201).json({
       success: true,
-      massage: "Request State Change",
+      message: "Restaurant Created Successfully",
+      results: result,
     });
   });
 };
 
 module.exports = {
   createRequest,
-  deleteOwner,
-  getAllRequests,
-  acceptRequest,
+  createRestaurant,
 };
