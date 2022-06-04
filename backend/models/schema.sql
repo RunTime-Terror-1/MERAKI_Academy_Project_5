@@ -126,7 +126,7 @@ CREATE TABLE role_permission (
 
 CREATE TABLE requests(
     id INT NOT NULL AUTO_INCREMENT NOT NULL,
-    restaurantName VARCHAR(255),
+    restaurantName VARCHAR(255) NOT NULL,
     state VARCHAR(255),
     owner_Id INT,
     FOREIGN KEY (owner_Id) REFERENCES users (id),
