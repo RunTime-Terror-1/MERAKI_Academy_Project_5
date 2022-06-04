@@ -10,11 +10,16 @@ const loginRouter = require("./routes/login");
 const roleRouter = require("./routes/role");
 const adminRouter = require("./routes/admin");
 
+const userRouter =require("./routes/user")
+
+
 const app = express();
 
 //built-in middleware
 app.use(express.json());
 app.use(cors());
+
+
 
 // router middleware
 app.use("/register", registerRouter);
@@ -22,6 +27,9 @@ app.use("/meals", mealsRouter);
 app.use("/login", loginRouter);
 app.use("/role", roleRouter);
 app.use("/users", adminRouter);
+
+
+app.use("/user", userRouter);
 
 const PORT = process.env.PORT || 5000;
 
