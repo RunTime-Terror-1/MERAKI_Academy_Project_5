@@ -8,7 +8,9 @@ const mealsRouter = require("./routes/meals");
 const registerRouter = require("./routes/register");
 const loginRouter = require("./routes/login");
 const roleRouter = require("./routes/role");
-const adminRouter = require("./routes/admin");
+const superAdminRouter = require("./routes/superAdmin");
+const ownerRouter = require("./routes/owner");
+
 
 const app = express();
 
@@ -21,7 +23,9 @@ app.use("/register", registerRouter);
 app.use("/meals", mealsRouter);
 app.use("/login", loginRouter);
 app.use("/role", roleRouter);
-app.use("/users", adminRouter);
+app.use("/superAdmin", superAdminRouter);
+app.use("/owner", ownerRouter);
+
 
 const PORT = process.env.PORT || 5000;
 

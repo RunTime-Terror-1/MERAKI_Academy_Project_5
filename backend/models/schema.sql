@@ -40,7 +40,7 @@ CREATE TABLE address (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE restarents (
+CREATE TABLE restaurants (
     id INT AUTO_INCREMENT NOT NULL,
     location VARCHAR(255) NOT NULL,
     lat VARCHAR(255) NOT NULL,
@@ -48,14 +48,15 @@ CREATE TABLE restarents (
     name VARCHAR(255) NOT NULL,
     owner_id INT,
     FOREIGN KEY (owner_id) REFERENCES users(id),
+    is_deleted TINYINT DEFAULT 0,
     PRIMARY KEY (id)
 );
 
-CREATE TABLE restarent_employee (
+CREATE TABLE restaurants_employee (
     id INT AUTO_INCREMENT NOT NULL,
     employee_id INT,
     restarent_id INT,
-    FOREIGN KEY (restarent_id) REFERENCES restarentS(id),
+    FOREIGN KEY (restarent_id) REFERENCES restaurants(id),
     FOREIGN KEY (employee_id) REFERENCES users(id),
     PRIMARY KEY (id)
 );
@@ -66,7 +67,9 @@ CREATE TABLE meals(
     imgUrl VARCHAR(255) NOT NULL,
     category VARCHAR(255) NOT NULL,
     price INT NOT NULL,
+    restarent_id INT,
     is_deleted TINYINT DEFAULT 0,
+    FOREIGN KEY (restarent_id) REFERENCES restaurants(id),
     PRIMARY KEY (id)
 );
 
@@ -118,5 +121,15 @@ CREATE TABLE role_permission (
     permission_id INT,
     FOREIGN KEY (role_id) REFERENCES roles (id),
     FOREIGN KEY (permission_id) REFERENCES permissions (id),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE requests(
+    id INT NOT NULL AUTO_INCREMENT NOT NULL,
+    restaurantName VARCHAR(255) NOT NULL,
+    state VARCHAR(255),
+    owner_Id INT,
+    FOREIGN KEY (owner_Id) REFERENCES users (id),
+    is_deleted TINYINT DEFAULT 0,
     PRIMARY KEY (id)
 );
