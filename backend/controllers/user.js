@@ -49,7 +49,7 @@ const getRestaurantByName = (req, res) => {
 
 //! ...........END getRestaurantByName ....................
 const getMealbyResturant = (req, res) => {
-    const {restaurant_id, mealName } = req.params
+    const { restaurant_id, mealName } = req.params
 
 
     const query = `SELECT * FROM meals WHERE name=? AND restaurant_id=?;`;
@@ -68,39 +68,84 @@ const getMealbyResturant = (req, res) => {
                 success: false,
                 massage: "The meal is Not Found",
             });
+        } else {
+            res.status(200).json({
+                success: true,
+                massage: `The meal ${mealName} is found`,
+                result: result,
+            });
         }
-        res.status(200).json({
-            success: true,
-            massage: `The meal ${mealName} is found`,
-            result: result,
-        });
-    });
-
-
+    })
 };
-
-
-
 //! ..................... End   getMealbyResturant ...............
 
 const addMealToCart = (req, res) => {
-    // console.log(25)
-    // console.log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
-    // console.log(req.params.mealName)
-    console.log(req.token.cartId)
-    
 
-    res.status(200).json({
-        success: true,
-        massage: "ggg",
+    const cart_id = req.token.cartId
+    const mealId = req.params.meal_id;
 
+    const query = `INSERT INTO cartItems(quantity,subTotal,cart_id,meal_id) VALUES (?,?,?,?);`;
+    const data = ["2", "85", cart_id, mealId];
+    connection.query(query, data, (err, result) => {
+   
+        if (err) {
+            res.status(500).json({
+                success: false,
+                massage: "Server error",
+                err: err,
+            });
+        }
+        res.status(200).json({
+            success: true,
+            massage: "add meal to cart",
+            result: result,
+        });
     });
-}
+};
+//! ...End addMeealtocart..........
 
+const deleteMealfromCart = (req, res) => {
+
+    const cart_id = req.token.cartId
+    const mealId = req.params.meal_id;
+
+    const query = `DELETE FROM cartItems WHERE cart_id=? AND meal_id=?;`;
+
+    const data = [cart_id, mealId]
+
+    connection.query(query, data, (err, result) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            massage: "Server Error",
+            err: err,
+          });
+        }
+   
+    ///...........
+        if (!result.affectedRows) {
+          return res.status(404).json({
+            success: false,
+            massage: `The meal: ${mealId} is not found`,
+            err: err,
+          });
+        }else{
+            res.status(200).json({
+                success: true,
+                massage: `Succeeded to delete meal with id: ${mealId}`,
+                result: result,
+              });
+
+        }
+        
+      });
+};
+//! ........END deleteMealfromCart.....
 module.exports = {
     getAllRestaurants,
     getRestaurantByName,
     getMealbyResturant,
     addMealToCart,
-    getMealby
+    deleteMealfromCart
+
 };
