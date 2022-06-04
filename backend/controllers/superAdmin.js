@@ -1,4 +1,32 @@
 const connection = require("../models/db");
+
+const getAllRestaurants = (req, res) => {
+  // Get All restaurants
+  const query = "SELECT * restaurants WHERE is_deleted = 0";
+  connection.query(query, [], (err, restaurants) => {
+    if (err) {
+      res.status(500).json({
+        success: false,
+        message: "Server Error",
+        err: err,
+      });
+    }
+    // check existing restaurants
+    if (restaurants.length) {
+      res.status(500).json({
+        success: true,
+        message: "Server Error",
+        restaurants,
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        message: "Not Found",
+      });
+    }
+  });
+};
+
 const getAllUsers = (req, res) => {
   const query = "SELECT * from users WHERE is_deleted = 0";
   connection.query(query, (err, result) => {
@@ -78,4 +106,4 @@ const deleteAdmin = (req, res) => {
     });
   });
 };
-module.exports = { deleteUserById, getAllUsers, createAdmin, deleteAdmin };
+module.exports = { deleteUserById, getAllUsers, createAdmin, deleteAdmin,getAllRestaurants };
