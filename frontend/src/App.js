@@ -5,7 +5,7 @@ import { SuperAdminPanel } from "./components/AdminPanle/SuperAdmin";
 function App() {
   return <div className="App">
     <Routes>
-      <Route path="/" element={<SuperAdminPanel/>} />
+      {/* <Route path="/" element={<SuperAdminPanel/>} /> */}
     </Routes>
     </div>;
 }

@@ -10,9 +10,11 @@ export const SuperAdminPanel = () => {
     return state;
   });
   useEffect(() => {
+   
     (async () => {
-      const usersResponse = await SuperAdmin.getAllUsers;
-      dispatch(setUsers(usersResponse.users));
+      const usersResponse = await SuperAdmin.getAllUsers({token:`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInJvbGVJZCI6MiwiY2FydElkIjoyLCJpYXQiOjE2NTQ0NTM5MzR9.6LTf6mA-BW3htOOCvCnm12ZvodYn2zCDir2ny0QLq-M` });
+      console.log(usersResponse);
+     // dispatch(setUsers(usersResponse.users));
     })();
   }, []);
   const showUsers = (user) => {

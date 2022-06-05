@@ -1,9 +1,11 @@
+const { hostUrl } = require("..");
+
 class Register {
     static async register({firstName, lastName, email, password }) {
         try {
           const body = { firstName, lastName, email, password };
           const response = await axios.post(
-            `${process.env.HOSTURL}/register/4`,
+            `${hostUrl}/register/4`,
             body,
           );
           return response.data;
