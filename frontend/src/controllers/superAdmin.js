@@ -1,5 +1,5 @@
 import axios from "axios";
-class SuperAdmin {
+export class SuperAdmin {
   static async createOwner({ firstName, lastName, email, password, token }) {
     try {
       const body = { firstName, lastName, email, password };
