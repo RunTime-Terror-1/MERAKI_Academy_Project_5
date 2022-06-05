@@ -1,19 +1,33 @@
-#nav-menu-panel{
-    display: flex;
-    flex-direction: column;
-    width: 30%;
-    background-color: aqua;
-    height: 100vh;
+#nav-menu-panel {
+  display: flex;
+  flex-direction: column;
+  width: 30vw;
+  background-color: aqua;
+  height: 100vh;
+  text-align: start;
 }
 
-#nav-menu-panel img{
-    width: 15vw;
-    height: 15vw;
-    border-radius: 50%;
+#nav-menu-panel img {
+  width: 15vw;
+  height: 15vw;
+  border-radius: 50%;
+  text-align: center;
 }
 
-#nav-menu-panel button{
-    padding: var(--button-padding);
-    margin: 2px;
-    background-color: transparent;
+#nav-menu-panel button {
+  width: 90%;
+  padding: var(--button-padding);
+  border: 0px;
+  text-align: start;
+  background-color: transparent;
+}
+
+.Nav-menu-btn {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 29vw;
+  margin: 2px;
+  border: 1px black solid;
+  background-color: antiquewhite;
 }
