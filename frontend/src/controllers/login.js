@@ -1,6 +1,8 @@
+
 const { hostUrl } = require("..");
 
-class Login {
+export class Login {
+
   static async login({ email, password }) {
     try {
       const body = { email, password };

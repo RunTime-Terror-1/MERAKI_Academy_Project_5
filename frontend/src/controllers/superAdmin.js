@@ -1,5 +1,6 @@
 import axios from "axios";
 import { hostUrl } from "..";
+
 export class SuperAdmin {
 
   static async createOwner({ firstName, lastName, email, password, token }) {

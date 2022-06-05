@@ -1,7 +1,7 @@
 const { default: axios } = require("axios");
 const { hostUrl } = require("..");
 
-class User {
+export class User {
   static async getAllRestaurants() {
     try {
       const response = await axios.get(`${hostUrl}/user/`);

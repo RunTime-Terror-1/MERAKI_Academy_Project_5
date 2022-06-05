@@ -1,6 +1,9 @@
+
 const { hostUrl } = require("..");
 
-class Register {
+
+export class Register {
+
     static async register({firstName, lastName, email, password }) {
         try {
           const body = { firstName, lastName, email, password };
