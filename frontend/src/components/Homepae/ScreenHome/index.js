@@ -1,10 +1,5 @@
 import React,{useState,useContext} from "react";
-import { Link } from "react-router-dom";
 
-
-import { useDispatch, useSelector } from "react-redux";
-
-import {setlogin,setlogout} from "../redux/reducers/auth"
 
 const NavBar = () => {
     
