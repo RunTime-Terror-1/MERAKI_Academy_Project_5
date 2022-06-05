@@ -6,14 +6,14 @@ const superAdminReducer = createSlice({
     users: [],
     requests: [],
   },
-  reducer: {
+  reducers: {
     // action.payload : [requests]
     setRequests: (state, action) => {
       state.requests = action.payload;
     },
     // action.payload : [users or only owners]
     setUsers: (state, action) => {
-      state.requests = action.payload;
+      state.users= action.payload;
     },
   },
 });

@@ -1,0 +1,17 @@
+#nav-menu-panel{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    background-color: aqua;
+    height: 100vh;
+}
+
+#nav-menu-panel img{
+    width: 15vw;
+    height: 15vw;
+    border-radius: 50%;
+}
+
+#nav-menu-panel button{
+    padding: var(--button-padding);
+}

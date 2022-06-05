@@ -30,7 +30,7 @@ app.use("/superAdmin", superAdminRouter);
 app.use("/owner", ownerRouter);
 app.use("/user", userRouter);
 
-const PORT = s.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`server on ${PORT}`);
