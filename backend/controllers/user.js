@@ -49,12 +49,12 @@ const getRestaurantByName = (req, res) => {
 
 //! ...........END getRestaurantByName ....................
 const getMealByRestaurant = (req, res) => {
-    const { restaurant_id, mealName } = req.params
+    const { restaurant_id } = req.params
 
 
-    const query = `SELECT * FROM meals WHERE name=? AND restaurant_id=?;`;
+    const query = `SELECT * FROM meals WHERE restarent_id=?;`;
 
-    const data = [mealName, restaurant_id];
+    const data = [restaurant_id];
     connection.query(query, data, (err, result) => {
         if (err) {
             res.status(500).json({
@@ -80,26 +80,28 @@ const getMealByRestaurant = (req, res) => {
 //! ..................... End   getMealbyResturant ...............
 
 const addMealToCart = (req, res) => {
-    const {quantity,subTotal} = req.body;
+    const { quantity, subTotal } = req.body;
     const cart_id = req.token.cartId
     const mealId = req.params.meal_id;
 
     const query = `INSERT INTO cartItems(quantity,subTotal,cart_id,meal_id) VALUES (?,?,?,?);`;
-    const data = [quantity,subTotal, cart_id, mealId];
+    const data = [quantity, subTotal, cart_id, mealId];
     connection.query(query, data, (err, result) => {
-   
+
         if (err) {
             res.status(500).json({
                 success: false,
                 massage: "Server error",
                 err: err,
             });
+        }else{
+            res.status(200).json({
+                success: true,
+                massage: "add meal to cart",
+                result: result,
+            });
         }
-        res.status(200).json({
-            success: true,
-            massage: "add meal to cart",
-            result: result,
-        });
+       
     });
 };
 //! ...End addMeealtocart..........
@@ -115,37 +117,73 @@ const deleteMealFromCart = (req, res) => {
 
     connection.query(query, data, (err, result) => {
         if (err) {
-          return res.status(500).json({
-            success: false,
-            massage: "Server Error",
-            err: err,
-          });
+            return res.status(500).json({
+                success: false,
+                massage: "Server Error",
+                err: err,
+            });
         }
-   
-    ///...........
+
+        ///...........
         if (!result.affectedRows) {
-          return res.status(404).json({
-            success: false,
-            massage: `The meal: ${mealId} is not found`,
-            err: err,
-          });
-        }else{
+            return res.status(404).json({
+                success: false,
+                massage: `The meal: ${mealId} is not found`,
+                err: err,
+            });
+        } else {
             res.status(200).json({
                 success: true,
                 massage: `Succeeded to delete meal with id: ${mealId}`,
                 result: result,
-              });
+            });
 
         }
-        
-      });
+
+    });
 };
 //! ........END deleteMealfromCart.....
+
+const senOrder=(req,res)=>{
+console.log(req.token)
+// { userId: 2, roleId: 1, cartId: 1, iat: 1654438446 }
+console.log(45)
+
+const user_id=req.token.userId
+const meal_id=req.params.meal_id
+const {quantity,receipt}=req.body
+
+
+const query = `INSERT INTO orders(quantity,receipt,user_id,meal_id) VALUES (?,?,?,?);`;
+const data = [quantity, receipt,user_id, meal_id];
+connection.query(query, data, (err, result) => {
+
+    if (err) {
+        res.status(500).json({
+            success: false,
+            massage: "Server error",
+            err: err,
+        });
+    }else{
+        res.status(200).json({
+            success: true,
+            massage: "add meal to Order",
+            result: result,
+        });
+
+    }
+   
+});
+
+};
+
+
 module.exports = {
     getAllRestaurants,
     getRestaurantByName,
-    getMealByRestaurant: getMealByRestaurant,
+    getMealByRestaurant,
     addMealToCart,
-    deleteMealFromCart: deleteMealFromCart
+    deleteMealFromCart,
+    senOrder
 
 };

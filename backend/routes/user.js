@@ -2,7 +2,7 @@ const express = require("express");
 
 
 //controllers
-const { getAllRestaurants, getRestaurantByName, getMealByRestaurant,addMealToCart,deleteMealFromCart} = require("../controllers/user");
+const { getAllRestaurants, getRestaurantByName, getMealByRestaurant,addMealToCart,deleteMealFromCart,  senOrder} = require("../controllers/user");
 
 // Middleware
 const authentication = require("../middlewares/authentication");
@@ -22,15 +22,20 @@ userRouter.get("/", getAllRestaurants);
 userRouter.get("/:name", getRestaurantByName);
 
 // get ( Double params methods)
-userRouter.get("/:restaurant_id/:mealName",  getMealByRestaurant)
+userRouter.get("/res/:restaurant_id",  getMealByRestaurant)
 
 
 
 // post ( params methods)
 userRouter.post("/:meal_id",authentication,addMealToCart);
 
-//delete (params methods)
 
+//post 
+userRouter.post("/sent/:meal_id",authentication,senOrder);
+
+
+
+//delete (params methods)
 userRouter.delete("/delete/:meal_id",authentication,deleteMealFromCart);
 
 

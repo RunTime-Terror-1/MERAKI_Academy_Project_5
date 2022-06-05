@@ -12,6 +12,7 @@ const superAdminRouter = require("./routes/superAdmin");
 const ownerRouter = require("./routes/owner");
 const userRouter =require("./routes/user")
 
+const employeRouter=require("./routes/employee")
 
 const app = express();
 
@@ -29,6 +30,11 @@ app.use("/role", roleRouter);
 app.use("/superAdmin", superAdminRouter);
 app.use("/owner", ownerRouter);
 app.use("/user", userRouter);
+
+
+
+app.use("/employe", employeRouter);
+
 
 const PORT = process.env.PORT || 5000;
 
