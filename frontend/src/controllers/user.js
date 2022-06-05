@@ -1,6 +1,6 @@
 const { default: axios } = require("axios");
 
-class User {
+export class User {
   static async getAllRestaurants() {
     try {
       const response = await axios.get(`${process.env.HOSTURL}/user/`);

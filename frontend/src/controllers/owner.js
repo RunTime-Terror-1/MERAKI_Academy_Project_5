@@ -1,7 +1,6 @@
 import axios from "axios"
-class Owner {
-
-    static createRequest ({restaurantName,token}){
+export class Owner {
+  static createRequest ({restaurantName,token}){
         try {
             const response = await axios.post(
               `${process.env.HOSTURL}/owner/request`,
@@ -18,9 +17,6 @@ class Owner {
               error,
             };
           }
-
-
-      
     }
     static createRestaurant ({ location, lat, lng, name,token}){
         try {
