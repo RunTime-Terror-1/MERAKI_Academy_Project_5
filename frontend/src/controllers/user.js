@@ -3,7 +3,7 @@ const { default: axios } = require("axios");
 export class User {
   static async getAllRestaurants() {
     try {
-      const response = await axios.get(`${process.env.HOSTURL}/user/`);
+      const response = await axios.get(`http://localhost:5000/user/`);
       return response.data;
     } catch (error) {
       return {
@@ -73,7 +73,7 @@ export class User {
     try {
       const response = await axios.delete(
         `${process.env.HOSTURL}/user/delete/${meal_id}`,
-        body,
+        // body,
         {
           headers: { authorization: `Bearer ${token}` },
         }
