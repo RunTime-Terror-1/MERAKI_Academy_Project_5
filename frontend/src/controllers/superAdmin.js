@@ -24,7 +24,7 @@ class SuperAdmin {
       };
     }
   }
-  static async deleteOwner({ ownerId, name }) {
+  static async deleteOwner({ ownerId, name ,token}) {
     try {
       const response = await axios.delete(
         `${process.env.HOSTURL}/superAdmin/delete/owner`,
@@ -46,7 +46,7 @@ class SuperAdmin {
       };
     }
   }
-  static async getAllRequests() {
+  static async getAllRequests({token}) {
     try {
       const response = await axios.get(
         `${process.env.HOSTURL}/superAdmin/requests`,
@@ -67,7 +67,7 @@ class SuperAdmin {
       };
     }
   }
-  static async acceptRequest({ requestId, state }) {
+  static async acceptRequest({ requestId, state ,token}) {
     try {
       const response = await axios.put(
         `${process.env.HOSTURL}/superAdmin/requests`,
@@ -90,28 +90,3 @@ class SuperAdmin {
   }
 }
 
-const acceptRequest = (req, res) => {
-  const { id, state } = req.body;
-  const query = `UPDATE requests  SET state =? WHERE id=?`;
-  connection.query(query, [state, id], (err, result) => {
-    if (err) {
-      return res.status(500).json({
-        success: false,
-        massage: "Server Error",
-        err,
-      });
-    }
-
-    res.status(200).json({
-      success: true,
-      massage: "Request State Change",
-    });
-  });
-};
-
-module.exports = {
-  createOwner,
-  deleteOwner,
-  getAllRequests,
-  acceptRequest,
-};
