@@ -48,7 +48,7 @@ const login = (req, res) => {
 
           
 
-              const SECRET = s.env.SECRET;
+              const SECRET = process.env.SECRET;
               const token = jwt.sign(payload, SECRET);
 
               return res.status(200).json({

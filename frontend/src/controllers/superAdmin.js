@@ -44,7 +44,7 @@ export class SuperAdmin {
   static async getAllRequests({token}) {
     try {
       const response = await axios.get(
-        `/superAdmin/requests`,
+        `${hostUrl}/superAdmin/requests`,
         {
           headers: { authorization: `Bearer ${token}` },
         }

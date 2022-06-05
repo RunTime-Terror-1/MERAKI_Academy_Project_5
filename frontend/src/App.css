@@ -1,3 +1,17 @@
+*{
+  padding: 0px;
+  margin: 0px;  
+}
 .App {
   text-align: center;
+}
+:root{
+  --first-color: white;
+  --second-color: #0975b8ce;
+  --third-color:black;
+  --forth-color: #F0F2F5;
+  --input-br-color: #E8F0FE;
+  --input-padding:12px;
+  --border-radius: 5px;
+  --button-padding:5px;
 }
