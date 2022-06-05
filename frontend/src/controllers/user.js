@@ -1,7 +1,7 @@
 const { default: axios } = require("axios");
 
 class User {
-  static async getAllRestaurants({ token }) {
+  static async getAllRestaurants() {
     try {
       const response = await axios.get(`${process.env.HOSTURL}/user/`);
       return {
@@ -18,7 +18,7 @@ class User {
     }
   }
 
-  static async getRestaurantByName({ token, restaurantName }) {
+  static async getRestaurantByName({ restaurantName }) {
     try {
       const response = await axios.get(
         `${process.env.HOSTURL}/user/${restaurantName}`
@@ -111,6 +111,30 @@ class User {
         success: true,
         massage: "add meal to cart",
         result: response.data.result,
+      };
+    } catch (error) {
+      return {
+        success: false,
+        massage: "Server error",
+        err: error,
+      };
+    }
+  }
+
+  static async deleteMealFromCart({ meal_id, token }) {
+    try {
+      const response = await axios.delete(
+        `${process.env.HOSTURL}/user/delete/${meal_id}`,
+        body,
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
+
+      return {
+        success: true,
+        massage: "Meal is deleted",
+        result: response,
       };
     } catch (error) {
       return {
