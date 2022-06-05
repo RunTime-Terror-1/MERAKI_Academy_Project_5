@@ -1,5 +1,6 @@
 import axios from "axios";
-class SuperAdmin {
+export class SuperAdmin {
+
   static async createOwner({ firstName, lastName, email, password, token }) {
     try {
       const body = { firstName, lastName, email, password };
@@ -42,6 +43,41 @@ class SuperAdmin {
     try {
       const response = await axios.get(
         `${process.env.HOSTURL}/superAdmin/requests`,
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return {
+        success: false,
+        massage: "Server Error",
+        error,
+      };
+    }
+  }
+  static async getAllUsers({token}) {
+    try {
+      const response = await axios.get(
+        `${process.env.HOSTURL}/superAdmin/users`,
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return {
+        success: false,
+        massage: "Server Error",
+        error,
+      };
+    }
+  }
+
+  static async getAllOwners({token}) {
+    try {
+      const response = await axios.get(
+        `${process.env.HOSTURL}/superAdmin/owners`,
         {
           headers: { authorization: `Bearer ${token}` },
         }
