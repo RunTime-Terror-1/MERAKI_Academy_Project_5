@@ -1,9 +1,10 @@
 const { default: axios } = require("axios");
+const { hostUrl } = require("..");
 
 export class User {
   static async getAllRestaurants() {
     try {
-      const response = await axios.get(`${process.env.HOSTURL}/user/`);
+      const response = await axios.get(`${hostUrl}/user/`);
       return response.data;
     } catch (error) {
       return {
@@ -16,9 +17,7 @@ export class User {
 
   static async getRestaurantByName({ restaurantName }) {
     try {
-      const response = await axios.get(
-        `${process.env.HOSTURL}/user/${restaurantName}`
-      );
+      const response = await axios.get(`${hostUrl}/user/${restaurantName}`);
       return response.data;
     } catch (error) {
       return {
@@ -33,7 +32,7 @@ export class User {
   static async getMealByRestaurant({ restaurant_id }) {
     try {
       const response = await axios.get(
-        `${process.env.HOSTURL}/user/${restaurant_id}/meals`
+        `${hostUrl}/user/${restaurant_id}/meals`
       );
       return response.data;
     } catch (error) {
@@ -44,20 +43,14 @@ export class User {
         result: [],
       };
     }
-
-   
   }
 
   static async addMealToCart({ quantity, subTotal, meal_id, token }) {
     try {
       const body = { quantity, subTotal };
-      const response = await axios.post(
-        `${process.env.HOSTURL}/user/${meal_id}`,
-        body,
-        {
-          headers: { authorization: `Bearer ${token}` },
-        }
-      );
+      const response = await axios.post(`${hostUrl}/user/${meal_id}`, body, {
+        headers: { authorization: `Bearer ${token}` },
+      });
 
       return response.data;
     } catch (error) {
@@ -72,7 +65,7 @@ export class User {
   static async deleteMealFromCart({ meal_id, token }) {
     try {
       const response = await axios.delete(
-        `${process.env.HOSTURL}/user/delete/${meal_id}`,
+        `${hostUrl}/user/delete/${meal_id}`,
         body,
         {
           headers: { authorization: `Bearer ${token}` },

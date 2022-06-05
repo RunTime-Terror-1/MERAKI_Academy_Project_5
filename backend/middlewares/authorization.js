@@ -3,6 +3,7 @@ const connection = require("../models/db");
 const authorization = (string) => {
  
   return function (req, res, next) {
+    console.log(req.token);
     const user_id = req.token.userId;
     const data = [user_id];
     const query = `SELECT * FROM users U WHERE U.id = (?)`;

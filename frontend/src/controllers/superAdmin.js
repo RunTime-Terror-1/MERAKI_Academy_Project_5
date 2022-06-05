@@ -1,10 +1,13 @@
 import axios from "axios";
+import { hostUrl } from "..";
+
 export class SuperAdmin {
+
   static async createOwner({ firstName, lastName, email, password, token }) {
     try {
       const body = { firstName, lastName, email, password };
       const response = await axios.post(
-        `${process.env.HOSTURL}/superAdmin/owner`,
+        `${hostUrl}/superAdmin/owner`,
         body,
         {
           headers: { authorization: `Bearer ${token}` },
@@ -23,7 +26,7 @@ export class SuperAdmin {
   static async deleteOwner({ ownerId, name ,token}) {
     try {
       const response = await axios.delete(
-        `${process.env.HOSTURL}/superAdmin/delete/owner`,
+        `${hostUrl}/superAdmin/delete/owner`,
         {
           headers: { authorization: `Bearer ${token}` },
           data: { ownerId, name },
@@ -41,7 +44,42 @@ export class SuperAdmin {
   static async getAllRequests({token}) {
     try {
       const response = await axios.get(
-        `${process.env.HOSTURL}/superAdmin/requests`,
+        `/superAdmin/requests`,
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return {
+        success: "false",
+        massage: "Server Error",
+        error,
+      };
+    }
+  }
+  static async getAllUsers({token}) {
+    try {
+      const response = await axios.get(
+        `${hostUrl}/superAdmin/users`,
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return {
+        success: false,
+        massage: "Server Error",
+        error,
+      };
+    }
+  }
+
+  static async getAllOwners({token}) {
+    try {
+      const response = await axios.get(
+        `${hostUrl}/superAdmin/owners`,
         {
           headers: { authorization: `Bearer ${token}` },
         }
@@ -58,7 +96,7 @@ export class SuperAdmin {
   static async acceptRequest({ requestId, state ,token}) {
     try {
       const response = await axios.put(
-        `${process.env.HOSTURL}/superAdmin/requests`,
+        `${hostUrl}/superAdmin/requests`,
         { requestId, state },
         {
           headers: { authorization: `Bearer ${token}` },

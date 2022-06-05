@@ -77,10 +77,10 @@ const getAllRequests = (req, res) => {
     }
   });
 };
-const acceptRequest = (req, res) => {
-  const { id, state } = req.body;
-  const query = `UPDATE requests  SET state =? WHERE id=?`;
-  connection.query(query, [state,id], (err, result) => {
+
+const getAllUsers = (req, res) => {
+  const query = "SELECT * FROM users WHERE is_deleted =0";
+  connection.query(query, [], (err, result) => {
     if (err) {
       return res.status(500).json({
         success: false,
@@ -88,12 +88,62 @@ const acceptRequest = (req, res) => {
         err,
       });
     }
-  
+    if (result.length) {
+      res.status(200).json({
+        success: true,
+        message: "All users",
+        users: result,
+      });
+    } else {
+      res.status(404).json({
+        success: true,
+        message: "No Request",
+      });
+    }
+  });
+};
+
+const getAllOwners = (req, res) => {
+  const query = "SELECT * FROM users WHERE is_deleted = 0 AND role_id = 2";
+  connection.query(query, [], (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        massage: "Server Error",
+        err,
+      });
+    }
+    if (result.length) {
+      res.status(200).json({
+        success: true,
+        message: "All users",
+        owners: result,
+      });
+    } else {
+      res.status(404).json({
+        success: true,
+        message: "No Request",
+      });
+    }
+  });
+};
+
+const acceptRequest = (req, res) => {
+  const { id, state } = req.body;
+  const query = `UPDATE requests  SET state =? WHERE id=?`;
+  connection.query(query, [state, id], (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        massage: "Server Error",
+        err,
+      });
+    }
+
     res.status(200).json({
       success: true,
       massage: "Request State Change",
     });
-
   });
 };
 
@@ -102,4 +152,6 @@ module.exports = {
   deleteOwner,
   getAllRequests,
   acceptRequest,
+  getAllUsers ,
+  getAllOwners 
 };

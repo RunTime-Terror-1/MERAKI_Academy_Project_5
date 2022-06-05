@@ -1,9 +1,13 @@
 import axios from "axios"
+
+import { hostUrl } from "..";
+
 export class Owner {
   static createRequest ({restaurantName,token}){
+
         try {
             const response = await axios.post(
-              `${process.env.HOSTURL}/owner/request`,
+              `${hostUrl}/owner/request`,
               {restaurantName},
               {
                 headers: { authorization: `Bearer ${token}` },
@@ -22,7 +26,7 @@ export class Owner {
         try {
             const body = { location, lat, lng, name,token};
             const response = await axios.post(
-              `${process.env.HOSTURL}/owner/restaurant`,
+              `${hostUrl}/owner/restaurant`,
               body,
               {
                 headers: { authorization: `Bearer ${token}` },
@@ -42,7 +46,7 @@ export class Owner {
         try {
             const body = { firstName, lastName, email, password,restaurant_id };
             const response = await axios.post(
-              `${process.env.HOSTURL}/owner/employee`,
+              `${hostUrl}/owner/employee`,
               body,
               {
                 headers: { authorization: `Bearer ${token}` },
@@ -60,7 +64,7 @@ export class Owner {
     static deleteEmployee ({employeeId})  {
         try {
             const response = await axios.delete(
-              `${process.env.HOSTURL}/owner/employee`,
+              `${hostUrl}/owner/employee`,
               {
                 headers: { authorization: `Bearer ${token}` },
                 data: { employeeId},
