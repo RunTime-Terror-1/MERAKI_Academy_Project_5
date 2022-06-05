@@ -61,4 +61,22 @@ class Owner {
             };
           }
     }
+    static deleteEmployee ({employeeId})  {
+        try {
+            const response = await axios.delete(
+              `${process.env.HOSTURL}/owner/employee`,
+              {
+                headers: { authorization: `Bearer ${token}` },
+                data: { employeeId},
+              }
+            );
+            return response.data;
+          } catch (error) {
+            return {
+              success: false,
+              massage: "Server Error",
+              error,
+            };
+          }
+      };
 }
