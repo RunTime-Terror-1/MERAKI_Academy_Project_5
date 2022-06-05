@@ -11,11 +11,7 @@ class SuperAdmin {
         }
       );
 
-      return {
-        success: true,
-        message: "Admin Created Successfully",
-        results: response,
-      };
+      return response.data;
     } catch (error) {
       return {
         success: false,
@@ -33,11 +29,7 @@ class SuperAdmin {
           data: { ownerId, name },
         }
       );
-      return {
-        success: true,
-        message: "Owner Deleted Successfully",
-        response,
-      };
+      return response.data;
     } catch (error) {
       return {
         success: false,
@@ -54,11 +46,7 @@ class SuperAdmin {
           headers: { authorization: `Bearer ${token}` },
         }
       );
-      return {
-        success: true,
-        message: "All Requests",
-        requests: response.data.requests,
-      };
+      return response.data;
     } catch (error) {
       return {
         success: false,
@@ -76,11 +64,7 @@ class SuperAdmin {
           headers: { authorization: `Bearer ${token}` },
         }
       );
-      return {
-        success: true,
-        message: "All Requests",
-        requests: response.data.requests,
-      };
+      return response.data;
     } catch (error) {
       return {
         success: true,

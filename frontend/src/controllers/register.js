@@ -6,11 +6,7 @@ class Register {
             `${process.env.HOSTURL}/register/4`,
             body,
           );
-          return {
-            success: true,
-            message: "Account Created Successfully",
-            results: response.data.result,
-          };
+          return response.data;
         } catch (error) {
           return {
             success: false,
