@@ -14,4 +14,6 @@
 
 #nav-menu-panel button{
     padding: var(--button-padding);
+    margin: 2px;
+    background-color: transparent;
 }
