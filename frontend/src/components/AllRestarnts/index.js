@@ -30,9 +30,18 @@ const AllRestarnts = () => {
     return (<div>
        <NavBar/>
         <h1>ggggggggg</h1>
-        <div>{
-            
-            }</div>
+        <div>{restaurants?restaurants.map((elemnt,index)=>{
+
+            return<div>
+
+
+                
+            </div>
+
+          
+
+        }): " "
+              }</div>
     </div>)
 
 
