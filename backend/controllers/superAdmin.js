@@ -117,7 +117,7 @@ const getAllOwners = (req, res) => {
       res.status(200).json({
         success: true,
         message: "All users",
-        requests: result,
+        owners: result,
       });
     } else {
       res.status(404).json({

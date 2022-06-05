@@ -1,6 +1,6 @@
-import { createSelector } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-const superAdminReducer = createSelector({
+const superAdminReducer = createSlice({
   name: "superAdmin",
   initialState: {
     users: [],
@@ -18,5 +18,5 @@ const superAdminReducer = createSelector({
   },
 });
 
-const {setRequests,setUsers} = superAdminReducer.action;
+export const {setRequests,setUsers} = superAdminReducer.actions;
 export default superAdminReducer.reducer;
