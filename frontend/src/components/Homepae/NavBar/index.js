@@ -18,8 +18,7 @@ const NavBar = () => {
   
       }
     })
-  
-   
+
     const whenOut = () => {
       console.log("when err")
      
