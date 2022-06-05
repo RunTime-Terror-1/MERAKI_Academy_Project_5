@@ -24,7 +24,6 @@ class SuperAdmin {
       };
     }
   }
-
   static async deleteOwner({ ownerId, name }) {
     try {
       const response = await axios.delete(
@@ -47,11 +46,10 @@ class SuperAdmin {
       };
     }
   }
-
   static async getAllRequests() {
     try {
       const response = await axios.get(
-        `${process.env.HOSTURL}/superAdmin/delete/owner`,
+        `${process.env.HOSTURL}/superAdmin/requests`,
         {
           headers: { authorization: `Bearer ${token}` },
         }
@@ -69,10 +67,11 @@ class SuperAdmin {
       };
     }
   }
-  static async acceptRequest() {
+  static async acceptRequest({ requestId, state }) {
     try {
-      const response = await axios.get(
-        `${process.env.HOSTURL}/superAdmin/delete/owner`,
+      const response = await axios.put(
+        `${process.env.HOSTURL}/superAdmin/requests`,
+        { requestId, state },
         {
           headers: { authorization: `Bearer ${token}` },
         }
@@ -84,13 +83,11 @@ class SuperAdmin {
       };
     } catch (error) {
       return {
-        success: false,
-        massage: "Server Error",
-        error,
+        success: true,
+        massage: "Request State Change",
       };
     }
   }
-
 }
 
 const acceptRequest = (req, res) => {
