@@ -2,17 +2,12 @@ import axios from "axios";
 import { hostUrl } from "..";
 
 export class SuperAdmin {
-
   static async createOwner({ firstName, lastName, email, password, token }) {
     try {
       const body = { firstName, lastName, email, password };
-      const response = await axios.post(
-        `${hostUrl}/superAdmin/owner`,
-        body,
-        {
-          headers: { authorization: `Bearer ${token}` },
-        }
-      );
+      const response = await axios.post(`${hostUrl}/superAdmin/owner`, body, {
+        headers: { authorization: `Bearer ${token}` },
+      });
 
       return response.data;
     } catch (error) {
@@ -23,7 +18,7 @@ export class SuperAdmin {
       };
     }
   }
-  static async deleteOwner({ ownerId, name ,token}) {
+  static async deleteOwner({ ownerId, name, token }) {
     try {
       const response = await axios.delete(
         `${hostUrl}/superAdmin/delete/owner`,
@@ -41,14 +36,11 @@ export class SuperAdmin {
       };
     }
   }
-  static async getAllRequests({token}) {
+  static async getAllRequests({ token }) {
     try {
-      const response = await axios.get(
-        `${hostUrl}/superAdmin/requests`,
-        {
-          headers: { authorization: `Bearer ${token}` },
-        }
-      );
+      const response = await axios.get(`${hostUrl}/superAdmin/requests`, {
+        headers: { authorization: `Bearer ${token}` },
+      });
       return response.data;
     } catch (error) {
       return {
@@ -58,14 +50,11 @@ export class SuperAdmin {
       };
     }
   }
-  static async getAllUsers({token}) {
+  static async getAllUsers({ token }) {
     try {
-      const response = await axios.get(
-        `${hostUrl}/superAdmin/users`,
-        {
-          headers: { authorization: `Bearer ${token}` },
-        }
-      );
+      const response = await axios.get(`${hostUrl}/superAdmin/users`, {
+        headers: { authorization: `Bearer ${token}` },
+      });
       return response.data;
     } catch (error) {
       return {
@@ -76,14 +65,11 @@ export class SuperAdmin {
     }
   }
 
-  static async getAllOwners({token}) {
+  static async getAllOwners({ token }) {
     try {
-      const response = await axios.get(
-        `${hostUrl}/superAdmin/owners`,
-        {
-          headers: { authorization: `Bearer ${token}` },
-        }
-      );
+      const response = await axios.get(`${hostUrl}/superAdmin/owners`, {
+        headers: { authorization: `Bearer ${token}` },
+      });
       return response.data;
     } catch (error) {
       return {
@@ -93,7 +79,7 @@ export class SuperAdmin {
       };
     }
   }
-  static async acceptRequest({ requestId, state ,token}) {
+  static async acceptRequest({ requestId, state, token }) {
     try {
       const response = await axios.put(
         `${hostUrl}/superAdmin/requests`,
@@ -111,4 +97,3 @@ export class SuperAdmin {
     }
   }
 }
-
