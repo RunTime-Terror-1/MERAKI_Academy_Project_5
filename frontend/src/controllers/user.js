@@ -18,7 +18,6 @@ export class User {
 
   static async getRestaurantByName({ restaurantName }) {
     try {
-    
       const response = await axios.get(`${hostUrl}/user/${restaurantName}`);
 
       return response.data;
@@ -34,9 +33,7 @@ export class User {
 
   static async getRestaurantById({ restaurantId }) {
     try {
-      const response = await axios.get(
-        `${host}/user/id/${restaurantId}`
-      );
+      const response = await axios.get(`${hostUrl}/user/id/${restaurantId}`);
       return response.data;
     } catch (error) {
       return {
@@ -84,11 +81,7 @@ export class User {
   static async deleteMealFromCart({ meal_id, token }) {
     try {
       const response = await axios.delete(
-        `${process.env.HOSTURL}/user/delete/${meal_id}`,
-        // body,
-
         `${hostUrl}/user/delete/${meal_id}`,
-        body,
         {
           headers: { authorization: `Bearer ${token}` },
         }
