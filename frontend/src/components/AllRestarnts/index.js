@@ -6,8 +6,7 @@ import NavBar from "../Homepage/NavBar";
 
 
 const AllRestarnts = () => {
-
-
+    
     const [restaurants, setRestaurants] = useState("")
 
 
@@ -15,8 +14,7 @@ const AllRestarnts = () => {
     const getRestarnts = async () => {
 
         let hotel = await User.getAllRestaurants()
-        // console.log(25)
-        // console.log(hotel)
+      
         setRestaurants(hotel.result)
 
     }
@@ -27,7 +25,7 @@ const AllRestarnts = () => {
         getRestarnts()
     }, [])
 
-    console.log(restaurants)
+  
     return (<div className="AllRestarnts">
         <div className="AllRestarnts_A">dd</div>
 

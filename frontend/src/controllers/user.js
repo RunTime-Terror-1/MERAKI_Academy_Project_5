@@ -17,7 +17,7 @@ export class User {
   static async getRestaurantByName({ restaurantName }) {
     try {
       const response = await axios.get(
-        `${process.env.HOSTURL}/user/${restaurantName}`
+        `${process.env.HOSTURL}/user/name/${restaurantName}`
       );
       return response.data;
     } catch (error) {
@@ -30,12 +30,12 @@ export class User {
     }
   }
 
-  
+
   static async getRestaurantById({ restaurantId }) {
     try {
       const response = await axios.get(
-        `http://localhost:5000/user/${restaurantId}`
-      );
+        `http://localhost:5000/user/id/${restaurantId}`
+      )
       return response.data;
     } catch (error) {
       return {
