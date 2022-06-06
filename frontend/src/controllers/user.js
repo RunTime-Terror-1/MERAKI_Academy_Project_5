@@ -5,7 +5,6 @@ export class User {
   static async getAllRestaurants() {
     try {
 
-      const response = await axios.get(`http://localhost:5000/user/`);
 
       const response = await axios.get(`${hostUrl}/user/`);
 
@@ -21,10 +20,6 @@ export class User {
 
   static async getRestaurantByName({ restaurantName }) {
     try {
-
-      const response = await axios.get(
-        `${process.env.HOSTURL}/user/name/${restaurantName}`
-      );
 
       const response = await axios.get(`${hostUrl}/user/${restaurantName}`);
 
@@ -43,7 +38,7 @@ export class User {
   static async getRestaurantById({ restaurantId }) {
     try {
       const response = await axios.get(
-        `http://localhost:5000/user/id/${restaurantId}`
+        `${hostUrl}/user/id/${restaurantId}`
       )
       return response.data;
     } catch (error) {
@@ -95,7 +90,7 @@ export class User {
     try {
       const response = await axios.delete(
 
-        `${process.env.HOSTURL}/user/delete/${meal_id}`,
+        `${hostUrl}/user/delete/${meal_id}`,
         // body,
 
         `${hostUrl}/user/delete/${meal_id}`,
