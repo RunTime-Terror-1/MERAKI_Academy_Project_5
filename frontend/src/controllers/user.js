@@ -30,6 +30,25 @@ export class User {
     }
   }
 
+  
+  static async getRestaurantById({ restaurantId }) {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/user/${restaurantId}`
+      );
+      return response.data;
+    } catch (error) {
+      return {
+        success: false,
+        massage: "Server Error",
+        error,
+        result: [],
+      };
+    }
+  }
+
+
+
   static async getMealByRestaurant({ restaurant_id }) {
     try {
       const response = await axios.get(
