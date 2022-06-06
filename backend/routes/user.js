@@ -7,6 +7,7 @@ const {
   getMealByRestaurant,
   addMealToCart,
   deleteMealFromCart,
+  getRestaurantById,
 } = require("../controllers/user");
 
 // Middleware
@@ -18,14 +19,20 @@ const userRouter = express.Router();
 
 //!.......... Router EndPoint .................
 
-// get
+//todo  get
 userRouter.get("/", getAllRestaurants);
 
 // get (params methods)
-// userRouter.get("/:name", getRestaurantByName);
+userRouter.get("/name/:name", getRestaurantByName);
+
 
 // get ( Double params methods)
 userRouter.get("/:restaurant_id",getMealByRestaurant);
+
+
+userRouter.get("/id/:id", getRestaurantById);
+
+
 
 // post ( params methods)
 userRouter.post("/:meal_id", authentication, addMealToCart);

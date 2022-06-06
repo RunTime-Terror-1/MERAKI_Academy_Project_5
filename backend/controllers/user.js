@@ -21,6 +21,7 @@ const getAllRestaurants = (req, res) => {
 //! ...........END   getAllRestaurants .......................
 
 const getRestaurantByName = (req, res) => {
+  console.log("iddddsss")
   const restaurantName = req.params.name;
   const query = `SELECT * FROM restaurants WHERE name=?;`;
   const data = [restaurantName];
@@ -42,8 +43,33 @@ const getRestaurantByName = (req, res) => {
     }
   });
 };
-
 //! ...........END getRestaurantByName ....................
+
+const getRestaurantById= (req, res) => {
+  console.log("id")
+  const restaurantid = req.params.id;
+  const query = `SELECT * FROM restaurants WHERE Id=?;`;
+  const data = [restaurantid];
+  connection.query(query, data, (err, result) => {
+    if (err) {
+      res.status(500).json({ err });
+    }
+    if (result.length) {
+      res.status(200).json({
+        success: true,
+        massage: `the restaurant name is: ${restaurantid}`,
+        result: result,
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        massage: `the restaurant name is ${restaurantid} is not found now `,
+      });
+    }
+  });
+};
+//! ...........END getRestaurantById ....................
+
 const getMealByRestaurant = (req, res) => {
   const restaurant_id = req.params.restaurant_id;
 
@@ -143,6 +169,7 @@ const deleteMealFromCart = (req, res) => {
 module.exports = {
   getAllRestaurants,
   getRestaurantByName,
+  getRestaurantById,
   getMealByRestaurant,
   addMealToCart,
   deleteMealFromCart,
