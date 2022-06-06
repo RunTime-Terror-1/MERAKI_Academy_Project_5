@@ -28,20 +28,20 @@ const AllRestarnts = () => {
 
     console.log(restaurants)
     return (<div>
-       <NavBar/>
+
         <h1>ggggggggg</h1>
-        <div>{restaurants?restaurants.map((elemnt,index)=>{
+        {/* <div>{restaurants?restaurants.map((elemnt,index)=>{
 
             return<div>
 
 
-                
+
             </div>
 
           
 
         }): " "
-              }</div>
+              }</div> */}
     </div>)
 
 
