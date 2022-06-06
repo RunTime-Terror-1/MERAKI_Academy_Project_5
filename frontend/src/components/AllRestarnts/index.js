@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 
 const AllRestarnts = () => {
 
+    const navigate = useNavigate()
+
     const [restaurants, setRestaurants] = useState("")
 
 
