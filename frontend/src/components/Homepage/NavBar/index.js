@@ -9,21 +9,26 @@ import { useNavigate } from "react-router-dom";
 const NavBar = () => {
   const navigate = useNavigate();
 
-  return (
-    <>
-      <div className="NavBar"><h1>Aklat</h1>
-        <button onClick={
+  return ( <div className="NavBar">
+
+        <div className="NavBar_One" > <h1>Aklat</h1>
+        </div>
+
+        <div className='NavBar_Tow'> <h1 onClick={
           () => {
             navigate("/AllRestarnts")
           }
 
-        }>AllRestarnts</button>
+        }>AllRestarnts</h1>
+
+          <h1>Accounts</h1></div>
+
 
 
 
 
       </div>
-    </>
+
   );
 };
 

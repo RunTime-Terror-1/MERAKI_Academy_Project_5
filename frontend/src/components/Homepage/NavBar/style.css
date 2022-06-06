@@ -1,4 +1,19 @@
 .NavBar{
     display: flex;
     flex-direction: row;
+    gap: 30vw;
+    background-color: chocolate;
+}
+
+.NavBar_One{
+position: relative;
+left: 10vw;
+
+}
+.NavBar_Tow{
+    display: flex;
+    flex-direction: row;
+
+    position: relative;
+    left: 10vw;
 }

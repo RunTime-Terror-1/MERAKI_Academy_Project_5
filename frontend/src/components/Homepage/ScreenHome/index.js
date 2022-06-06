@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 
 
 import NavBar from "../NavBar"
-import SearchSection from "../SearchSection";
 
 const ScreenHome = () => {
 
@@ -21,9 +20,8 @@ const ScreenHome = () => {
     return (
         <>
             <div className="Na">
-                <NavBar />
-                <SearchSection />
-
+             
+                <div><h1>ffffff</h1></div>
             </div>
         </>
     );
