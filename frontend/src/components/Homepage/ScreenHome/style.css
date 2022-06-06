@@ -1,6 +1,9 @@
 .ScreenHome {
     display: flex;
     flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
 }
 
 .SH_first {
@@ -22,4 +25,28 @@
     position: relative;
     top: 30vh;
     left: 40vw;
+}
+
+.SH_FOne_Button{
+    background-color: coral;
+}
+
+.SH_second{
+display: flex;
+flex-direction: row;
+gap: 5vW;
+background-color: rgb(255,240,237);
+
+}
+.SH_second_One{
+    position: relative;
+    left: 10vw;
+}
+.SH_second_Tow{
+    position: relative;
+    left: 10vw;
+}
+.SH_secound_imgOne{
+    width: 35vw;
+    height: 50vh;
 }
