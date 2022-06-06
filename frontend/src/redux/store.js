@@ -1,5 +1,5 @@
 import {configureStore} from "@reduxjs/toolkit"
-import superAdminReducer from "./redusers/superAdmin"
+import superAdminReducer from "./reducers/superAdmin"
 
 import authReducer from "./reducers/auth";
 
