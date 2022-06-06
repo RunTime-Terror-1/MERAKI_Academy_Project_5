@@ -1,5 +1,5 @@
 import "./App.css";
-import {Route,Routes} from "react-router-dom"
+
 import { SuperAdminPanel } from "./components/AdminPanle/SuperAdmin";
 import { Route, Routes } from "react-router-dom";
 import ScreenHome from "./components/Homepage/ScreenHome";
@@ -8,31 +8,27 @@ import NavBar from "./components/Homepage/NavBar";
 import RestaurantPage from "./components/RestaurantPage";
 
 
-
-const  App=()=> {
+const App = () => {
   return <div className="App">
-  <NavBar/>
-  <Routes>
-  <Route path={"/"} element={<ScreenHome/>} />
-
-  <Route path={"/AllRestarnts"} element={<AllRestarnts/>} />
-
-  <Route path={"/RestaurantPage"} element={<RestaurantPage/>} />
-
-
-
-  </Routes>
-  
-  
-  
-  </div>;
-
-function App() {
-  return <div className="App">
+    <NavBar />
     <Routes>
-      <Route path="/" element={<SuperAdminPanel/>} />
+      <Route path={"/"} element={<ScreenHome />} />
+
+
+      <Route path="/SuperAdminPanel" element={<SuperAdminPanel />} />
+      <Route path={"/AllRestarnts"} element={<AllRestarnts />} />
+
+
+
+      <Route path={"/RestaurantPage"} element={<RestaurantPage />} />
+
+
+
     </Routes>
-    </div>;
+
+
+
+  </div>;
 }
 
 export default App;
