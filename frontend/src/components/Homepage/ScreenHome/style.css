@@ -1,4 +1,25 @@
-.ScreenHome{
+.ScreenHome {
     display: flex;
     flex-direction: column;
+}
+
+.SH_first {
+    height: 60vh;
+    /* display: flex;
+    flex-direction: row; */
+    /* justify-content: center; */
+    background-image: url(https://image.shutterstock.com/z/stock-photo-salad-with-tomatoes-greens-dressing-oil-and-feta-cheese-in-blue-plate-on-white-wooden-background-269131160.jpg);
+
+}
+
+.SH_first_One {
+    width: 30vw;
+    height: 6vh;
+    display: flex;
+    flex-direction: row;
+    gap: 2Vw;
+
+    position: relative;
+    top: 30vh;
+    left: 40vw;
 }

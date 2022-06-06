@@ -9,8 +9,8 @@ const ScreenHome = () => {
 
     return (<div className="ScreenHome">
 
-        <div className="SH_first"><h1>ffffff</h1></div>
-        <div className="SH_second"></div>
+        <div className="SH_first"><div className="SH_first_One" ><input /> <button>let`s go</button></div></div>
+        <div className="SH_second">dddd </div>
 
 
     </div>
