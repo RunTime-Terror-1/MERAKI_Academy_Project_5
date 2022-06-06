@@ -45,7 +45,7 @@ const getRestaurantByName = (req, res) => {
 };
 //! ...........END getRestaurantByName ....................
 
-const getRestaurantById= (req, res) => {
+const getRestaurantById = (req, res) => {
   console.log("id")
   const restaurantid = req.params.id;
   const query = `SELECT * FROM restaurants WHERE Id=?;`;
@@ -70,32 +70,70 @@ const getRestaurantById= (req, res) => {
 };
 //! ...........END getRestaurantById ....................
 
+const addMealToCart = (req, res) => {
+  // console.log(req.token.cartId)
+  const cart_id=req.token.cartId
+  const mealId=req.params.meal_id;
+  
+  const query = `INSERT INTO cartItems(quantity,subTotal,cart_id,meal_id) VALUES (?,?,?,?);`;
+  const data = ["2", "85", cart_id,mealId];
+  connection.query(query, data, (err, result) => {
+      console.log(query)
+      if (err) {
+        res.status(500).json({
+          success: false,
+          massage: "Server error",
+          err: err,
+        });
+      }
+      res.status(200).json({
+        success: true,
+        massage: "add meal to cart",
+        result: result,
+      });
+    });
+};
+//! ..................... End   getMealbyResturant ...............
+
 const getMealByRestaurant = (req, res) => {
   const restaurant_id = req.params.restaurant_id;
 
-const addMealToCart = (req, res) => {
-  const { quantity, subTotal } = req.body;
-  const cart_id = req.token.cartId;
-  const mealId = req.params.meal_id;
+  const query = `SELECT * FROM meals WHERE restarent_id=?;`;
 
-  const query = `INSERT INTO cartItems(quantity,subTotal,cart_id,meal_id) VALUES (?,?,?,?);`;
-  const data = [quantity, subTotal, cart_id, mealId];
-  connection.query(query, data, (err, result) => {
+  const data = [restaurant_id];
+  connection.query(query, data, (err, resultMeals) => {
     if (err) {
       res.status(500).json({
         success: false,
-        massage: "Server error",
+        massage: "Server Error",
         err: err,
       });
     }
-    res.status(200).json({
-      success: true,
-      massage: "add meal to cart",
-      result: result,
 
-    });
+    if (!resultMeals.length) {
+      res.status(404).json({
+        success: false,
+        massage: "The meal is Not Found",
+      });
+    } else {
+      const categories = [];
+      resultMeals.forEach((ele) => {
+        if (!categories.includes(ele.category)) {
+          categories.push(ele.category);
+        }
+      });
+      res.status(200).json({
+        success: true,
+        massage: "All Meals",
+        result: resultMeals,
+        categories,
+      });
+    }
   });
 };
+
+
+
 //! ...End addMeealtocart..........
 
 const deleteMealFromCart = (req, res) => {
@@ -132,34 +170,35 @@ const deleteMealFromCart = (req, res) => {
 };
 //! ........END deleteMealfromCart.....
 
-const senOrder=(req,res)=>{
-const user_id=req.token.userId
-const meal_id=req.params.meal_id
-const {quantity,receipt}=req.body
+const senOrder = (req, res) => {
+  const user_id = req.token.userId
+  const meal_id = req.params.meal_id
+  const { quantity, receipt } = req.body
 
 
-const query = `INSERT INTO orders(quantity,receipt,user_id,meal_id) VALUES (?,?,?,?);`;
-const data = [quantity, receipt,user_id, meal_id];
-connection.query(query, data, (err, result) => {
+  const query = `INSERT INTO orders(quantity,receipt,user_id,meal_id) VALUES (?,?,?,?);`;
+  const data = [quantity, receipt, user_id, meal_id];
+  connection.query(query, data, (err, result) => {
 
     if (err) {
-        res.status(500).json({
-            success: false,
-            massage: "Server error",
-            err: err,
-        });
-    }else{
-        res.status(200).json({
-            success: true,
-            massage: "add meal to Order",
-            result: result,
-        });
+      res.status(500).json({
+        success: false,
+        massage: "Server error",
+        err: err,
+      });
+    } else {
+      res.status(200).json({
+        success: true,
+        massage: "add meal to Order",
+        result: result,
+      });
 
     }
-   
-});
+
+  });
 
 };
+
 
 
 module.exports = {
@@ -169,5 +208,5 @@ module.exports = {
   getMealByRestaurant,
   addMealToCart,
   deleteMealFromCart,
-
+  senOrder
 };
