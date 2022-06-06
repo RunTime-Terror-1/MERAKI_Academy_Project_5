@@ -43,9 +43,11 @@ CREATE TABLE address (
 CREATE TABLE restaurants (
     id INT AUTO_INCREMENT NOT NULL,
     location VARCHAR(255) NOT NULL,
+    Logo VARCHAR(255) NOT NULL,
     lat VARCHAR(255) NOT NULL,
     lng VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
+    rest_category VARCHAR(255) NOT NULL,
     owner_id INT,
     FOREIGN KEY (owner_id) REFERENCES users(id),
     is_deleted TINYINT DEFAULT 0,

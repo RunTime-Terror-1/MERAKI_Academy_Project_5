@@ -2,7 +2,18 @@ const express = require("express");
 
 //controllers
 
+const {
+  getAllRestaurants,
+  getRestaurantByName,
+  getMealByRestaurant,
+  addMealToCart,
+  deleteMealFromCart,
+  getRestaurantById,
+} = require("../controllers/user");
+
+
 const { getAllRestaurants, getRestaurantByName, getMealByRestaurant,addMealToCart,deleteMealFromCart,  senOrder} = require("../controllers/user");
+
 
 
 // Middleware
@@ -14,11 +25,25 @@ const userRouter = express.Router();
 
 //!.......... Router EndPoint .................
 
-// get
+//todo  get method
+// get 
 userRouter.get("/", getAllRestaurants);
 
-// get (params methods)
-// userRouter.get("/:name", getRestaurantByName);
+// get (params)
+userRouter.get("/name/:name", getRestaurantByName);
+
+
+
+// get (  params )
+userRouter.get("/:restaurant_id",getMealByRestaurant);
+
+// get ( params )
+userRouter.get("/id/:id", getRestaurantById);
+
+//...........................................................
+//todo  post method
+// post ( params methods)
+userRouter.post("/:meal_id", authentication, addMealToCart);
 
 // get ( Double params methods)
 
@@ -29,8 +54,15 @@ userRouter.get("/res/:restaurant_id",  getMealByRestaurant)
 userRouter.post("/sent/:meal_id",authentication,senOrder);
 
 
+
 //delete (params methods)
 userRouter.delete("/delete/:meal_id",authentication,deleteMealFromCart);
 
 
+
+
+
+
+
+//todo  exports router
 module.exports = userRouter;

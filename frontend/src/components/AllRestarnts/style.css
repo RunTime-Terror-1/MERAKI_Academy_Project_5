@@ -1,0 +1,57 @@
+.AllRestarnts{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    top:4vh;
+    
+}
+.AllRestarnts_A{
+    width: 10vw;
+}
+.AllRestarnts_C{
+    width: 10vw;
+}
+.AllRestarnts_B{
+    width: 90vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.All_B_eachRestarant{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    border:inset #B0B8B4
+    
+    
+}
+.All_B_eachRestarant:hover{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    border:inset #B0B8B4;
+    transform: scale(1.2);
+}
+.logo{
+    width: 8vw;
+    height: 14vh;
+    position: relative;
+    top:20px
+}
+
+.divLogo{
+    width: 15vw;
+    height: 18vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: crimson;
+}
+.divLogoOne{
+    width: 10vw;
+    height: 15vh;
+    position: relative;
+    
+    background-color: darkblue;
+}
