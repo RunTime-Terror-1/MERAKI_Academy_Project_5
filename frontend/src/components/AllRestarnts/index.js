@@ -1,3 +1,4 @@
+import './style.css'
 import React, { useState, useEffect, useContext } from "react";
 import { User } from "../../controllers/user";
 
@@ -11,7 +12,7 @@ const AllRestarnts = () => {
 
 
 
-    const getRestarnts = async() => {
+    const getRestarnts = async () => {
 
         let hotel = await User.getAllRestaurants()
         // console.log(25)
@@ -27,21 +28,24 @@ const AllRestarnts = () => {
     }, [])
 
     console.log(restaurants)
-    return (<div>
+    return (<div className="AllRestarnts">
+        <div className="AllRestarnts_A">dd</div>
 
-        <h1>ggggggggg</h1>
-        {/* <div>{restaurants?restaurants.map((elemnt,index)=>{
+        <div className="AllRestarnts_B">{restaurants ? restaurants.map((elemnt, index) => {
+                console.log(elemnt.Logo)
+            return <div className="All_B_eachRestarant" key={index}>
 
-            return<div>
-
-
+                    <div className='divLogo'><img  className='logo' src={elemnt.Logo}/></div>
+                
+                    <h2>{elemnt.name}</h2>
+                    <h2>{elemnt.rest_category}</h2>
+                
 
             </div>
+        }) : " "
+        }</div>
 
-          
-
-        }): " "
-              }</div> */}
+        <div className="AllRestarnts_C">ee</div>
     </div>)
 
 
