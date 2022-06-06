@@ -1,0 +1,4 @@
+.ScreenHome{
+    display: flex;
+    flex-direction: column;
+}

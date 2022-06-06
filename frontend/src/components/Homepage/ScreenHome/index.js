@@ -1,29 +1,19 @@
+import './style.css'
 import React, { useState, useContext } from "react";
 
 
-import NavBar from "../NavBar"
+
 
 const ScreenHome = () => {
 
-    // const dispatch = useDispatch();
 
-    // const statevalue = useSelector((state) => {
+    return (<div className="ScreenHome">
 
-    //   return {
-    //     tokenValue: state.auth.token,
-    //     isLoggedInValue: state.auth.isloggedIn,
-
-    //   }
-    // })
+        <div className="SH_first"><h1>ffffff</h1></div>
+        <div className="SH_second"></div>
 
 
-    return (
-        <>
-            <div className="Na">
-             
-                <div><h1>ffffff</h1></div>
-            </div>
-        </>
+    </div>
     );
 };
 
