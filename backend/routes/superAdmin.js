@@ -1,6 +1,13 @@
 const express = require("express");
 
-const { createOwner,deleteOwner, getAllRequests ,acceptRequest} = require("../controllers/superAdmin");
+const {
+  createOwner,
+  deleteOwner,
+  getAllRequests,
+  acceptRequest,
+  getAllUsers,
+  getAllOwners,
+} = require("../controllers/superAdmin");
 const authentication = require("../middlewares/authentication");
 const authorization = require("../middlewares/authorization");
 
@@ -15,26 +22,39 @@ superAdminRouter.post(
 
 //delete
 superAdminRouter.delete(
-    "/delete/owner",
-    authentication,
-    authorization("1"),
-    deleteOwner
-  );
+  "/delete/owner",
+  authentication,
+  authorization("1"),
+  deleteOwner
+);
 
-  //get
-  superAdminRouter.get(
-    "/requests",
-    authentication,
-    authorization("1"),
-    getAllRequests,
-  );
+//get
+superAdminRouter.get(
+  "/requests",
+  authentication,
+  authorization("1"),
+  getAllRequests
+);
+superAdminRouter.get(
+  "/users",
+  authentication,
+  authorization("1"),
+  getAllUsers,
+);
 
-  //put
-  superAdminRouter.put(
-    "/requests",
-    authentication,
-    authorization("1"),
-    acceptRequest,
-  );
-  
+superAdminRouter.get(
+  "/owners",
+  authentication,
+  authorization("1"),
+  getAllOwners,
+);
+
+//put
+superAdminRouter.put(
+  "/requests",
+  authentication,
+  authorization("1"),
+  acceptRequest
+);
+
 module.exports = superAdminRouter;
