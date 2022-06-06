@@ -9,10 +9,10 @@ const {
   addMealToCart,
   deleteMealFromCart,
   getRestaurantById,
+  senOrder,
 } = require("../controllers/user");
 
 
-const { getAllRestaurants, getRestaurantByName, getMealByRestaurant,addMealToCart,deleteMealFromCart,  senOrder} = require("../controllers/user");
 
 
 
@@ -43,7 +43,7 @@ userRouter.get("/id/:id", getRestaurantById);
 //...........................................................
 //todo  post method
 // post ( params methods)
-userRouter.post("/:meal_id", authentication, addMealToCart);
+userRouter.post("/:meal_id",authentication,addMealToCart);
 
 // get ( Double params methods)
 
