@@ -2,11 +2,24 @@
   display: flex;
   flex-direction: column;
   width: 30vw;
-  background-color: aqua;
+  background-color: rgb(255, 183, 0);
   height: 100vh;
   text-align: start;
+  padding: 5px;
 }
 
+#nav-menu-panel h2 {
+  text-align: center;
+}
+#nav-menu-panel hr {
+  background-color: black;
+  border: 0.5px solid black;
+}
+
+#user-img-div {
+  width: 100%;
+  text-align: center;
+}
 #nav-menu-panel img {
   width: 15vw;
   height: 15vw;
@@ -28,6 +41,6 @@
   align-items: center;
   width: 29vw;
   margin: 2px;
-  border: 1px black solid;
+  border: 1px rgb(18, 17, 17) solid;
   background-color: antiquewhite;
 }
