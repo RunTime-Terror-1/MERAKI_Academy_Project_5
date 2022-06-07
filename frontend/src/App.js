@@ -10,7 +10,7 @@ import RestaurantPage from "./components/RestaurantPage";
 const App = () => {
   return (
     <div className="App">
-      <NavBar />
+      {/* <NavBar /> */}
       <Routes>
         <Route path={"/"} element={<ScreenHome />} />
         <Route path="/SuperAdminPanel" element={<SuperAdminPanel />} />

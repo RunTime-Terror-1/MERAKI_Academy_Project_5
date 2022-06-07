@@ -12,11 +12,10 @@ import { setRequests, setUsers } from "../../../../redux/reducers/superAdmin";
 export const NavigationBar = (req, res) => {
   const dispatch = useDispatch();
   const [isUsersShown, setIsUsersShown] = useState(true);
-  const {superAdminPanel,auth} = useSelector((state) => {
+  const { superAdminPanel, auth } = useSelector((state) => {
     return state;
   });
 
-  
   const userArea = ({
     name,
     imgUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Lionel_Messi_20180626.jpg/347px-Lionel_Messi_20180626.jpg",
@@ -49,9 +48,14 @@ export const NavigationBar = (req, res) => {
       <hr />
       <h3>menu</h3>
       <hr />
-      {menuButton({ text: "Users", icon: <HiUsers />, onClick: () => {
-        
-      } })}
+      {menuButton({
+        text: "Users",
+        icon: <HiUsers />,
+        onClick: async () => {
+          const data = await SuperAdmin.getAllUsers({ token: auth.token });
+          dispatch(setUsers(data.users));
+        },
+      })}
       {menuButton({
         text: "Requests",
         icon: <BiGitPullRequest />,
@@ -60,10 +64,7 @@ export const NavigationBar = (req, res) => {
       {menuButton({
         text: "Create Owner",
         icon: <AiOutlineUserAdd />,
-        onClick: async () => {
-          const data =await SuperAdmin.getAllOwners({token:auth.token})
-          dispatch(setUsers(data.owners))
-        },
+        onClick: async () => {},
       })}
     </div>
   );
