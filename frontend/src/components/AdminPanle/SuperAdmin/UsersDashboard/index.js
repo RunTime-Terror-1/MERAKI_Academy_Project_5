@@ -1,6 +1,8 @@
 import react, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SuperAdmin } from "../../../../controllers/superAdmin";
+import { User } from "../../../../controllers/user";
+import auth from "../../../../redux/reducers/auth";
 import { setRequests } from "../../../../redux/reducers/superAdmin";
 
 export const Users = () => {
@@ -19,6 +21,9 @@ export const Users = () => {
       dispatch(setRequests(usersResponse.requests));
     })();
   }, []);
+  const {auth} = useSelector((state)=>{
+      return state;
+  })
 
   const showUsers = (user) => {
     return (
@@ -29,8 +34,10 @@ export const Users = () => {
         <h4>{user.role_id}</h4>
         <h4>{user.lastName}</h4>
         <div>
-            <button >Delete</button>
-            <button>Edit</button>
+            <button onClick={async()=>{
+                await SuperAdmin.deleteOwner({token:auth.token,ownerId:user.id,restaurantName:""})
+            }}>Delete</button>
+            <button onClick={()=>{}}>Edit</button>
         </div>
       </div>
     );
