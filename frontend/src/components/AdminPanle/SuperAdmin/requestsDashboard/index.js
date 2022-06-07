@@ -1,9 +1,8 @@
 import react, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SuperAdmin } from "../../../../controllers/superAdmin";
-import { User } from "../../../../controllers/user";
-import auth from "../../../../redux/reducers/auth";
-import { setRequests, setUsers } from "../../../../redux/reducers/superAdmin";
+
+import { setRequests } from "../../../../redux/reducers/superAdmin";
 
 export const Users = () => {
   const dispatch = useDispatch();
@@ -14,16 +13,11 @@ export const Users = () => {
   useEffect(() => {
     // just for test
     (async () => {
-      const requestsResponse = await SuperAdmin.getAllRequests({
+      const usersResponse = await SuperAdmin.getAllRequests({
         token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInJvbGVJZCI6MSwiY2FydElkIjozLCJpYXQiOjE2NTQ0NTYzMTZ9.k_orJs2F3mmDFmCm6UVE7nK4HuzTc9tRorjl7hYQ4ew`,
       });
 
-      dispatch(setRequests(requestsResponse.requests));
-      const usersResponse = await SuperAdmin.getAllUsers({
-        token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInJvbGVJZCI6MSwiY2FydElkIjozLCJpYXQiOjE2NTQ0NTYzMTZ9.k_orJs2F3mmDFmCm6UVE7nK4HuzTc9tRorjl7hYQ4ew`,
-      });
-
-      dispatch(setUsers(usersResponse.users));
+      dispatch(setRequests(usersResponse.requests));
     })();
   }, []);
   const {auth} = useSelector((state)=>{

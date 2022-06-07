@@ -59,7 +59,10 @@ export const NavigationBar = (req, res) => {
       {menuButton({
         text: "Requests",
         icon: <BiGitPullRequest />,
-        onClick: () => {},
+        onClick: async () => {
+          const data = await SuperAdmin.getAllRequests({ token: auth.token });
+          dispatch(setRequests(data.requests));
+        },
       })}
       {menuButton({
         text: "Create Owner",

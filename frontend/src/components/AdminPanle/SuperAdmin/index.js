@@ -7,7 +7,7 @@ import "./style.css";
 import { Users } from "./UsersDashboard";
 export const SuperAdminPanel = () => {
   const dispatch = useDispatch();
-  const [isUsersShown, setIsUsersShown] = useState(true);
+  const [isUsersShown, setIsUsersShown] = useState(false);
   const { superAdminPanel } = useSelector((state) => {
     return state;
   });
