@@ -1,4 +1,7 @@
-const { hostUrl } = require("..");
+import axios from "axios";
+import { hostUrl } from "..";
+
+
 
 export class Login {
   static async login({ email, password }) {

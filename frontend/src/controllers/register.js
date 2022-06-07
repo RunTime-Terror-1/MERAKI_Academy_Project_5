@@ -1,7 +1,10 @@
-const { hostUrl } = require("..");
+import axios from "axios";
+import { hostUrl } from "..";
+
 
 export class Register {
   static async register({ firstName, lastName, email, password }) {
+  
     try {
       const body = { firstName, lastName, email, password };
       const response = await axios.post(`${hostUrl}/register/4`, body);
