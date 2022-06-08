@@ -126,7 +126,18 @@ const RestaurantPage = () => {
           }) : ""}</div>
 
 
-          <div>{menu ? menu.map((element, index) => {
+          {/* <div className='Res_two_B_B'>{menu ? menu.map((element, index) => {
+            return (<div>
+
+              <h1>{element.name}</h1>
+              <img src={element.imgUrl} />
+
+
+            </div>
+            )
+          }) : ""}</div> */}
+
+          <div className='Res_two_B_B'>{menu ? menu.map((element, index) => {
             return (<div>
 
               <h1>{element.name}</h1>
@@ -136,6 +147,10 @@ const RestaurantPage = () => {
             </div>
             )
           }) : ""}</div>
+
+
+
+          <div className='Res_two_B_c'>cart cart</div>
 
         </div>
 

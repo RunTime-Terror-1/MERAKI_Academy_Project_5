@@ -33,7 +33,17 @@
     background-color: darkgreen;
 }
 .Res_two_B_A{
+    width: 10vw;
     background-color: darkred;
+}
+
+.Res_two_B_B{
+    width: 60vw;
+    background-color: deeppink;
+}
+.Res_two_B_c{
+    width: 10vw;
+    background-color: indigo;
 }
 .Res_three {
     width: 10vw;
