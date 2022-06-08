@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {controllers, Register} from "../controllers/register"
 
-
+console.log("RegisterComponent");
 export const RegisterComponent = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastname] = useState("");

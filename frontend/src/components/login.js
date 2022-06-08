@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {controllers, Login} from "../controllers/login"
 
-
+console.log("loginCompomnent");
 export const LoginComponent = () => {
     const[email,setEmail]=useState("");
     const[password,setpassword]=useState("");
