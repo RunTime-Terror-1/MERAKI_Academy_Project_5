@@ -4,31 +4,18 @@ import { SuperAdmin } from "../../../../controllers/superAdmin";
 import { User } from "../../../../controllers/user";
 import auth from "../../../../redux/reducers/auth";
 import { setRequests, setUsers } from "../../../../redux/reducers/superAdmin";
+import { CreateOwnerDialog } from "./CreateOwner";
 
 export const Users = () => {
   const dispatch = useDispatch();
-  const [isUsersShown, setIsUsersShown] = useState(true);
+  const [isRegisterShown, setIsRegisterShown] = useState(false);
   const { superAdminPanel } = useSelector((state) => {
     return state;
   });
-  useEffect(() => {
-    // just for test
-    (async () => {
-      const requestsResponse = await SuperAdmin.getAllRequests({
-        token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInJvbGVJZCI6MSwiY2FydElkIjozLCJpYXQiOjE2NTQ0NTYzMTZ9.k_orJs2F3mmDFmCm6UVE7nK4HuzTc9tRorjl7hYQ4ew`,
-      });
 
-      dispatch(setRequests(requestsResponse.requests));
-      const usersResponse = await SuperAdmin.getAllUsers({
-        token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInJvbGVJZCI6MSwiY2FydElkIjozLCJpYXQiOjE2NTQ0NTYzMTZ9.k_orJs2F3mmDFmCm6UVE7nK4HuzTc9tRorjl7hYQ4ew`,
-      });
-
-      dispatch(setUsers(usersResponse.users));
-    })();
-  }, []);
-  const {auth} = useSelector((state)=>{
-      return state;
-  })
+  const { auth } = useSelector((state) => {
+    return state;
+  });
 
   const showUsers = (user) => {
     return (
@@ -39,20 +26,38 @@ export const Users = () => {
         <h4>{user.role_id}</h4>
         <h4>{user.lastName}</h4>
         <div>
-            <button onClick={async()=>{
-                await SuperAdmin.deleteOwner({token:auth.token,ownerId:user.id,restaurantName:""})
-            }}>Delete</button>
-            <button onClick={()=>{}}>Edit</button>
+          <button
+            onClick={async () => {
+              await SuperAdmin.deleteOwner({
+                token: auth.token,
+                ownerId: user.id,
+                restaurantName: "",
+              });
+            }}
+          >
+            Delete
+          </button>
+          <button onClick={() => {}}>Edit</button>
         </div>
       </div>
     );
   };
+
   return (
     <div>
-        <div style= {{textAlign:"start",height:"100px"}}>
-           <p><strong>Users</strong> you can,edit or delete users </p> 
-           <button>+ User</button>
-        </div>
+      <div style={{ textAlign: "start", height: "100px" }}>
+        <p>
+          <strong>Users</strong> you can,edit or delete users{" "}
+        </p>
+        <button
+          onClick={() => {
+            setIsRegisterShown(!isRegisterShown);
+          }}
+        >
+          + User
+        </button>
+      </div>
+      {isRegisterShown ? <CreateOwnerDialog auth={auth} /> : <></>}
       <div key={"//d"} id="user-div">
         <h4>#</h4>
         <h4>Name</h4>
