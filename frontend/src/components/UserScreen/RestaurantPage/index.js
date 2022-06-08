@@ -85,6 +85,7 @@ const RestaurantPage = () => {
     getRestarnt()
 
   }, [])
+
   console.log(arraydetials)
   return (<div className="RestaurantPage">
     <div>Navbar</div>
@@ -137,12 +138,23 @@ const RestaurantPage = () => {
             )
           }) : ""}</div> */}
 
-          <div className='Res_two_B_B'>{menu ? menu.map((element, index) => {
-            return (<div>
+          <div className='Res_two_B_B'>{arraydetials? arraydetials.map((element, index) => {
+            return (<div className='div_Mallloop_1'>
 
-              <h1>{element.name}</h1>
-              <img src={element.imgUrl} />
+              <details>
+              <summary>{element.catoName}</summary>
+           <div>{element.mallloop?element.mallloop.map((elementMall,index)=>{
+             return(<div className='div_Mallloop_2'>
+               <img className='imagetest' src={elementMall.imgUrl}/>
+               <h1>{elementMall.name}</h1>
 
+
+             </div>)    
+
+
+           }):""}</div>
+
+              </details>
 
             </div>
             )
