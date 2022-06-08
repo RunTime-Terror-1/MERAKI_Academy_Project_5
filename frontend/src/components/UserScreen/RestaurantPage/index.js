@@ -120,10 +120,10 @@ const RestaurantPage = () => {
         <div className='Res_two_B' >
           <div className='Res_two_B_A'>{categories ? categories.map((element, index) => {
 
-            return (<div>
-              <h1>{element}</h1>
+            return (<nav>
+              <a href={"#"+index}>{element}</a>
 
-            </div>)
+            </nav>)
           }) : ""}</div>
 
 
@@ -138,21 +138,21 @@ const RestaurantPage = () => {
             )
           }) : ""}</div> */}
 
-          <div className='Res_two_B_B'>{arraydetials? arraydetials.map((element, index) => {
+          <div className='Res_two_B_B'>{arraydetials ? arraydetials.map((element, index) => {
             return (<div className='div_Mallloop_1'>
 
-              <details dd>
-              <summary>{element.catoName}</summary>
-           <div>{element.mallloop?element.mallloop.map((elementMall,index)=>{
-             return(<div className='div_Mallloop_2'>
-               <img className='imagetest' src={elementMall.imgUrl}/>
-               <h1>{elementMall.name}</h1>
+              <details open  id={index}>
+                <summary>{element.catoName}</summary>
+                <div>{element.mallloop ? element.mallloop.map((elementMall, index) => {
+                  return (<div className='div_Mallloop_2'>
+                    <img className='imagetest' src={elementMall.imgUrl} />
+                    <h1>{elementMall.name}</h1>
 
 
-             </div>)    
+                  </div>)
 
 
-           }):""}</div>
+                }) : ""}</div>
 
               </details>
 
@@ -162,7 +162,7 @@ const RestaurantPage = () => {
 
 
 
-          <div className='Res_two_B_c'>cart cart</div>
+          <div className='Res_two_B_c'>cart cart  cart cart cart cart </div>
 
         </div>
 

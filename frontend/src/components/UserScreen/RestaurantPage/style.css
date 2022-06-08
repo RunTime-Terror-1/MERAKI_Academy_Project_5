@@ -43,7 +43,7 @@
 }
 .Res_two_B_c{
     width: 10vw;
-    background-color: indigo;
+    /* background-color: indigo; */
 }
 .Res_three {
     width: 10vw;
@@ -69,4 +69,8 @@
     height: 250px;
 
     transform: scale(1.3);
+}
+
+html{
+    scroll-behavior: auto;
 }
