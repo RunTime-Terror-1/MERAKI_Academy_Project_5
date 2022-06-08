@@ -92,10 +92,10 @@ const RestaurantPage = () => {
         <div className='Res_two_B' >
           <div className='Res_two_B_A'>{categories ? categories.map((element, index) => {
 
-            return (<nav>
+            return (<div className='divsticky'>
               <a href={"#" + index}>{element}</a>
 
-            </nav>)
+            </div>)
           }) : ""}</div>
 
 

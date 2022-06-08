@@ -35,6 +35,7 @@
 .Res_two_B_A{
     width: 10vw;
     background-color: darkred;
+    /* position: fixed; */
 }
 
 .Res_two_B_B{
@@ -45,6 +46,12 @@
     width: 10vw;
     /* background-color: indigo; */
 }
+
+/* .divstickyq{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+} */
 .Res_three {
     width: 10vw;
 }
