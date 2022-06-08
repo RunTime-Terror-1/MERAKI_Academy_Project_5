@@ -97,8 +97,8 @@ const RestaurantPage = () => {
       <div className='Res_two'>
 
 
-        <div>{restaurant ? restaurant.map((element, index) => {
-          return (<div>
+        <div className='Res_two_A' >{restaurant ? restaurant.map((element, index) => {
+          return (<div className='Res_two_A_A' >
 
             <div><img src={element.Logo} /></div>
 
@@ -116,8 +116,8 @@ const RestaurantPage = () => {
 
         </div>
 
-        <div>
-          <div>{categories ? categories.map((element, index) => {
+        <div className='Res_two_B' >
+          <div className='Res_two_B_A'>{categories ? categories.map((element, index) => {
 
             return (<div>
               <h1>{element}</h1>
@@ -144,6 +144,9 @@ const RestaurantPage = () => {
 
 
       </div>
+
+
+
       <div className='Res_three'>three</div>
     </div>
   </div>

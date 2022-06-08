@@ -18,10 +18,23 @@
 .Res_two {
     width: 80vw;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     background-color: rgb(255, 0, 0);
 }
+.Res_two_A_A{
+    display: flex;
+    flex-direction: row;
+    background-color: cyan;
+}
 
+.Res_two_B{
+    display: flex;
+    flex-direction: row;
+    background-color: darkgreen;
+}
+.Res_two_B_A{
+    background-color: darkred;
+}
 .Res_three {
     width: 10vw;
 }
