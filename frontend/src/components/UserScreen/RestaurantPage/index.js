@@ -8,7 +8,7 @@ const RestaurantPage = () => {
   const [restaurant, setRestaurants] = useState("")
   const [menu, setMenu] = useState("")
   const [categories, setCategories] = useState("")
-
+  const [arraydetials, setArraydetials] = useState("")
   const getRestarnt = async () => {
     const responseRestarnt = await User.getRestaurantById({ restaurantId: 1 })
     console.log(responseRestarnt.result)
@@ -48,6 +48,7 @@ const RestaurantPage = () => {
     console.log(array)
     console.log(arrayTwo)
     console.log(arrayLoop)
+    setArraydetials(arrayLoop)
     // console.log(arrayLoop[indexOne])
   }
 
@@ -79,12 +80,12 @@ const RestaurantPage = () => {
   // console.log(restaurant)
   // console.log(menu)
   // console.log(categories)
-  
+
   useEffect(() => {
     getRestarnt()
 
   }, [])
-
+  console.log(arraydetials)
   return (<div className="RestaurantPage">
     <div>Navbar</div>
 
