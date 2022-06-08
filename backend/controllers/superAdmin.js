@@ -17,7 +17,7 @@ const createOwner = async (req, res) => {
     }
     res.status(201).json({
       success: true,
-      message: "Admin Created Successfully",
+      message: "Owner Created Successfully",
       results: result,
     });
   });
