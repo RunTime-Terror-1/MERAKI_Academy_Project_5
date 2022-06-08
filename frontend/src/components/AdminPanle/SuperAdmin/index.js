@@ -8,7 +8,7 @@ import { Users } from "./UsersDashboard";
 import { Requests } from "./requestsDashboard";
 export const SuperAdminPanel = () => {
   const dispatch = useDispatch();
-  const [isUsersShown, setIsUsersShown] = useState(false);
+  const [isUsersShown, setIsUsersShown] = useState(true);
   const { superAdminPanel } = useSelector((state) => {
     return state;
   });

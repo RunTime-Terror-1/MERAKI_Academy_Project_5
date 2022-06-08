@@ -35,12 +35,7 @@ export const Requests = () => {
 
   return (
     <div>
-      <div style={{ textAlign: "start", height: "100px" }}>
-        <p>
-          <strong>Users</strong> you can,edit or delete users{" "}
-        </p>
-        <button>+ User</button>
-      </div>
+      
       <div id="user-div">
         <h4>#</h4>
         <h4>Name</h4>

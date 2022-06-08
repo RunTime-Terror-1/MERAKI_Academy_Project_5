@@ -8,27 +8,18 @@ import { setRequests, setUsers } from "../../../../redux/reducers/superAdmin";
 export const Users = () => {
   const dispatch = useDispatch();
   const [isUsersShown, setIsUsersShown] = useState(true);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isRegisterShown, setIsRegisterShown] = useState(true);
   const { superAdminPanel } = useSelector((state) => {
     return state;
   });
-  useEffect(() => {
-    // just for test
-    (async () => {
-      const requestsResponse = await SuperAdmin.getAllRequests({
-        token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInJvbGVJZCI6MSwiY2FydElkIjozLCJpYXQiOjE2NTQ0NTYzMTZ9.k_orJs2F3mmDFmCm6UVE7nK4HuzTc9tRorjl7hYQ4ew`,
-      });
 
-      dispatch(setRequests(requestsResponse.requests));
-      const usersResponse = await SuperAdmin.getAllUsers({
-        token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInJvbGVJZCI6MSwiY2FydElkIjozLCJpYXQiOjE2NTQ0NTYzMTZ9.k_orJs2F3mmDFmCm6UVE7nK4HuzTc9tRorjl7hYQ4ew`,
-      });
-
-      dispatch(setUsers(usersResponse.users));
-    })();
-  }, []);
-  const {auth} = useSelector((state)=>{
-      return state;
-  })
+  const { auth } = useSelector((state) => {
+    return state;
+  });
 
   const showUsers = (user) => {
     return (
@@ -39,20 +30,83 @@ export const Users = () => {
         <h4>{user.role_id}</h4>
         <h4>{user.lastName}</h4>
         <div>
-            <button onClick={async()=>{
-                await SuperAdmin.deleteOwner({token:auth.token,ownerId:user.id,restaurantName:""})
-            }}>Delete</button>
-            <button onClick={()=>{}}>Edit</button>
+          <button
+            onClick={async () => {
+              await SuperAdmin.deleteOwner({
+                token: auth.token,
+                ownerId: user.id,
+                restaurantName: "",
+              });
+            }}
+          >
+            Delete
+          </button>
+          <button onClick={() => {}}>Edit</button>
         </div>
       </div>
     );
   };
+
+  const createInput = ({ placeholder, setState, type = "text", key = "" }) => {
+    return (
+      <div>
+        <input
+          type={type}
+          placeholder={placeholder}
+          onChange={(e) => {}}
+          className="input"
+        />
+      </div>
+    );
+  };
+
+  const createOwner = () => {
+    return (
+      <div>
+        <div>
+          <div id="register-username-div">
+            {createInput({
+              placeholder: "First Name",
+              type: "text",
+              key: "FirstName",
+              setState: setFirstName,
+            })}
+            {createInput({
+              placeholder: "Last Name",
+              type: "text",
+              key: "LastName",
+              setState: setLastName,
+            })}
+            {createInput({
+              placeholder: "Email",
+              type: "text",
+              key: "Email",
+              setState: setEmail,
+            })}
+            {createInput({
+              placeholder: "Password",
+              type: "password",
+              key: "Password",
+              setState: setPassword,
+            })}
+            <button></button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div>
-        <div style= {{textAlign:"start",height:"100px"}}>
-           <p><strong>Users</strong> you can,edit or delete users </p> 
-           <button>+ User</button>
-        </div>
+      <div style={{ textAlign: "start", height: "100px" }}>
+        <p>
+          <strong>Users</strong> you can,edit or delete users{" "}
+        </p>
+        <button onClick={() => {
+          setIsRegisterShown(!isRegisterShown)
+        }}>+ User</button>
+      </div>
+      {isRegisterShown ? createOwner() : <></>}
       <div key={"//d"} id="user-div">
         <h4>#</h4>
         <h4>Name</h4>
