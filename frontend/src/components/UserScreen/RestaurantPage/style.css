@@ -30,7 +30,7 @@
 .Res_two_B{
     display: flex;
     flex-direction: row;
-    background-color: darkgreen;
+    /* background-color: darkgreen; */
 }
 .Res_two_B_A{
     width: 10vw;
@@ -40,7 +40,7 @@
 
 .Res_two_B_B{
     width: 60vw;
-    background-color: deeppink;
+    /* background-color: deeppink; */
 }
 .Res_two_B_c{
     width: 10vw;
