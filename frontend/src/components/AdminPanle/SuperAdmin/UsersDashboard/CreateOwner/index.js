@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { SuperAdmin } from "../../../../../controllers/superAdmin";
+import "./style.css"
 
 export const CreateOwnerDialog = ({auth}) => {
   const [firstName, setFirstName] = useState("");
@@ -25,9 +26,9 @@ export const CreateOwnerDialog = ({auth}) => {
 
   const createOwner = () => {
     return (
-      <div>
-        <div>
-          <div id="register-username-div">
+      <div id = "owner-register-div">
+        <div id = "owner-register-div-inner">
+          <div >
             {createInput({
               placeholder: "First Name",
               type: "text",
