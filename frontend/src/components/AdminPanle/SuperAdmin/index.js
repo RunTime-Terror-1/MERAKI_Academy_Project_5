@@ -5,9 +5,10 @@ import { setRequests, setUsers } from "../../../redux/reducers/superAdmin";
 import { NavigationBar } from "./NavigationMenu";
 import "./style.css";
 import { Users } from "./UsersDashboard";
+import { Requests } from "./requestsDashboard";
 export const SuperAdminPanel = () => {
   const dispatch = useDispatch();
-  const [isUsersShown, setIsUsersShown] = useState(true);
+  const [isUsersShown, setIsUsersShown] = useState(false);
   const { superAdminPanel } = useSelector((state) => {
     return state;
   });
@@ -27,9 +28,11 @@ export const SuperAdminPanel = () => {
     return (
       <div key={request.id}>
         <h1>{request.id}</h1>
-        <h1>{request.state}</h1>
-        <h1>{request.owner_Id}</h1>
+        <h1>{request.firstName + " " +request.lastName}</h1>
+        <h1>{request.email}</h1>
         <h1>{request.restaurantName}</h1>
+        <h1>{request.state}</h1>
+       
       </div>
     );
   };
@@ -41,9 +44,7 @@ export const SuperAdminPanel = () => {
      
         {isUsersShown
           ? <Users/>
-          : superAdminPanel.requests.map((ele) => {
-              return showRequests(ele);
-            })}
+          :< Requests/>}
       </div>
     </div>
   );

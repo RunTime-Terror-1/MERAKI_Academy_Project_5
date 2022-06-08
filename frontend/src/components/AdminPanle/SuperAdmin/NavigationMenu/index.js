@@ -60,8 +60,11 @@ export const NavigationBar = (req, res) => {
         text: "Requests",
         icon: <BiGitPullRequest />,
         onClick: async () => {
+        
           const data = await SuperAdmin.getAllRequests({ token: auth.token });
+          
           dispatch(setRequests(data.requests));
+          
         },
       })}
       {menuButton({

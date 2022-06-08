@@ -1,62 +1,56 @@
 import react, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SuperAdmin } from "../../../../controllers/superAdmin";
-
 import { setRequests } from "../../../../redux/reducers/superAdmin";
+import "./style.css";
 
-export const Users = () => {
+export const Requests = () => {
   const dispatch = useDispatch();
   const [isUsersShown, setIsUsersShown] = useState(true);
   const { superAdminPanel } = useSelector((state) => {
     return state;
   });
-  useEffect(() => {
-    // just for test
-    (async () => {
-      const usersResponse = await SuperAdmin.getAllRequests({
-        token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInJvbGVJZCI6MSwiY2FydElkIjozLCJpYXQiOjE2NTQ0NTYzMTZ9.k_orJs2F3mmDFmCm6UVE7nK4HuzTc9tRorjl7hYQ4ew`,
-      });
 
-      dispatch(setRequests(usersResponse.requests));
-    })();
-  }, []);
-  const {auth} = useSelector((state)=>{
-      return state;
-  })
+  const { auth } = useSelector((state) => {
+    return state;
+  });
 
-  const showUsers = (user) => {
+  const showRequests = (request) => {
+    console.log(request);
     return (
-      <div key={user.id} id="user-div">
-        <h4>{user.id}</h4>
-        <h4>{user.firstName + " " + user.lastName}</h4>
-        <h4>{user.email}</h4>
-        <h4>{user.role_id}</h4>
-        <h4>{user.lastName}</h4>
+      <div key={`${request.id + request.firstName}`} id="user-div">
+        <h4>{request.id}</h4>
+        <h4>{request.firstName + " " + request.lastName}</h4>
+        <h4>{request.email}</h4>
+        <h4>{request.state}</h4>
+        <h4>{"request.restaurantName"}</h4>
         <div>
-            <button onClick={async()=>{
-                await SuperAdmin.deleteOwner({token:auth.token,ownerId:user.id,restaurantName:""})
-            }}>Delete</button>
-            <button onClick={()=>{}}>Edit</button>
-        </div>
+          <button>Accept</button>
+          <button>Delete</button>
+          
+          </div>
       </div>
     );
   };
+
   return (
     <div>
-        <div style= {{textAlign:"start",height:"100px"}}>
-           <p><strong>Users</strong> you can,edit or delete users </p> 
-           <button>+ User</button>
-        </div>
-      <div key={"//d"} id="user-div">
+      <div style={{ textAlign: "start", height: "100px" }}>
+        <p>
+          <strong>Users</strong> you can,edit or delete users{" "}
+        </p>
+        <button>+ User</button>
+      </div>
+      <div id="user-div">
         <h4>#</h4>
         <h4>Name</h4>
-        <h4>Email</h4>
-        <h4>Role</h4>
-        <h4>last Login</h4>
+        <h4>email</h4>
+        <h4>state</h4>
+        <h4>restaurantName</h4>
         <h4>Actions</h4>
       </div>
-      {superAdminPanel.users.map((ele) => {
-        return showUsers(ele);
+      {superAdminPanel.requests.map((ele) => {
+        return showRequests(ele);
       })}
     </div>
   );
