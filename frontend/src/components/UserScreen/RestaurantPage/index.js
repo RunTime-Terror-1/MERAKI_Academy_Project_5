@@ -141,7 +141,7 @@ const RestaurantPage = () => {
           <div className='Res_two_B_B'>{arraydetials? arraydetials.map((element, index) => {
             return (<div className='div_Mallloop_1'>
 
-              <details open>
+              <details dd>
               <summary>{element.catoName}</summary>
            <div>{element.mallloop?element.mallloop.map((elementMall,index)=>{
              return(<div className='div_Mallloop_2'>
