@@ -54,7 +54,8 @@ const deleteOwner = async (req, res) => {
   });
 };
 const getAllRequests = (req, res) => {
-  const query = "SELECT * FROM requests WHERE is_deleted =0";
+  const query = "SELECT firstName,lastName,restaurantName,state, email FROM users INNER JOIN requests ON requests.owner_id =users.id ";
+ 
   connection.query(query, [], (err, result) => {
     if (err) {
       return res.status(500).json({
@@ -63,6 +64,9 @@ const getAllRequests = (req, res) => {
         err,
       });
     }
+    console.log("*********",result);
+    delete result.password
+    console.log(result);
     if (result.length) {
       res.status(200).json({
         success: true,
