@@ -7,8 +7,8 @@ import AllRestarnts from "./components/AllRestarnts";
 import NavBar from "./components/Homepage/NavBar";
 import RestaurantPage from "./components/RestaurantPage";
 
-import { RegisterComponent } from "./components/register";
-import { LoginComponent } from "./components/login";
+import { RegisterComponent } from "./components/register/register";
+import { LoginComponent } from "./components/login/login";
 ////import { LoginComponent } from "./components/login";
 
 const App = () => {
@@ -21,7 +21,7 @@ const App = () => {
         <Route path={"/AllRestarnts"} element={<AllRestarnts />} />
         <Route path={"/RestaurantPage"} element={<RestaurantPage />} />
         <Route path={"/register"} element={<RegisterComponent />} />
-        <Route path={"/login"} element={<RegisterComponent />} />
+        <Route path={"/login"} element={<LoginComponent />} />
     
 
   
