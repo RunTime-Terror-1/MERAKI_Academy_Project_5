@@ -15,12 +15,10 @@ const RestaurantPage = () => {
     setRestaurants(responseRestarnt.result)
 
     const responseMeal = await User.getMealsByRestaurant({ restaurantId: 1 })
-    // console.log(responseMeal.result)
+
     setMenu(responseMeal.result)
-    // console.log(responseMeal.categories)
+
     setCategories(responseMeal.categories)
-    // console.log(menu)
-    // console.log(categories)
 
 
 
@@ -28,8 +26,6 @@ const RestaurantPage = () => {
     let arrayTwo = []
     let arrayLoop = []
 
-    // console.log(menu)
-    // console.log(responseMeal.result)
     const filter = await responseMeal.categories.map((element, indexOne) => {
       console.log("5")
       arrayLoop.push({ catoName: element, mallloop: [] })
@@ -49,37 +45,13 @@ const RestaurantPage = () => {
     console.log(arrayTwo)
     console.log(arrayLoop)
     setArraydetials(arrayLoop)
-    // console.log(arrayLoop[indexOne])
+
   }
 
-  // const filter = async () => {
-  //   console.log("df")
-  //   let array = []
-  //   console.log(menu)
-  //   console.log(categories)
-  //   const filterw = await menu.map((element, index) => {
-  //     console.log("5")
-  //     menu.map((elem, index) => {
-  //       if (elem.category.includes(element)) {
-
-  //         array.push(element)
-  //       }
-
-  //     })
-
-  //   })
-
-  //   console.log(array)
-
-
-  // }
 
 
 
 
-  // console.log(restaurant)
-  // console.log(menu)
-  // console.log(categories)
 
   useEffect(() => {
     getRestarnt()
@@ -121,27 +93,18 @@ const RestaurantPage = () => {
           <div className='Res_two_B_A'>{categories ? categories.map((element, index) => {
 
             return (<nav>
-              <a href={"#"+index}>{element}</a>
+              <a href={"#" + index}>{element}</a>
 
             </nav>)
           }) : ""}</div>
 
 
-          {/* <div className='Res_two_B_B'>{menu ? menu.map((element, index) => {
-            return (<div>
 
-              <h1>{element.name}</h1>
-              <img src={element.imgUrl} />
-
-
-            </div>
-            )
-          }) : ""}</div> */}
 
           <div className='Res_two_B_B'>{arraydetials ? arraydetials.map((element, index) => {
             return (<div className='div_Mallloop_1'>
 
-              <details open  id={index}>
+              <details open id={index}>
                 <summary>{element.catoName}</summary>
                 <div>{element.mallloop ? element.mallloop.map((elementMall, index) => {
                   return (<div className='div_Mallloop_2'>
