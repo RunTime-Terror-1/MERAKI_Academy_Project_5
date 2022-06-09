@@ -20,9 +20,9 @@ const YourCart = () => {
     return (<div>{Userinfor.yourCart !== 0 && Userinfor.yourCart.length ? Userinfor.yourCart.map((element, index) => {
         return (<div key={index} className="div-Yourcart">
             <h5>counter</h5>
-            <h3>{element.name}</h3 >
+            {/* <h3>{element.name}</h3 >
             <h5>{element.price}</h5>
-            <h5>delete</h5>
+            <h5>delete</h5> */}
         </div>)
     }) : "they are no item in your cart"}
     </div>)
