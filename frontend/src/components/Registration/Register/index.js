@@ -4,6 +4,8 @@ import { Registration } from "../../../controllers/registration";
 import { ErrorsDiv } from "./ErrorsDiv";
 import "./style.css";
 import { Gender } from "./GenderDiv";
+import { useDispatch, useSelector } from "react-redux";
+import { setIsSignUpFormShown } from "../../../redux/reducers/auth";
 export const RegisterComponent = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -12,7 +14,10 @@ export const RegisterComponent = () => {
   const [password, setPassword] = useState("");
   const [isDialogShown, setIsDialogShown] = useState("");
   let [errors, setErrors] = useState([]);
-
+  const dispatch = useDispatch();
+  const { auth } = useSelector((state) => {
+    return state;
+  });
   const buildAlertDialog = ({ bgColor, color, text, text2 }) => {
     setTimeout(() => {
       setIsDialogShown(false);
@@ -94,7 +99,9 @@ export const RegisterComponent = () => {
       )}
       <div id="signup-form-inner">
         <div id="signup--exit-button">
-          <button onClick={() => {}}>X</button>
+          <button onClick={() => {
+            dispatch(setIsSignUpFormShown())
+          }}>X</button>
         </div>
 
         <h1>Sign Up</h1>

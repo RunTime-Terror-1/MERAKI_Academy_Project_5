@@ -10,9 +10,9 @@ export class Registration {
     try {
       const response = await axios.post(`${hostUrl}/login`, body);
 
-      return response.data.message;
+      return response.data;
     } catch (error) {
-      return error.response.data.message;
+      return error.response.data;
     }
   }
   static async register({ firstName, lastName, email, password, gender }) {

@@ -53,7 +53,7 @@ const login = (req, res) => {
 
               return res.status(200).json({
                 success: true,
-                message: "Welcome",
+                message: "Login Successful",
                 token,
               });
             });

@@ -4,14 +4,13 @@ import "./style.css";
 import { Registration } from "../../../../controllers/registration";
 import { ErrorsDiv } from "../../Register/ErrorsDiv";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsSignUpFormShown } from "../../../../redux/reducers/auth";
+import { setIsSignUpFormShown, setlogin } from "../../../../redux/reducers/auth";
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
   const { auth } = useSelector((state) => {
     return state;
   });
-
   let [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   let [errors, setErrors] = useState("");
@@ -52,14 +51,15 @@ export const LoginForm = () => {
 
     if (errors.length === 0) {
       email = email.toLowerCase().trim();
-      const serverError = await Registration.login({
+      const response = await Registration.login({
         email,
         password,
       });
-
-      serverError !== "Login Successful"
-        ? setErrors([...errors, serverError])
-        : navigate(`/homepage`);
+      console.log(response.token);
+      dispatch(setlogin(response.token))
+      response.message !== "Login Successful"
+        ? setErrors([...errors, response.message])
+        : <></>;
     } else {
       setErrors(errors);
     }
