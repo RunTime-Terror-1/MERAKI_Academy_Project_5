@@ -70,8 +70,14 @@ export const NavigationBar = (req, res) => {
       {menuButton({
         text: "Create Owner",
         icon: <AiOutlineUserAdd />,
-        onClick: async () => {},
+        onClick: async () => {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            console.log("Latitude is :", position.coords.latitude);
+            console.log("Longitude is :", position.coords.longitude);
+          });
+        },
       })}
+      <button id="nav-menu-btn">Close Menu</button>
     </div>
   );
 };
