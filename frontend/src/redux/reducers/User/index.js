@@ -24,7 +24,7 @@ export const UserSlice = createSlice({
         },
 
         setPrice: (state, action) => {
-            state.price.push(action.payload.price)
+            state.price.push({price:action.payload.price,id:action.payload.indexitem})
             // console.log(action.payload.items,"dash")
             // console.log(state.cart,"cdfd")
             console.log(state.price,"hh")

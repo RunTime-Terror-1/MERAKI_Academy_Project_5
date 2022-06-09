@@ -20,6 +20,14 @@ const RestaurantPage = () => {
   const cart = []
 
 
+  const Userinfor = useSelector((state) => {
+
+    return {
+      yourCart: state.User.cart,
+      yourPrice: state.User.price,
+    }
+  })
+
 
   const getRestarnt = async () => {
     const responseRestarnt = await User.getRestaurantById({ restaurantId: 1 })
@@ -129,22 +137,22 @@ const RestaurantPage = () => {
               <details open id={index} >
                 <summary className="details">{element.catoName}</summary>
                 <div>{element.mallloop ? element.mallloop.map((elementMall, index) => {
-                  // console.log(elementMall)
+                  console.log(elementMall.id)
                   return (<div className='div_Mallloop_2'>
 
                     <img className='imagetest' src={elementMall.imgUrl} />
                     <h1>{elementMall.name}</h1>
-                    <button 
-                    onClick={() => {
-                      console.log(elementMall)
-                      dispatch(setCart({items:elementMall }))
-                      dispatch(setPrice({price:elementMall.price}))
-                      // cart.push(elementMall)
-                      console.log("44")
-                      console.log(cart)
-                    }
+                    <button
+                      onClick={() => {
+                        console.log(elementMall)
+                        dispatch(setCart({ items: elementMall }))
+                        dispatch(setPrice({ price: elementMall.price, indexitem: elementMall.id }))
+                        // cart.push(elementMall)
+                        console.log("44")
+                        console.log(cart)
+                      }
 
-                    } >add to cart</button>
+                      } >add to cart</button>
 
                   </div>)
 
@@ -161,13 +169,13 @@ const RestaurantPage = () => {
 
           <div className='Res_two_B_c'>
             <div className='Res_two_B_c_One' >
-            <button> your cart</button>
-            
-          
-            {<YourCart/>}
+              <button> your cart</button>
 
+
+              {<YourCart />}
+              <h3>{Userinfor.length !=0?<h4>totalprice</h4>:""}</h3>
             </div>
-           
+
           </div>
 
         </div>

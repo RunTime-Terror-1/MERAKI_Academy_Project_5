@@ -4,14 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteCart, setPrice } from '../../../../redux/reducers/User';
 
 
-const Counter = ({ element }) => {
+const Counter = ({ element,index }) => {
 
     const [cart, setCart] = useState("")
     const [priceNumber, setPriceNumber] = useState(1)
 
     const [realPrice, setrealPrice] = useState(element.price)
 
-    console.log(element, "item13")
+    console.log(element.id, "item13")
+    // console.log(index, "55index")
     const dispatch = useDispatch();
 
     const Userinfor = useSelector((state) => {
@@ -40,7 +41,7 @@ const Counter = ({ element }) => {
     return (<div className="div_yourCounter">
 
         <h4 onClick={() => {nextPrice();
-        dispatch(setPrice({ price:(realPrice*priceNumber)+realPrice,index:1}))
+        dispatch(setPrice({ price:(realPrice*priceNumber)+realPrice,indexitem:element.id}))
         }}>+</h4>
         <h5>{priceNumber}</h5>
         <h5 onClick={() => { prevPrice() }} >-</h5>
