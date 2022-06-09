@@ -37,7 +37,7 @@ export class Registration {
         gender,
       };
       
-      const response = await axios.post(`${hostUrl}/users`, user);
+      const response = await axios.post(`${hostUrl}/register`, user);
       return response.data.message;
     } catch (error) {
       return error.response.data.message;
