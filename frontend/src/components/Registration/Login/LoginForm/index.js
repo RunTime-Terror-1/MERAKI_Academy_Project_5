@@ -1,11 +1,17 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./style.css"
+import "./style.css";
 import { Registration } from "../../../../controllers/registration";
 import { ErrorsDiv } from "../../Register/ErrorsDiv";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setIsSignUpFormShown } from "../../../../redux/reducers/auth";
 
 export const LoginForm = () => {
+  const dispatch = useDispatch();
+  const { auth } = useSelector((state) => {
+    return state;
+  });
+
   let [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   let [errors, setErrors] = useState("");
@@ -34,12 +40,11 @@ export const LoginForm = () => {
     );
   };
   const login = async () => {
-    
     const inputForm = {
       Email: email,
       Password: password,
     };
-    
+
     errors = Registration.checkFormErrors({
       isLoginForm: true,
       inputForm: inputForm,
@@ -76,19 +81,20 @@ export const LoginForm = () => {
       })}
       <ErrorsDiv errors={errors} />
       <div>
-        <button id="login-button" onClick={login}>Login</button>
+        <button id="login-button" onClick={login}>
+          Login
+        </button>
       </div>
       <hr />
       <div id="create-new-account-button">
-      <button
-        onClick={() => {
-    
-        }}
-      >
-        Create New Account
-      </button>
+        <button
+          onClick={() => {
+            dispatch(setIsSignUpFormShown());
+          }}
+        >
+          Create New Account
+        </button>
       </div>
-     
     </div>
   );
 };
