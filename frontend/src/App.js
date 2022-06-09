@@ -7,6 +7,7 @@ import AllRestarnts from "./components/UserScreen/AllRestarnts";
 import RestaurantPage from "./components/UserScreen/RestaurantPage";
 import { LoginComponent } from "./components/UserScreen/Login";
 import { RegisterComponent } from "./components/Registration/Register";
+import { Loginw } from "./components/Registration/Login";
 
 
 const App = () => {
@@ -19,7 +20,7 @@ const App = () => {
         <Route path={"/AllRestarnts"} element={<AllRestarnts />} />
         <Route path={"/RestaurantPage"} element={<RestaurantPage />} />
         <Route path={"/register"} element={<RegisterComponent />} />
-        <Route path={"/login"} element={<LoginComponent />} />
+        <Route path={"/login"} element={<Loginw />} />
     
 
   
