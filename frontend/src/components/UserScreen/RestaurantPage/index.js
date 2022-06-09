@@ -1,14 +1,36 @@
 import './style.css'
 import React, { useState, useEffect, useContext } from "react";
 import { User } from '../../../controllers/user';
+import NavBar from '../NavBar';
+import YourCart from '../YourCart';
+import { setCart, setPrice } from '../../../redux/reducers/User';
+import { useDispatch, useSelector } from "react-redux";
+import SumPrice from './SumPrice';
 
-
+import { setTotal} from '../../../redux/reducers/User';
 
 const RestaurantPage = () => {
+
+  const dispatch = useDispatch();
+
+  // const [sumreal, setSumreal] = useState(0)
   const [restaurant, setRestaurants] = useState("")
   const [menu, setMenu] = useState("")
   const [categories, setCategories] = useState("")
   const [arraydetials, setArraydetials] = useState("")
+  const cart = []
+
+  //!...................................................
+  const Userinfor = useSelector((state) => {
+
+    return {
+      yourCart: state.User.cart,
+      yourPrice: state.User.price,
+      sumPrice:state.User.sumPriceUser,
+    }
+  })
+
+
   const getRestarnt = async () => {
     const responseRestarnt = await User.getRestaurantById({ restaurantId: 1 })
     console.log(responseRestarnt.result)
@@ -27,7 +49,7 @@ const RestaurantPage = () => {
     let arrayLoop = []
 
     const filter = await responseMeal.categories.map((element, indexOne) => {
-      console.log("5")
+      // console.log("5")
       arrayLoop.push({ catoName: element, mallloop: [] })
       responseMeal.result.map((elem, indextow) => {
         if (elem.category.includes(element)) {
@@ -41,16 +63,20 @@ const RestaurantPage = () => {
       console.log(arrayLoop[indexOne])
     })
 
-    console.log(array)
-    console.log(arrayTwo)
-    console.log(arrayLoop)
     setArraydetials(arrayLoop)
 
+  
   }
 
+  // const sum = () => {
+  //   let sumpruce = 0
+  //   let sumpr = Userinfor.yourPrice.map((element, index) => {
+  //     sumpruce = sumpruce + element.price
+  //   })
+  //   setSumreal(sumpruce)
+  // }
 
-
-
+  // console.log(sum)
 
 
   useEffect(() => {
@@ -58,11 +84,15 @@ const RestaurantPage = () => {
 
   }, [])
 
+
   console.log(arraydetials)
+  console.log(Userinfor.yourPrice)
   return (<div className="RestaurantPage">
-    <div>Navbar</div>
+    <div>{<NavBar />}</div>
+
 
     <div className='Allinform' >
+
       <div className='Res_One' >One</div>
 
 
@@ -92,13 +122,22 @@ const RestaurantPage = () => {
         </div>
 
         <div className='Res_two_B' >
-          <div className='Res_two_B_A'>{categories ? categories.map((element, index) => {
 
-            return (<div className='divsticky'>
-              <a href={"#" + index}>{element}</a>
+          <div className='Res_two_B_A'>
+            <div className='Res_two_B_A_first' >
+              <h1>categories</h1>
+              <div className='Res_two_B_A_One'>{categories ? categories.map((element, index) => {
 
-            </div>)
-          }) : ""}</div>
+                return (<div className='divcategories' key={index}>
+                  <a href={"#" + index} className="a_atAll">{element}</a>
+
+                </div>)
+              }) : ""}</div>
+            </div>
+
+          </div>
+
+
 
 
 
@@ -106,13 +145,27 @@ const RestaurantPage = () => {
           <div className='Res_two_B_B'>{arraydetials ? arraydetials.map((element, index) => {
             return (<div className='div_Mallloop_1'>
 
-              <details open id={index}>
-                <summary>{element.catoName}</summary>
+              <details open id={index} >
+                <summary className="details">{element.catoName}</summary>
                 <div>{element.mallloop ? element.mallloop.map((elementMall, index) => {
+                  // console.log(elementMall.id)
                   return (<div className='div_Mallloop_2'>
+
                     <img className='imagetest' src={elementMall.imgUrl} />
                     <h1>{elementMall.name}</h1>
+                    <button
+                      onClick={() => {
+                        console.log(elementMall)
+                        dispatch(setCart({ items: elementMall }))
+                        dispatch(setPrice({ price: elementMall.price, indexitem: elementMall.id }))
+                        // setSumreal(elementMall.price)
+                        // dispatch(setsumPriceUser({id:1}))
+                        dispatch(setTotal({opr:"+",value:elementMall.price}));
+                        console.log("44")
+                        console.log(cart)
+                      }
 
+                      } >add to cart</button>
 
                   </div>)
 
@@ -127,7 +180,19 @@ const RestaurantPage = () => {
 
 
 
-          <div className='Res_two_B_c'>cart cart  cart cart cart cart </div>
+          <div className='Res_two_B_c'>
+            <div className='Res_two_B_c_One' 
+            // onClick={() => { sum() }}
+            
+            >
+              <button> your cart</button>
+
+
+              {<YourCart />}
+              {/* <div>{Userinfor.yourPrice.length == 0 ? "" : <h3>""</h3>}</div> */}
+            </div>
+
+          </div>
 
         </div>
 

@@ -1,10 +1,18 @@
 .AllRestarnts{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     position: relative;
-    top:4vh;
-    
+    /* top:4vh;
+     */
+
+     gap: 20px;
 }
+.AllAllRestarntsShow{
+    display: flex;
+    flex-direction: row;
+}
+
+
 .AllRestarnts_A{
     width: 10vw;
 }
@@ -12,11 +20,11 @@
     width: 10vw;
 }
 .AllRestarnts_B{
-    width: 90vw;
+    width: 85vw;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 20px;
 }
 .All_B_eachRestarant{
     display: flex;
