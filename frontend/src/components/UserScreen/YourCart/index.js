@@ -25,11 +25,10 @@ const YourCart = () => {
             <h5>counter</h5>
             <h3>{element.name}</h3 >
             <h5>{element.price}</h5>
-            <h5  onClick={() => {
-                      dispatch(deleteCart({id:element }))
-                
-                      
-                    }}>delete</h5>
+            <h5 onClick={() => {
+                dispatch(deleteCart({ id: element.id }))
+                console.log(element.id)
+            }}>delete</h5>
         </div>)
     }) : "they are no item in your cart"}
     </div>)

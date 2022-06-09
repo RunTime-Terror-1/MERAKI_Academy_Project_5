@@ -16,9 +16,10 @@ export const UserSlice = createSlice({
         deleteCart: (state, action) => {
             // action = {type,payload:2}
             state.cart = state.cart.filter((cartitem, index) => {
+                console.log("delete here")
                 return cartitem.id != action.payload.id;
             });
-            console.log(state.articles)
+          
         },
 
     }
