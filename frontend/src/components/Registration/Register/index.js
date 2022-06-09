@@ -3,6 +3,7 @@ import "./style.css";
 import { Registration } from "../../../controllers/registration";
 import { ErrorsDiv } from "./ErrorsDiv";
 import "./style.css";
+import { Gender } from "./GenderDiv";
 export const RegisterComponent = () => {
 
   const [firstName, setFirstName] = useState("");
@@ -77,7 +78,7 @@ export const RegisterComponent = () => {
 
       serverError === "Email already taken"
         ? setErrors([...errors, "Email already taken"])
-        : setIsDialogShown(true);
+        : setIsDialogShown(false);
     } else {
       setErrors(errors);
     }
@@ -134,7 +135,7 @@ export const RegisterComponent = () => {
           key: "Password",
           setState: setPassword,
         })}
-        
+        <Gender setGender={setGender} errors={errors} setErrors={setErrors} />
         <ErrorsDiv errors={errors} />
         <div id="signup-button-div">
           <button onClick={signUp}>Sign Up</button>

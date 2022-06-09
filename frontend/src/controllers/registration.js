@@ -1,7 +1,6 @@
 import axios from "axios";
 import { hostUrl } from "..";
 
-
 export class Registration {
   static async login({ email, password }) {
     const body = {
@@ -10,7 +9,7 @@ export class Registration {
     };
     try {
       const response = await axios.post(`${hostUrl}/login`, body);
-      
+
       return response.data.message;
     } catch (error) {
       return error.response.data.message;
@@ -19,25 +18,20 @@ export class Registration {
   static async register({
     firstName,
     lastName,
-    age,
-    country,
-    birthDate = Date.now(),
     email,
     password,
     gender,
   }) {
     try {
       const user = {
-        userName: firstName +" "+lastName,
-        birthDate: birthDate,
-        age,
-        country,
+        firstName,
+        lastName,
         email,
         password,
         gender,
       };
-      
-      const response = await axios.post(`${hostUrl}/register`, user);
+
+      const response = await axios.post(`${hostUrl}/register/1`, user);
       return response.data.message;
     } catch (error) {
       return error.response.data.message;
@@ -46,28 +40,27 @@ export class Registration {
 
   static checkFormErrors({ inputForm, isLoginForm = false }) {
     let errors = [];
-   
+
     for (let key in inputForm) {
       if (!isLoginForm) {
         if (key === "LastName") {
           const value = inputForm[key];
 
-          if (value === "" || value.length<2) {
+          if (value === "" || value.length < 2) {
             if (!errors.includes("Invalid last name")) {
               errors.push("Invalid last name");
             }
-          } 
+          }
         }
-        if (key === "FirstName" ) {
+        if (key === "FirstName") {
           const value = inputForm[key];
 
-          if (value === "" || value.length<2) {
+          if (value === "" || value.length < 2) {
             if (!errors.includes("Invalid first name")) {
               errors.push("Invalid first name");
             }
-          } 
+          }
         }
-
 
         if (key === "Email") {
           const value = inputForm[key];
@@ -120,15 +113,14 @@ export class Registration {
         errors.splice(errors.indexOf(error), 1);
       }
     };
-  
-    
+
     if (!isLoginForm) {
       if (key === "LastName") {
-        if (value !== "" || value.length>2) {
+        if (value !== "" || value.length > 2) {
           removeError("Invalid last name");
         }
       }
-      if (key === "FirstName"|| value.length>2) {
+      if (key === "FirstName" || value.length > 2) {
         if (value !== "") {
           removeError("Invalid first name");
         }

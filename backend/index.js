@@ -30,9 +30,6 @@ app.use("/role", roleRouter);
 app.use("/superAdmin", superAdminRouter);
 app.use("/owner", ownerRouter);
 app.use("/user", userRouter);
-
-
-
 app.use("employee", employeeRouter);
 
 
