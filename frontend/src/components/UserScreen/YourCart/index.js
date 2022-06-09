@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteCart } from '../../../redux/reducers/User';
 const YourCart = () => {
     const [cart, setCart] = useState("")
-    const [priceNumber, setPrice] = useState(2)
+    const [priceNumber, setPrice] = useState(1)
 
     const dispatch = useDispatch();
 
@@ -15,16 +15,25 @@ const YourCart = () => {
 
         }
     })
-
     console.log(Userinfor.yourCart, "cart cart")
+//!..............................
+    
+
+    const nextPrice = () => {
+        setPrice(priceNumber+1);
+    }
+    const prevPrice = () => {
+        setPrice(priceNumber-1)
+    }
+
 
     // console.log(Userinfor.yourCart.length, "cart cart")
 
     return (<div>{Userinfor.yourCart !== 0 && Userinfor.yourCart.length ? Userinfor.yourCart.map((element, index) => {
         return (<div key={index} className="div-Yourcart">
-            <h4>+</h4>
+            <h4 onClick={()=>{nextPrice()}}>+</h4>
             <h5>{priceNumber}</h5>
-            <h5>-</h5>
+            <h5 onClick={()=>{prevPrice()}} >-</h5>
             <h3>{element.name}</h3 >
             <h5>{element.price*priceNumber}</h5>
             <h5 onClick={() => {
