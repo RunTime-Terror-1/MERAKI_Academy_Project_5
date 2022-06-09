@@ -70,15 +70,15 @@ export const RegisterComponent = () => {
     });
     if (errors.length === 0) {
       const serverError = await Registration.register({
-        firstName: firstName,
+        firstName,
         lastName,
         email,
         password,
       });
-
+      console.log(serverError);
       serverError === "Email already taken"
         ? setErrors([...errors, "Email already taken"])
-        : setIsDialogShown(false);
+        : setIsDialogShown(true);
     } else {
       setErrors(errors);
     }
