@@ -5,17 +5,15 @@ import { ErrorsDiv } from "./ErrorsDiv";
 import "./style.css";
 import { Gender } from "./GenderDiv";
 export const RegisterComponent = () => {
-
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [age, setAge] = useState(0);
   const [gender, setGender] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isDialogShown, setIsDialogShown] = useState("");
   let [errors, setErrors] = useState([]);
 
-  const buildAlertDialog = ({ bgColor, color, text ,text2}) => {
+  const buildAlertDialog = ({ bgColor, color, text, text2 }) => {
     setTimeout(() => {
       setIsDialogShown(false);
     }, 2500);
@@ -24,9 +22,9 @@ export const RegisterComponent = () => {
       <div id="Alert">
         <div style={{ backgroundColor: `${bgColor}` }}>
           <p>
-          <h2 style={{ color: `${color}` }}>{text}</h2>
-          <br/>
-          <h4 style={{ color: `${color}` }}>{text2}</h4>
+            <strong style={{ color: `${color}` }}>{text}</strong>
+            <br />
+            <small style={{ color: `${color}` }}>{text2}</small>
           </p>
         </div>
       </div>
@@ -75,7 +73,6 @@ export const RegisterComponent = () => {
         email,
         password,
       });
-      console.log(serverError);
       serverError === "Email already taken"
         ? setErrors([...errors, "Email already taken"])
         : setIsDialogShown(true);
@@ -97,12 +94,7 @@ export const RegisterComponent = () => {
       )}
       <div id="signup-form-inner">
         <div id="signup--exit-button">
-          <button
-            onClick={() => {
-            }}
-          >
-            X
-          </button>
+          <button onClick={() => {}}>X</button>
         </div>
 
         <h1>Sign Up</h1>

@@ -1,13 +1,14 @@
 *{
   padding: 0px;
-  margin: 0px;  
+  margin: 0px; 
+  box-sizing: border-box; 
 }
 .App {
   text-align: center;
 }
 :root{
   --first-color: white;
-  --second-color: #0975b8ce;
+  --second-color: #c1a208ce;
   --third-color:black;
   --forth-color: #F0F2F5;
   --input-br-color: #E8F0FE;
