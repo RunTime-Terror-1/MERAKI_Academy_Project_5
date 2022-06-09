@@ -7,13 +7,13 @@ import { setCart, setPrice } from '../../../redux/reducers/User';
 import { useDispatch, useSelector } from "react-redux";
 import SumPrice from './SumPrice';
 
-
+import { setTotal} from '../../../redux/reducers/User';
 
 const RestaurantPage = () => {
 
   const dispatch = useDispatch();
 
-  const [sumreal, setSumreal] = useState(0)
+  // const [sumreal, setSumreal] = useState(0)
   const [restaurant, setRestaurants] = useState("")
   const [menu, setMenu] = useState("")
   const [categories, setCategories] = useState("")
@@ -26,6 +26,7 @@ const RestaurantPage = () => {
     return {
       yourCart: state.User.cart,
       yourPrice: state.User.price,
+      sumPrice:state.User.sumPriceUser,
     }
   })
 
@@ -64,16 +65,16 @@ const RestaurantPage = () => {
 
     setArraydetials(arrayLoop)
 
-    sum()
+  
   }
 
-  const sum = () => {
-    let sumpruce = 0
-    let sumpr = Userinfor.yourPrice.map((element, index) => {
-      sumpruce = sumpruce + element.price
-    })
-    setSumreal(sumpruce)
-  }
+  // const sum = () => {
+  //   let sumpruce = 0
+  //   let sumpr = Userinfor.yourPrice.map((element, index) => {
+  //     sumpruce = sumpruce + element.price
+  //   })
+  //   setSumreal(sumpruce)
+  // }
 
   // console.log(sum)
 
@@ -82,6 +83,7 @@ const RestaurantPage = () => {
     getRestarnt()
 
   }, [])
+
 
   console.log(arraydetials)
   console.log(Userinfor.yourPrice)
@@ -126,7 +128,7 @@ const RestaurantPage = () => {
               <h1>categories</h1>
               <div className='Res_two_B_A_One'>{categories ? categories.map((element, index) => {
 
-                return (<div className='divcategories'>
+                return (<div className='divcategories' key={index}>
                   <a href={"#" + index} className="a_atAll">{element}</a>
 
                 </div>)
@@ -156,8 +158,9 @@ const RestaurantPage = () => {
                         console.log(elementMall)
                         dispatch(setCart({ items: elementMall }))
                         dispatch(setPrice({ price: elementMall.price, indexitem: elementMall.id }))
-                        setSumreal(elementMall.price)
-                  
+                        // setSumreal(elementMall.price)
+                        // dispatch(setsumPriceUser({id:1}))
+                        dispatch(setTotal({opr:"+",value:elementMall.price}));
                         console.log("44")
                         console.log(cart)
                       }
@@ -178,12 +181,15 @@ const RestaurantPage = () => {
 
 
           <div className='Res_two_B_c'>
-            <div className='Res_two_B_c_One' onClick={()=>{sum()}} >
+            <div className='Res_two_B_c_One' 
+            // onClick={() => { sum() }}
+            
+            >
               <button> your cart</button>
 
 
               {<YourCart />}
-              <div>{Userinfor.yourPrice.length == 0 ? "" :<h3>totalprice:{sumreal}</h3>}</div>
+              {/* <div>{Userinfor.yourPrice.length == 0 ? "" : <h3>""</h3>}</div> */}
             </div>
 
           </div>

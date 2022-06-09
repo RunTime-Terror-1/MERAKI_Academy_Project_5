@@ -5,7 +5,9 @@ export const UserSlice = createSlice({
     name: "User",
     initialState: {
         cart: [],
-        price: []
+        price: [],
+        total: 0,
+        sumPriceUser: "",
 
     },
     reducers: {
@@ -40,7 +42,7 @@ export const UserSlice = createSlice({
 
                 state.price = state.price.filter((element, index) => {
                     console.log(element.id)
-                    console.log(action.payload.indexitem,"idpy")
+                    console.log(action.payload.indexitem, "idpy")
                     if (element.id == action.payload.indexitem) {
                         element.price = action.payload.price
                         loop = true
@@ -59,12 +61,35 @@ export const UserSlice = createSlice({
                 }
             }
         },
+        setsumPriceUser: (state, action) => {
+            state.sumPriceUser = state.price.reduce((acc, elemnt, index) => {
 
+                return acc + elemnt
+            })
+            console.log(state.sumPriceUser)
+            console.log("sum")
+        },
+
+
+        setTotal: (state, action) => {
+
+            //payload = {"opr":"+" , value:10}
+
+            if (action.payload.opr === "+") {
+
+                state.total = state.total + action.payload.value
+            } else {
+                state.total = state.total - action.payload.value
+
+            }
+
+
+        }
     }
 
 });
 
-export const { setCart, deleteCart, setPrice } =
+export const { setCart, deleteCart, setPrice, setsumPriceUser, setTotal } =
     UserSlice.actions;
 
 export default UserSlice.reducer;
