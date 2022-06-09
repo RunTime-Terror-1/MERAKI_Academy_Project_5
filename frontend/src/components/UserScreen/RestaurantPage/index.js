@@ -134,9 +134,10 @@ const RestaurantPage = () => {
 
                     <img className='imagetest' src={elementMall.imgUrl} />
                     <h1>{elementMall.name}</h1>
-                    <button onClick={() => {
+                    <button 
+                    onClick={() => {
                       dispatch(setCart({items:elementMall }))
-                      cart.push(elementMall)
+                      // cart.push(elementMall)
                       console.log("44")
                       console.log(cart)
                     }
