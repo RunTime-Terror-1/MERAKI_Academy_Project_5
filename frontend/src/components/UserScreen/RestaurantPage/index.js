@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { User } from '../../../controllers/user';
 import NavBar from '../NavBar';
 import YourCart from '../YourCart';
-import { setCart } from '../../../redux/reducers/User';
+import { setCart, setPrice } from '../../../redux/reducers/User';
 import { useDispatch, useSelector } from "react-redux";
 
 
@@ -136,7 +136,9 @@ const RestaurantPage = () => {
                     <h1>{elementMall.name}</h1>
                     <button 
                     onClick={() => {
+                      console.log(elementMall)
                       dispatch(setCart({items:elementMall }))
+                      dispatch(setPrice({price:elementMall.price}))
                       // cart.push(elementMall)
                       console.log("44")
                       console.log(cart)

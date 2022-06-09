@@ -18,11 +18,11 @@ const YourCart = () => {
     
 
 
-const sum=()=>{
+// const sum=()=>{
 
 
     
-}
+// }
 
 
    
