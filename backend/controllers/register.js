@@ -17,7 +17,7 @@ const register = async (req, res) => {
     if (err) {
       return res.status(409).json({
         success: false,
-        massage: "The email already exists",
+        message: "Email already taken",
         err,
       });
     }

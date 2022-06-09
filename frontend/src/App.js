@@ -5,7 +5,10 @@ import { Route, Routes } from "react-router-dom";
 import ScreenHome from "./components/UserScreen/ScreenHome"
 import AllRestarnts from "./components/UserScreen/AllRestarnts";
 import RestaurantPage from "./components/UserScreen/RestaurantPage";
-import { LoginComponent } from "./components/UserScreen/Login";
+
+import { RegisterComponent } from "./components/Registration/Register";
+import { LoginComponent } from "./components/Registration/Login";
+
 
 
 const App = () => {
@@ -17,7 +20,6 @@ const App = () => {
         <Route path="/SuperAdminPanel" element={<SuperAdminPanel />} />
         <Route path={"/AllRestarnts"} element={<AllRestarnts />} />
         <Route path={"/RestaurantPage"} element={<RestaurantPage />} />
-        {/* <Route path={"/register"} element={<RegisterComponent />} /> */}
         <Route path={"/login"} element={<LoginComponent />} />
     
 
