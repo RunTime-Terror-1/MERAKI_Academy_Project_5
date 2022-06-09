@@ -4,17 +4,14 @@ import { SuperAdminPanel } from "./components/AdminPanle/SuperAdmin";
 import { Route, Routes } from "react-router-dom";
 import ScreenHome from "./components/UserScreen/ScreenHome"
 import AllRestarnts from "./components/UserScreen/AllRestarnts";
-import NavBar from "./components/UserScreen/NavBar";
 import RestaurantPage from "./components/UserScreen/RestaurantPage";
+import { LoginComponent } from "./components/UserScreen/Login";
 
-// import { RegisterComponent } from "./components/register";
-import { LoginComponent } from "./components/login";
-////import { LoginComponent } from "./components/login";
 
 const App = () => {
   return (
     <div className="App">
-      <NavBar />
+      {/* <NavBar /> */}
       <Routes>
         <Route path={"/"} element={<ScreenHome />} />
         <Route path="/SuperAdminPanel" element={<SuperAdminPanel />} />
