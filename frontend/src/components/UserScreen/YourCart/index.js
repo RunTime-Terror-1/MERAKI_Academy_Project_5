@@ -6,30 +6,28 @@ import Counter from './Counter';
 
 const YourCart = () => {
 
+ const [totalPrice,setTotalPrice]=useState("")
+
+
     const Userinfor = useSelector((state) => {
 
         return {
             yourCart: state.User.cart,
-
+            yourPrice: state.User.price,
         }
     })
 
     //!..............................
 
+ 
 
+  
 
-    // const sum=()=>{
-
-
-
-    // }
-
-
-
-
+    
     return (<div>{Userinfor.yourCart !== 0 && Userinfor.yourCart.length ? Userinfor.yourCart.map((element, index) => {
         return (<div key={index} className="div-Yourcart">
             {<Counter element={element} />}
+         
         </div>)
     }) : "they are no item in your cart"}
     </div>)

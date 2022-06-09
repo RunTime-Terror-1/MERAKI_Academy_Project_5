@@ -44,7 +44,9 @@ const Counter = ({ element,index }) => {
         dispatch(setPrice({ price:(realPrice*priceNumber)+realPrice,indexitem:element.id}))
         }}>+</h4>
         <h5>{priceNumber}</h5>
-        <h5 onClick={() => { prevPrice() }} >-</h5>
+        <h5 onClick={() => { prevPrice() 
+        dispatch(setPrice({ price:(realPrice*priceNumber)-realPrice,indexitem:element.id}))
+        }} >-</h5>
         <h3>{element.name}</h3 >
         <h5>{realPrice* priceNumber}</h5>
 
