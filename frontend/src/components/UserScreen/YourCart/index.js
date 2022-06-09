@@ -5,6 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 const YourCart = () => {
     const [cart, setCart] = useState("")
 
+
+    const dispatch = useDispatch();
+    
     const Userinfor = useSelector((state) => {
 
         return {
@@ -13,7 +16,7 @@ const YourCart = () => {
         }
     })
 
-    // console.log(Userinfor.yourCart, "cart cart")
+    console.log(Userinfor.yourCart, "cart cart")
 
     // console.log(Userinfor.yourCart.length, "cart cart")
 
