@@ -1,14 +1,14 @@
 import './style.css'
 import React, { useState, useContext } from "react";
 
-// import NavBar from '../NavBar';
+import NavBar from '../NavBar';
 
 
 const ScreenHome = () => {
 
 
     return (<div className="ScreenHome">
-            {/* {<NavBar/>} */}
+            {<NavBar/>}
         <div className="SH_first">
             <div className="SH_first_One" ><input placeholder="Location" /> <button className='SH_FOne_Button'>let`s go</button></div>
         </div>
