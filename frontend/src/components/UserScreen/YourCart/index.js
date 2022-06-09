@@ -5,11 +5,7 @@ import { deleteCart } from '../../../redux/reducers/User';
 import Counter from './Counter';
 
 const YourCart = () => {
-    const [cart, setCart] = useState("")
-    const [priceNumber, setPrice] = useState(1)
-
-    const dispatch = useDispatch();
-
+    
     const Userinfor = useSelector((state) => {
 
         return {
@@ -17,23 +13,24 @@ const YourCart = () => {
 
         }
     })
-    console.log(Userinfor.yourCart, "cart cart")
+
 //!..............................
     
 
-    const nextPrice = () => {
-        setPrice(priceNumber+1);
-    }
-    const prevPrice = () => {
-        setPrice(priceNumber-1)
-    }
+
+const sum=()=>{
 
 
-    // console.log(Userinfor.yourCart.length, "cart cart")
+    
+}
+
+
+   
 
     return (<div>{Userinfor.yourCart !== 0 && Userinfor.yourCart.length ? Userinfor.yourCart.map((element, index) => {
         return (<div key={index} className="div-Yourcart">
             {<Counter element={element} />}
+            {/* <h2>totalPrice</h2> */}
         </div>)
     }):"they are no item in your cart"}
     </div>)
@@ -44,54 +41,3 @@ export default YourCart;
 
 
 
-
-
-// import './style.css'
-// import React, { useState, useContext } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { deleteCart } from '../../../redux/reducers/User';
-// const YourCart = () => {
-//     const [cart, setCart] = useState("")
-//     const [priceNumber, setPrice] = useState(1)
-
-//     const dispatch = useDispatch();
-
-//     const Userinfor = useSelector((state) => {
-
-//         return {
-//             yourCart: state.User.cart,
-
-//         }
-//     })
-//     console.log(Userinfor.yourCart, "cart cart")
-// //!..............................
-    
-
-//     const nextPrice = () => {
-//         setPrice(priceNumber+1);
-//     }
-//     const prevPrice = () => {
-//         setPrice(priceNumber-1)
-//     }
-
-
-//     // console.log(Userinfor.yourCart.length, "cart cart")
-
-//     return (<div>{Userinfor.yourCart !== 0 && Userinfor.yourCart.length ? Userinfor.yourCart.map((element, index) => {
-//         return (<div key={index} className="div-Yourcart">
-//             <h4 onClick={()=>{nextPrice()}}>+</h4>
-//             <h5>{priceNumber}</h5>
-//             <h5 onClick={()=>{prevPrice()}} >-</h5>
-//             <h3>{element.name}</h3 >
-//             <h5>{element.price*priceNumber}</h5>
-//             <h5 onClick={() => {
-//                 dispatch(deleteCart({ id: element.id }))
-//                 console.log(element.id)
-//             }}>delete</h5>
-//         </div>)
-//     }) : "they are no item in your cart"}
-//     </div>)
-
-// }
-
-// export default YourCart;
