@@ -20,7 +20,6 @@ const App = () => {
         <Route path="/SuperAdminPanel" element={<SuperAdminPanel />} />
         <Route path={"/AllRestarnts"} element={<AllRestarnts />} />
         <Route path={"/RestaurantPage"} element={<RestaurantPage />} />
-        <Route path={"/register"} element={<RegisterComponent />} />
         <Route path={"/login"} element={<LoginComponent />} />
     
 
