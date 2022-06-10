@@ -34,8 +34,9 @@ const RestaurantPage = () => {
   const getRestarnt = async () => {
 
     const responseRestarnt = await User.getRestaurantById({ restaurantId: 1 })
+
     console.log(responseRestarnt.result)
-    setRestaurants(responseRestarnt.result)
+    await setRestaurants(responseRestarnt.result)
 
 
 
@@ -82,34 +83,18 @@ const RestaurantPage = () => {
   console.log(arraydetials)
   console.log(Userinfor.yourPrice)
 
+  console.log(restaurant)
 
   return (<div className="RestaurantPage">
     <div>{<NavBar />}</div>
 
 
-    <div className='Allinformation' >
-
-
-      <div className='Allinform_One'></div>
-      <div className='Allinform_Two'>
-        <div className='All_Two-categore'></div>
-        <div className='All_Two-menue'></div>
-        <div className='All_Two-cart'></div>
-      </div>
-
-
-      <div className='Res_One' >One</div>
-
-
-
-      <div className='Res_two'>
-
-
-        <div className='Res_two_A' >{restaurant ? restaurant.map((element, index) => {
-          return (<div className='Res_two_A_A' >
-
-            <div><img src={element.Logo} /></div>
-
+    <div className='Allinformation_One' >
+  
+          <div className='All_One_map' >{restaurant ? restaurant.map((element, index) => {
+          return (<div className='All_One_One_map_returndiv' >
+                <div><img className='imgback' src={element.backImg} /></div>
+           <img className='imgLogo' src={element.Logo} />
             <div><h1>{element.name}</h1>
               <h2>{element.rest_category}</h2>
             </div>
@@ -118,100 +103,29 @@ const RestaurantPage = () => {
           </div>)
 
 
-
-
-
-
         }) : ""}
 
         </div>
+      
+       
 
-        <div className='Res_two_B' >
-
-          <div className='Res_two_B_A'>
-            <div className='Res_two_B_A_first' >
-              <h1>categories</h1>
-              <div className='Res_two_B_A_One'>{categories ? categories.map((element, index) => {
-
-                return (<div className='divcategories' key={index}>
-                  <a href={"#" + index} className="a_atAll">{element}</a>
-
-                </div>)
-              }) : ""}</div>
-            </div>
-
-          </div>
-
-
-
-
-
-
-          <div className='Res_two_B_B'>{arraydetials ? arraydetials.map((element, index) => {
-            return (<div className='div_Mallloop_1'>
-
-              <details open id={index} >
-                <summary className="details">{element.catoName}</summary>
-                <div>{element.mallloop ? element.mallloop.map((elementMall, index) => {
-                  // console.log(elementMall.id)
-                  return (<div className='div_Mallloop_2'>
-
-                    <img className='imagetest' src={elementMall.imgUrl} />
-                    <h1>{elementMall.name}</h1>
-                    <button
-                      onClick={() => {
-                        console.log(elementMall)
-                        dispatch(setCart({ items: elementMall }))
-                        dispatch(setPrice({ price: elementMall.price, indexitem: elementMall.id }))
-                        // setSumreal(elementMall.price)
-                        // dispatch(setsumPriceUser({id:1}))
-                        dispatch(setTotal({ opr: "+", value: elementMall.price }));
-                        console.log("44")
-                        console.log(cart)
-                      }
-
-                      } >add to cart</button>
-
-                  </div>)
-
-
-                }) : ""}</div>
-
-              </details>
-
-            </div>
-            )
-          }) : ""}</div>
-
-
-
-          <div className='Res_two_B_c'>
-            <div className='Res_two_B_c_One'
-            // onClick={() => { sum() }}
-
-            >
-              <button> your cart</button>
-
-
-              {<YourCart />}
-              {/* <div>{Userinfor.yourPrice.length == 0 ? "" : <h3>""</h3>}</div> */}
-            </div>
-
-          </div>
-
-        </div>
-
-
-
-
+        
 
       </div>
 
 
 
-      <div className='Res_three'>three</div>
+      <div className='Allinformation_Two'>
+        <div className='All_Two-categore'></div>
+        <div className='All_Two-menue'></div>
+        <div className='All_Two-cart'></div>
+      </div>
+
+
+
     </div>
-  </div>
+
+  
   );
 };
 
