@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 import { HiUsers } from "react-icons/hi";
-import { BiGitPullRequest,BiLogOut } from "react-icons/bi";
+import { BiGitPullRequest, BiLogOut } from "react-icons/bi";
 import { MdFastfood } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
 import react, { useEffect, useState } from "react";
@@ -10,7 +10,7 @@ import { setRequests, setUsers } from "../../../../redux/reducers/superAdmin";
 
 export const NavigationMenu = () => {
   const dispatch = useDispatch();
-  const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(true);
   const { superAdminPanel, auth } = useSelector((state) => {
     return state;
   });
@@ -60,13 +60,12 @@ export const NavigationMenu = () => {
         icon: <MdFastfood />,
         onClick: () => {},
       })}
-      <button id="logout-btn" >
-      <div  id="logout-div">
-        <BiLogOut/>
-        <h4>LogOut</h4>
-      </div>
+      <button id="logout-btn">
+        <div id="logout-div">
+          <BiLogOut />
+          <h4>LogOut</h4>
+        </div>
       </button>
-     
     </div>
   );
 };
