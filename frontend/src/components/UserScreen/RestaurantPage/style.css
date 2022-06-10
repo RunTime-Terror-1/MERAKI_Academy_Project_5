@@ -15,10 +15,6 @@
 
 ;
 
-.Allinformation {
-    /* position:relative;
-    top:10px; */
-}
 
 .All_One_One_map_returndiv {
     display: flex;
@@ -28,17 +24,13 @@
     top: 10px;
 }
 
-.All_One_map {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
+
 
 .imgLogo {
     width: 120px;
     height: 120px; 
      position: relative;
-    left: 100px;
+    left: 110px;
     bottom: 60px;
     border-radius: 55px; 
     /* background-color:salmon blue; */
@@ -49,7 +41,10 @@
     height: 55vh;
 }
 
-
+.div_restur_Name{
+    position: relative;
+    right: 40vw;
+}
 
 
 
