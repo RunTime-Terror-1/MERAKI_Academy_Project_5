@@ -1,9 +1,6 @@
 import react, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SuperAdmin } from "../../../../controllers/superAdmin";
-import { User } from "../../../../controllers/user";
-import auth from "../../../../redux/reducers/auth";
-import { setRequests, setUsers } from "../../../../redux/reducers/superAdmin";
 import { CreateOwnerDialog } from "./CreateOwner";
 
 export const Users = () => {

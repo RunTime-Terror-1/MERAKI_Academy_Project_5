@@ -16,6 +16,7 @@ export class Registration {
     }
   }
   static async register({ firstName, lastName, email, password, gender }) {
+   
     try {
       const user = {
         firstName,

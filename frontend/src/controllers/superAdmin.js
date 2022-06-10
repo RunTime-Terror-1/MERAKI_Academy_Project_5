@@ -78,6 +78,22 @@ export class SuperAdmin {
       };
     }
   }
+
+  static async getAllRestaurants({ token }) {
+    try {
+      const response = await axios.get(`${hostUrl}/superAdmin/restaurants`, {
+        headers: { authorization: `Bearer ${token}` },
+      });
+      return response.data;
+    } catch (error) {
+      return {
+        success: false,
+        massage: "Server Error",
+        error,
+      };
+    }
+  }
+
   static async acceptRequest({ requestId, state, token }) {
     try {
       const response = await axios.put(

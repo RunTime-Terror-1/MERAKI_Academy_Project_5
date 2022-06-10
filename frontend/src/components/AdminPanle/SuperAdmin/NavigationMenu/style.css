@@ -15,7 +15,8 @@
   text-align: center;
 }
 
-#nav-menu-panel button {
+
+#menu-btns-div button {
   width: 90%;
   padding: var(--button-padding);
   border: 0px;
@@ -31,4 +32,10 @@
   margin: 2px;
   border: 1px black solid;
   background-color: antiquewhite;
+}
+
+#nav-menu-btn{
+  left: 0;
+  top: 0;
+  margin-right: 10px;
 }

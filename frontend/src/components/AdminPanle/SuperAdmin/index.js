@@ -23,20 +23,6 @@ export const SuperAdminPanel = () => {
     })();
   }, []);
 
-  
-  const showRequests = (request) => {
-    return (
-      <div key={request.id}>
-        <h1>{request.id}</h1>
-        <h1>{request.firstName + " " +request.lastName}</h1>
-        <h1>{request.email}</h1>
-        <h1>{request.restaurantName}</h1>
-        <h1>{request.state}</h1>
-       
-      </div>
-    );
-  };
-
   return (
     <div style={{ width: "100vw", display: "flex" }}>
       <NavigationBar />

@@ -11,7 +11,7 @@ import { setRequests, setUsers } from "../../../../redux/reducers/superAdmin";
 
 export const NavigationBar = (req, res) => {
   const dispatch = useDispatch();
-  const [isUsersShown, setIsUsersShown] = useState(true);
+  const [showMenu,setShowMenu] = useState(false)
   const { superAdminPanel, auth } = useSelector((state) => {
     return state;
   });
@@ -40,44 +40,56 @@ export const NavigationBar = (req, res) => {
   };
 
   return (
-    <div id="nav-menu-panel">
-      <h3>User Information</h3>
-      <hr />
-      <br />
-      <div>{userArea({ name: "sad" })}</div>
-      <hr />
-      <h3>menu</h3>
-      <hr />
-      {menuButton({
-        text: "Users",
-        icon: <HiUsers />,
-        onClick: async () => {
-          const data = await SuperAdmin.getAllUsers({ token: auth.token });
-          dispatch(setUsers(data.users));
-        },
-      })}
-      {menuButton({
-        text: "Requests",
-        icon: <BiGitPullRequest />,
-        onClick: async () => {
-        
-          const data = await SuperAdmin.getAllRequests({ token: auth.token });
-          
-          dispatch(setRequests(data.requests));
-          
-        },
-      })}
-      {menuButton({
-        text: "Create Owner",
-        icon: <AiOutlineUserAdd />,
-        onClick: async () => {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            console.log("Latitude is :", position.coords.latitude);
-            console.log("Longitude is :", position.coords.longitude);
-          });
-        },
-      })}
-      <button id="nav-menu-btn">Close Menu</button>
+    <div style={{position:"relative"}}>
+     { showMenu ?<div id="nav-menu-panel">
+        <h3>User Information</h3>
+        <hr />
+        <br />
+        <div>{userArea({ name: "sad" })}</div>
+        <hr />
+        <h3>menu</h3>
+        <hr />
+        <div id= "menu-btns-div">
+        {menuButton({
+          text: "Users",
+          icon: <HiUsers />,
+          onClick: async () => {
+            const data = await SuperAdmin.getAllUsers({ token: auth.token });
+            if (data.success) {
+              dispatch(setUsers(data.users));
+            }
+          },
+        })}
+        {menuButton({
+          text: "Requests",
+          icon: <BiGitPullRequest />,
+          onClick: async () => {
+            const data = await SuperAdmin.getAllRequests({ token: auth.token });
+            if (data.success) {
+              dispatch(setRequests(data.requests));
+            }
+          },
+        })}
+        {menuButton({
+          text: "Create Owner",
+          icon: <AiOutlineUserAdd />,
+          onClick: async () => {
+            const data = await SuperAdmin.getAllRestaurants({
+              token: auth.token,
+            });
+            console.log(data);
+          },
+        })}
+
+        </div>
+       
+         <button id="nav-menu-btn" onClick={()=>{
+          setShowMenu(false)
+        }}>Close Menu</button>
+      </div>: <button id="nav-menu-btn" onClick={()=>{
+        setShowMenu(true)
+      }}>Open Menu</button>}
+     
     </div>
   );
 };

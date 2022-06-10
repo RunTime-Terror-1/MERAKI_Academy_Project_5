@@ -148,11 +148,38 @@ const acceptRequest = (req, res) => {
   });
 };
 
+const getAllRestaurants = (req, res) => {
+  const query = "SELECT name,firstName,lastName,email,US.id,Logo FROM users  US INNER JOIN restaurants RS  ON US.id = RS.owner_Id AND RS.is_deleted = 0";
+  connection.query(query, [], (err, result) => {
+    if (err) {
+      console.log(err.message);
+      return res.status(500).json({
+        success: false,
+        massage: "Server Error",
+        err,
+      });
+    }
+    if (result.length) {
+      res.status(200).json({
+        success: true,
+        message: "All restaurants",
+        restaurants: result,
+      });
+    } else {
+      res.status(404).json({
+        success: true,
+        message: "No Request",
+      });
+    }
+  });
+};
+
 module.exports = {
   createOwner,
   deleteOwner,
   getAllRequests,
   acceptRequest,
   getAllUsers ,
-  getAllOwners 
+  getAllOwners ,
+  getAllRestaurants
 };
