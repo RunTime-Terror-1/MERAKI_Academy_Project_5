@@ -120,7 +120,9 @@ const RestaurantPage = () => {
             <a href={"#" + index} className="a_atAll">{element}</a>
 
           </div>)
-        }) : ""}</div>
+        }) : <></>}</div>
+
+
       </div>
 
 
@@ -128,7 +130,7 @@ const RestaurantPage = () => {
       <div className='All_Two-menue'>  {arraydetials ? arraydetials.map((element, index) => {
         return (<div className='div_Mealloop_One'>
 
-          <h1 className='h1_category_Name' id={index}>{element.catoName}</h1>
+          <h1 className='h1_category_Nameq' id={index}>{element.catoName}</h1>
 
           <div className='div_Mealloop_1'>{element.mallloop ? element.mallloop.map((elementMall, index) => {
             return (<div className='div_Mallloop_2'>
@@ -163,6 +165,7 @@ const RestaurantPage = () => {
 
 
         {<YourCart className="YourCartinRest" />}</div>
+        
     </div>
 
 

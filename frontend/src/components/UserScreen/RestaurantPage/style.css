@@ -1,13 +1,4 @@
-* {
-    margin: 0%;
-    padding: 0%;
-    box-sizing: border-box;
-    
-}
-html,body{
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
+
 .RestaurantPage {
     display: flex;
     flex-direction: column;
@@ -30,21 +21,24 @@ html,body{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    position: relative;
+    text-align: start;
+  
 
     top: 10px;
 }
 
-
+.Allinformation_One{
+    text-align: start;
+}
 
 .imgLogo {
     width: 120px;
     height: 120px;
-    position: relative;
+  
     right: 44vw;
     bottom: 60px;
     border-radius: 50px;
-    /* background-co   border-radius: 55px;lor:salmon blue; */
+  
 }
 
 .imgback {
@@ -54,7 +48,7 @@ html,body{
 }
 
 .div_restur_Name {
-    position: relative;
+    /* position: relative; */
     right: 43vw;
     bottom: 6vh;
 
@@ -70,21 +64,22 @@ html,body{
     display: flex;
     flex-direction: row;
     gap: 25px;
-    position: relative;
+   
     left:2vw;
-    /* background-color: blue; */
+   
     scroll-snap-align:0;
 }
 
 .All_Two_categore_Cat {
     width: 10vw;
-    /* height: 100vh; */
-    /* background-color: chartreuse; */
-   
+    font-size: 80%;
+    background-color: chartreuse;
+    
     display: flex;
     flex-direction: column;
     position:sticky;
-    top:0;
+    top:0%;
+    bottom: 10px;
     /* left: 2vw; */
 }
 .All_Two-categore_map{
@@ -92,7 +87,7 @@ html,body{
     display: flex;
     flex-direction: column;
     gap: 40px;
-    position:sticky;
+    
     top:0;
 }
 
@@ -110,49 +105,52 @@ html,body{
     flex-wrap: wrap;
     gap:30px;
 }
-.div_Mallloop_2{
-    /* display: flex;
-    flex-direction:column; */
-    flex-wrap: wrap;
-    /* gap:880px; */
 
-
-}
 .div_Mealloop_One{
+    margin: 0%;
+    padding: 0%;
     display: flex;
+    text-align: start;
     flex-direction: column;
-    flex-wrap: wrap;
+    justify-content: flex-start;
+    background-color: burlywood;
+  
     gap:20px;
+
 }
 .eachMealimg{
     width:20vw;
     height: 30vh;
 }
 .h1_category_Name{
+    margin: 0%;
+    padding: 0%;
     font-size: xx-large;
-    position: relative;
-    right:35vw;
+    
+    right:32vw;
 }
 .details{
     font-size: xx-large;
-    flex-wrap: wrap;
-    position: relative;
+    
     right:35vw;
 }
 
 .All_Two-cart{
     width:17vw;
-    background-color: brown;
-    flex-wrap: wrap;
-    position: relative;
-    /* right:1vw; */
     position: sticky;
     top:0;
 
 }
-.YourCartinRestPage{
-    position: relative;
+.YourCartinRest{
+ 
     left:10px;
+    background-color: cornflowerblue;
+    position:sticky;
+}
+.stiky{
+  
+    top:0;
+    background-color: red;
 }
 /*-----EEEend-----*/
 
