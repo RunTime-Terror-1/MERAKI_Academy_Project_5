@@ -2,10 +2,11 @@ import { useSelector, useDispatch } from "react-redux";
 import react, { useEffect, useState } from "react";
 import { SuperAdmin } from "../../../controllers/superAdmin";
 import { setRequests, setUsers } from "../../../redux/reducers/superAdmin";
-import { NavigationBar } from "./NavigationMenu";
+import { NavigationMenu } from "./NavigationMenu";
 import "./style.css";
 import { Users } from "./UsersDashboard";
 import { Requests } from "./requestsDashboard";
+import { NavigationBarPanel } from "./NavigationBar";
 export const SuperAdminPanel = () => {
   const dispatch = useDispatch();
   const [isUsersShown, setIsUsersShown] = useState(true);
@@ -25,9 +26,9 @@ export const SuperAdminPanel = () => {
 
   return (
     <div style={{ width: "100vw", display: "flex" }}>
-      <NavigationBar />
+      <NavigationMenu />
       <div style={{ color: "red", width: "100%" }}>
-     
+        <NavigationBarPanel/>
         {isUsersShown
           ? <Users/>
           :< Requests/>}
