@@ -1,41 +1,22 @@
-#nav-menu-panel {
-  display: flex;
-  flex-direction: column;
+#nav-menu-bar{
+  background-color: rgb(146, 152, 157);
   width: 30vw;
-  background-color: rgb(212, 183, 78);
   height: 100vh;
-  text-align: start;
-  padding: 15px;
+  
 }
-
-#nav-menu-panel img {
-  width: 15vw;
-  height: 15vw;
-  border-radius: 50%;
-  text-align: center;
+#title-nav-bar {
+  background-color: beige;
+  padding: 10px;
 }
-
-
-#menu-btns-div button {
-  width: 90%;
-  padding: var(--button-padding);
-  border: 0px;
-  text-align: start;
-  background-color: transparent;
-}
-
-.Nav-menu-btn {
+#user-img-div{
   display: flex;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
-  width: 100%;
-  margin: 2px;
-  border: 1px black solid;
-  background-color: antiquewhite;
-}
+  padding: 5px;
 
-#nav-menu-btn{
-  left: 0;
-  top: 0;
-  margin-right: 10px;
+}
+#user-img-div img{
+  height: 10vw;
+  width: 10vw;
+  border-radius: 50%;
 }
