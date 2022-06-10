@@ -161,7 +161,7 @@ const RestaurantPage = () => {
       <div className='All_Two-cart'> <button> your cart</button>
 
 
-        {<YourCart />}</div>
+        {<YourCart className="YourCartinRestPage" />}</div>
     </div>
 
 
