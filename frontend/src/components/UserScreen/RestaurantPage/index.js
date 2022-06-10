@@ -7,7 +7,7 @@ import { setCart, setPrice } from '../../../redux/reducers/User';
 import { useDispatch, useSelector } from "react-redux";
 import SumPrice from './SumPrice';
 
-import { setTotal} from '../../../redux/reducers/User';
+import { setTotal } from '../../../redux/reducers/User';
 
 const RestaurantPage = () => {
 
@@ -26,7 +26,7 @@ const RestaurantPage = () => {
     return {
       yourCart: state.User.cart,
       yourPrice: state.User.price,
-      sumPrice:state.User.sumPriceUser,
+      sumPrice: state.User.sumPriceUser,
     }
   })
 
@@ -67,10 +67,10 @@ const RestaurantPage = () => {
 
     setArraydetials(arrayLoop)
 
-  
+
   }
 
- 
+
 
 
   useEffect(() => {
@@ -82,12 +82,21 @@ const RestaurantPage = () => {
   console.log(arraydetials)
   console.log(Userinfor.yourPrice)
 
-  
+
   return (<div className="RestaurantPage">
     <div>{<NavBar />}</div>
 
 
-    <div className='Allinform' >
+    <div className='Allinformation' >
+
+
+      <div className='Allinform_One'></div>
+      <div className='Allinform_Two'>
+        <div className='All_Two-categore'></div>
+        <div className='All_Two-menue'></div>
+        <div className='All_Two-cart'></div>
+      </div>
+
 
       <div className='Res_One' >One</div>
 
@@ -156,7 +165,7 @@ const RestaurantPage = () => {
                         dispatch(setPrice({ price: elementMall.price, indexitem: elementMall.id }))
                         // setSumreal(elementMall.price)
                         // dispatch(setsumPriceUser({id:1}))
-                        dispatch(setTotal({opr:"+",value:elementMall.price}));
+                        dispatch(setTotal({ opr: "+", value: elementMall.price }));
                         console.log("44")
                         console.log(cart)
                       }
@@ -177,9 +186,9 @@ const RestaurantPage = () => {
 
 
           <div className='Res_two_B_c'>
-            <div className='Res_two_B_c_One' 
+            <div className='Res_two_B_c_One'
             // onClick={() => { sum() }}
-            
+
             >
               <button> your cart</button>
 
