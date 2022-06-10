@@ -7,6 +7,7 @@ const {
   acceptRequest,
   getAllUsers,
   getAllOwners,
+  getAllRestaurants,
 } = require("../controllers/superAdmin");
 const authentication = require("../middlewares/authentication");
 const authorization = require("../middlewares/authorization");
@@ -49,6 +50,13 @@ superAdminRouter.get(
   getAllOwners,
 );
 
+superAdminRouter.get(
+  "/restaurants",
+  authentication,
+  authorization("1"),
+  getAllRestaurants,
+);
+
 //put
 superAdminRouter.put(
   "/requests",
@@ -56,5 +64,6 @@ superAdminRouter.put(
   authorization("1"),
   acceptRequest
 );
+
 
 module.exports = superAdminRouter;

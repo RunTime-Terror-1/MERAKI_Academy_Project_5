@@ -99,9 +99,13 @@ export const RegisterComponent = () => {
       )}
       <div id="signup-form-inner">
         <div id="signup--exit-button">
-          <button onClick={() => {
-            dispatch(setIsSignUpFormShown())
-          }}>X</button>
+          <button
+            onClick={() => {
+              dispatch(setIsSignUpFormShown());
+            }}
+          >
+            X
+          </button>
         </div>
 
         <h1>Sign Up</h1>

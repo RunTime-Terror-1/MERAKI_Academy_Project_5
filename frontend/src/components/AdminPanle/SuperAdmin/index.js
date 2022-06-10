@@ -2,12 +2,14 @@ import { useSelector, useDispatch } from "react-redux";
 import react, { useEffect, useState } from "react";
 import { SuperAdmin } from "../../../controllers/superAdmin";
 import { setRequests, setUsers } from "../../../redux/reducers/superAdmin";
-import { NavigationBar } from "./NavigationMenu";
+import { NavigationMenu } from "./NavigationMenu";
 import "./style.css";
 import { Users } from "./UsersDashboard";
 import { Requests } from "./requestsDashboard";
+import { NavigationBarPanel } from "./NavigationBar";
 export const SuperAdminPanel = () => {
   const dispatch = useDispatch();
+  const [hideMenu,setHideMenu] = useState(false);
   const [isUsersShown, setIsUsersShown] = useState(true);
   const { superAdminPanel } = useSelector((state) => {
     return state;
@@ -23,25 +25,11 @@ export const SuperAdminPanel = () => {
     })();
   }, []);
 
-  
-  const showRequests = (request) => {
-    return (
-      <div key={request.id}>
-        <h1>{request.id}</h1>
-        <h1>{request.firstName + " " +request.lastName}</h1>
-        <h1>{request.email}</h1>
-        <h1>{request.restaurantName}</h1>
-        <h1>{request.state}</h1>
-       
-      </div>
-    );
-  };
-
   return (
     <div style={{ width: "100vw", display: "flex" }}>
-      <NavigationBar />
+      {hideMenu?<NavigationMenu />:<></>}
       <div style={{ color: "red", width: "100%" }}>
-     
+        <NavigationBarPanel setHideMenu={setHideMenu} hideMenu={hideMenu}/>
         {isUsersShown
           ? <Users/>
           :< Requests/>}
