@@ -54,8 +54,9 @@ const deleteOwner = async (req, res) => {
   });
 };
 const getAllRequests = (req, res) => {
-  const query = "SELECT firstName,lastName,restaurantName,state, email, requests.id  FROM users INNER JOIN requests ON requests.owner_id =users.id ";
- 
+  const query =
+    "SELECT firstName,lastName,restaurantName,state, email, requests.id  FROM users INNER JOIN requests ON requests.owner_id =users.id ";
+
   connection.query(query, [], (err, result) => {
     if (err) {
       return res.status(500).json({
@@ -80,7 +81,8 @@ const getAllRequests = (req, res) => {
 };
 
 const getAllUsers = (req, res) => {
-  const query = "SELECT * FROM users WHERE is_deleted =0";
+  const query =
+    "SELECT * FROM users INNER JOIN roles ON users.role_id=roles.id AND is_deleted =0";
   connection.query(query, [], (err, result) => {
     if (err) {
       return res.status(500).json({
@@ -149,7 +151,8 @@ const acceptRequest = (req, res) => {
 };
 
 const getAllRestaurants = (req, res) => {
-  const query = "SELECT name,firstName,lastName,email,US.id,Logo FROM users  US INNER JOIN restaurants RS  ON US.id = RS.owner_Id AND RS.is_deleted = 0";
+  const query =
+    "SELECT name,firstName,lastName,email,US.id,Logo FROM users  US INNER JOIN restaurants RS  ON US.id = RS.owner_Id AND RS.is_deleted = 0";
   connection.query(query, [], (err, result) => {
     if (err) {
       console.log(err.message);
@@ -179,7 +182,7 @@ module.exports = {
   deleteOwner,
   getAllRequests,
   acceptRequest,
-  getAllUsers ,
-  getAllOwners ,
-  getAllRestaurants
+  getAllUsers,
+  getAllOwners,
+  getAllRestaurants,
 };
