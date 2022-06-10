@@ -33,7 +33,7 @@ export const Users = () => {
         <h4>{user.email}</h4>
         <h4>{user.role}</h4>
         <h4>{"user.lastLogin"}</h4>
-        <div>
+        <div id="edit-btns-div">
           {createButton({ onClick: () => {}, text: "Delete" })}
           {createButton({ onClick: () => {}, text: "Edit" })}
         </div>
@@ -47,7 +47,7 @@ export const Users = () => {
       </p>
       <button> + Users</button>
       <div style={{ marginTop: "5px"}}>
-        <div id="user-row"  style={{backgroundColor:"black"}} >
+        <div id="user-row"  style={{backgroundColor:"rgb(34, 35, 36)",color:"white"}} >
           <h4>ID</h4>
           <h4>NAME</h4>
           <h4>EMAIL</h4>
