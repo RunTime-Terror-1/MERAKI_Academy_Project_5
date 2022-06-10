@@ -112,6 +112,7 @@ const RestaurantPage = () => {
 
 
     <div className='Allinformation_Two'>
+
       <div className='All_Two-categore'><h1>categories</h1>
         <div className='All_Two-categore_map'>{categories ? categories.map((element, index) => {
           return (<div className='All_Two-categore_map_return' key={index}>
@@ -124,41 +125,43 @@ const RestaurantPage = () => {
 
 
       <div className='All_Two-menue'>  {arraydetials ? arraydetials.map((element, index) => {
-        return (<div className='div_Mallloop_1'>
+        return (<div className='div_Mealloop_One'>
 
-          <details open id={index} >
-            <summary className="details">{element.catoName}</summary>
-            <div>{element.mallloop ? element.mallloop.map((elementMall, index) => {
-              // console.log(elementMall.id)
-              return (<div className='div_Mallloop_2'>
+          <h1 className='h1_category_Name' id={index}>{element.catoName}</h1>
 
-                <img className='imagetest' src={elementMall.imgUrl} />
-                <h1>{elementMall.name}</h1>
-                <button
-                  onClick={() => {
-                    console.log(elementMall)
-                    dispatch(setCart({ items: elementMall }))
-                    dispatch(setPrice({ price: elementMall.price, indexitem: elementMall.id }))
-                    // setSumreal(elementMall.price)
-                    // dispatch(setsumPriceUser({id:1}))
-                    dispatch(setTotal({ opr: "+", value: elementMall.price }));
-                    console.log("44")
-                    console.log(cart)
-                  }
+          <div className='div_Mealloop_1'>{element.mallloop ? element.mallloop.map((elementMall, index) => {
+            return (<div className='div_Mallloop_2'>
+              <img className='eachMealimg' src={elementMall.imgUrl} />
+              <h1>{elementMall.name}</h1>
+              <button
+                onClick={() => {
+                  console.log(elementMall)
+                  dispatch(setCart({ items: elementMall }))
+                  dispatch(setPrice({ price: elementMall.price, indexitem: elementMall.id }))
+                  // setSumreal(elementMall.price)
+                  // dispatch(setsumPriceUser({id:1}))
+                  dispatch(setTotal({ opr: "+", value: elementMall.price }));
+                  console.log("44")
+                  console.log(cart)
+                }
 
-                  } >add to cart</button>
+                } >add to cart</button>
 
-              </div>)
+            </div>)
 
 
-            }) : ""}</div>
-
-          </details>
-
+          }) : ""}</div>
         </div>
         )
       }) : ""}</div>
-      <div className='All_Two-cart'>cart</div>
+
+
+
+
+      <div className='All_Two-cart'> <button> your cart</button>
+
+
+        {<YourCart />}</div>
     </div>
 
 
