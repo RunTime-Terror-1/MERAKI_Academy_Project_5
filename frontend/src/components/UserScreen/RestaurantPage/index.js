@@ -32,12 +32,14 @@ const RestaurantPage = () => {
 
 
   const getRestarnt = async () => {
+
     const responseRestarnt = await User.getRestaurantById({ restaurantId: 1 })
     console.log(responseRestarnt.result)
     setRestaurants(responseRestarnt.result)
 
-    const responseMeal = await User.getMealsByRestaurant({ restaurantId: 1 })
 
+
+    const responseMeal = await User.getMealsByRestaurant({ restaurantId: 1 })
     setMenu(responseMeal.result)
 
     setCategories(responseMeal.categories)
@@ -54,8 +56,8 @@ const RestaurantPage = () => {
       responseMeal.result.map((elem, indextow) => {
         if (elem.category.includes(element)) {
 
-          array.push(element)
-          arrayTwo.push(elem)
+          // array.push(element)
+          // arrayTwo.push(elem)
           arrayLoop[indexOne].mallloop.push(elem)
         }
 
@@ -68,15 +70,7 @@ const RestaurantPage = () => {
   
   }
 
-  // const sum = () => {
-  //   let sumpruce = 0
-  //   let sumpr = Userinfor.yourPrice.map((element, index) => {
-  //     sumpruce = sumpruce + element.price
-  //   })
-  //   setSumreal(sumpruce)
-  // }
-
-  // console.log(sum)
+ 
 
 
   useEffect(() => {
@@ -87,6 +81,8 @@ const RestaurantPage = () => {
 
   console.log(arraydetials)
   console.log(Userinfor.yourPrice)
+
+  
   return (<div className="RestaurantPage">
     <div>{<NavBar />}</div>
 
