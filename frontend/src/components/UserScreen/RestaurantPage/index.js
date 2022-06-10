@@ -123,7 +123,41 @@ const RestaurantPage = () => {
 
 
 
-      <div className='All_Two-menue'>menue</div>
+      <div className='All_Two-menue'>  {arraydetials ? arraydetials.map((element, index) => {
+        return (<div className='div_Mallloop_1'>
+
+          <details open id={index} >
+            <summary className="details">{element.catoName}</summary>
+            <div>{element.mallloop ? element.mallloop.map((elementMall, index) => {
+              // console.log(elementMall.id)
+              return (<div className='div_Mallloop_2'>
+
+                <img className='imagetest' src={elementMall.imgUrl} />
+                <h1>{elementMall.name}</h1>
+                <button
+                  onClick={() => {
+                    console.log(elementMall)
+                    dispatch(setCart({ items: elementMall }))
+                    dispatch(setPrice({ price: elementMall.price, indexitem: elementMall.id }))
+                    // setSumreal(elementMall.price)
+                    // dispatch(setsumPriceUser({id:1}))
+                    dispatch(setTotal({ opr: "+", value: elementMall.price }));
+                    console.log("44")
+                    console.log(cart)
+                  }
+
+                  } >add to cart</button>
+
+              </div>)
+
+
+            }) : ""}</div>
+
+          </details>
+
+        </div>
+        )
+      }) : ""}</div>
       <div className='All_Two-cart'>cart</div>
     </div>
 
