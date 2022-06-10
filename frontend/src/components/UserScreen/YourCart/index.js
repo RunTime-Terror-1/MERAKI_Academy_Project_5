@@ -37,7 +37,8 @@ const YourCart = () => {
 
 
 
-    return (<div>{Userinfor.yourCart !== 0 && Userinfor.yourCart.length ? Userinfor.yourCart.map((element, index) => {
+    
+        return (<div   className="YourCartinRest" >{Userinfor.yourCart !== 0 && Userinfor.yourCart.length ? Userinfor.yourCart.map((element, index) => {
         return (<div key={index} className="div-Yourcart">
             {<Counter element={element} />}
 

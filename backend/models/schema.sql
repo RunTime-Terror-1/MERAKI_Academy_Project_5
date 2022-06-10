@@ -45,6 +45,7 @@ CREATE TABLE address (
 CREATE TABLE restaurants (
     id INT AUTO_INCREMENT NOT NULL,
     location VARCHAR(255) NOT NULL,
+    backImg VARCHAR(255) NOT NULL,
     Logo VARCHAR(255) NOT NULL,
     orders INT DEFAULT 0,
     lat VARCHAR(255) NOT NULL,
