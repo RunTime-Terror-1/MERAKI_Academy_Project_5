@@ -95,7 +95,7 @@ const RestaurantPage = () => {
         return (<div className='All_One_One_map_returndiv' >
           <div><img className='imgback' src={element.backImg} /></div>
           <img className='imgLogo' src={element.Logo} />
-          <div className='div_restur_Name'><h1>{element.name}</h1>
+          <div className='div_restur_Name'><h1 className='H1_Name'>{element.name}</h1>
             <h2>{element.rest_category}</h2>
           </div>
 
@@ -107,18 +107,24 @@ const RestaurantPage = () => {
 
       </div>
 
-
-
-
-
     </div>
 
 
 
     <div className='Allinformation_Two'>
-      <div className='All_Two-categore'></div>
-      <div className='All_Two-menue'></div>
-      <div className='All_Two-cart'></div>
+      <div className='All_Two-categore'><h1>categories</h1>
+        <div className='All_Two-categore_map'>{categories ? categories.map((element, index) => {
+          return (<div className='All_Two-categore_map_return' key={index}>
+            <a href={"#" + index} className="a_atAll">{element}</a>
+
+          </div>)
+        }) : ""}</div>
+      </div>
+
+
+
+      <div className='All_Two-menue'>menue</div>
+      <div className='All_Two-cart'>cart</div>
     </div>
 
 
