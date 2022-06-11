@@ -9,6 +9,9 @@ import SumPrice from './SumPrice';
 
 import { setTotal } from '../../../redux/reducers/User';
 
+
+
+import{BsPlusCircleFill}from "react-icons/bs"
 const RestaurantPage = () => {
 
   const dispatch = useDispatch();
@@ -136,6 +139,7 @@ const RestaurantPage = () => {
             return (<div className='div_Mallloop_2'>
               <div className='imgbox'> <img className='eachMealimg' src={elementMall.imgUrl} /></div>
               <h1>{elementMall.name}</h1>
+              <BsPlusCircleFill className='PluseIcone'/>
               <button
                 onClick={() => {
                   console.log(elementMall)

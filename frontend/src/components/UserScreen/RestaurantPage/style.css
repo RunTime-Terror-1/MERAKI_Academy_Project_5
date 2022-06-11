@@ -122,29 +122,35 @@
     gap: 20px;
 
 }
-.imgbox{
-    width: 15.1vw;
-    height: 30.1vh;
+
+.imgbox {
+    width: 15.4vw;
+    height: 30.2h;
     overflow: hidden;
-}
-.eachMealimg {
-    width: 15vw;
-    height: 30vh;
-transition:0.4s ease-in-out;
+
 }
 
-.imgbox:hover .eachMealimg{
+.eachMealimg {
+    width: 15.3vw;
+    height: 30vh;
+    transition: 0.5s ease-in-out;
+}
+
+.imgbox:hover .eachMealimg {
     transform: scale(1.1);
 }
-.div_Mallloop_2:hover.eachMealimg{
+
+.div_Mallloop_2:hover.eachMealimg {
     transform: scale(1.2);
 }
-/* 
-.eachMealimg {
-    width: 15vw;
-    height: 30vh;
-    transform: scale(1.2);
-} */
+.PluseIcone{
+    width: 35px;
+    height: 50px;
+    position: relative;
+    bottom: 250px;
+    left: 190px;
+}
+
 
 .h1_category_Name {
     margin: 0%;
