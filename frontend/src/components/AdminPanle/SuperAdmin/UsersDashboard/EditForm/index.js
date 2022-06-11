@@ -1,20 +1,17 @@
 import React, { useContext, useState } from "react";
 import "./style.css";
-import { Registration } from "../../../controllers/registration";
-import { ErrorsDiv } from "./ErrorsDiv";
+import { Registration } from "../../../../../controllers/registration";
+import { ErrorsDiv } from "../../../../Registration/Register/ErrorsDiv";
 import "./style.css";
-import { Gender } from "./GenderDiv";
+import { Gender } from "./../../../../Registration/Register/GenderDiv";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsSignUpFormShown } from "../../../redux/reducers/auth";
-export const RegisterComponent = ({
-  superAdminRegister = false,
-  setIsRegisterShown,
-}) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [gender, setGender] = useState(null);
-  const [email, setEmail] = useState("");
-  const [role, setRole] = useState("");
+import { setIsSignUpFormShown } from "../../../../../redux/reducers/auth";
+export const EditForm = ({user={}}) => {
+  const [firstName, setFirstName] = useState(user.firstName);
+  const [lastName, setLastName] = useState(user.lastName);
+  const [gender, setGender] = useState(user.gender);
+  const [email, setEmail] = useState(user.name);
+  const [role, setRole] = useState(user.role);
   const [password, setPassword] = useState("");
   const [isDialogShown, setIsDialogShown] = useState("");
   let [errors, setErrors] = useState([]);
@@ -62,7 +59,7 @@ export const RegisterComponent = ({
     );
   };
 
-  const signUp = async () => {
+  const updateUser = async () => {
     const inputForm = {
       FirstName: `${firstName} `,
       LastName: ` ${lastName}`,
@@ -83,13 +80,12 @@ export const RegisterComponent = ({
         password,
         role,
       });
-    
+
       if (serverError === "Email already taken") {
         setErrors([...errors, "Email already taken"]);
       } else {
         setIsDialogShown(true);
         dispatch(setIsSignUpFormShown());
-        setIsRegisterShown(false);
       }
     } else {
       setErrors(errors);
@@ -112,14 +108,13 @@ export const RegisterComponent = ({
           <button
             onClick={() => {
               dispatch(setIsSignUpFormShown());
-              setIsRegisterShown(false);
             }}
           >
             X
           </button>
         </div>
 
-        <h1>Sign Up</h1>
+        <h1>Update </h1>
         <h4> it's quick and easy.</h4>
         <hr />
         <div id="register-username-div">
@@ -149,20 +144,17 @@ export const RegisterComponent = ({
           key: "Password",
           setState: setPassword,
         })}
-        {superAdminRegister ? (
-          createInput({
-            placeholder: "Role Id",
-            type: "number",
-            key: "number",
-            setState: setRole,
-          })
-        ) : (
-          <></>
-        )}
+
+        {createInput({
+          placeholder: "Role Id",
+          type: "number",
+          key: "number",
+          setState: setRole,
+        })}
         <Gender setGender={setGender} errors={errors} setErrors={setErrors} />
         <ErrorsDiv errors={errors} />
         <div id="signup-button-div">
-          <button onClick={signUp}>Sign Up</button>
+          <button onClick={updateUser}>Update</button>
         </div>
       </div>
     </div>

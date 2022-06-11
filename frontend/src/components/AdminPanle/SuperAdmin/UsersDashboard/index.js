@@ -4,6 +4,7 @@ import { SuperAdmin } from "../../../../controllers/superAdmin";
 import { setUsers } from "../../../../redux/reducers/superAdmin";
 import "./style.css";
 import { RegisterComponent } from "../../../Registration/Register";
+import { EditForm } from "./EditForm";
 
 export const Users = () => {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ export const Users = () => {
       ) : (
         <></>
       )}
+      < EditForm/>
       <div id="adduser-div">
         <p>
           <strong>Users</strong> you can add,update and remove users
