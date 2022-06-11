@@ -177,6 +177,26 @@ const getAllRestaurants = (req, res) => {
   });
 };
 
+const editUser = (req, res) => {
+  const { firstName, lastName, email, password, role_id, gender, userId } = req.body;
+  const data = [firstName, lastName, email, password, role_id, gender, userId];
+  const query =
+    "UPDATE users SET firstName=?,lastName=?,email:?,password:?,role_id=?,gender=? WHERE id=? ";
+    connection.query(query,data,(err,result)=>{
+      if (err) {
+        return res.status(500).json({
+          success: false,
+          massage: "Server Error",
+          err,
+        });
+      }
+  
+      res.status(200).json({
+        success: true,
+        massage: "User Updated",
+      });
+    })
+};
 module.exports = {
   createOwner,
   deleteOwner,
@@ -185,4 +205,5 @@ module.exports = {
   getAllUsers,
   getAllOwners,
   getAllRestaurants,
+  editUser
 };
