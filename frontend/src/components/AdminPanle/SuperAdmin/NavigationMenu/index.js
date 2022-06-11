@@ -8,9 +8,8 @@ import react, { useEffect, useState } from "react";
 import { SuperAdmin } from "../../../../controllers/superAdmin";
 import { setRequests, setUsers } from "../../../../redux/reducers/superAdmin";
 
-export const NavigationMenu = () => {
+export const NavigationMenu = ({setIsUsersShown}) => {
   const dispatch = useDispatch();
-  const [showMenu, setShowMenu] = useState(true);
   const { superAdminPanel, auth } = useSelector((state) => {
     return state;
   });
@@ -49,7 +48,11 @@ export const NavigationMenu = () => {
       <div id="user-management-div">
         <h4>User Management</h4>
       </div>
-      {menuButton({ text: "Users", icon: <HiUsers />, onClick: () => {} })}
+      {menuButton({ text: "Users", icon: <HiUsers />, onClick: async () => {
+        const {users} = await SuperAdmin.getAllUsers({token:auth.token});
+        setIsUsersShown(true);
+        dispatch(setUsers(users))
+      } })}
       {menuButton({
         text: "Requests",
         icon: <BiGitPullRequest />,

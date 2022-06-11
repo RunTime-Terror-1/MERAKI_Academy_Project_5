@@ -10,7 +10,7 @@ import { NavigationBarPanel } from "./NavigationBar";
 export const SuperAdminPanel = () => {
   const dispatch = useDispatch();
   const [hideMenu,setHideMenu] = useState(false);
-  const [isUsersShown, setIsUsersShown] = useState(true);
+  const [isUsersShown, setIsUsersShown] = useState(false);
   const { superAdminPanel } = useSelector((state) => {
     return state;
   });
@@ -21,18 +21,18 @@ export const SuperAdminPanel = () => {
         token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInJvbGVJZCI6MSwiY2FydElkIjozLCJpYXQiOjE2NTQ0NTYzMTZ9.k_orJs2F3mmDFmCm6UVE7nK4HuzTc9tRorjl7hYQ4ew`,
       });
 
-      dispatch(setRequests(usersResponse.requests));
+      dispatch(setRequests([...usersResponse.requests]));
     })();
   }, []);
 
   return (
     <div style={{ width: "100vw", display: "flex" }}>
-      {hideMenu?<NavigationMenu />:<></>}
+      {hideMenu?<NavigationMenu setIsUsersShown={setIsUsersShown} />:<></>}
       <div style={{ color: "red", width: "100%" }}>
         <NavigationBarPanel setHideMenu={setHideMenu} hideMenu={hideMenu}/>
         {isUsersShown
           ? <Users/>
-          :< Requests/>}
+          :<Requests/>} 
       </div>
     </div>
   );

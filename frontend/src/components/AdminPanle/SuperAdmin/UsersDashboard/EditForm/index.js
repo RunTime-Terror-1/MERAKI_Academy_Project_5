@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setIsSignUpFormShown } from "../../../../../redux/reducers/auth";
 import { SuperAdmin } from "../../../../../controllers/superAdmin";
 export const EditForm = ({ user = {}, setIsEditFormShown }) => {
-console.log(user);
+
   const [firstName, setFirstName] = useState(`${user.firstName}`);
   const [lastName, setLastName] = useState(user.lastName);
   const [gender, setGender] = useState(user.gender);
@@ -99,7 +99,6 @@ console.log(user);
       setErrors(errors);
     }
   };
-  console.log(firstName);
   return (
     <div id="signup-form">
       {isDialogShown ? (
@@ -116,7 +115,7 @@ console.log(user);
         <div id="signup--exit-button">
           <button
             onClick={() => {
-              dispatch(setIsSignUpFormShown());
+              setIsEditFormShown(false)
             }}
           >
             X
