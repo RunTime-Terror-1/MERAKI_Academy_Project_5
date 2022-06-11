@@ -15,6 +15,7 @@ const superAdminReducer = createSlice({
     setUsers: (state, action) => {
       state.users= action.payload;
     },
+    
   },
 });
 

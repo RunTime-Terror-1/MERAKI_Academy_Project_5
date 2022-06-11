@@ -11,6 +11,7 @@ export const Users = () => {
   const [isRegisterShown, setIsRegisterShown] = useState(false);
   const [isEditFormShown, setIsEditFormShown] = useState(false);
   const [isDeleteDialogShown, setIsDeleteDialogShown] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState({});
 
   const [currentUser, setCurrentUser] = useState({});
 
@@ -21,13 +22,13 @@ export const Users = () => {
   useEffect(() => {
     (async () => {
       const data = await SuperAdmin.getAllUsers({ token: auth.token });
-      dispatch(setUsers(data.users));
+      dispatch(setUsers([...data.users]));
     })();
   }, []);
   const createButton = ({ onClick, text }) => {
     return <button onClick={onClick}>{text}</button>;
   };
-  const createRow = (user) => {
+  const createRow = (user, index) => {
     return (
       <div className="user-row" key={user.id + user.email}>
         <h4>{user.id}</h4>
@@ -38,28 +39,52 @@ export const Users = () => {
         <div id="edit-btns-div">
           {createButton({
             onClick: () => {
+              setCurrentIndex(index);
               setIsEditFormShown(true);
               setCurrentUser(user);
             },
             text: "Edit",
           })}
-          {createButton({ onClick: () => {}, text: "Delete" })}
+          {createButton({
+            onClick: () => {
+              setCurrentUser(user);
+              setIsDeleteDialogShown(true);
+              setCurrentIndex(index);
+            },
+            text: "Delete",
+          })}
         </div>
       </div>
     );
   };
 
-  const deleteDialog = ({title,text}) => {
+  const deleteDialog = ({ title, text }) => {
     return (
-      <div>
-        <div>
+      <div id="delete-pop">
+        <div id="inner-delete-pop">
           <h3>{title}</h3>
           <p>{text}</p>
           <div id="edit-btns-div">
-          {createButton({text:"Yes",onClick:async()=>{
-            await SuperAdmin.deleteUser({})
-          }})}
-          {createButton({text:"Cancel",onClick:()=>{}})}
+            {createButton({
+              text: "Yes",
+              onClick: async () => {
+                // await SuperAdmin.deleteUser({
+                //   id: currentUser.id,
+                //   token: auth.token,
+                // });
+                // console.log(superAdminPanel.users,currentIndex);
+                superAdminPanel.users.splice(currentIndex,1)
+                // dispatch(setUsers(superAdminPanel.users))
+                console.log(superAdminPanel.users);
+                setIsDeleteDialogShown(false);
+              },
+            })}
+            {createButton({
+              text: "Cancel",
+              onClick: () => {
+                setIsDeleteDialogShown(false);
+              },
+            })}
           </div>
         </div>
       </div>
@@ -80,7 +105,14 @@ export const Users = () => {
       ) : (
         <></>
       )}
-    {isDeleteDialogShown?deleteDialog({text:"User will be deleted, Are you sure?",title:"Delete User"}):<></>}
+      {isDeleteDialogShown ? (
+        deleteDialog({
+          text: "User will be deleted, Are you sure?",
+          title: "Delete User",
+        })
+      ) : (
+        <></>
+      )}
       <div id="adduser-div">
         <p>
           <strong>Users</strong> you can add,update and remove users
@@ -106,8 +138,8 @@ export const Users = () => {
           <h4>ACTIONS</h4>
         </div>
         {superAdminPanel.users.length ? (
-          superAdminPanel.users.map((user) => {
-            return createRow(user);
+          superAdminPanel.users.map((user, index) => {
+            return createRow(user, index);
           })
         ) : (
           <></>

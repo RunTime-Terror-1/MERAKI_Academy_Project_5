@@ -21,7 +21,7 @@
   height: 30px;
   border-radius: 50%;
 }
-#adduser-div{
+#adduser-div {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -30,7 +30,7 @@
   padding: 2px;
 }
 
-#adduser-div button{
+#adduser-div button {
   color: black;
   text-align: start;
   padding: 4px;
@@ -47,8 +47,7 @@
   background-color: rgb(42, 165, 126);
 }
 
-
-.user-dashboard{
+.user-dashboard {
   background-color: rgba(18, 59, 77, 0.915);
   border: 2px solid black;
   margin-left: 1px;
@@ -83,15 +82,35 @@
   color: white;
   font-size: 90%;
   cursor: pointer;
-
 }
 #edit-btns-div button:hover {
   background-color: rgb(42, 165, 126);
 }
 
-
-#dash-title-div{
-  background-color:rgb(34, 35, 36);
-  color:white;
+#dash-title-div {
+  background-color: rgb(34, 35, 36);
+  color: white;
   box-shadow: 2px 2px 2px 2px rgba(11, 11, 11, 0.999);
 }
+#delete-pop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  text-align: start;
+  color: white;
+  background-color: rgba(255, 253, 251, 0.358);
+}
+#inner-delete-pop{
+height:fit-content;
+width: 300px;
+padding: 10px;
+border-radius: 10px;
+background-color: rgb(34, 35, 36);
+}
+
+#inner-delete-pop button{
+  margin-top: 16px;
+  }
