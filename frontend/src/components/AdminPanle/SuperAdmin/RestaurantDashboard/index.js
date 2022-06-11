@@ -11,11 +11,9 @@ import "./style.css";
 export const Restaurants = () => {
   const dispatch = useDispatch();
   const [isDeleteDialogShown, setIsDeleteDialogShown] = useState(false);
-  const [isAcceptDialogShown, setIsAcceptDialogShown] = useState(false);
-
   const [currentIndex, setCurrentIndex] = useState({});
 
-  const [currentRequest, setCurrentRequest] = useState({});
+  const [currentRestaurant, setCurrentRestaurant] = useState({});
 
   const { superAdminPanel, auth } = useSelector((state) => {
     return state;
@@ -42,7 +40,7 @@ export const Restaurants = () => {
         <div id="edit-btns-div">
           {createButton({
             onClick: async () => {
-              setCurrentRequest(restaurant);
+              setCurrentRestaurant(restaurant);
               setIsDeleteDialogShown(true);
               setCurrentIndex(index);
             },
@@ -53,20 +51,16 @@ export const Restaurants = () => {
     );
   };
 
-  const updateUser = async (state) => {
-    await SuperAdmin.acceptRequest({
-      requestId: currentRequest.id,
-      state: state,
+  const updateRestaurant = async () => {
+    await SuperAdmin.deleteRestaurant({
+      id:currentRestaurant.id,
       token: auth.token,
     });
-    const requests = [...superAdminPanel.requests];
-    requests[currentIndex] = {
-      ...requests[currentIndex],
-      state: state,
-    };
-    dispatch(setRequests(requests));
+    const restaurants = [...superAdminPanel.restaurants]
+    restaurants.splice(currentIndex,1)
+    dispatch(setRequests(restaurants));
   };
-  const deleteDialog = ({ title, text, state }) => {
+  const deleteDialog = ({ title, text }) => {
     return (
       <div id="delete-pop">
         <div id="inner-delete-pop">
@@ -76,27 +70,15 @@ export const Restaurants = () => {
             {createButton({
               text: "Yes",
               onClick: async () => {
-                updateUser(state);
+                updateRestaurant();
                 setIsDeleteDialogShown(false);
-                setIsAcceptDialogShown(false);
               },
             })}
             {createButton({
               text: "Cancel",
               onClick: async () => {
-                await SuperAdmin.acceptRequest({
-                  requestId: currentRequest.id,
-                  state: "Accepted",
-                  token: auth.token,
-                });
-                const requests = [...superAdminPanel.requests];
-                requests[currentIndex] = {
-                  ...requests[currentIndex],
-                  state: "Accepted",
-                };
-                dispatch(setRequests(requests));
+                dispatch(setRequests([...superAdminPanel.restaurants]));
                 setIsDeleteDialogShown(false);
-                setIsAcceptDialogShown(false);
               },
             })}
           </div>
