@@ -89,7 +89,7 @@ const RestaurantPage = () => {
   console.log(restaurant)
 
   return (<div className="RestaurantPage">
-    <div>{<NavBar />}</div>
+    <div className='NavBarHere'>{<NavBar />}</div>
 
 
     <div className='Allinformation_One' >
@@ -112,21 +112,32 @@ const RestaurantPage = () => {
 
     </div>
 
-
-
-    <div className='Allinformation_Two'>
-
-      <div className='All_Two_categore_Cat'>
+    <div className='All_Two_categore'>
         <h1>categories</h1>
-        <div className='All_Two-categore_map'>{categories ? categories.map((element, index) => {
+        <div className='Two-categore_map'>{categories ? categories.map((element, index) => {
           return (<div className='All_Two-categore_map_return' key={index}>
-            <a href={"#" + index} className="a_atAll">{element}</a>
+            <a  href={"#" + index} className="a_atAll">{element}</a>
 
           </div>)
         }) : <></>}</div>
 
 
       </div>
+
+
+    <div className='Allinformation_Two'>
+{/* 
+      <div className='All_Two_categore_Cat'>
+        <h1>categories</h1>
+        <div className='All_Two-categore_map'>{categories ? categories.map((element, index) => {
+          return (<div className='All_Two-categore_map_return' key={index}>
+            <a  href={"#" + index} className="a_atAll">{element}</a>
+
+          </div>)
+        }) : <></>}</div>
+
+
+      </div> */}
 
 
 
@@ -139,8 +150,18 @@ const RestaurantPage = () => {
             return (<div className='div_Mallloop_2'>
               <div className='imgbox'> <img className='eachMealimg' src={elementMall.imgUrl} /></div>
               <h1>{elementMall.name}</h1>
-              <BsPlusCircleFill className='PluseIcone'/>
-              <button
+              <BsPlusCircleFill className='PluseIcone'
+               onClick={() => {
+                console.log(elementMall)
+                dispatch(setCart({ items: elementMall }))
+                dispatch(setPrice({ price: elementMall.price, indexitem: elementMall.id }))
+
+                dispatch(setTotal({ opr: "+", value: elementMall.price }));
+                console.log("44")
+                console.log(cart)
+              } } 
+              />
+              {/* <button
                 onClick={() => {
                   console.log(elementMall)
                   dispatch(setCart({ items: elementMall }))
@@ -149,9 +170,8 @@ const RestaurantPage = () => {
                   dispatch(setTotal({ opr: "+", value: elementMall.price }));
                   console.log("44")
                   console.log(cart)
-                }
-
-                } >add to cart</button>
+                } } 
+                >add to cart</button> */}
 
             </div>)
 
