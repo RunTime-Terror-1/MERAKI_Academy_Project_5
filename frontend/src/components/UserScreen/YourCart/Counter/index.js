@@ -3,6 +3,8 @@ import React, { useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCart, setPrice ,setsumPriceUser,setTotal} from '../../../../redux/reducers/User';
 
+import{BiArrowToTop,BiChevronDownCirc,BiArrowToBottom} from "react-icons/bi";
+
 
 const Counter = ({ element}) => {
 
@@ -39,19 +41,28 @@ const Counter = ({ element}) => {
 
 
     return (<div className="div_yourCounter">
-
-        <h4 onClick={() => {nextPrice();
-        dispatch(setPrice({ price:(realPrice*priceNumber)+realPrice,indexitem:element.id}));
-        dispatch(setTotal({opr:"+",value:realPrice}));
-        }}>+</h4>
+         <div className='Number_controlee'>
+          <BiArrowToTop  
+           onClick={() => {nextPrice();
+            dispatch(setPrice({ price:(realPrice*priceNumber)+realPrice,indexitem:element.id}));
+            dispatch(setTotal({opr:"+",value:realPrice}));
+            }}
+          />
+         
         <h5>{priceNumber}</h5>
-        <h5 onClick={() => { prevPrice() 
-        dispatch(setPrice({ price:(realPrice*priceNumber)-realPrice,indexitem:element.id}));
-        dispatch(setTotal({opr:"-",value:realPrice}));
-        }} >-</h5>
-        <h3>{element.name}</h3 >
-        <h5>{realPrice* priceNumber}</h5>
+        < BiArrowToBottom
+        
+         onClick={() => { prevPrice() 
+            dispatch(setPrice({ price:(realPrice*priceNumber)-realPrice,indexitem:element.id}));
+            dispatch(setTotal({opr:"-",value:realPrice}));
+            }} 
+        />
+     
 
+       
+         </div>
+         <h3>{element.name}</h3 >
+        <h5>{realPrice* priceNumber}</h5>
 
         <h5 onClick={() => {
             dispatch(deleteCart({ id: element.id }))

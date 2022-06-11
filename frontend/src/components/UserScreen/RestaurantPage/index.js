@@ -112,21 +112,11 @@ const RestaurantPage = () => {
 
     </div>
 
-    <div className='All_Two_categore'>
-        <h1 className='test_categories'>categories</h1>
-        <div className='Two-categore_map'>{categories ? categories.map((element, index) => {
-          return (<div className='All_Two-categore_map_return' key={index}>
-            <a  href={"#"+index+"1"} className="a_atAll">{element}</a>
-
-          </div>)
-        }) : <></>}</div>
-
-       <h1 className='h1_YourCart'>Your cart</h1>
-      </div>
+    
 
 
     <div className='Allinformation_Two'>
-{/* 
+
       <div className='All_Two_categore_Cat'>
         <h1>categories</h1>
         <div className='All_Two-categore_map'>{categories ? categories.map((element, index) => {
@@ -137,7 +127,7 @@ const RestaurantPage = () => {
         }) : <></>}</div>
 
 
-      </div> */}
+      </div>
 
 
 
