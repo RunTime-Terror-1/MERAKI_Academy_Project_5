@@ -121,9 +121,10 @@ const getAllOwners = (req, res) => {
 };
 
 const acceptRequest = (req, res) => {
-  const { id, state } = req.body;
+  console.log(req.body);
+  const { requestId, state } = req.body;
   const query = `UPDATE requests  SET state =? WHERE id=?`;
-  connection.query(query, [state, id], (err, result) => {
+  connection.query(query, [state, requestId], (err, result) => {
     if (err) {
       return res.status(500).json({
         success: false,
@@ -135,6 +136,7 @@ const acceptRequest = (req, res) => {
     res.status(200).json({
       success: true,
       massage: "Request State Change",
+      result
     });
   });
 };

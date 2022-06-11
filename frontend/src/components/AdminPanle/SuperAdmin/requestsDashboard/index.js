@@ -1,13 +1,13 @@
 import react, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SuperAdmin } from "../../../../controllers/superAdmin";
-import { setUsers } from "../../../../redux/reducers/superAdmin";
+import { setRequests, setUsers } from "../../../../redux/reducers/superAdmin";
 import "./style.css";
 import { RegisterComponent } from "../../../Registration/Register";
 
 export const Requests = () => {
   const dispatch = useDispatch();
-  
+
   const [isDeleteDialogShown, setIsDeleteDialogShown] = useState(false);
   const [currentIndex, setCurrentIndex] = useState({});
 
@@ -20,7 +20,7 @@ export const Requests = () => {
   useEffect(() => {
     (async () => {
       const data = await SuperAdmin.getAllRequests({ token: auth.token });
-      dispatch(setUsers([...data.requests]));
+      dispatch(setRequests([...data.requests]));
     })();
   }, []);
   const createButton = ({ onClick, text }) => {
@@ -43,12 +43,12 @@ export const Requests = () => {
             text: "Accept",
           })}
           {createButton({
-            onClick: () => {
+            onClick: async () => {
               setCurrentRequest(request);
               setIsDeleteDialogShown(true);
               setCurrentIndex(index);
             },
-            text: "Remove",
+            text: "Reject",
           })}
         </div>
       </div>
@@ -65,13 +65,17 @@ export const Requests = () => {
             {createButton({
               text: "Yes",
               onClick: async () => {
-                await SuperAdmin.deleteUser({
-                  id: currentRequest.id,
+                await SuperAdmin.acceptRequest({
+                  requestId: currentRequest.id,
+                  state: "Rejected",
                   token: auth.token,
                 });
-                const users = [...superAdminPanel.users];
-                users.splice(currentIndex, 1);
-                dispatch(setUsers(users));
+                const requests = await [...superAdminPanel.requests];
+                requests[currentIndex] = {
+                  ...requests[currentIndex],
+                  state: "Rejected",
+                };
+                dispatch(setRequests(requests));
                 setIsDeleteDialogShown(false);
               },
             })}
@@ -90,13 +94,12 @@ export const Requests = () => {
     <div>
       {isDeleteDialogShown ? (
         deleteDialog({
-          text: "User will be deleted, Are you sure?",
-          title: "Delete User",
+          text: "Request will be rejected, Are you sure?",
+          title: "Reject Request",
         })
       ) : (
         <></>
       )}
-      
 
       <div className="user-dashboard" style={{ marginTop: "5px" }}>
         <div id="dash-title-div" className="user-row">
@@ -107,9 +110,9 @@ export const Requests = () => {
           <h4>{"restaurant".toUpperCase()}</h4>
           <h4>ACTIONS</h4>
         </div>
-        {superAdminPanel.users.length ? (
-          superAdminPanel.users.map((user, index) => {
-            return createRow(user, index);
+        {superAdminPanel.requests.length ? (
+          superAdminPanel.requests.map((request, index) => {
+            return createRow(request, index);
           })
         ) : (
           <></>
@@ -118,4 +121,3 @@ export const Requests = () => {
     </div>
   );
 };
-
