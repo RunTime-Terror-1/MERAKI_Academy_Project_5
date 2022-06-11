@@ -68,14 +68,13 @@ export const Users = () => {
             {createButton({
               text: "Yes",
               onClick: async () => {
-                // await SuperAdmin.deleteUser({
-                //   id: currentUser.id,
-                //   token: auth.token,
-                // });
-                // console.log(superAdminPanel.users,currentIndex);
-                superAdminPanel.users.splice(currentIndex,1)
-                // dispatch(setUsers(superAdminPanel.users))
-                console.log(superAdminPanel.users);
+                await SuperAdmin.deleteUser({
+                  id: currentUser.id,
+                  token: auth.token,
+                });
+                const users = [...superAdminPanel.users];
+                users.splice(currentIndex, 1);
+                dispatch(setUsers(users));
                 setIsDeleteDialogShown(false);
               },
             })}
