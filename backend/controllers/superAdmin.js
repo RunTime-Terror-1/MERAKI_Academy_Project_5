@@ -44,9 +44,9 @@ const deleteUser = async (req, res) => {
 };
 const getAllRequests = (req, res) => {
   const query =
-    "SELECT firstName,lastName,restaurantName,state, email, requests.id  FROM users INNER JOIN requests ON requests.owner_id =users.id ";
+    "SELECT firstName,lastName,restaurantName,state, email, requests.id  FROM users INNER JOIN requests ON requests.owner_id =users.id AND  requests.state=? ";
 
-  connection.query(query, [], (err, result) => {
+  connection.query(query, ["In Progress"], (err, result) => {
     if (err) {
       return res.status(500).json({
         success: false,
@@ -121,7 +121,6 @@ const getAllOwners = (req, res) => {
 };
 
 const acceptRequest = (req, res) => {
-  console.log(req.body);
   const { requestId, state } = req.body;
   const query = `UPDATE requests  SET state =? WHERE id=?`;
   connection.query(query, [state, requestId], (err, result) => {

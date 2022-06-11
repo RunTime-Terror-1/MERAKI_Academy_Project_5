@@ -50,18 +50,26 @@ export const NavigationMenu = ({setIsUsersShown}) => {
       </div>
       {menuButton({ text: "Users", icon: <HiUsers />, onClick: async () => {
         const {users} = await SuperAdmin.getAllUsers({token:auth.token});
-        setIsUsersShown(true);
+        setIsUsersShown(0);
         dispatch(setUsers(users))
       } })}
       {menuButton({
         text: "Requests",
         icon: <BiGitPullRequest />,
-        onClick: () => {},
+        onClick:async () => {
+          const {requests} = await SuperAdmin.getAllRequests({token:auth.token});
+          setIsUsersShown(1);
+          dispatch(setRequests(requests))
+        },
       })}
       {menuButton({
         text: "Restaurants",
         icon: <MdFastfood />,
-        onClick: () => {},
+        onClick: async () => {
+          const {restaurants} = await SuperAdmin.getAllRestaurants({token:auth.token});
+          setIsUsersShown(2);
+          dispatch(setRequests(restaurants))
+        },
       })}
       <button id="logout-btn">
         <div id="logout-div">

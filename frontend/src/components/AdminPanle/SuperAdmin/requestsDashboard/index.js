@@ -9,6 +9,7 @@ export const Requests = () => {
   const dispatch = useDispatch();
   const [isDeleteDialogShown, setIsDeleteDialogShown] = useState(false);
   const [isAcceptDialogShown, setIsAcceptDialogShown] = useState(false);
+
   const [currentIndex, setCurrentIndex] = useState({});
 
   const [currentRequest, setCurrentRequest] = useState({});
@@ -34,7 +35,7 @@ export const Requests = () => {
         <h4>{request.email}</h4>
         <h4>{request.state}</h4>
         <h4>{request.restaurantName}</h4>
-        <div id="edit-btns-div">
+        {request.state === "In Progress"?<div id="edit-btns-div">
           {createButton({
             onClick: () => {
               setCurrentIndex(index);
@@ -51,7 +52,7 @@ export const Requests = () => {
             },
             text: "Reject",
           })}
-        </div>
+        </div>:<></>}
       </div>
     );
   };

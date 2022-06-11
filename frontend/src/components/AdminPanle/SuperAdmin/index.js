@@ -10,7 +10,7 @@ import { NavigationBarPanel } from "./NavigationBar";
 export const SuperAdminPanel = () => {
   const dispatch = useDispatch();
   const [hideMenu,setHideMenu] = useState(false);
-  const [isUsersShown, setIsUsersShown] = useState(false);
+  const [isUsersShown, setIsUsersShown] = useState(3);
   const { superAdminPanel } = useSelector((state) => {
     return state;
   });
@@ -30,9 +30,9 @@ export const SuperAdminPanel = () => {
       {hideMenu?<NavigationMenu setIsUsersShown={setIsUsersShown} />:<></>}
       <div style={{ color: "red", width: "100%" }}>
         <NavigationBarPanel setHideMenu={setHideMenu} hideMenu={hideMenu}/>
-        {isUsersShown
+        {isUsersShown === 0
           ? <Users/>
-          :<Requests/>} 
+          :(isUsersShown === 1?<Requests/>:<></>)} 
       </div>
     </div>
   );
