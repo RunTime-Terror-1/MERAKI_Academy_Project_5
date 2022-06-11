@@ -2,17 +2,14 @@ import react, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SuperAdmin } from "../../../../controllers/superAdmin";
 import { setUsers } from "../../../../redux/reducers/superAdmin";
-import { CreateOwnerDialog } from "./CreateOwner";
 import "./style.css";
+import { RegisterComponent } from "../../../Registration/Register";
 
 export const Users = () => {
   const dispatch = useDispatch();
   const [isRegisterShown, setIsRegisterShown] = useState(false);
-  const { superAdminPanel } = useSelector((state) => {
-    return state;
-  });
 
-  const { auth } = useSelector((state) => {
+  const { superAdminPanel, auth } = useSelector((state) => {
     return state;
   });
 
@@ -27,27 +24,48 @@ export const Users = () => {
   };
   const createRow = (user) => {
     return (
-      <div id="user-row">
+      <div className="user-row" key={user.id + user.email}>
         <h4>{user.id}</h4>
         <h4>{user.firstName + " " + user.lastName}</h4>
         <h4>{user.email}</h4>
         <h4>{user.role}</h4>
         <h4>{"user.lastLogin"}</h4>
         <div id="edit-btns-div">
-          {createButton({ onClick: () => {}, text: "Delete" })}
           {createButton({ onClick: () => {}, text: "Edit" })}
+          {createButton({ onClick: () => {}, text: "Delete" })}
         </div>
       </div>
     );
   };
+
   return (
     <div>
-      <p>
-        <strong>Users</strong> you can add,update and remove users
-      </p>
-      <button> + Users</button>
-      <div style={{ marginTop: "5px"}}>
-        <div id="user-row"  style={{backgroundColor:"rgb(34, 35, 36)",color:"white"}} >
+      {isRegisterShown ? (
+        <RegisterComponent
+          superAdminRegister={true}
+          setIsRegisterShown={setIsRegisterShown}
+        />
+      ) : (
+        <></>
+      )}
+      <div id="adduser-div">
+        <p>
+          <strong>Users</strong> you can add,update and remove users
+        </p>
+       
+          <button
+            onClick={() => {
+              setIsRegisterShown(true);
+            }}
+          >
+            {" "}
+            + Users
+          </button>
+        
+      </div>
+
+      <div className="user-dashboard" style={{ marginTop: "5px" }}>
+        <div id="dash-title-div" className="user-row">
           <h4>ID</h4>
           <h4>NAME</h4>
           <h4>EMAIL</h4>

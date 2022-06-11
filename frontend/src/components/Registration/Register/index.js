@@ -6,11 +6,12 @@ import "./style.css";
 import { Gender } from "./GenderDiv";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsSignUpFormShown } from "../../../redux/reducers/auth";
-export const RegisterComponent = () => {
+export const RegisterComponent = ({ superAdminRegister = false,setIsRegisterShown }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [gender, setGender] = useState(null);
   const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
   const [isDialogShown, setIsDialogShown] = useState("");
   let [errors, setErrors] = useState([]);
@@ -77,7 +78,14 @@ export const RegisterComponent = () => {
         lastName,
         email,
         password,
+        role
       });
+     /*   dispatch(setIsSignUpFormShown());
+              setIsRegisterShown(false)
+               */
+              if(){
+                
+              }
       serverError === "Email already taken"
         ? setErrors([...errors, "Email already taken"])
         : setIsDialogShown(true);
@@ -102,6 +110,7 @@ export const RegisterComponent = () => {
           <button
             onClick={() => {
               dispatch(setIsSignUpFormShown());
+              setIsRegisterShown(false)
             }}
           >
             X
@@ -138,6 +147,16 @@ export const RegisterComponent = () => {
           key: "Password",
           setState: setPassword,
         })}
+        {superAdminRegister ? (
+          createInput({
+            placeholder: "Role Id",
+            type: "number",
+            key: "number",
+            setState: setRole,
+          })
+        ) : (
+          <></>
+        )}
         <Gender setGender={setGender} errors={errors} setErrors={setErrors} />
         <ErrorsDiv errors={errors} />
         <div id="signup-button-div">
