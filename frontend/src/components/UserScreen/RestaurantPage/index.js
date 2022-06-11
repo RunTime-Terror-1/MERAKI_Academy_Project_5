@@ -5,7 +5,7 @@ import NavBar from '../NavBar';
 import YourCart from '../YourCart';
 import { setCart, setPrice } from '../../../redux/reducers/User';
 import { useDispatch, useSelector } from "react-redux";
-import SumPrice from './SumPrice';
+
 
 import { setTotal } from '../../../redux/reducers/User';
 
@@ -134,7 +134,7 @@ const RestaurantPage = () => {
       <div className='All_Two-menue'>  {arraydetials ? arraydetials.map((element, index) => {
         return (<div className='div_Mealloop_One'>
 
-          <h1 className='h1_category_Nameq' id={index+"1"}>{element.catoName}</h1>
+          <h1 className='h1_category_Nameq' id={index}>{element.catoName}</h1>
 
           <div className='div_Mealloop_1'>{element.mallloop ? element.mallloop.map((elementMall, index) => {
             return (<div className='div_Mallloop_2'>
@@ -175,7 +175,7 @@ const RestaurantPage = () => {
 
 
       <div className='All_Two_cart'> 
-      {/* <button> cart</button> */}
+      
 
 
         {<YourCart className="YourCartinRest" />}</div>

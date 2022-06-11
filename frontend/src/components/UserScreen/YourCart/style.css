@@ -1,5 +1,14 @@
-.div-Yourcart{
+
+.YourCartinRest{
     display: flex;
     flex-direction: column;
-    gap:20px
+    gap:20px;
+}
+
+.div-Yourcart{
+    height:100px;
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    border-bottom: 5px solid red;
 }

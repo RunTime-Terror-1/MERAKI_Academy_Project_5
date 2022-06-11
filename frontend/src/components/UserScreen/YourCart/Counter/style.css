@@ -2,9 +2,45 @@
     display: flex;
     flex-direction: row;
     gap:20px;
-    border-bottom:black
+  
+    /* background-color: rgb(235, 235, 235);
+     */
 };
+.returnDiv{
+    display: flex;
+    flex-direction: row;
+    background-color: brown;
+}
 .Number_controlee{
     display: flex;
     flex-direction: column;
+    
+};
+
+.Name_andP{
+    background-color: darkgreen;
+}
+.Name_andPrice{
+    display: flex;
+    /* flex-direction: column; */
+    gap:50px;
+    background-color: darkgreen;
+}
+
+.iconesCounter{
+    width:28px;
+    height: 28px;
+}
+
+.h3_price{
+    position: relative;
+    top:25px
+}
+.con{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    left:10px;
+    top:6px;
+    gap:16px;
 }
