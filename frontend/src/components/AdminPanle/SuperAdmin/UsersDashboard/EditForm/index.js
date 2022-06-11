@@ -1,21 +1,20 @@
 import React, { useContext, useState } from "react";
 import "./style.css";
-import { Registration } from "../../../controllers/registration";
-import { ErrorsDiv } from "./ErrorsDiv";
+import { Registration } from "../../../../../controllers/registration";
+import { ErrorsDiv } from "../../../../Registration/Register/ErrorsDiv";
 import "./style.css";
-import { Gender } from "./GenderDiv";
+import { Gender } from "./../../../../Registration/Register/GenderDiv";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsSignUpFormShown } from "../../../redux/reducers/auth";
-export const RegisterComponent = ({
-  superAdminRegister = false,
-  setIsRegisterShown,
-}) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [gender, setGender] = useState(null);
-  const [email, setEmail] = useState("");
-  const [role, setRole] = useState("");
-  const [password, setPassword] = useState("");
+import { setIsSignUpFormShown } from "../../../../../redux/reducers/auth";
+import { SuperAdmin } from "../../../../../controllers/superAdmin";
+export const EditForm = ({ user = {}, setIsEditFormShown }) => {
+
+  const [firstName, setFirstName] = useState(`${user.firstName}`);
+  const [lastName, setLastName] = useState(user.lastName);
+  const [gender, setGender] = useState(user.gender);
+  const [email, setEmail] = useState(user.email);
+  const [role_id, setRole] = useState(user.role_id);
+  const [password, setPassword] = useState(user.password);
   const [isDialogShown, setIsDialogShown] = useState("");
   let [errors, setErrors] = useState([]);
   const dispatch = useDispatch();
@@ -39,12 +38,19 @@ export const RegisterComponent = ({
       </div>
     );
   };
-  const createInput = ({ placeholder, setState, type = "text", key = "" }) => {
+  const createInput = ({
+    placeholder,
+    setState,
+    type = "text",
+    key = "",
+    name = "",
+  }) => {
     return (
       <div>
         <input
           type={type}
           placeholder={placeholder}
+          value={name}
           onChange={(e) => {
             setErrors(
               Registration.removeErrors({
@@ -62,7 +68,7 @@ export const RegisterComponent = ({
     );
   };
 
-  const signUp = async () => {
+  const updateUser = async () => {
     const inputForm = {
       FirstName: `${firstName} `,
       LastName: ` ${lastName}`,
@@ -76,21 +82,19 @@ export const RegisterComponent = ({
       inputForm: inputForm,
     });
     if (errors.length === 0) {
-      const serverError = await Registration.register({
+      const body = {
+        id:user.id,
         firstName,
         lastName,
         email,
         password,
-        role,
+        role_id,
+        gender,
+      };
+      const serverError = await SuperAdmin.updateUser({
+        user: body,
+        token: auth.token,
       });
-    
-      if (serverError === "Email already taken") {
-        setErrors([...errors, "Email already taken"]);
-      } else {
-        setIsDialogShown(true);
-        dispatch(setIsSignUpFormShown());
-        setIsRegisterShown(false);
-      }
     } else {
       setErrors(errors);
     }
@@ -111,15 +115,14 @@ export const RegisterComponent = ({
         <div id="signup--exit-button">
           <button
             onClick={() => {
-              dispatch(setIsSignUpFormShown());
-              setIsRegisterShown(false);
+              setIsEditFormShown(false)
             }}
           >
             X
           </button>
         </div>
 
-        <h1>Sign Up</h1>
+        <h1>Update </h1>
         <h4> it's quick and easy.</h4>
         <hr />
         <div id="register-username-div">
@@ -127,12 +130,14 @@ export const RegisterComponent = ({
             placeholder: "First Name",
             type: "text",
             key: "FirstName",
+            name: firstName,
             setState: setFirstName,
           })}
           {createInput({
             placeholder: "Last Name",
             type: "text",
             key: "LastName",
+            name: lastName,
             setState: setLastName,
           })}
         </div>
@@ -141,28 +146,28 @@ export const RegisterComponent = ({
           placeholder: "Email",
           type: "text",
           key: "Email",
+          name: email,
           setState: setEmail,
         })}
         {createInput({
           placeholder: "Password",
           type: "password",
           key: "Password",
+          name: password,
           setState: setPassword,
         })}
-        {superAdminRegister ? (
-          createInput({
-            placeholder: "Role Id",
-            type: "number",
-            key: "number",
-            setState: setRole,
-          })
-        ) : (
-          <></>
-        )}
+
+        {createInput({
+          placeholder: "Role Id",
+          type: "number",
+          key: "number",
+          name: role_id,
+          setState: setRole,
+        })}
         <Gender setGender={setGender} errors={errors} setErrors={setErrors} />
         <ErrorsDiv errors={errors} />
         <div id="signup-button-div">
-          <button onClick={signUp}>Sign Up</button>
+          <button onClick={updateUser}>Update</button>
         </div>
       </div>
     </div>

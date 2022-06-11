@@ -2,52 +2,133 @@ import react, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SuperAdmin } from "../../../../controllers/superAdmin";
 import { setUsers } from "../../../../redux/reducers/superAdmin";
-import { CreateOwnerDialog } from "./CreateOwner";
 import "./style.css";
+import { RegisterComponent } from "../../../Registration/Register";
+import { EditForm } from "./EditForm";
 
 export const Users = () => {
   const dispatch = useDispatch();
   const [isRegisterShown, setIsRegisterShown] = useState(false);
-  const { superAdminPanel } = useSelector((state) => {
-    return state;
-  });
+  const [isEditFormShown, setIsEditFormShown] = useState(false);
+  const [isDeleteDialogShown, setIsDeleteDialogShown] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState({});
 
-  const { auth } = useSelector((state) => {
+  const [currentUser, setCurrentUser] = useState({});
+
+  const { superAdminPanel, auth } = useSelector((state) => {
     return state;
   });
 
   useEffect(() => {
     (async () => {
       const data = await SuperAdmin.getAllUsers({ token: auth.token });
-      dispatch(setUsers(data.users));
+      dispatch(setUsers([...data.users]));
     })();
   }, []);
   const createButton = ({ onClick, text }) => {
     return <button onClick={onClick}>{text}</button>;
   };
-  const createRow = (user) => {
+  const createRow = (user, index) => {
     return (
-      <div id="user-row">
+      <div className="user-row" key={user.id + user.email}>
         <h4>{user.id}</h4>
         <h4>{user.firstName + " " + user.lastName}</h4>
         <h4>{user.email}</h4>
         <h4>{user.role}</h4>
         <h4>{"user.lastLogin"}</h4>
         <div id="edit-btns-div">
-          {createButton({ onClick: () => {}, text: "Delete" })}
-          {createButton({ onClick: () => {}, text: "Edit" })}
+          {createButton({
+            onClick: () => {
+              setCurrentIndex(index);
+              setIsEditFormShown(true);
+              setCurrentUser(user);
+            },
+            text: "Edit",
+          })}
+          {createButton({
+            onClick: () => {
+              setCurrentUser(user);
+              setIsDeleteDialogShown(true);
+              setCurrentIndex(index);
+            },
+            text: "Delete",
+          })}
+        </div>
+      </div>
+    );
+  };
+
+  const deleteDialog = ({ title, text }) => {
+    return (
+      <div id="delete-pop">
+        <div id="inner-delete-pop">
+          <h3>{title}</h3>
+          <p>{text}</p>
+          <div id="edit-btns-div">
+            {createButton({
+              text: "Yes",
+              onClick: async () => {
+                await SuperAdmin.deleteUser({
+                  id: currentUser.id,
+                  token: auth.token,
+                });
+                const users = [...superAdminPanel.users];
+                users.splice(currentIndex, 1);
+                dispatch(setUsers(users));
+                setIsDeleteDialogShown(false);
+              },
+            })}
+            {createButton({
+              text: "Cancel",
+              onClick: () => {
+                setIsDeleteDialogShown(false);
+              },
+            })}
+          </div>
         </div>
       </div>
     );
   };
   return (
     <div>
-      <p>
-        <strong>Users</strong> you can add,update and remove users
-      </p>
-      <button> + Users</button>
-      <div style={{ marginTop: "5px"}}>
-        <div id="user-row"  style={{backgroundColor:"rgb(34, 35, 36)",color:"white"}} >
+      {isRegisterShown ? (
+        <RegisterComponent
+          superAdminRegister={true}
+          setIsRegisterShown={setIsRegisterShown}
+        />
+      ) : (
+        <></>
+      )}
+      {isEditFormShown ? (
+        <EditForm setIsEditFormShown={setIsEditFormShown} user={currentUser} />
+      ) : (
+        <></>
+      )}
+      {isDeleteDialogShown ? (
+        deleteDialog({
+          text: "User will be deleted, Are you sure?",
+          title: "Delete User",
+        })
+      ) : (
+        <></>
+      )}
+      <div id="adduser-div">
+        <p>
+          <strong>Users</strong> you can add,update and remove users
+        </p>
+
+        <button
+          onClick={() => {
+            setIsRegisterShown(true);
+          }}
+        >
+          {" "}
+          + Users
+        </button>
+      </div>
+
+      <div className="user-dashboard" style={{ marginTop: "5px" }}>
+        <div id="dash-title-div" className="user-row">
           <h4>ID</h4>
           <h4>NAME</h4>
           <h4>EMAIL</h4>
@@ -56,8 +137,8 @@ export const Users = () => {
           <h4>ACTIONS</h4>
         </div>
         {superAdminPanel.users.length ? (
-          superAdminPanel.users.map((user) => {
-            return createRow(user);
+          superAdminPanel.users.map((user, index) => {
+            return createRow(user, index);
           })
         ) : (
           <></>

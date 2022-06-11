@@ -18,13 +18,30 @@ export class SuperAdmin {
       };
     }
   }
-  static async deleteOwner({ ownerId, restaurantName: name, token }) {
+  static async deleteUser({ id, token }) {
     try {
       const response = await axios.delete(
         `${hostUrl}/superAdmin/delete/owner`,
         {
           headers: { authorization: `Bearer ${token}` },
-          data: { ownerId, name },
+          data: { id },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return {
+        success: false,
+        error,
+      };
+    }
+  }
+  static async deleteRestaurant({ id, token }) {
+    try {
+      const response = await axios.delete(
+        `${hostUrl}/superAdmin/delete/restaurant`,
+        {
+          headers: { authorization: `Bearer ${token}` },
+          data: { id },
         }
       );
       return response.data;
@@ -108,6 +125,24 @@ export class SuperAdmin {
       return {
         success: true,
         massage: "Request State Change",
+      };
+    }
+  }
+
+  static async updateUser({ user, token }) {
+    try {
+      const response = await axios.put(
+        `${hostUrl}/superAdmin/update/user`,
+        {...user},
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return {
+        success:false,
+        massage: error,
       };
     }
   }

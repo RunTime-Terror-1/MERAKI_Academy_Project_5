@@ -15,7 +15,7 @@ export class Registration {
       return error.response.data;
     }
   }
-  static async register({ firstName, lastName, email, password, gender }) {
+  static async register({ firstName, lastName, email, password, gender,role=1 }) {
    
     try {
       const user = {
@@ -26,7 +26,7 @@ export class Registration {
         gender,
       };
 
-      const response = await axios.post(`${hostUrl}/register/1`, user);
+      const response = await axios.post(`${hostUrl}/register/${role}`, user);
       return response.data.message;
     } catch (error) {
       return error.response.data.message;
