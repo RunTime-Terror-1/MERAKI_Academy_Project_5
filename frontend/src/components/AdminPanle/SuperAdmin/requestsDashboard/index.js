@@ -7,8 +7,8 @@ import { RegisterComponent } from "../../../Registration/Register";
 
 export const Requests = () => {
   const dispatch = useDispatch();
-
   const [isDeleteDialogShown, setIsDeleteDialogShown] = useState(false);
+  const [isAcceptDialogShown, setIsAcceptDialogShown] = useState(false);
   const [currentIndex, setCurrentIndex] = useState({});
 
   const [currentRequest, setCurrentRequest] = useState({});
@@ -39,6 +39,7 @@ export const Requests = () => {
             onClick: () => {
               setCurrentIndex(index);
               setCurrentRequest(request);
+              setIsAcceptDialogShown(true);
             },
             text: "Accept",
           })}
@@ -55,7 +56,20 @@ export const Requests = () => {
     );
   };
 
-  const deleteDialog = ({ title, text }) => {
+  const updateUser = async (state) => {
+    await SuperAdmin.acceptRequest({
+      requestId: currentRequest.id,
+      state: state,
+      token: auth.token,
+    });
+    const requests = [...superAdminPanel.requests];
+    requests[currentIndex] = {
+      ...requests[currentIndex],
+      state: state,
+    };
+    dispatch(setRequests(requests));
+  };
+  const deleteDialog = ({ title, text,state }) => {
     return (
       <div id="delete-pop">
         <div id="inner-delete-pop">
@@ -65,24 +79,27 @@ export const Requests = () => {
             {createButton({
               text: "Yes",
               onClick: async () => {
-                await SuperAdmin.acceptRequest({
-                  requestId: currentRequest.id,
-                  state: "Rejected",
-                  token: auth.token,
-                });
-                const requests = await [...superAdminPanel.requests];
-                requests[currentIndex] = {
-                  ...requests[currentIndex],
-                  state: "Rejected",
-                };
-                dispatch(setRequests(requests));
+                updateUser(state)
                 setIsDeleteDialogShown(false);
+                setIsAcceptDialogShown(false);
               },
             })}
             {createButton({
               text: "Cancel",
-              onClick: () => {
+              onClick: async () => {
+                await SuperAdmin.acceptRequest({
+                  requestId: currentRequest.id,
+                  state: "Accepted",
+                  token: auth.token,
+                });
+                const requests = [...superAdminPanel.requests];
+                requests[currentIndex] = {
+                  ...requests[currentIndex],
+                  state: "Accepted",
+                };
+                dispatch(setRequests(requests));
                 setIsDeleteDialogShown(false);
+                setIsAcceptDialogShown(false);
               },
             })}
           </div>
@@ -96,11 +113,21 @@ export const Requests = () => {
         deleteDialog({
           text: "Request will be rejected, Are you sure?",
           title: "Reject Request",
+          state:"Rejected"
         })
       ) : (
         <></>
       )}
 
+      {isAcceptDialogShown ? (
+        deleteDialog({
+          text: "Request will be Accepted, Are you sure?",
+          title: "Accept Request",
+          state:"Accepted"
+        })
+      ) : (
+        <></>
+      )}
       <div className="user-dashboard" style={{ marginTop: "5px" }}>
         <div id="dash-title-div" className="user-row">
           <h4>ID</h4>
