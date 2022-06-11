@@ -134,15 +134,14 @@ const RestaurantPage = () => {
 
           <div className='div_Mealloop_1'>{element.mallloop ? element.mallloop.map((elementMall, index) => {
             return (<div className='div_Mallloop_2'>
-              <img className='eachMealimg' src={elementMall.imgUrl} />
+              <div className='imgbox'> <img className='eachMealimg' src={elementMall.imgUrl} /></div>
               <h1>{elementMall.name}</h1>
               <button
                 onClick={() => {
                   console.log(elementMall)
                   dispatch(setCart({ items: elementMall }))
                   dispatch(setPrice({ price: elementMall.price, indexitem: elementMall.id }))
-                  // setSumreal(elementMall.price)
-                  // dispatch(setsumPriceUser({id:1}))
+
                   dispatch(setTotal({ opr: "+", value: elementMall.price }));
                   console.log("44")
                   console.log(cart)
@@ -165,7 +164,7 @@ const RestaurantPage = () => {
 
 
         {<YourCart className="YourCartinRest" />}</div>
-        
+
     </div>
 
 

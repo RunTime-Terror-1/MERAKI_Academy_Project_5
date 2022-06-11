@@ -122,18 +122,29 @@
     gap: 20px;
 
 }
-
+.imgbox{
+    width: 15.1vw;
+    height: 30.1vh;
+    overflow: hidden;
+}
 .eachMealimg {
     width: 15vw;
     height: 30vh;
-
+transition:0.4s ease-in-out;
 }
 
+.imgbox:hover .eachMealimg{
+    transform: scale(1.1);
+}
+.div_Mallloop_2:hover.eachMealimg{
+    transform: scale(1.2);
+}
+/* 
 .eachMealimg {
     width: 15vw;
     height: 30vh;
     transform: scale(1.2);
-}
+} */
 
 .h1_category_Name {
     margin: 0%;
