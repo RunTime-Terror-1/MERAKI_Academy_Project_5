@@ -116,12 +116,12 @@ const RestaurantPage = () => {
         <h1>categories</h1>
         <div className='Two-categore_map'>{categories ? categories.map((element, index) => {
           return (<div className='All_Two-categore_map_return' key={index}>
-            <a  href={"#" + index} className="a_atAll">{element}</a>
+            <a  href={"#"+index+"1"} className="a_atAll">{element}</a>
 
           </div>)
         }) : <></>}</div>
 
-
+       <h1 className='h1_YourCart'>Your cart</h1>
       </div>
 
 
@@ -144,7 +144,7 @@ const RestaurantPage = () => {
       <div className='All_Two-menue'>  {arraydetials ? arraydetials.map((element, index) => {
         return (<div className='div_Mealloop_One'>
 
-          <h1 className='h1_category_Nameq' id={index}>{element.catoName}</h1>
+          <h1 className='h1_category_Nameq' id={index+"1"}>{element.catoName}</h1>
 
           <div className='div_Mealloop_1'>{element.mallloop ? element.mallloop.map((elementMall, index) => {
             return (<div className='div_Mallloop_2'>
@@ -184,7 +184,8 @@ const RestaurantPage = () => {
 
 
 
-      <div className='All_Two-cart'> <button> your cart</button>
+      <div className='All_Two_cart'> 
+      {/* <button> cart</button> */}
 
 
         {<YourCart className="YourCartinRest" />}</div>
