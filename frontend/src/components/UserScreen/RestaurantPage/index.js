@@ -113,7 +113,7 @@ const RestaurantPage = () => {
     </div>
 
     <div className='All_Two_categore'>
-        <h1>categories</h1>
+        <h1 className='test_categories'>categories</h1>
         <div className='Two-categore_map'>{categories ? categories.map((element, index) => {
           return (<div className='All_Two-categore_map_return' key={index}>
             <a  href={"#"+index+"1"} className="a_atAll">{element}</a>

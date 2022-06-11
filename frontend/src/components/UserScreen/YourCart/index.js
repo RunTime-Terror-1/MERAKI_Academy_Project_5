@@ -26,14 +26,6 @@ const YourCart = () => {
     //!..............................
     
  
-     
-//   useEffect(() => {
-//     Userinfor.yourPrice.reduce((acc, element, index) => {
-//         console.log(typeof element.price);
-//         return acc + Number(element.price)
-//     },0)
-//   }, [Userinfor.yourCart])
-
 
 
 
