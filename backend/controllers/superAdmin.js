@@ -1,6 +1,7 @@
 const connection = require("../models/db");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
+
 const createOwner = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
   const encryptedPassword = await bcrypt.hash(password, saltRounds);
@@ -189,6 +190,27 @@ const editUser = (req, res) => {
     });
   });
 };
+const deleteRestaurant = async (req, res) => {
+  const {id} = req.body;
+
+  const query = `UPDATE restaurants SET is_deleted=1 WHERE id=?`;
+
+  connection.query(query, [id], (err, result) => {
+    if (err) {
+      return res.status(409).json({
+        success: false,
+        massage: "Server Error",
+        err,
+      });
+    }
+    res.status(200).json({
+      success: true,
+      message: "Restaurant  Deleted Successfully",
+      results: result,
+    });
+  });
+};
+
 module.exports = {
   createOwner,
   deleteOwner: deleteUser,
@@ -198,4 +220,5 @@ module.exports = {
   getAllOwners,
   getAllRestaurants,
   editUser,
+  deleteRestaurant
 };

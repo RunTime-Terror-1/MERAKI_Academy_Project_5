@@ -35,6 +35,23 @@ export class SuperAdmin {
       };
     }
   }
+  static async deleteRestaurant({ id, token }) {
+    try {
+      const response = await axios.delete(
+        `${hostUrl}/superAdmin/delete/restaurant`,
+        {
+          headers: { authorization: `Bearer ${token}` },
+          data: { id },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return {
+        success: false,
+        error,
+      };
+    }
+  }
   static async getAllRequests({ token }) {
     try {
       const response = await axios.get(`${hostUrl}/superAdmin/requests`, {

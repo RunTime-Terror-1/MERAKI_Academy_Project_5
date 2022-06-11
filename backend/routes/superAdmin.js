@@ -9,6 +9,7 @@ const {
   getAllOwners,
   getAllRestaurants,
   editUser,
+  deleteRestaurant,
 } = require("../controllers/superAdmin");
 const authentication = require("../middlewares/authentication");
 const authorization = require("../middlewares/authorization");
@@ -28,6 +29,13 @@ superAdminRouter.delete(
   authentication,
   authorization("1"),
   deleteOwner
+);
+
+superAdminRouter.delete(
+  "/delete/restaurant",
+  authentication,
+  authorization("1"),
+  deleteRestaurant
 );
 
 //get
