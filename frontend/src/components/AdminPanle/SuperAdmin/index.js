@@ -5,8 +5,9 @@ import { setRequests, setUsers } from "../../../redux/reducers/superAdmin";
 import { NavigationMenu } from "./NavigationMenu";
 import "./style.css";
 import { Users } from "./UsersDashboard";
-import { Requests } from "./requestsDashboard";
+import { Requests } from "./RequestsDashboard";
 import { NavigationBarPanel } from "./NavigationBar";
+import { Restaurants } from "./RestaurantDashboard";
 export const SuperAdminPanel = () => {
   const dispatch = useDispatch();
   const [hideMenu,setHideMenu] = useState(false);
@@ -32,7 +33,7 @@ export const SuperAdminPanel = () => {
         <NavigationBarPanel setHideMenu={setHideMenu} hideMenu={hideMenu}/>
         {isUsersShown === 0
           ? <Users/>
-          :(isUsersShown === 1?<Requests/>:<></>)} 
+          :(isUsersShown === 1?<Requests/>:<Restaurants/>)} 
       </div>
     </div>
   );

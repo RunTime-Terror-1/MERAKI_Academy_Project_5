@@ -4,7 +4,7 @@ import { SuperAdmin } from "../../../../controllers/superAdmin";
 import { setRequests, setUsers } from "../../../../redux/reducers/superAdmin";
 import "./style.css";
 
-export const Requests = () => {
+export const Restaurants = () => {
   const dispatch = useDispatch();
   const [isDeleteDialogShown, setIsDeleteDialogShown] = useState(false);
   const [isAcceptDialogShown, setIsAcceptDialogShown] = useState(false);
@@ -19,8 +19,9 @@ export const Requests = () => {
 
   useEffect(() => {
     (async () => {
-      const data = await SuperAdmin.getAllRequests({ token: auth.token });
-      dispatch(setRequests([...data.requests]));
+      const data = await SuperAdmin.getAllRestaurants({ token: auth.token });
+      console.log(data);
+    //   dispatch(setRequests([...data.requests]));
     })();
   }, []);
   const createButton = ({ onClick, text }) => {
@@ -113,7 +114,7 @@ export const Requests = () => {
   };
   return (
     <div>
-      {isDeleteDialogShown ? (
+      {/* {isDeleteDialogShown ? (
         deleteDialog({
           text: "Request will be rejected, Are you sure?",
           title: "Reject Request",
@@ -148,7 +149,7 @@ export const Requests = () => {
         ) : (
           <></>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -142,7 +142,7 @@ const acceptRequest = (req, res) => {
 
 const getAllRestaurants = (req, res) => {
   const query =
-    "SELECT name,firstName,lastName,email,US.id,Logo FROM users  US INNER JOIN restaurants RS  ON US.id = RS.owner_Id AND RS.is_deleted = 0";
+    "SELECT email,firstName,lastName,name,orders,RS.id FROM users US INNER JOIN restaurants RS ON RS.is_deleted = 0 AND US.id=RS.owner_id";
   connection.query(query, [], (err, result) => {
     if (err) {
       return res.status(500).json({
