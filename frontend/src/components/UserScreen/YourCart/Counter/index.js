@@ -43,42 +43,45 @@ const Counter = ({ element }) => {
     return (<div className="div_yourCounter">
         <div className='con'>
 
-        <div className='Number_controlee'>
-            <BsPlusCircleFill className='iconesCounter'
-                onClick={() => {
-                    nextPrice();
-                    dispatch(setPrice({ price: (realPrice * priceNumber) + realPrice, indexitem: element.id }));
-                    dispatch(setTotal({ opr: "+", value: realPrice }));
-                }}
-            />
+            <div className='Number_controlee'>
+                <BsPlusCircleFill className='iconesCounter'
+                    onClick={() => {
+                        nextPrice();
+                        dispatch(setPrice({ price: (realPrice * priceNumber) + realPrice, indexitem: element.id }));
+                        dispatch(setTotal({ opr: "+", value: realPrice }));
+                    }}
+                />
 
-            <h2>{priceNumber}</h2>
-            < BsDashCircleFill className='iconesCounter'
+                <h2>{priceNumber}</h2>
+                < BsDashCircleFill className='iconesCounter'
 
+                    onClick={() => {
+                        prevPrice()
+                        dispatch(setPrice({ price: (realPrice * priceNumber) - realPrice, indexitem: element.id }));
+                        dispatch(setTotal({ opr: "-", value: realPrice }));
+                    }}
+                />
+
+            </div>
+
+
+            <div className='Name_andP' >
+                <h3>{element.name + "gggHddHHg"}</h3 >
+                <h3 className='h3_price'>{realPrice * priceNumber + "JD"}</h3></div>
+
+                
+            <div className='div_delete'> <AiTwotoneDelete className='deleteIcons'
                 onClick={() => {
-                    prevPrice()
-                    dispatch(setPrice({ price: (realPrice * priceNumber) - realPrice, indexitem: element.id }));
-                    dispatch(setTotal({ opr: "-", value: realPrice }));
+                    dispatch(deleteCart({ id: element.id }))
+                    console.log(element.id)
                 }}
-            />
+
+            /></div>
+
+
 
         </div>
 
-
-        <div className='Name_andP' >
-            <h3>{element.name + "gggHddHHg"}</h3 >
-            <h3 className='h3_price'>{realPrice * priceNumber+"JD"}</h3></div>
-
-        <AiTwotoneDelete onClick={() => {
-            dispatch(deleteCart({ id: element.id }))
-            console.log(element.id)
-        }}
-
-        />
-
-
-        </div>
-       
 
 
     </div>)

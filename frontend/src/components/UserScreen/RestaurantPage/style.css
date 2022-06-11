@@ -108,14 +108,15 @@
     width: 280px;
     height: 100vh;
     font-size: 80%;
-    background-color: crimson;
+    /* background-color: crimson; */
+    border-right: 3px solid rgb(214, 202, 202);
+
     overflow: hidden;
     display: flex;
     flex-direction: column;
     position: relative;
     left: 30px;
-    /* position: fixed; */
-
+  
     position: sticky;
     top: 0;
     z-index: 99;
@@ -142,7 +143,7 @@
     position: relative;
     /* left: 60px; */
 
-    background-color: aquamarine;
+    /* background-color: aquamarine; */
 }
 
 .div_Mealloop_1 {
@@ -237,19 +238,24 @@
     bottom: 25vh;
     position: sticky;
     top: 0;
+    border-left: 3px solid rgb(214, 202, 202);
 
 }
 
 
-/* ..     Counter Your cart.......*/
+/* ..     Counter Your cart........................*/
+
+
 .iconesCounter {
     width: 25px;
     height: 60px;
 }
 
 .Name_andP{
+    width:180px;
     gap: 30px;
-    background-color: darkgreen;
+
+    /* background-color: darkgreen; */
 }
 /*-----EEEend-----*/
 

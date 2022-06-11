@@ -24,14 +24,21 @@
     display: flex;
     /* flex-direction: column; */
     gap:50px;
-    background-color: darkgreen;
+  
 }
 
 .iconesCounter{
-    width:28px;
-    height: 28px;
+    width:23px;
+    height: 23px;
+    opacity:0.8;
 }
-
+.deleteIcons{
+    width:25px;
+    height: 25px; 
+    position: relative;
+    top:25px;
+    opacity:0.5;
+}
 .h3_price{
     position: relative;
     top:25px
