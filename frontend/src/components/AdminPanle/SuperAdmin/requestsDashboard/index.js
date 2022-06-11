@@ -7,12 +7,11 @@ import { RegisterComponent } from "../../../Registration/Register";
 
 export const Requests = () => {
   const dispatch = useDispatch();
-  const [isRegisterShown, setIsRegisterShown] = useState(false);
-  const [isEditFormShown, setIsEditFormShown] = useState(false);
+  
   const [isDeleteDialogShown, setIsDeleteDialogShown] = useState(false);
   const [currentIndex, setCurrentIndex] = useState({});
 
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentRequest, setCurrentRequest] = useState({});
 
   const { superAdminPanel, auth } = useSelector((state) => {
     return state;
@@ -28,7 +27,6 @@ export const Requests = () => {
     return <button onClick={onClick}>{text}</button>;
   };
   const createRow = (request, index) => {
-    console.log(request);
     return (
       <div className="user-row" key={request.id + request.email}>
         <h4>{request.id}</h4>
@@ -40,18 +38,17 @@ export const Requests = () => {
           {createButton({
             onClick: () => {
               setCurrentIndex(index);
-              setIsEditFormShown(true);
-              setCurrentUser(request);
+              setCurrentRequest(request);
             },
-            text: "Edit",
+            text: "Accept",
           })}
           {createButton({
             onClick: () => {
-              setCurrentUser(request);
+              setCurrentRequest(request);
               setIsDeleteDialogShown(true);
               setCurrentIndex(index);
             },
-            text: "Delete",
+            text: "Remove",
           })}
         </div>
       </div>
@@ -69,7 +66,7 @@ export const Requests = () => {
               text: "Yes",
               onClick: async () => {
                 await SuperAdmin.deleteUser({
-                  id: currentUser.id,
+                  id: currentRequest.id,
                   token: auth.token,
                 });
                 const users = [...superAdminPanel.users];
@@ -91,15 +88,6 @@ export const Requests = () => {
   };
   return (
     <div>
-      {isRegisterShown ? (
-        <RegisterComponent
-          superAdminRegister={true}
-          setIsRegisterShown={setIsRegisterShown}
-        />
-      ) : (
-        <></>
-      )}
-
       {isDeleteDialogShown ? (
         deleteDialog({
           text: "User will be deleted, Are you sure?",
@@ -108,20 +96,7 @@ export const Requests = () => {
       ) : (
         <></>
       )}
-      <div id="adduser-div">
-        <p>
-          <strong>Users</strong> you can add,update and remove users
-        </p>
-
-        <button
-          onClick={() => {
-            setIsRegisterShown(true);
-          }}
-        >
-          {" "}
-          + Users
-        </button>
-      </div>
+      
 
       <div className="user-dashboard" style={{ marginTop: "5px" }}>
         <div id="dash-title-div" className="user-row">
@@ -143,11 +118,4 @@ export const Requests = () => {
     </div>
   );
 };
-/* 
-<h4>#</h4>
-        <h4>Name</h4>
-        <h4>email</h4>
-        <h4>state</h4>
-        <h4>restaurantName</h4>
-        <h4>Actions</h4>
-*/
+

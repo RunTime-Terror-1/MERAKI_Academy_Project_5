@@ -103,6 +103,7 @@
   color: white;
   background-color: rgba(255, 253, 251, 0.358);
   left: 0;
+  top:0;
 }
 #inner-delete-pop{
 height:fit-content;
