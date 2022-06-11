@@ -9,6 +9,10 @@ import { EditForm } from "./EditForm";
 export const Users = () => {
   const dispatch = useDispatch();
   const [isRegisterShown, setIsRegisterShown] = useState(false);
+  const [isEditFormShown, setIsEditFormShown] = useState(false);
+  const [isDeleteDialogShown, setIsDeleteDialogShown] = useState(false);
+
+  const [currentUser, setCurrentUser] = useState({});
 
   const { superAdminPanel, auth } = useSelector((state) => {
     return state;
@@ -32,13 +36,35 @@ export const Users = () => {
         <h4>{user.role}</h4>
         <h4>{"user.lastLogin"}</h4>
         <div id="edit-btns-div">
-          {createButton({ onClick: () => {}, text: "Edit" })}
+          {createButton({
+            onClick: () => {
+              setIsEditFormShown(true);
+              setCurrentUser(user);
+            },
+            text: "Edit",
+          })}
           {createButton({ onClick: () => {}, text: "Delete" })}
         </div>
       </div>
     );
   };
 
+  const deleteDialog = ({title,text}) => {
+    return (
+      <div>
+        <div>
+          <h3>{title}</h3>
+          <p>{text}</p>
+          <div id="edit-btns-div">
+          {createButton({text:"Yes",onClick:async()=>{
+            await SuperAdmin.deleteUser({})
+          }})}
+          {createButton({text:"Cancel",onClick:()=>{}})}
+          </div>
+        </div>
+      </div>
+    );
+  };
   return (
     <div>
       {isRegisterShown ? (
@@ -49,21 +75,25 @@ export const Users = () => {
       ) : (
         <></>
       )}
-      < EditForm/>
+      {isEditFormShown ? (
+        <EditForm setIsEditFormShown={setIsEditFormShown} user={currentUser} />
+      ) : (
+        <></>
+      )}
+    {isDeleteDialogShown?deleteDialog({text:"User will be deleted, Are you sure?",title:"Delete User"}):<></>}
       <div id="adduser-div">
         <p>
           <strong>Users</strong> you can add,update and remove users
         </p>
-       
-          <button
-            onClick={() => {
-              setIsRegisterShown(true);
-            }}
-          >
-            {" "}
-            + Users
-          </button>
-        
+
+        <button
+          onClick={() => {
+            setIsRegisterShown(true);
+          }}
+        >
+          {" "}
+          + Users
+        </button>
       </div>
 
       <div className="user-dashboard" style={{ marginTop: "5px" }}>

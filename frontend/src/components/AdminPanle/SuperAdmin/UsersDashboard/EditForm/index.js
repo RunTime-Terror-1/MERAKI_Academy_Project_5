@@ -6,13 +6,15 @@ import "./style.css";
 import { Gender } from "./../../../../Registration/Register/GenderDiv";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsSignUpFormShown } from "../../../../../redux/reducers/auth";
-export const EditForm = ({user={}}) => {
-  const [firstName, setFirstName] = useState(user.firstName);
+import { SuperAdmin } from "../../../../../controllers/superAdmin";
+export const EditForm = ({ user = {}, setIsEditFormShown }) => {
+console.log(user);
+  const [firstName, setFirstName] = useState(`${user.firstName}`);
   const [lastName, setLastName] = useState(user.lastName);
   const [gender, setGender] = useState(user.gender);
-  const [email, setEmail] = useState(user.name);
-  const [role, setRole] = useState(user.role);
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(user.email);
+  const [role_id, setRole] = useState(user.role_id);
+  const [password, setPassword] = useState(user.password);
   const [isDialogShown, setIsDialogShown] = useState("");
   let [errors, setErrors] = useState([]);
   const dispatch = useDispatch();
@@ -36,12 +38,19 @@ export const EditForm = ({user={}}) => {
       </div>
     );
   };
-  const createInput = ({ placeholder, setState, type = "text", key = "" }) => {
+  const createInput = ({
+    placeholder,
+    setState,
+    type = "text",
+    key = "",
+    name = "",
+  }) => {
     return (
       <div>
         <input
           type={type}
           placeholder={placeholder}
+          value={name}
           onChange={(e) => {
             setErrors(
               Registration.removeErrors({
@@ -73,24 +82,24 @@ export const EditForm = ({user={}}) => {
       inputForm: inputForm,
     });
     if (errors.length === 0) {
-      const serverError = await Registration.register({
+      const body = {
+        id:user.id,
         firstName,
         lastName,
         email,
         password,
-        role,
+        role_id,
+        gender,
+      };
+      const serverError = await SuperAdmin.updateUser({
+        user: body,
+        token: auth.token,
       });
-
-      if (serverError === "Email already taken") {
-        setErrors([...errors, "Email already taken"]);
-      } else {
-        setIsDialogShown(true);
-        dispatch(setIsSignUpFormShown());
-      }
     } else {
       setErrors(errors);
     }
   };
+  console.log(firstName);
   return (
     <div id="signup-form">
       {isDialogShown ? (
@@ -122,12 +131,14 @@ export const EditForm = ({user={}}) => {
             placeholder: "First Name",
             type: "text",
             key: "FirstName",
+            name: firstName,
             setState: setFirstName,
           })}
           {createInput({
             placeholder: "Last Name",
             type: "text",
             key: "LastName",
+            name: lastName,
             setState: setLastName,
           })}
         </div>
@@ -136,12 +147,14 @@ export const EditForm = ({user={}}) => {
           placeholder: "Email",
           type: "text",
           key: "Email",
+          name: email,
           setState: setEmail,
         })}
         {createInput({
           placeholder: "Password",
           type: "password",
           key: "Password",
+          name: password,
           setState: setPassword,
         })}
 
@@ -149,6 +162,7 @@ export const EditForm = ({user={}}) => {
           placeholder: "Role Id",
           type: "number",
           key: "number",
+          name: role_id,
           setState: setRole,
         })}
         <Gender setGender={setGender} errors={errors} setErrors={setErrors} />
