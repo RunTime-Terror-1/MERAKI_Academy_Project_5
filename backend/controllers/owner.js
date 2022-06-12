@@ -83,6 +83,7 @@ const deleteEmployee = (req, res) => {
     });
   });
 };
+
 const getAllEmployee = (req, res) => {
   const owner_id = req.token.userId;
   const query = "SELECT * FROM restaurants WHERE owner_id = ? ";
@@ -112,7 +113,7 @@ const getAllEmployee = (req, res) => {
 
 const getOwnerRestaurants = (req, res) => {
   const owner_id = req.token.userId;
-  const query = "SELECT firstName,lastName,restaurantName,state, email, requests.id  FROM users INNER JOIN requests ON requests.owner_id =?";
+  const query = "SELECT * FROM restaurants INNER JOIN users ";
   connection.query(query, [owner_id], (err, restaurants) => {
     if (err) {
       return res.status(500).json({
@@ -137,9 +138,12 @@ const getOwnerRestaurants = (req, res) => {
   });
 };
 const getOwnerRequests = (req, res) => {
+  
   const owner_id = req.token.userId;
-  const query = "SELECT * FROM requests WHERE owner_id = ? ";
-  connection.query(query, [owner_id], (err, requests) => {
+  console.log(owner_id);
+  const query = "SELECT firstName,lastName,restaurantName,state, email, requests.id  FROM users INNER JOIN requests ON requests.owner_id =? AND users.id=?";
+  connection.query(query, [owner_id,owner_id], (err, requests) => {
+  
     if (err) {
       return res.status(500).json({
         success: false,
@@ -162,12 +166,33 @@ const getOwnerRequests = (req, res) => {
     }
   });
 };
+const deleteRequest = (req, res) => {
+  const { requestId } = req.body;
 
+  const query = `DELETE FROM requests WHERE id=?`;
+
+  connection.query(query, [requestId], (err, result) => {
+    if (err) {
+      return res.status(409).json({
+        success: false,
+        massage: "Server Error",
+        err,
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Owner Deleted Successfully",
+      results: result,
+    });
+  });
+};
 module.exports = {
   createRequest,
   createRestaurant,
   createEmployee,
   deleteEmployee,
   getOwnerRequests,
-  getOwnerRestaurants
+  getOwnerRestaurants,
+  deleteRequest
 };
