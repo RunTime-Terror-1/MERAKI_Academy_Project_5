@@ -101,10 +101,10 @@ const RestaurantPage = () => {
           <div className='div_restur_Name'><h1 className='H1_Name'>{element.name + "hghghg"}</h1>
             <img className='imgLogo' src={element.Logo} />
             <div className='textadd'><AiFillStar className='star' /><h2>4.8</h2>
-            <h2>{element.rest_category}</h2>
-            
+              <h2>{element.rest_category}</h2>
+
             </div>
-            
+
           </div>
 
 
@@ -144,7 +144,11 @@ const RestaurantPage = () => {
           <div className='div_Mealloop_1'>{element.mallloop ? element.mallloop.map((elementMall, index) => {
             return (<div className='div_Mallloop_2'>
               <div className='imgbox'> <img className='eachMealimg' src={elementMall.imgUrl} /></div>
-              <h1>{elementMall.name}</h1>
+              <div className='divNameandPriceeach'>
+                <h2 className='h2andh4'>{elementMall.name}</h2>
+                <h4 className='h2andh4'>{"$"+elementMall.price }</h4>
+              </div>
+
               <BsPlusCircleFill className='PluseIcone'
                 onClick={() => {
                   console.log(elementMall)
@@ -169,9 +173,7 @@ const RestaurantPage = () => {
 
 
       <div className='All_Two_cart'>
-      <h1>Your Cart</h1>
-
-
+        <h1>Your Cart</h1>
         {<YourCart className="YourCartinRest" />}</div>
 
     </div>

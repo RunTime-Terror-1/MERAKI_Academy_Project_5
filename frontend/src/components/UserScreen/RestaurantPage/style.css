@@ -50,26 +50,29 @@
     width: 50px;
     height: 50px;
     position: relative;
- 
-   right:50px;
+
+    right: 50px;
     border-radius: 50px;
 
 }
-.textadd{
+
+.textadd {
     display: flex;
     flex-direction: row;
-position: relative;
-bottom:40px;
-left: 20px;
+    position: relative;
+    bottom: 40px;
+    left: 20px;
 }
-.star{
+
+.star {
     width: 20px;
     height: 30px;
 }
+
 .imgback {
     width: 100vw;
     height: 35vh;
-    border-radius: 20px;
+    /* border-radius: 20px; */
 }
 
 .div_restur_Name {
@@ -81,13 +84,14 @@ left: 20px;
 .H1_Name {
     font-size: 350%;
     position: relative;
-    right:50px;
+    right: 50px;
 }
 
 .Allinformation_Two {
 
     width: 100%;
     /* background-color: chartreuse; */
+    border-top: 0.5px solid rgb(214, 202, 202);
     display: flex;
     flex-direction: row;
     position: relative;
@@ -123,14 +127,14 @@ left: 20px;
     text-align: start;
     font-size: 150%;
     gap: 30px;
-    border-right: 3px solid rgb(214, 202, 202);
+    border-right: 1px solid rgb(214, 202, 202);
 
     overflow: hidden;
     display: flex;
     flex-direction: column;
     position: relative;
     left: 30px;
-  
+
     position: sticky;
     top: 0;
     z-index: 99;
@@ -155,7 +159,7 @@ left: 20px;
     flex-direction: column;
     gap: 5vh;
     position: relative;
-  
+
 
     /* background-color: aquamarine; */
 }
@@ -190,13 +194,26 @@ left: 20px;
     gap: 20px;
 
 }
+.divNameandPriceeach{
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+    /* gap:100px; */
+    position: relative;
+    top: 10px
 
+
+}
 .div_Mallloop_2 {
+    height: 280px;
     /* background-color: crimson; */
-
+    border-width: 2.1px;
     border-style: outset;
 }
+.h2andh4{
+    opacity: 0.9;
 
+}
 .div_Mallloop_2:hover {
     /* background-color: blue; */
 }
@@ -243,9 +260,11 @@ left: 20px;
 }
 
 .All_Two_cart {
-    width:322px;
+    width: 322px;
     height: 100vh;
-
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
     /* background-color: blue; */
 
     position: relative;
@@ -253,7 +272,7 @@ left: 20px;
     bottom: 25vh;
     position: sticky;
     top: 0;
-    border-left: 3px solid rgb(214, 202, 202);
+    border-left: 1px solid rgb(214, 202, 202);
 
 }
 
@@ -266,12 +285,13 @@ left: 20px;
     height: 60px;
 }
 
-.Name_andP{
-    width:180px;
+.Name_andP {
+    width: 180px;
     gap: 30px;
 
     /* background-color: darkgreen; */
 }
+
 /*-----EEEend-----*/
 
 /* .Res_two_A_A{
