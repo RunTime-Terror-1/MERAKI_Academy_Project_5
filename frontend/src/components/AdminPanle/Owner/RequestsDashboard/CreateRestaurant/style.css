@@ -21,7 +21,8 @@
   align-items: stretch;
   width: 50%;
   max-width: 500px;
-  min-height: 200px;
+  min-height: fit-content;
+  gap: 4px;
   padding: 10px;
   border: 0px solid black;
   border-radius: var(--border-radius);

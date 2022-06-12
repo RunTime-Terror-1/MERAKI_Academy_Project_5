@@ -6,6 +6,10 @@ import { setRequests } from "../../../../../redux/reducers/superAdmin";
 
 export const CreateRestaurant = ({}) => {
   const [name, setName] = useState("");
+  const [location, setLocation] = useState("");
+  const [logo, setLogo] = useState("");
+  const [Category, setCategory] = useState("");
+
   const [isDialogShown, setIsDialogShown] = useState("");
   const dispatch = useDispatch();
 
@@ -55,10 +59,10 @@ export const CreateRestaurant = ({}) => {
         ...requests[0],
         id: results.insertId,
         state: "In Progress",
-        restaurantName:name
+        restaurantName: name,
       });
-      setIsDialogShown(true)
-     dispatch(setRequests(requests))
+      setIsDialogShown(true);
+      dispatch(setRequests(requests));
     }
   };
   return (
@@ -82,10 +86,29 @@ export const CreateRestaurant = ({}) => {
         <hr />
 
         {createInput({
+          placeholder: "Logo Url",
+          type: "text",
+          key: "text",
+          setState: setLogo,
+        })}
+        {createInput({
           placeholder: "Restaurant Name",
           type: "text",
           key: "text",
           setState: setName,
+        })}
+
+        {createInput({
+          placeholder: "Location",
+          type: "text",
+          key: "text",
+          setState: setLocation,
+        })}
+        {createInput({
+          placeholder: "Category",
+          type: "text",
+          key: "text",
+          setState: setCategory,
         })}
 
         <div id="signup-button-div">

@@ -57,8 +57,9 @@ export const Requests = () => {
             createButton({
               onClick: async () => {
                 setCurrentRequest(request);
-                setIsDeleteDialogShown(true);
                 setCurrentIndex(index);
+                setIsRestaurantDialogShown(true)
+              
               },
               text: "Create Restaurant",
               state: request.state,
@@ -72,6 +73,7 @@ export const Requests = () => {
   };
 
   const updateRequest = async (state) => {
+  
     if (state !== "Accepted") {
       await Owner.deleteRequest({
         token: auth.token,
