@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import react, { useEffect, useState } from "react";
 import { SuperAdmin } from "../../../../controllers/superAdmin";
 import { setRequests, setUsers } from "../../../../redux/reducers/superAdmin";
+import { Owner } from "../../../../controllers/owner";
 
 export const NavigationMenu = ({setIsUsersShown}) => {
   const dispatch = useDispatch();
@@ -57,7 +58,7 @@ export const NavigationMenu = ({setIsUsersShown}) => {
         text: "Requests",
         icon: <BiGitPullRequest />,
         onClick:async () => {
-          const {requests} = await SuperAdmin.getAllRequests({token:auth.token});
+          const {requests} =await SuperAdmin.getAllRequests({token:auth.token});
           setIsUsersShown(1);
           dispatch(setRequests(requests))
         },

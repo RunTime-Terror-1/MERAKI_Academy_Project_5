@@ -76,12 +76,14 @@ export const RegisterComponent = ({
       inputForm: inputForm,
     });
     if (errors.length === 0) {
+      
       const serverError = await Registration.register({
         firstName,
         lastName,
         email,
         password,
-        role,
+        gender,
+        role:superAdminRegister?role:1,
       });
     
       if (serverError === "Email already taken") {
@@ -89,7 +91,10 @@ export const RegisterComponent = ({
       } else {
         setIsDialogShown(true);
         dispatch(setIsSignUpFormShown());
-        setIsRegisterShown(false);
+        if(superAdminRegister){
+          setIsRegisterShown(false);
+        }
+        
       }
     } else {
       setErrors(errors);
@@ -112,6 +117,7 @@ export const RegisterComponent = ({
           <button
             onClick={() => {
               dispatch(setIsSignUpFormShown());
+  
               setIsRegisterShown(false);
             }}
           >

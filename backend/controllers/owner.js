@@ -112,7 +112,7 @@ const getAllEmployee = (req, res) => {
 
 const getOwnerRestaurants = (req, res) => {
   const owner_id = req.token.userId;
-  const query = "SELECT * FROM restaurants WHERE owner_id = ? ";
+  const query = "SELECT firstName,lastName,restaurantName,state, email, requests.id  FROM users INNER JOIN requests ON requests.owner_id =?";
   connection.query(query, [owner_id], (err, restaurants) => {
     if (err) {
       return res.status(500).json({

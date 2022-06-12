@@ -15,8 +15,8 @@ export class Registration {
       return error.response.data;
     }
   }
-  static async register({ firstName, lastName, email, password, gender,role=1 }) {
-   
+  static async register({ firstName, lastName, email, password, gender, role = 1 }) {
+   console.log(firstName, lastName, email, password, gender,role);
     try {
       const user = {
         firstName,
