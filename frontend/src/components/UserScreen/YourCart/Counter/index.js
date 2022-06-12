@@ -32,7 +32,7 @@ const Counter = ({ element }) => {
 
     const nextPrice = async () => {
         const A = await setPriceNumber(priceNumber + 1);
-        // const B = await dispatch(setPrice({ price:realPrice*priceNumber}))
+  
     }
 
 

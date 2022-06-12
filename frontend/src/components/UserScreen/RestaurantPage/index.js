@@ -151,13 +151,13 @@ const RestaurantPage = () => {
 
               <BsPlusCircleFill className='PluseIcone'
                 onClick={() => {
-                  console.log(elementMall)
+                
                   dispatch(setCart({ items: elementMall }))
                   dispatch(setPrice({ price: elementMall.price, indexitem: elementMall.id }))
 
                   dispatch(setTotal({ opr: "+", value: elementMall.price }));
                   console.log("44")
-                  console.log(cart)
+                
                 }}
               />
 

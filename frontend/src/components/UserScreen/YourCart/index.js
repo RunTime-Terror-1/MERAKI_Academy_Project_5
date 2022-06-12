@@ -38,8 +38,8 @@ const YourCart = () => {
 
     }) : <div className='cartempty '><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2RAmmS3yjdMkpGUh2S858rxj2HB4fzf-4CQ&usqp=CAU" /><h2 className='textinYourCart'>Your cart is empty</h2><br /><h2 className='textinYourCart'>
         Add items to get started</h2></div>}
-        <h1>{Userinfor.yourCart !== 0 && Userinfor.yourCart.length ? <h1>total:{Userinfor.yourTotal}</h1> : ""}</h1>
-        {/* <h1>total:{Userinfor.yourTotal}</h1> */}
+        <h1>{Userinfor.yourCart !== 0 && Userinfor.yourCart.length ? <h3>total:{Userinfor.yourTotal}</h3> : ""}</h1>
+    
 
     </div>)
 
