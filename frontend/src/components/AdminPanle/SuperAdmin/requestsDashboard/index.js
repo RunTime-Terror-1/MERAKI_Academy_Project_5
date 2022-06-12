@@ -20,7 +20,8 @@ export const Requests = () => {
   useEffect(() => {
     (async () => {
       const data = await SuperAdmin.getAllRequests({ token: auth.token });
-      dispatch(setRequests([...data.requests]));
+    
+      dispatch(setRequests(data.requests));
     })();
   }, []);
   const createButton = ({ onClick, text }) => {
@@ -111,6 +112,7 @@ export const Requests = () => {
       </div>
     );
   };
+
   return (
     <div>
       {isDeleteDialogShown ? (
@@ -141,7 +143,7 @@ export const Requests = () => {
           <h4>{"restaurant".toUpperCase()}</h4>
           <h4>ACTIONS</h4>
         </div>
-        {superAdminPanel.requests.length ? (
+        {superAdminPanel.requests? (
           superAdminPanel.requests.map((request, index) => {
             return createRow(request, index);
           })

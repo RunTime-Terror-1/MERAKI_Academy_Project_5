@@ -6,7 +6,8 @@ import { Users } from "./UsersDashboard";
 import { Requests } from "./RequestsDashboard";
 import { NavigationBarPanel } from "./NavigationBar";
 import { Restaurants } from "./RestaurantDashboard";
-export const SuperAdminPanel = () => {
+
+export const OwnerPanel = () => {
   const dispatch = useDispatch();
   const [hideMenu,setHideMenu] = useState(false);
   const [isUsersShown, setIsUsersShown] = useState(0);

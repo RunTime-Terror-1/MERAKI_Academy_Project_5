@@ -22,7 +22,7 @@ export class Owner {
             };
           }
     }
-    static createRestaurant ({ location, lat, lng, name,token}){
+  static createRestaurant ({ location, lat, lng, name,token}){
         try {
             const body = { location, lat, lng, name,token};
             const response = await axios.post(
@@ -42,7 +42,7 @@ export class Owner {
           }
 
     }
-    static createEmployee ({firstName, lastName, email, password,restaurant_id,token }){
+ static createEmployee ({firstName, lastName, email, password,restaurant_id,token }){
         try {
             const body = { firstName, lastName, email, password,restaurant_id };
             const response = await axios.post(
@@ -61,7 +61,7 @@ export class Owner {
             };
           }
     }
-    static deleteEmployee ({employeeId})  {
+ static deleteEmployee ({employeeId})  {
         try {
             const response = await axios.delete(
               `${hostUrl}/owner/employee`,
@@ -79,4 +79,34 @@ export class Owner {
             };
           }
       };
+
+ static getOwnerRequests ({token}){
+  try {
+    const response = await axios.get(`${hostUrl}/owner/requests`, {
+      headers: { authorization: `Bearer ${token}` },
+    });
+
+    return response.data;
+  } catch (error) {
+    return {
+      success: "false",
+      massage: "Server Error",
+      error,
+    };
+  }
+ }
+ static getOwnerRestaurants ({token}){
+  try {
+    const response = await axios.get(`${hostUrl}/owner/restaurants`, {
+      headers: { authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  } catch (error) {
+    return {
+      success: "false",
+      massage: "Server Error",
+      error,
+    };
+  }
+ }
 }

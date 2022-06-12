@@ -1,10 +1,13 @@
 const express = require("express");
 
-const { createRequest, createRestaurant ,createEmployee, deleteEmployee} = require("../controllers/owner");
+const { createRequest, createRestaurant ,createEmployee, deleteEmployee,getOwnerRequests,getOwnerRestaurants} = require("../controllers/owner");
 const authentication = require("../middlewares/authentication");
 const authorization = require("../middlewares/authorization");
 
 const ownerRouter = express.Router();
+//get
+ownerRouter.get("/requests",authentication,authorization("2"),getOwnerRequests)
+ownerRouter.get("/restaurants",authentication,authorization("2"),getOwnerRestaurants)
 //post
 ownerRouter.post("/request", authentication, authorization("2"), createRequest);
 ownerRouter.post("/restaurant", authentication, authorization("2"), createRestaurant);

@@ -25,7 +25,7 @@ const createRestaurant = async (req, res) => {
   const ownerId = req.token.userId;
   const { location, lat, lng, name, orders, Logo, rest_category } = req.body;
   const query = `INSERT INTO restaurants  ( location, lat, lng, name, orders, Logo, rest_category,owner_id) VALUES (?,?,?,?,?,?,?,?)`;
-  const data = [location, lat, lng, name, orders, Logo, rest_category,ownerId];
+  const data = [location, lat, lng, name, orders, Logo, rest_category, ownerId];
   connection.query(query, data, (err, result) => {
     if (err) {
       return res.status(500).json({
@@ -83,9 +83,91 @@ const deleteEmployee = (req, res) => {
     });
   });
 };
+const getAllEmployee = (req, res) => {
+  const owner_id = req.token.userId;
+  const query = "SELECT * FROM restaurants WHERE owner_id = ? ";
+  connection.query(query, [owner_id], (err, restaurants) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        massage: "Server Error",
+        err,
+      });
+    }
+    if (restaurants.length) {
+      res.status(200).json({
+        success: true,
+        message: "All Restaurants",
+        restaurants,
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        message: "Not Found",
+        requests: [],
+      });
+    }
+  });
+};
+
+const getOwnerRestaurants = (req, res) => {
+  const owner_id = req.token.userId;
+  const query = "SELECT * FROM restaurants WHERE owner_id = ? ";
+  connection.query(query, [owner_id], (err, restaurants) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        massage: "Server Error",
+        err,
+      });
+    }
+    if (restaurants.length) {
+      res.status(200).json({
+        success: true,
+        message: "All Restaurants",
+        restaurants,
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        message: "Not Found",
+        requests: [],
+      });
+    }
+  });
+};
+const getOwnerRequests = (req, res) => {
+  const owner_id = req.token.userId;
+  const query = "SELECT * FROM requests WHERE owner_id = ? ";
+  connection.query(query, [owner_id], (err, requests) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        massage: "Server Error",
+        err,
+      });
+    }
+    if (requests.length) {
+      res.status(200).json({
+        success: true,
+        message: "All Requests",
+        requests: requests,
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        message: "Not Found",
+        requests: [],
+      });
+    }
+  });
+};
+
 module.exports = {
   createRequest,
   createRestaurant,
   createEmployee,
   deleteEmployee,
+  getOwnerRequests,
+  getOwnerRestaurants
 };
