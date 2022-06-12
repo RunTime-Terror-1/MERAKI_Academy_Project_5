@@ -12,3 +12,16 @@
     gap:20px;
     border-bottom: 3px solid rgb(211, 190, 190);
 }
+.cartempty{
+display: flex;
+flex-direction: column;
+flex-wrap: wrap;
+}
+.textinYourCart{
+    flex-wrap: wrap;
+    opacity:0.5;
+}
+/* .imgempty{
+width: 300px;
+height:800px;
+} */

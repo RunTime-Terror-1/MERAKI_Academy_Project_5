@@ -38,6 +38,7 @@
 
 .Allinformation_One {
     text-align: start;
+    /* background-color: darkgoldenrod; */
 
 }
 
@@ -46,15 +47,25 @@
 }
 
 .imgLogo {
-    width: 120px;
-    height: 120px;
+    width: 50px;
+    height: 50px;
     position: relative;
-    bottom: 40px;
-    left: 6.5vw;
+ 
+   right:50px;
     border-radius: 50px;
 
 }
-
+.textadd{
+    display: flex;
+    flex-direction: row;
+position: relative;
+bottom:40px;
+left: 20px;
+}
+.star{
+    width: 20px;
+    height: 30px;
+}
 .imgback {
     width: 100vw;
     height: 35vh;
@@ -63,12 +74,14 @@
 
 .div_restur_Name {
     position: relative;
-    bottom: 40px;
-    left: 6.5vw;
+    /* bottom: 100px; */
+    left: 7vw;
 }
 
 .H1_Name {
-    font-size: 350%
+    font-size: 350%;
+    position: relative;
+    right:50px;
 }
 
 .Allinformation_Two {
@@ -78,7 +91,7 @@
     display: flex;
     flex-direction: row;
     position: relative;
-    top: 20vh;
+    top: 8vh;
     gap: 25px;
 
     left: 40px;
@@ -107,8 +120,9 @@
 .All_Two_categore_Cat {
     width: 280px;
     height: 100vh;
-    font-size: 80%;
-    /* background-color: crimson; */
+    text-align: start;
+    font-size: 150%;
+    gap: 30px;
     border-right: 3px solid rgb(214, 202, 202);
 
     overflow: hidden;
@@ -141,7 +155,7 @@
     flex-direction: column;
     gap: 5vh;
     position: relative;
-    /* left: 60px; */
+  
 
     /* background-color: aquamarine; */
 }
@@ -158,7 +172,8 @@
     /* height: 12vh;
     width: 12vw; */
     text-align: start;
-    font-size: large;
+    font-size: 110%;
+    /* font-size: large; */
     font-style: normal;
     color: #000;
 }

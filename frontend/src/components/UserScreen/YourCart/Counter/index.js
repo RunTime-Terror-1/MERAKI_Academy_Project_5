@@ -22,6 +22,7 @@ const Counter = ({ element }) => {
         return {
             yourCart: state.User.cart,
             yourPrice: state.User.price,
+            yourTotal: state.User.total,
         }
     })
     console.log(Userinfor.yourCart, "cart cart")
@@ -69,7 +70,7 @@ const Counter = ({ element }) => {
                 <h3>{element.name + "gggHddHHg"}</h3 >
                 <h3 className='h3_price'>{realPrice * priceNumber + "JD"}</h3></div>
 
-                
+
             <div className='div_delete'> <AiTwotoneDelete className='deleteIcons'
                 onClick={() => {
                     dispatch(deleteCart({ id: element.id }))

@@ -10,8 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setTotal } from '../../../redux/reducers/User';
 
 
-
-import{BsPlusCircleFill}from "react-icons/bs"
+import { AiFillStar } from "react-icons/ai";
+import { BsPlusCircleFill } from "react-icons/bs"
 const RestaurantPage = () => {
 
   const dispatch = useDispatch();
@@ -97,9 +97,14 @@ const RestaurantPage = () => {
       <div className='All_One_map' >{restaurant ? restaurant.map((element, index) => {
         return (<div className='All_One_One_map_returndiv' >
           <div><img className='imgback' src={element.backImg} /></div>
-          <img className='imgLogo' src={element.Logo} />
-          <div className='div_restur_Name'><h1 className='H1_Name'>{element.name}</h1>
+
+          <div className='div_restur_Name'><h1 className='H1_Name'>{element.name + "hghghg"}</h1>
+            <img className='imgLogo' src={element.Logo} />
+            <div className='textadd'><AiFillStar className='star' /><h2>4.8</h2>
             <h2>{element.rest_category}</h2>
+            
+            </div>
+            
           </div>
 
 
@@ -112,7 +117,7 @@ const RestaurantPage = () => {
 
     </div>
 
-    
+
 
 
     <div className='Allinformation_Two'>
@@ -121,7 +126,7 @@ const RestaurantPage = () => {
         <h1>categories</h1>
         <div className='All_Two-categore_map'>{categories ? categories.map((element, index) => {
           return (<div className='All_Two-categore_map_return' key={index}>
-            <a  href={"#" + index} className="a_atAll">{element}</a>
+            <a href={"#" + index} className="a_atAll">{element}</a>
 
           </div>)
         }) : <></>}</div>
@@ -141,17 +146,6 @@ const RestaurantPage = () => {
               <div className='imgbox'> <img className='eachMealimg' src={elementMall.imgUrl} /></div>
               <h1>{elementMall.name}</h1>
               <BsPlusCircleFill className='PluseIcone'
-               onClick={() => {
-                console.log(elementMall)
-                dispatch(setCart({ items: elementMall }))
-                dispatch(setPrice({ price: elementMall.price, indexitem: elementMall.id }))
-
-                dispatch(setTotal({ opr: "+", value: elementMall.price }));
-                console.log("44")
-                console.log(cart)
-              } } 
-              />
-              {/* <button
                 onClick={() => {
                   console.log(elementMall)
                   dispatch(setCart({ items: elementMall }))
@@ -160,8 +154,8 @@ const RestaurantPage = () => {
                   dispatch(setTotal({ opr: "+", value: elementMall.price }));
                   console.log("44")
                   console.log(cart)
-                } } 
-                >add to cart</button> */}
+                }}
+              />
 
             </div>)
 
@@ -174,8 +168,8 @@ const RestaurantPage = () => {
 
 
 
-      <div className='All_Two_cart'> 
-      
+      <div className='All_Two_cart'>
+      <h1>Your Cart</h1>
 
 
         {<YourCart className="YourCartinRest" />}</div>
