@@ -3,11 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { setRequests, setUsers } from "../../../../redux/reducers/superAdmin";
 import { Owner } from "../../../../controllers/owner";
 import "./style.css";
+import { CreateRequest } from "./CreateRequest";
+import { CreateRestaurant } from "./CreateRestaurant";
 
 export const Requests = () => {
   const dispatch = useDispatch();
   const [isDeleteDialogShown, setIsDeleteDialogShown] = useState(false);
   const [isCreateRequestDialogShown, setIsRequestDialogShown] = useState(false);
+  const [isCreateRestaurantDialogShown, setIsRestaurantDialogShown] =
+    useState(false);
 
   const [currentIndex, setCurrentIndex] = useState({});
 
@@ -73,6 +77,10 @@ export const Requests = () => {
         token: auth.token,
         requestId: currentRequest.id,
       });
+      const requests = [...superAdminPanel.requests];
+      requests.splice(currentIndex, 1);
+      dispatch(setRequests(requests));
+    } else {
     }
   };
   const deleteDialog = ({ title, text, state }) => {
@@ -108,7 +116,14 @@ export const Requests = () => {
           <strong>Requests,</strong> you can send and remove restaurant request
         </p>
 
-        <button onClick={() => {}}> + Request</button>
+        <button
+          onClick={() => {
+            setIsRequestDialogShown(true);
+          }}
+        >
+          {" "}
+          + Request
+        </button>
       </div>
       {isDeleteDialogShown ? (
         deleteDialog({
@@ -118,8 +133,8 @@ export const Requests = () => {
       ) : (
         <></>
       )}
-      {isCreateRequestDialogShown?<CreateRequest/>:<></>}
-
+      {isCreateRequestDialogShown ? <CreateRequest /> : <></>}
+      {isCreateRestaurantDialogShown ? <CreateRestaurant /> : <></>}
       <div className="user-dashboard" style={{ marginTop: "5px" }}>
         <div id="dash-title-div" className="user-row">
           <h4>ID</h4>
