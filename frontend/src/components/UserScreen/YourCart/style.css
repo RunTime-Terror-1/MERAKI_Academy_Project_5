@@ -21,6 +21,11 @@ flex-wrap: wrap;
     flex-wrap: wrap;
     opacity:0.5;
 }
+.gotoCheck{
+width:320px;
+height:80px;
+}
+
 /* .imgempty{
 width: 300px;
 height:800px;

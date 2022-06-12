@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 const register = async (req, res) => {
-  
+  console.log("gdfgd")
   const role_id = req.params.roleId;
   const { firstName, lastName, email, password } = req.body;
 
@@ -38,7 +38,7 @@ const register = async (req, res) => {
               message: err,
             });
           }
-
+console.log("gdfgd")
           res.status(201).json({
             success: true,
             message: "Account Created Successfully",
