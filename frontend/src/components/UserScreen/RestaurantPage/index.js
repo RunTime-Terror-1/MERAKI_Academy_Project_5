@@ -5,10 +5,13 @@ import NavBar from '../NavBar';
 import YourCart from '../YourCart';
 import { setCart, setPrice } from '../../../redux/reducers/User';
 import { useDispatch, useSelector } from "react-redux";
-import SumPrice from './SumPrice';
+
 
 import { setTotal } from '../../../redux/reducers/User';
 
+
+import { AiFillStar } from "react-icons/ai";
+import { BsPlusCircleFill } from "react-icons/bs"
 const RestaurantPage = () => {
 
   const dispatch = useDispatch();
@@ -86,7 +89,7 @@ const RestaurantPage = () => {
   console.log(restaurant)
 
   return (<div className="RestaurantPage">
-    <div>{<NavBar />}</div>
+    <div className='NavBarHere'>{<NavBar />}</div>
 
 
     <div className='Allinformation_One' >
@@ -94,9 +97,20 @@ const RestaurantPage = () => {
       <div className='All_One_map' >{restaurant ? restaurant.map((element, index) => {
         return (<div className='All_One_One_map_returndiv' >
           <div><img className='imgback' src={element.backImg} /></div>
-          <img className='imgLogo' src={element.Logo} />
-          <div className='div_restur_Name'><h1 className='H1_Name'>{element.name}</h1>
-            <h2>{element.rest_category}</h2>
+
+          <div className='div_restur_Name'><h1 className='H1_Name'>{element.name + "hghghg"}</h1>
+            {/* <img className='imgLogo' src={element.Logo} /> */}
+            <div className='textadd'><AiFillStar className='star' /><h2 className='rating'>4.8</h2>
+              <h2 className='location_res'>{"Jordan - " + element.location}</h2><br />
+              {/* <h2>{element.rest_category}</h2> */}
+            </div>
+
+            <div className='textadd22'>
+              <h4 className='h4_rest'>Open until 9:30 PM</h4>
+
+              <h4 className='h4_rest'>Tap for hours, address, and more</h4>
+            </div>
+
           </div>
 
 
@@ -106,8 +120,21 @@ const RestaurantPage = () => {
       }) : ""}
 
       </div>
+      <div className='Allinformation_One_tow'>
+        <div className='Allinformation_One_tow_one'>
+
+
+          <h1 className='h1h1 G1 '>Group Order</h1>
+
+
+        </div>
+        <div className='Allinformation_One_tow_tow'><div className='div1'><h1 className='h1h1'>delivery</h1><h4 className='h4h4'>30-35 min .$0.99</h4></div>
+          <div className='div2'><h1 className='h1h1'>pick up</h1><h4 className='h4h4  g4 '>10-15 min .$0.00</h4></div>
+        </div>
+      </div>
 
     </div>
+
 
 
 
@@ -134,21 +161,23 @@ const RestaurantPage = () => {
 
           <div className='div_Mealloop_1'>{element.mallloop ? element.mallloop.map((elementMall, index) => {
             return (<div className='div_Mallloop_2'>
-              <img className='eachMealimg' src={elementMall.imgUrl} />
-              <h1>{elementMall.name}</h1>
-              <button
+              <div className='imgbox'> <img className='eachMealimg' src={elementMall.imgUrl} /></div>
+              <div className='divNameandPriceeach'>
+                <h2 className='h2andh4'>{elementMall.name}</h2>
+                <h4 className='h2andh4'>{"$" + elementMall.price}</h4>
+              </div>
+
+              <BsPlusCircleFill className='PluseIcone'
                 onClick={() => {
-                  console.log(elementMall)
+
                   dispatch(setCart({ items: elementMall }))
-                  dispatch(setPrice({ price: elementMall.price, indexitem: elementMall.id }))
-                  // setSumreal(elementMall.price)
-                  // dispatch(setsumPriceUser({id:1}))
+                  // dispatch(setPrice({ price: elementMall.price, indexitem: elementMall.id }))
+
                   dispatch(setTotal({ opr: "+", value: elementMall.price }));
                   console.log("44")
-                  console.log(cart)
-                }
 
-                } >add to cart</button>
+                }}
+              />
 
             </div>)
 
@@ -161,11 +190,10 @@ const RestaurantPage = () => {
 
 
 
-      <div className='All_Two-cart'> <button> your cart</button>
-
-
+      <div className='All_Two_cart'>
+        <h1 className='Your_cart_h1'>Your Cart</h1>
         {<YourCart className="YourCartinRest" />}</div>
-        
+
     </div>
 
 

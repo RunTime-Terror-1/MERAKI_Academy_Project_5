@@ -12,9 +12,42 @@ export const UserSlice = createSlice({
     },
     reducers: {
         setCart: (state, action) => {
-            state.cart.push(action.payload.items)
-            console.log(action.payload.items, "dash")
-            console.log(state.cart, "cdfd")
+            console.log("jkj")
+            if (state.cart.length == 0) {
+                console.log("welco55555mmmmm")
+                // console.log(action.payload.items,"length")
+                state.cart.push(action.payload.items)
+
+            }else{
+                console.log("55")
+
+                let loop = true
+
+                state.cart = state.cart.filter((element, index) => {
+                    console.log(element.id)
+                    console.log(action.payload.items.id, "idpy")
+                    if (element.id == action.payload.items.id) {
+                        element = action.payload.items
+                        loop = false
+                        return element
+                    }
+                    else {
+                        return element
+                    }
+
+
+
+                })
+                if (loop == true) {
+                    state.cart.push(action.payload.items)
+                }
+            }
+
+            // state.cart.push(action.payload.items)
+            // console.log(action.payload.items, "dash")
+            // console.log(state.cart, "cdfd")
+
+
         },
         deleteCart: (state, action) => {
             // action = {type,payload:2}
@@ -28,7 +61,7 @@ export const UserSlice = createSlice({
         setPrice: (state, action) => {
             // state.price.push({price:action.payload.price,id:action.payload.indexitem})
             console.log("ghgh")
-            // console.log(state.price,"hh")
+           
             if (state.price.length == 0) {
                 console.log("length")
                 state.price.push({ price: action.payload.price, id: action.payload.indexitem })
@@ -37,7 +70,7 @@ export const UserSlice = createSlice({
                 console.log("not zero")
 
                 let loop = false
-                // console.log(state.price, "priceeee")
+         
 
 
                 state.price = state.price.filter((element, index) => {

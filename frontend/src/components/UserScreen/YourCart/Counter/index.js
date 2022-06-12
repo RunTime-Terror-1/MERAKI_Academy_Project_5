@@ -1,10 +1,12 @@
 import './style.css'
 import React, { useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCart, setPrice ,setsumPriceUser,setTotal} from '../../../../redux/reducers/User';
+import { deleteCart, setPrice, setsumPriceUser, setTotal } from '../../../../redux/reducers/User';
 
+import { AiTwotoneDelete } from "react-icons/ai";
 
-const Counter = ({ element}) => {
+import { BsDashLg, BsDashCircleFill, BsPlusCircleFill } from "react-icons/bs";
+const Counter = ({ element }) => {
 
     const [cart, setCart] = useState("")
     const [priceNumber, setPriceNumber] = useState(1)
@@ -20,6 +22,7 @@ const Counter = ({ element}) => {
         return {
             yourCart: state.User.cart,
             yourPrice: state.User.price,
+            yourTotal: state.User.total,
         }
     })
     console.log(Userinfor.yourCart, "cart cart")
@@ -29,7 +32,7 @@ const Counter = ({ element}) => {
 
     const nextPrice = async () => {
         const A = await setPriceNumber(priceNumber + 1);
-        // const B = await dispatch(setPrice({ price:realPrice*priceNumber}))
+  
     }
 
 
@@ -39,24 +42,48 @@ const Counter = ({ element}) => {
 
 
     return (<div className="div_yourCounter">
+        <div className='con'>
 
-        <h4 onClick={() => {nextPrice();
-        dispatch(setPrice({ price:(realPrice*priceNumber)+realPrice,indexitem:element.id}));
-        dispatch(setTotal({opr:"+",value:realPrice}));
-        }}>+</h4>
-        <h5>{priceNumber}</h5>
-        <h5 onClick={() => { prevPrice() 
-        dispatch(setPrice({ price:(realPrice*priceNumber)-realPrice,indexitem:element.id}));
-        dispatch(setTotal({opr:"-",value:realPrice}));
-        }} >-</h5>
-        <h3>{element.name}</h3 >
-        <h5>{realPrice* priceNumber}</h5>
+            <div className='Number_controlee'>
+                <BsPlusCircleFill className='iconesCounter'
+                    onClick={() => {
+                        nextPrice();
+                        dispatch(setPrice({ price: (realPrice * priceNumber) + realPrice, indexitem: element.id }));
+                        dispatch(setTotal({ opr: "+", value: realPrice }));
+                    }}
+                />
+
+                <h2>{priceNumber}</h2>
+                < BsDashCircleFill className='iconesCounter'
+
+                    onClick={() => {
+                        prevPrice()
+                        dispatch(setPrice({ price: (realPrice * priceNumber) - realPrice, indexitem: element.id }));
+                        dispatch(setTotal({ opr: "-", value: realPrice }));
+                    }}
+                />
+
+            </div>
 
 
-        <h5 onClick={() => {
-            dispatch(deleteCart({ id: element.id }))
-            console.log(element.id)
-        }}>delete</h5>
+            <div className='Name_andP' >
+                <h3>{element.name + "gggHddHHg"}</h3 >
+                <h3 className='h3_price'>{realPrice * priceNumber + "JD"}</h3></div>
+
+
+            <div className='div_delete'> <AiTwotoneDelete className='deleteIcons'
+                onClick={() => {
+                    dispatch(deleteCart({ id: element.id }))
+                    console.log(element.id)
+                }}
+
+            /></div>
+
+
+
+        </div>
+
+
 
     </div>)
 

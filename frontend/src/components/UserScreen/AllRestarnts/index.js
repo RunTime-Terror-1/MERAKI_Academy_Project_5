@@ -33,10 +33,10 @@ const AllRestarnts = () => {
     return (<div className="AllRestarnts">
         {<NavBar/>}
         <div className="AllAllRestarntsShow">
-        <div className="AllRestarnts_A">AA</div>
+        <div className="AllRestarnts_A"></div>
 
         <div className="AllRestarnts_B">{restaurants ? restaurants.map((elemnt, index) => {
-            console.log(elemnt.Logo)
+            // console.log(elemnt.Logo)
             return <div className="All_B_eachRestarant" key={index} onClick={
                 () => {
                     navigate("/RestaurantPage")
@@ -44,17 +44,19 @@ const AllRestarnts = () => {
 
             } >
 
-                <div className='divLogo'><img className='logo' src={elemnt.Logo} /></div>
+              
+              <img className='logo' src={elemnt.backImg} />
+              
 
-                <h2>{elemnt.name}</h2>
-                <h2>{elemnt.rest_category}</h2>
+                <h2 className='All_h2'>{elemnt.name+"kjkjkj"}</h2>
+                <h2 className='All_h2Categorry'>{elemnt.rest_category}</h2>
 
 
             </div>
         }) : " "
         }</div>
 
-        <div className="AllRestarnts_C">CC</div>
+        <div className="AllRestarnts_C"></div>
         </div>
     </div>)
 
