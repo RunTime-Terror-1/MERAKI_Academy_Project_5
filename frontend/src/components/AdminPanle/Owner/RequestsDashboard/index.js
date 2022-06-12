@@ -20,6 +20,7 @@ export const Requests = () => {
     return <button onClick={onClick}>{text}</button>;
   };
   const createRow = (request, index) => {
+    console.log(request);
     return (
       <div className="user-row" key={request.id + request.email}>
         <h4>{request.id}</h4>
@@ -27,28 +28,24 @@ export const Requests = () => {
         <h4>{request.email}</h4>
         <h4>{request.state}</h4>
         <h4>{request.restaurantName}</h4>
-        {request.state === "In Progress" ? (
-          <div id="edit-btns-div">
-            {createButton({
+        <div id="edit-btns-div">
+            {request.state ==="In Progress"?createButton({
               onClick: () => {
                 setCurrentIndex(index);
                 setCurrentRequest(request);
                 setIsAcceptDialogShown(true);
               },
-              text: "Accept",
-            })}
-            {createButton({
+              text: "Delete",
+            }):
+            createButton({
               onClick: async () => {
                 setCurrentRequest(request);
                 setIsDeleteDialogShown(true);
                 setCurrentIndex(index);
               },
               text: "Reject",
-            })}
+            })}``
           </div>
-        ) : (
-          <></>
-        )}
       </div>
     );
   };

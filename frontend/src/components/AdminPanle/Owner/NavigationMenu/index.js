@@ -49,7 +49,7 @@ export const NavigationMenu = ({setIsUsersShown}) => {
       <div id="user-management-div">
         <h4>User Management</h4>
       </div>
-      {menuButton({ text: "Users", icon: <HiUsers />, onClick: async () => {
+      {menuButton({ text: "Employee", icon: <HiUsers />, onClick: async () => {
         const {users} = await SuperAdmin.getAllUsers({token:auth.token});
         setIsUsersShown(0);
         dispatch(setUsers(users))
@@ -58,13 +58,34 @@ export const NavigationMenu = ({setIsUsersShown}) => {
         text: "Requests",
         icon: <BiGitPullRequest />,
         onClick:async () => {
-          const {requests} =await SuperAdmin.getAllRequests({token:auth.token});
+          const {requests} = await Owner.getOwnerRequests({token:auth.token});
           setIsUsersShown(1);
           dispatch(setRequests(requests))
         },
       })}
+     {menuButton({
+        text: "My Restaurants",
+        icon: <MdFastfood />,
+        onClick: async () => {
+          const {restaurants} = await SuperAdmin.getAllRestaurants({token:auth.token});
+          setIsUsersShown(2);
+          dispatch(setRequests(restaurants))
+        },
+      })}
+      <div id="user-management-div">
+        <h4>Restaurant Management</h4>
+      </div>
       {menuButton({
-        text: "Restaurants",
+        text: "Orders",
+        icon: <MdFastfood />,
+        onClick: async () => {
+          const {restaurants} = await SuperAdmin.getAllRestaurants({token:auth.token});
+          setIsUsersShown(2);
+          dispatch(setRequests(restaurants))
+        },
+      })}
+       {menuButton({
+        text: "meals",
         icon: <MdFastfood />,
         onClick: async () => {
           const {restaurants} = await SuperAdmin.getAllRestaurants({token:auth.token});

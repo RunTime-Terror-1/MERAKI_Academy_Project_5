@@ -3,7 +3,7 @@ import axios from "axios"
 import { hostUrl } from "..";
 
 export class Owner {
-  static createRequest ({restaurantName,token}){
+  static async  createRequest ({restaurantName,token}){
 
         try {
             const response = await axios.post(
@@ -22,7 +22,7 @@ export class Owner {
             };
           }
     }
-    static createRestaurant ({ location, lat, lng, name,token}){
+  static async createRestaurant ({ location, lat, lng, name,token}){
         try {
             const body = { location, lat, lng, name,token};
             const response = await axios.post(
@@ -42,7 +42,7 @@ export class Owner {
           }
 
     }
-    static createEmployee ({firstName, lastName, email, password,restaurant_id,token }){
+ static async createEmployee ({firstName, lastName, email, password,restaurant_id,token }){
         try {
             const body = { firstName, lastName, email, password,restaurant_id };
             const response = await axios.post(
@@ -61,7 +61,7 @@ export class Owner {
             };
           }
     }
-    static deleteEmployee ({employeeId})  {
+ static async deleteEmployee ({employeeId,token})  {
         try {
             const response = await axios.delete(
               `${hostUrl}/owner/employee`,
@@ -79,4 +79,35 @@ export class Owner {
             };
           }
       };
+
+ static async getOwnerRequests ({token}){
+  try {
+    const response = await axios.get(`${hostUrl}/owner/requests`, {
+      headers: { authorization: `Bearer ${token}` },
+    });
+    console.log( response.data);
+    return response.data;
+  } catch (error) {
+    console.log( error);
+    return {
+      success: "false",
+      massage: "Server Error",
+      error,
+    };
+  }
+ }
+ static async getOwnerRestaurants ({token}){
+  try {
+    const response = await axios.get(`${hostUrl}/owner/restaurants`, {
+      headers: { authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  } catch (error) {
+    return {
+      success: "false",
+      massage: "Server Error",
+      error,
+    };
+  }
+ }
 }
