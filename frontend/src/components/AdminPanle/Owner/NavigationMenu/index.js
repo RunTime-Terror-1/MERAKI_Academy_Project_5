@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { SuperAdmin } from "../../../../controllers/superAdmin";
 import { setRequests, setRestaurants, setUsers } from "../../../../redux/reducers/superAdmin";
 import { Owner } from "../../../../controllers/owner";
+import { Employee } from "../../../../controllers/employee";
 
 export const NavigationMenu = ({setIsUsersShown}) => {
   const dispatch = useDispatch();
@@ -88,9 +89,8 @@ export const NavigationMenu = ({setIsUsersShown}) => {
         text: "meals",
         icon: <MdFastfood />,
         onClick: async () => {
-          const {restaurants} = await SuperAdmin.getAllRestaurants({token:auth.token});
+          await Employee.getAllMeals({token:auth.token,restaurant_id:superAdminPanel.restaurants[0].id})
           setIsUsersShown(3);
-          dispatch(setRequests(restaurants))
         },
       })}
       <button id="logout-btn">

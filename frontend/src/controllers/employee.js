@@ -31,4 +31,19 @@ export class Employee {
       };
     }
   }
+  static async getAllMeals({ token,restaurant_id }) {
+
+    try {
+      const response = await axios.get(`${hostUrl}/employee//meals/ ${restaurant_id}`, {
+        headers: { authorization: `Bearer ${token}` },
+      });
+      return response.data;
+    } catch (error) {
+      return {
+        success: false,
+        massage: "Error",
+        serverError: error.response.data.message,
+      };
+    }
+  }
 }

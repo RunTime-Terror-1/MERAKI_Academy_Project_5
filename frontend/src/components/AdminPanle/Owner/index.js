@@ -7,15 +7,26 @@ import { Requests } from "./RequestsDashboard";
 import { NavigationBarPanel } from "../SuperAdmin/NavigationBar";
 import { Restaurants } from "../SuperAdmin/RestaurantDashboard";
 import { Meals } from "./MealsDashboard";
+import { Owner } from "../../../controllers/owner";
+import { setRestaurants } from "../../../redux/reducers/superAdmin";
 
 export const OwnerPanel = () => {
   const dispatch = useDispatch();
   const [hideMenu, setHideMenu] = useState(false);
   const [isUsersShown, setIsUsersShown] = useState(0);
-  const { superAdminPanel } = useSelector((state) => {
+  const { superAdminPanel ,auth} = useSelector((state) => {
     return state;
   });
 
+  useEffect(() => {
+    (async () => {
+      const { restaurants } = await Owner.getOwnerRestaurants({
+        token: auth.token,
+      });
+      setIsUsersShown(2);
+      dispatch(setRestaurants(restaurants));
+    })();
+  }, []);
   return (
     <div style={{ width: "100vw", display: "flex" }}>
       {hideMenu ? <NavigationMenu setIsUsersShown={setIsUsersShown} /> : <></>}
@@ -27,8 +38,8 @@ export const OwnerPanel = () => {
           <Requests />
         ) : isUsersShown === 2 ? (
           <Restaurants />
-        ) :(
-          <Meals  />
+        ) : (
+          <Meals />
         )}
       </div>
     </div>

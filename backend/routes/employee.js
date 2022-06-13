@@ -5,7 +5,10 @@ const {
   deleteMealFromRestaurant,
   updateMeal,
   getAllOrder,
+  getAllMeals
 } = require("../controllers/employee");
+const authentication = require("../middlewares/authentication");
+const authorization = require("../middlewares/authorization");
 
 //!..........Create employee router........................
 const employeeRouter = express.Router();
@@ -22,6 +25,7 @@ employeeRouter.delete("/:meal_id", deleteMealFromRestaurant);
 employeeRouter.put("/:id", updateMeal);
 
 //get
-employeeRouter.put("/:id",  getAllOrder);
+employeeRouter.get("/:id",  getAllOrder);
+employeeRouter.get("/meals/:restaurant_id",authentication,authorization("2"),  getAllMeals);
 
 module.exports = employeeRouter;
