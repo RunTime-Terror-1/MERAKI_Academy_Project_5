@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import react, { useEffect, useState } from "react";
 import { NavigationMenu } from "./NavigationMenu";
 import "./style.css";
-import { Users } from "../SuperAdmin/UsersDashboard";
+import { Users } from "./UsersDashboard";
 import { Requests } from "./RequestsDashboard";
 import { NavigationBarPanel } from "../SuperAdmin/NavigationBar";
 import { Restaurants } from "../SuperAdmin/RestaurantDashboard";

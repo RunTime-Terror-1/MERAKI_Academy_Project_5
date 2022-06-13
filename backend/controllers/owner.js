@@ -43,11 +43,13 @@ const createRestaurant = async (req, res) => {
   });
 };
 const createEmployee = async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
+  const restaurant_id = req.params.restaurant_id;
+  const { firstName, lastName, email, password,gender, shift, salary, weeklyHours } =
+    req.body;
   const encryptedPassword = await bcrypt.hash(password, saltRounds);
+  const query = `INSERT INTO users (firstName, lastName,  email, password,gender, role_id) VALUES (?,?,?,?,?,?)`;
 
-  const query = `INSERT INTO users (firstName, lastName,  email, password, role_id) VALUES (?,?,?,?,?)`;
-  const data = [firstName, lastName, email, encryptedPassword, 3];
+  const data = [firstName, lastName, email, encryptedPassword,gender, 3];
   connection.query(query, data, (err, result) => {
     if (err) {
       return res.status(409).json({
@@ -56,11 +58,17 @@ const createEmployee = async (req, res) => {
         err,
       });
     }
-    res.status(201).json({
-      success: true,
-      message: "Employee Created Successfully",
-      results: result,
-    });
+    const query = `INSERT INTO employees (shift, salary, weeklyHours,restaurant_id,user_id) VALUES (?,?,?,?,?)`;
+    const data = [shift, salary, weeklyHours,restaurant_id,result.insertId];
+    connection.query(query,data,(err,employeeResult)=>{
+      res.status(201).json({
+        success: true,
+        message: "Employee Created Successfully",
+        userResult: result,
+        employeeResult
+      });
+    })
+   
   });
 };
 const deleteEmployee = (req, res) => {
@@ -237,4 +245,5 @@ module.exports = {
   deleteRequest,
   updateRequest,
   deleteRestaurant,
+  getAllEmployee
 };

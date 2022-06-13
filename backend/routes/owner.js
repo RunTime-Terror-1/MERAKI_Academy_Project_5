@@ -7,6 +7,7 @@ const {
   deleteEmployee,
   getOwnerRequests,
   getOwnerRestaurants,
+  getAllEmployee,
   deleteRequest,
   updateRequest,
   deleteRestaurant,
@@ -28,7 +29,12 @@ ownerRouter.get(
   authorization("2"),
   getOwnerRestaurants
 );
-
+// ownerRouter.get(
+//   "/employees",
+//   authentication,
+//   authorization("2"),
+//   getAllEmployee
+// );
 //post
 ownerRouter.post("/request", authentication, authorization("2"), createRequest);
 ownerRouter.post(
@@ -38,7 +44,7 @@ ownerRouter.post(
   createRestaurant
 );
 ownerRouter.post(
-  "/employee",
+  "/employee/:restaurant_id",
   authentication,
   authorization("2"),
   createEmployee

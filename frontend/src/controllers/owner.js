@@ -59,6 +59,9 @@ export class Owner {
     email,
     password,
     restaurant_id,
+    shift,
+    salary,
+    weeklyHours,
     token,
   }) {
     try {
@@ -90,7 +93,21 @@ export class Owner {
       };
     }
   }
-
+  static async deleteRequest({ requestId, token }) {
+    try {
+      const response = await axios.delete(`${hostUrl}/owner/request`, {
+        headers: { authorization: `Bearer ${token}` },
+        data: { requestId },
+      });
+      return response.data;
+    } catch (error) {
+      return {
+        success: false,
+        massage: "Server Error",
+        error,
+      };
+    }
+  }
   static async getOwnerRequests({ token }) {
     try {
       const response = await axios.get(`${hostUrl}/owner/requests`, {
@@ -119,26 +136,11 @@ export class Owner {
         success: "false",
         massage: "Server Error",
         error,
-        restaurants:[]
+        restaurants: [],
       };
     }
   }
 
-  static async deleteRequest({ requestId, token }) {
-    try {
-      const response = await axios.delete(`${hostUrl}/owner/request`, {
-        headers: { authorization: `Bearer ${token}` },
-        data: { requestId },
-      });
-      return response.data;
-    } catch (error) {
-      return {
-        success: false,
-        massage: "Server Error",
-        error,
-      };
-    }
-  }
   static async updateRequest({ requestId, state, token }) {
     try {
       const response = await axios.put(
@@ -158,13 +160,10 @@ export class Owner {
   }
   static async deleteRestaurant({ id, token }) {
     try {
-      const response = await axios.delete(
-        `${hostUrl}/owner/restaurant`,
-        {
-          headers: { authorization: `Bearer ${token}` },
-          data: { id },
-        }
-      );
+      const response = await axios.delete(`${hostUrl}/owner/restaurant`, {
+        headers: { authorization: `Bearer ${token}` },
+        data: { id },
+      });
       return response.data;
     } catch (error) {
       return {
