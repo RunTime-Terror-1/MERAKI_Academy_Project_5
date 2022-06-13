@@ -1,6 +1,7 @@
 const express = require("express");
 
-const { createRequest, createRestaurant ,createEmployee, deleteEmployee,getOwnerRequests,getOwnerRestaurants} = require("../controllers/owner");
+const { createRequest, createRestaurant ,createEmployee, deleteEmployee,getOwnerRequests,getOwnerRestaurants,deleteRequest
+} = require("../controllers/owner");
 const authentication = require("../middlewares/authentication");
 const authorization = require("../middlewares/authorization");
 
@@ -15,7 +16,7 @@ ownerRouter.post("/employee", authentication, authorization("2"), createEmployee
 
 //delete
 ownerRouter.delete("/employee", authentication, authorization("2"), deleteEmployee);
-
-
+ownerRouter.delete("/request", authentication, authorization("2"),deleteRequest);
+//deleteRequest
 
 module.exports = ownerRouter;
