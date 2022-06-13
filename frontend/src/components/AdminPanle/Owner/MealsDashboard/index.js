@@ -1,11 +1,6 @@
 import react, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setMeals,
-  setRequests,
-  setUsers,
-} from "../../../../redux/reducers/superAdmin";
-import { Owner } from "../../../../controllers/owner";
+import { setMeals } from "../../../../redux/reducers/superAdmin";
 import "./style.css";
 import { CreateMeal } from "./CreateMeal";
 import { Employee } from "../../../../controllers/employee";
@@ -13,13 +8,10 @@ import { Employee } from "../../../../controllers/employee";
 export const Meals = () => {
   const dispatch = useDispatch();
   const [isDeleteDialogShown, setIsDeleteDialogShown] = useState(false);
-
   const [isCreateMealDialogShown, setIsMealDialogShown] = useState(false);
-
+  const [isUpdate, setIsUpdate] = useState(false);
   const [currentIndex, setCurrentIndex] = useState({});
-
-  const [currentRequest, setCurrentRequest] = useState({});
-
+  const [currentMeal, setCurrentMeal] = useState({});
   const { superAdminPanel, auth } = useSelector((state) => {
     return state;
   });
@@ -28,7 +20,7 @@ export const Meals = () => {
       <button
         onClick={onClick}
         style={
-          state !== "Accepted"
+          text !== "Edit"
             ? { backgroundColor: "red" }
             : { backgroundColor: "green" }
         }
@@ -46,45 +38,28 @@ export const Meals = () => {
         <h4>{meal.price} $</h4>
         <h4>{meal.category} </h4>
         <div id="edit-btns-div">
-          {meal.state !== "Accepted" ? (
-            createButton({
-              onClick: () => {
-                setCurrentIndex(index);
-                setCurrentRequest(meal);
-                setIsDeleteDialogShown(true);
-              },
-              text: "Delete",
-              state: meal.state,
-            })
-          ) : meal.state === "Accepted" ? (
-            createButton({
-              onClick: async () => {
-                setCurrentRequest(meal);
-                setCurrentIndex(index);
-                setIsMealDialogShown(true);
-              },
-              text: "Create Restaurant",
-              state: meal.state,
-            })
-          ) : (
-            <></>
-          )}
+          {createButton({
+            onClick: async () => {
+              setCurrentMeal(meal);
+              setCurrentIndex(index);
+              setIsUpdate(true)
+              setIsMealDialogShown(true);
+            },
+            text: "Edit",
+            state: meal.state,
+          })}
+          {createButton({
+            onClick: () => {
+              setCurrentIndex(index);
+              setCurrentMeal(meal);
+              setIsDeleteDialogShown(true);
+            },
+            text: "Delete",
+            state: meal.state,
+          })}
         </div>
       </div>
     );
-  };
-
-  const updateRequest = async (state) => {
-    if (state !== "Accepted") {
-      await Owner.deleteRequest({
-        token: auth.token,
-        requestId: currentRequest.id,
-      });
-      const requests = [...superAdminPanel.requests];
-      requests.splice(currentIndex, 1);
-      dispatch(setRequests(requests));
-    } else {
-    }
   };
   const deleteDialog = ({ title, text, state }) => {
     return (
@@ -96,7 +71,7 @@ export const Meals = () => {
             {createButton({
               text: "Yes",
               onClick: async () => {
-                updateRequest(currentRequest.state);
+                updateRequest(currentMeal.state);
                 setIsDeleteDialogShown(false);
               },
             })}
@@ -119,6 +94,9 @@ export const Meals = () => {
       </option>
     );
   };
+
+  const updateRequest = async (state) => {};
+
 
   return (
     <div>
@@ -151,10 +129,11 @@ export const Meals = () => {
           })}
         </select>
       </div>
+
       {isDeleteDialogShown ? (
         deleteDialog({
-          text: "Request will be Deleted, Are you sure?",
-          title: "Delete Request",
+          text: "Meal will be Deleted, Are you sure?",
+          title: "Delete Meal",
         })
       ) : (
         <></>
@@ -164,6 +143,7 @@ export const Meals = () => {
         <CreateMeal
           setIsMealDialogShown={setIsMealDialogShown}
           currentIndex={currentIndex}
+          isUpdate={isUpdate}
         />
       ) : (
         <></>

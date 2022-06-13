@@ -7,7 +7,11 @@ import { ErrorsDiv } from "../../../../Registration/Register/ErrorsDiv";
 import { Registration } from "../../../../../controllers/registration";
 import { Employee } from "../../../../../controllers/employee";
 
-export const CreateMeal = ({ setIsMealDialogShown }) => {
+export const CreateMeal = ({
+  setIsMealDialogShown,
+  isUpdate = false,
+  currentIndex,
+}) => {
   const [name, setName] = useState("");
   const [imgUrl, setImgUrl] = useState("");
   const [category, setCategory] = useState("");
@@ -62,7 +66,7 @@ export const CreateMeal = ({ setIsMealDialogShown }) => {
       restaurant_id,
       token: auth.token,
     });
-    console.log(response);
+
     if (response.success) {
       setIsDialogShown(true);
     }
@@ -90,7 +94,7 @@ export const CreateMeal = ({ setIsMealDialogShown }) => {
           </button>
         </div>
 
-        <h1>Create Meal</h1>
+        <h1>{isUpdate?"Update Meal":"Create Meal"}</h1>
         <hr />
 
         <div></div>
@@ -130,7 +134,8 @@ export const CreateMeal = ({ setIsMealDialogShown }) => {
         })}
 
         <div id="signup-button-div">
-          <button onClick={createMeal}>Create Employee</button>
+          <button onClick={createMeal}>
+          {isUpdate?"Update Employee":"Create Employee"}</button>
         </div>
       </div>
     </div>
