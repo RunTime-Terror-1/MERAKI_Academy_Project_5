@@ -45,7 +45,7 @@
 .input {
   width: 100%;
   padding: var(--input-padding);
-  border-radius: 30px;
+  border-radius: 8px;
   border: 0.1px solid rgba(0, 0, 0, 0.425);
   
 }
@@ -131,5 +131,5 @@ font-family: open_sansregular;
   padding: 10px;
   width: 40%;
   height: 100px;
-  border-radius: 20px;
+  border-radius: 8px;
 }
