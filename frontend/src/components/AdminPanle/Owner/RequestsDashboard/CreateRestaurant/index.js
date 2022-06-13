@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Owner } from "../../../../../controllers/owner";
 import { setRequests } from "../../../../../redux/reducers/superAdmin";
 
-export const CreateRestaurant = ({}) => {
+export const CreateRestaurant = ({setIsRestaurantDialogShown}) => {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [Logo, setLogo] = useState("");
@@ -50,6 +50,7 @@ export const CreateRestaurant = ({}) => {
 
   const createRestaurant = async () => {
    await Owner.createRestaurant({lat:"none",lng:"none",location,name, Logo,category,token:auth.token})
+   setIsRestaurantDialogShown(false)
   };
   return (
     <div id="signup-form">
@@ -65,7 +66,9 @@ export const CreateRestaurant = ({}) => {
       )}
       <div id="signup-form-inner">
         <div id="signup--exit-button">
-          <button onClick={() => {}}>X</button>
+          <button onClick={() => {
+            setIsRestaurantDialogShown(false)
+          }}>X</button>
         </div>
 
         <h1>Create Restaurant</h1>

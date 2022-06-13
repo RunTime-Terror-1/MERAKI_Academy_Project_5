@@ -135,8 +135,8 @@ export const Requests = () => {
       ) : (
         <></>
       )}
-      {isCreateRequestDialogShown ? <CreateRequest /> : <></>}
-      {isCreateRestaurantDialogShown ? <CreateRestaurant /> : <></>}
+      {isCreateRequestDialogShown ? <CreateRequest setIsRequestDialogShown= {setIsRequestDialogShown} /> : <></>}
+      {isCreateRestaurantDialogShown ? <CreateRestaurant setIsRestaurantDialogShown={setIsRestaurantDialogShown} /> : <></>}
       <div className="user-dashboard" style={{ marginTop: "5px" }}>
         <div id="dash-title-div" className="user-row">
           <h4>ID</h4>

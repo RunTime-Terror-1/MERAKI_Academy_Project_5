@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Owner } from "../../../../../controllers/owner";
 import { setRequests } from "../../../../../redux/reducers/superAdmin";
 
-export const CreateRequest = ({}) => {
+export const CreateRequest = ({setIsRequestDialogShown}) => {
   const [name, setName] = useState("");
   const [isDialogShown, setIsDialogShown] = useState("");
   const dispatch = useDispatch();
@@ -75,7 +75,9 @@ export const CreateRequest = ({}) => {
       )}
       <div id="signup-form-inner">
         <div id="signup--exit-button">
-          <button onClick={() => {}}>X</button>
+          <button onClick={() => {
+            setIsRequestDialogShown(false)
+          }}>X</button>
         </div>
 
         <h1>Create Request</h1>

@@ -12,7 +12,7 @@ export class Owner {
           headers: { authorization: `Bearer ${token}` },
         }
       );
-      console.log( response.data);
+      console.log(response.data);
       return response.data;
     } catch (error) {
       return {
@@ -22,10 +22,26 @@ export class Owner {
       };
     }
   }
-  static async createRestaurant({ location, lat, lng, name, token,Logo,category }) {
+  static async createRestaurant({
+    location,
+    lat,
+    lng,
+    name,
+    token,
+    Logo,
+    category,
+  }) {
     try {
-      const body = { location, lat, lng, name,Logo,rest_category:category, token };
-      console.log(body);
+      const body = {
+        location,
+        lat,
+        lng,
+        name,
+        Logo,
+        rest_category: category,
+        token,
+      };
+
       const response = await axios.post(`${hostUrl}/owner/restaurant`, body, {
         headers: { authorization: `Bearer ${token}` },
       });
