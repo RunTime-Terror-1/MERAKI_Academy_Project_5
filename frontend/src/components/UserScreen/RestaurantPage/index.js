@@ -18,6 +18,7 @@ const RestaurantPage = () => {
 
   // const [sumreal, setSumreal] = useState(0)
   const [restaurant, setRestaurants] = useState("")
+  const [name, setName] = useState("")
   const [menu, setMenu] = useState("")
   const [categories, setCategories] = useState("")
   const [arraydetials, setArraydetials] = useState("")
@@ -83,10 +84,10 @@ const RestaurantPage = () => {
   }, [])
 
 
-  console.log(arraydetials)
-  console.log(Userinfor.yourPrice)
+  // console.log(arraydetials)
+  // console.log(Userinfor.yourPrice)
 
-  console.log(restaurant)
+  // console.log(restaurant[0].name)
 
   return (<div className="RestaurantPage">
     <div className='NavBarHere'>{<NavBar />}</div>

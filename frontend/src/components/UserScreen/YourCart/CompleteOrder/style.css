@@ -1,0 +1,76 @@
+.completeOrder{
+    display: flex;
+    flex-direction: column;
+}
+.order{
+    width: 70vw;
+    height: 100vh;
+    /* background-color: darkblue; */
+    position: relative;
+    left:15vw;
+
+
+    text-align: start;
+  
+    padding: 40px;
+}
+.divSummary{
+    height: 10vh;
+    /* background-color: darkmagenta; */
+}
+.title{
+    display: flex;
+    flex-direction: row;
+
+   
+}
+.title_tow{
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    /* position: relative;
+    left: 30vw; */
+}
+.items{
+    width:40vw;
+    background-color: crimson;
+}
+.mealItems{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.NameMeal{
+    width:37vw;
+    background-color: rgb(125, 139, 0);
+}
+.div_return_map{
+    display: flex;
+    flex-direction: row;
+ 
+
+}
+.insted__div_return_map{
+    width:30vw;
+    display: flex;
+    flex-direction: row;
+    gap: 80px;
+    background-color: chartreuse;
+
+    position: relative;
+    left: 30px;
+
+
+}
+.h3_quntity{
+   position:relative; 
+   /* left: 40vw; */
+}
+.h3_price{
+    position:relative; 
+    /* left: 45vw; */
+}
+.h3_totalprice{
+    position: relative; 
+    /* left: 45vw; */
+}

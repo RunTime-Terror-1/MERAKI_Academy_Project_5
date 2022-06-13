@@ -5,7 +5,7 @@ import { deleteCart } from '../../../redux/reducers/User';
 import Counter from './Counter';
 import { useNavigate } from "react-router-dom";
 
-const YourCart = () => {
+const YourCart = ({name}) => {
     const navigate = useNavigate()
 
 
@@ -32,14 +32,14 @@ const YourCart = () => {
     //!..............................
 
    const complete=()=>{
-  
+    // navigate("/Hotelinform", { state: { id: element._id } })
     Userinfor.islogin==true? navigate("/CompleteOrder"):navigate("/Login")
 
    }
 
 
 
-    console.log(Userinfor.islogin)
+    console.log(name)
     return (<div className="YourCartinRest" >{Userinfor.yourCart !== 0 && Userinfor.yourCart.length ? Userinfor.yourCart.map((element, index) => {
         return (<div key={index} className="div-Yourcart">
             {<Counter element={element} />}
