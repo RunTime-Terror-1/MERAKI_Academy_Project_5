@@ -58,15 +58,26 @@ export class Owner {
     lastName,
     email,
     password,
+    gender,
     restaurant_id,
     shift,
     salary,
     weeklyHours,
     token,
   }) {
+   console.log(gender);
     try {
-      const body = { firstName, lastName, email, password, restaurant_id };
-      const response = await axios.post(`${hostUrl}/owner/employee`, body, {
+      const body = {
+        firstName,
+        gender,
+        lastName,
+        email,
+        password,
+        shift,
+        salary,
+        weeklyHours,
+      };
+      const response = await axios.post(`${hostUrl}/owner/employee/${restaurant_id}`, body, {
         headers: { authorization: `Bearer ${token}` },
       });
       return response.data;
@@ -74,7 +85,7 @@ export class Owner {
       return {
         success: false,
         massage: "Error",
-        error,
+        serverError: error.response.data.message
       };
     }
   }

@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Owner } from "../../../../../controllers/owner";
 import { setRequests } from "../../../../../redux/reducers/superAdmin";
 import { Gender } from "../../../../Registration/Register/GenderDiv";
+import { ErrorsDiv } from "../../../../Registration/Register/ErrorsDiv";
+import { Registration } from "../../../../../controllers/registration";
 
 export const CreateEmployee = ({
-  setIsRestaurantDialogShown,
-  currentIndex,
+  setIsEmployeeFormShown
 }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -19,6 +20,7 @@ export const CreateEmployee = ({
   const [shift, setShift] = useState("");
   const [salary, setSalary] = useState("");
   const [weeklyHours, setWeeklyHours] = useState("");
+  const [restaurant_id, setRestaurant_id] = useState("");
 
   const [isDialogShown, setIsDialogShown] = useState("");
   const dispatch = useDispatch();
@@ -29,6 +31,7 @@ export const CreateEmployee = ({
   const buildAlertDialog = ({ bgColor, color, text, text2 }) => {
     setTimeout(() => {
       setIsDialogShown(false);
+      setIsEmployeeFormShown(false)
     }, 2500);
 
     return (
@@ -49,7 +52,16 @@ export const CreateEmployee = ({
         <input
           type={type}
           placeholder={placeholder}
+          min={1}
           onChange={(e) => {
+            setErrors(
+              Registration.removeErrors({
+                isLoginForm: false,
+                key: key,
+                value: e.target.value,
+                errors,
+              })
+            );
             setState(e.target.value);
           }}
           className="input"
@@ -58,31 +70,42 @@ export const CreateEmployee = ({
     );
   };
 
-  const createRestaurant = async () => {
-    const { results } = await Owner.createRestaurant({
-      lat: "none",
-      lng: "none",
-      location: shift,
-      name: superAdminPanel.requests[currentIndex].restaurantName,
-      Logo: salary,
-      category: weeklyHours,
-      token: auth.token,
+  const createEmployee = async () => {
+    const employee = {
+      firstName,
+      lastName,
+      password,
+      gender,
+      email,
+      shift,
+      salary,
+      restaurant_id,
+      weeklyHours,
+      token:auth.token
+    };
+    const inputForm = {
+      FirstName: `${firstName} `,
+      LastName: ` ${lastName}`,
+      Email: email,
+      Password: password,
+      Gender: gender,
+    };
+
+    errors = Registration.checkFormErrors({
+      isLoginForm: false,
+      inputForm: inputForm,
     });
-
-    if (results.affectedRows) {
-      const requests = [...superAdminPanel.requests];
-      await Owner.updateRequest({
-        requestId: requests[currentIndex].id,
-        state: "Completed",
-        token: auth.token,
-      });
-      requests[currentIndex] = {
-        ...requests[currentIndex],
-        state: "Completed",
-      };
-
-      dispatch(setRequests(requests));
-      setIsRestaurantDialogShown(false);
+    if (errors.length === 0) {
+      const {serverError} = await Owner.createEmployee({...employee});
+      if (serverError === "Email already taken") {
+        setErrors([...errors, "Email already taken"]);
+      } else {
+       
+        setIsDialogShown(true);
+       
+      }
+    } else {
+      setErrors(errors);
     }
   };
   return (
@@ -91,8 +114,8 @@ export const CreateEmployee = ({
         buildAlertDialog({
           bgColor: "green",
           color: "white",
-          text: "Request Created Successfully",
-          text2: `The response will be in few hours `,
+          text: "Employee Created Successfully",
+          text2: `The employee can start his job `,
         })
       ) : (
         <></>
@@ -101,7 +124,7 @@ export const CreateEmployee = ({
         <div id="signup--exit-button">
           <button
             onClick={() => {
-              setIsRestaurantDialogShown(false);
+              setIsEmployeeFormShown(false)
             }}
           >
             X
@@ -131,7 +154,7 @@ export const CreateEmployee = ({
         {createInput({
           placeholder: "Email",
           type: "text",
-          key: "text",
+          key: "Email",
           setState: setEmail,
         })}
 
@@ -148,6 +171,12 @@ export const CreateEmployee = ({
           key: "Shift",
           setState: setShift,
         })}
+         {createInput({
+          placeholder: "Restaurant Id",
+          type: "number",
+          key: "Restaurant Id",
+          setState: setRestaurant_id,
+        })}
         <div id="register-username-div">
           {createInput({
             placeholder: "Salary",
@@ -162,9 +191,9 @@ export const CreateEmployee = ({
             setState: setWeeklyHours,
           })}
         </div>
-
+        <ErrorsDiv errors={errors} />
         <div id="signup-button-div">
-          <button onClick={createRestaurant}>Create Restaurant</button>
+          <button onClick={createEmployee}>Create Employee</button>
         </div>
       </div>
     </div>

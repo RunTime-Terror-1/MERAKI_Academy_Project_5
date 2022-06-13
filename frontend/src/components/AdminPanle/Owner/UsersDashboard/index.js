@@ -20,7 +20,6 @@ export const Users = () => {
     return state;
   });
 
-  
   const createButton = ({ onClick, text }) => {
     return <button onClick={onClick}>{text}</button>;
   };
@@ -87,7 +86,11 @@ export const Users = () => {
   };
   return (
     <div>
-    <CreateEmployee/>
+      {isEmployeeFormShown ? (
+        <CreateEmployee setIsEmployeeFormShown={setIsEmployeeFormShown} />
+      ) : (
+        <></>
+      )}
       {isEditFormShown ? (
         <EditForm setIsEditFormShown={setIsEditFormShown} user={currentUser} />
       ) : (
@@ -107,14 +110,9 @@ export const Users = () => {
           <strong>Employees</strong> you can add,update and remove employee
         </p>
 
-        <button
-          onClick={() => {
-           
-          }}
-        >
-          {" "}
-          + Employee
-        </button>
+        <button onClick={() => {
+          setIsEmployeeFormShown(true)
+        }}> + Employee</button>
       </div>
 
       <div className="user-dashboard" style={{ marginTop: "5px" }}>

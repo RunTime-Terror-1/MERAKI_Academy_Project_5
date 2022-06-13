@@ -60,7 +60,6 @@ export const CreateRestaurant = ({
       category,
       token: auth.token,
     });
-
     if (results.affectedRows) {
       const requests = [...superAdminPanel.requests];
       await Owner.updateRequest({

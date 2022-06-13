@@ -1,5 +1,6 @@
 const connection = require("../models/db");
-
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 const createRequest = async (req, res) => {
   const ownerId = req.token.userId;
   const { restaurantName } = req.body;
@@ -28,6 +29,7 @@ const createRestaurant = async (req, res) => {
   const query = `INSERT INTO restaurants  ( location, lat, lng, name, Logo, rest_category,owner_id) VALUES (?,?,?,?,?,?,?)`;
   const data = [location, lat, lng, name, Logo, rest_category, ownerId];
   connection.query(query, data, (err, result) => {
+    console.log(err.message);
     if (err) {
       return res.status(500).json({
         success: false,
@@ -43,6 +45,7 @@ const createRestaurant = async (req, res) => {
   });
 };
 const createEmployee = async (req, res) => {
+  console.log(req.body);
   const restaurant_id = req.params.restaurant_id;
   const { firstName, lastName, email, password,gender, shift, salary, weeklyHours } =
     req.body;
@@ -54,13 +57,20 @@ const createEmployee = async (req, res) => {
     if (err) {
       return res.status(409).json({
         success: false,
-        massage: "The email already exists",
+        message: "Email already taken",
         err,
       });
     }
     const query = `INSERT INTO employees (shift, salary, weeklyHours,restaurant_id,user_id) VALUES (?,?,?,?,?)`;
     const data = [shift, salary, weeklyHours,restaurant_id,result.insertId];
     connection.query(query,data,(err,employeeResult)=>{
+      if (err) {
+        return res.status(500).json({
+          success: false,
+          message: "Email already taken",
+          err:err.message,
+        });
+      }
       res.status(201).json({
         success: true,
         message: "Employee Created Successfully",
