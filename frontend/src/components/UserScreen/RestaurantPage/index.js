@@ -98,7 +98,7 @@ const RestaurantPage = () => {
         return (<div className='All_One_One_map_returndiv' >
           <div><img className='imgback' src={element.backImg} /></div>
 
-          <div className='div_restur_Name'><h1 className='H1_Name'>{element.name + "hghghg"}</h1>
+          <div className='div_restur_Name'><h1 className='H1_Name'>{element.name }</h1>
             {/* <img className='imgLogo' src={element.Logo} /> */}
             <div className='textadd'><AiFillStar className='star' /><h2 className='rating'>4.8</h2>
               <h2 className='location_res'>{"Jordan - " + element.location}</h2><br />
