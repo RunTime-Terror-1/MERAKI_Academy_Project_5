@@ -34,34 +34,35 @@ export const Meals = () => {
       </button>
     );
   };
-  const createRow = (request, index) => {
+  const createRow = (meal, index) => {
+    console.log(meal);
     return (
-      <div className="user-row" key={request.id + request.email}>
-        <h4>{request.id}</h4>
-        <h4>{request.firstName + " " + request.lastName}</h4>
-        <h4>{request.email}</h4>
-        <h4>{request.state}</h4>
-        <h4>{request.restaurantName}</h4>
+      <div className="user-row" key={meal.id + meal.name }>
+        <h4>{meal.id}</h4>
+        <h4>{meal.name}</h4>
+        <img src={`${meal.imgUrl}`} width="100%" height="50px"/>
+        <h4>{meal.price} $</h4>
+        <h4>{meal.category} </h4>
         <div id="edit-btns-div">
-          {request.state !== "Accepted" ? (
+          {meal.state !== "Accepted" ? (
             createButton({
               onClick: () => {
                 setCurrentIndex(index);
-                setCurrentRequest(request);
+                setCurrentRequest(meal);
                 setIsDeleteDialogShown(true);
               },
               text: "Delete",
-              state: request.state,
+              state: meal.state,
             })
-          ) : request.state === "Accepted" ? (
+          ) : meal.state === "Accepted" ? (
             createButton({
               onClick: async () => {
-                setCurrentRequest(request);
+                setCurrentRequest(meal);
                 setCurrentIndex(index);
                 setIsMealDialogShown(true);
               },
               text: "Create Restaurant",
-              state: request.state,
+              state: meal.state,
             })
           ) : (
             <></>
@@ -151,12 +152,12 @@ export const Meals = () => {
           <h4>NAME</h4>
           <h4>LOGO</h4>
           <h4>PRICE</h4>
-          <h4>{"restaurant".toUpperCase()}</h4>
+          <h4>CATEGORY</h4>
           <h4>ACTIONS</h4>
         </div>
-        {superAdminPanel.requests ? (
-          superAdminPanel.requests.map((request, index) => {
-            return createRow(request, index);
+        {superAdminPanel.meals ? (
+          superAdminPanel.meals.map((meal, index) => {
+            return createRow(meal, index);
           })
         ) : (
           <></>

@@ -132,6 +132,7 @@ const getAllMeals = (req, res) => {
         success: false,
         massage: "server error",
         err: err,
+        meals:[]
       });
     }
     res.status(200).json({
