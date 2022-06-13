@@ -52,6 +52,18 @@ export const Users = () => {
       </div>
     );
   };
+  const createRow1 = (user, index) => {
+    return (
+      <div className="user-row1" key={user.id + user.email}>
+        <h4>{user.id}</h4>
+        <h4>{user.firstName + " " + user.lastName}</h4>
+        <h4>{user.name}</h4>
+        <h4>{user.salary}</h4>
+        <h4>{user.weeklyHours}</h4>
+        <h4>{user.shift}</h4>
+      </div>
+    );
+  };
 
   const deleteDialog = ({ title, text }) => {
     return (
@@ -110,9 +122,14 @@ export const Users = () => {
           <strong>Employees</strong> you can add,update and remove employee
         </p>
 
-        <button onClick={() => {
-          setIsEmployeeFormShown(true)
-        }}> + Employee</button>
+        <button
+          onClick={() => {
+            setIsEmployeeFormShown(true);
+          }}
+        >
+          {" "}
+          + Employee
+        </button>
       </div>
 
       <div className="user-dashboard" style={{ marginTop: "5px" }}>
@@ -127,6 +144,23 @@ export const Users = () => {
         {superAdminPanel.users.length ? (
           superAdminPanel.users.map((user, index) => {
             return createRow(user, index);
+          })
+        ) : (
+          <></>
+        )}
+      </div>
+      <div className="user-dashboard" style={{ marginTop: "2px" }}>
+        <div id="dash-title-div" className="user-row1">
+          <h4>ID</h4>
+          <h4>NAME</h4>
+          <h4>RESTAURANT</h4>
+          <h4>SALARY</h4>
+          <h4>WEEKLY HOURS</h4>
+          <h4>SHIFT</h4>
+        </div>
+        {superAdminPanel.users.length ? (
+          superAdminPanel.users.map((user, index) => {
+            return createRow1(user, index);
           })
         ) : (
           <></>

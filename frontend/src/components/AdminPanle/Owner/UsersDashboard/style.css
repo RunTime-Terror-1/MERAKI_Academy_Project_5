@@ -68,6 +68,21 @@
   font-weight: 200;
 }
 
+.user-row1 {
+  display: grid;
+  padding: 5px;
+  text-align: center;
+  font-size: 70%;
+  color: white;
+  grid-template-columns:3% 15% 25% 15% 20% 22%;
+  align-items: center;
+  border-bottom: 2px solid rgba(19, 18, 18, 0.393);
+}
+.user-row1 h4 {
+  overflow: hidden;
+  font-weight: 200;
+}
+
 #edit-btns-div {
   display: flex;
 }

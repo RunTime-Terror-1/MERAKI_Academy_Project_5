@@ -50,6 +50,7 @@ export const NavigationMenu = ({setIsUsersShown}) => {
       </div>
       {menuButton({ text: "Employee", icon: <HiUsers />, onClick: async () => {
         const {users} = await Owner.getAllEmployee({token:auth.token});
+        console.log(users);
         setIsUsersShown(0);
         dispatch(setUsers(users))
       } })}

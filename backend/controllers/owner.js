@@ -170,7 +170,7 @@ const updateRequest = (req, res) => {
 const getAllEmployee = (req, res) => {
   const owner_id = req.token.userId;
   const query =
-    "SELECT firstName,lastName,name,email,salary,weeklyHours,shift,role FROM users US INNER JOIN employees EM INNER JOIN roles RS INNER JOIN restaurants RST ON  US.id=EM.user_id AND RST.id = EM.restaurant_id AND US.role_id=RS.id AND RST.owner_id=?";
+    "SELECT US.id,firstName,lastName,name,email,salary,weeklyHours,shift,role FROM users US INNER JOIN employees EM INNER JOIN roles RS INNER JOIN restaurants RST ON  US.id=EM.user_id AND RST.id = EM.restaurant_id AND US.role_id=RS.id AND RST.owner_id=?";
 
   connection.query(query, [owner_id], (err, users) => {
     if (err) {
@@ -180,7 +180,7 @@ const getAllEmployee = (req, res) => {
         err,
       });
     }
-    if (restaurants.length) {
+    if (users.length) {
       res.status(200).json({
         success: true,
         message: "All Restaurants",
