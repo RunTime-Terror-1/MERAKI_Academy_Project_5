@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Owner } from "../../../../../controllers/owner";
 import { setRequests } from "../../../../../redux/reducers/superAdmin";
 
-export const CreateRestaurant = ({setIsRestaurantDialogShown}) => {
+export const CreateRestaurant = ({
+  setIsRestaurantDialogShown,
+  currentIndex,
+}) => {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [Logo, setLogo] = useState("");
@@ -49,8 +52,31 @@ export const CreateRestaurant = ({setIsRestaurantDialogShown}) => {
   };
 
   const createRestaurant = async () => {
-   await Owner.createRestaurant({lat:"none",lng:"none",location,name, Logo,category,token:auth.token})
-   setIsRestaurantDialogShown(false)
+    const { results } = await Owner.createRestaurant({
+      lat: "none",
+      lng: "none",
+      location,
+      name,
+      Logo,
+      category,
+      token: auth.token,
+    });
+
+    if (results.affectedRows) {
+      const requests = [...superAdminPanel.requests];
+      await Owner.updateRequest({
+        requestId: requests[currentIndex].id,
+        state: "Completed",
+        token: auth.token,
+      });
+      requests[currentIndex] = {
+        ...requests[currentIndex],
+        state: "Completed",
+      };
+
+      dispatch(setRequests(requests));
+      setIsRestaurantDialogShown(false);
+    }
   };
   return (
     <div id="signup-form">
@@ -66,9 +92,13 @@ export const CreateRestaurant = ({setIsRestaurantDialogShown}) => {
       )}
       <div id="signup-form-inner">
         <div id="signup--exit-button">
-          <button onClick={() => {
-            setIsRestaurantDialogShown(false)
-          }}>X</button>
+          <button
+            onClick={() => {
+              setIsRestaurantDialogShown(false);
+            }}
+          >
+            X
+          </button>
         </div>
 
         <h1>Create Restaurant</h1>

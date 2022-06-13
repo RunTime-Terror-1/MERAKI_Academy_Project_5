@@ -24,11 +24,10 @@ const createRequest = async (req, res) => {
 const createRestaurant = async (req, res) => {
   const ownerId = req.token.userId;
   const { location, lat, lng, name, Logo, rest_category } = req.body;
-  console.log(location, lat, lng, name, Logo, rest_category);
+
   const query = `INSERT INTO restaurants  ( location, lat, lng, name, Logo, rest_category,owner_id) VALUES (?,?,?,?,?,?,?)`;
   const data = [location, lat, lng, name, Logo, rest_category, ownerId];
   connection.query(query, data, (err, result) => {
-    console.log(result);
     if (err) {
       return res.status(500).json({
         success: false,
@@ -140,12 +139,11 @@ const getOwnerRestaurants = (req, res) => {
   });
 };
 const getOwnerRequests = (req, res) => {
-  
   const owner_id = req.token.userId;
   console.log(owner_id);
-  const query = "SELECT firstName,lastName,restaurantName,state, email, requests.id  FROM users INNER JOIN requests ON requests.owner_id =? AND users.id=?";
-  connection.query(query, [owner_id,owner_id], (err, requests) => {
-  
+  const query =
+    "SELECT firstName,lastName,restaurantName,state, email, requests.id  FROM users INNER JOIN requests ON requests.owner_id =? AND users.id=?";
+  connection.query(query, [owner_id, owner_id], (err, requests) => {
     if (err) {
       return res.status(500).json({
         success: false,
@@ -189,6 +187,26 @@ const deleteRequest = (req, res) => {
     });
   });
 };
+
+const updateRequest = (req, res) => {
+  const { requestId, state } = req.body;
+  const query = `UPDATE requests  SET state =? WHERE id=?`;
+  connection.query(query, [state, requestId], (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        massage: "Server Error",
+        err,
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      massage: "Request State Change",
+      result,
+    });
+  });
+};
 module.exports = {
   createRequest,
   createRestaurant,
@@ -196,5 +214,6 @@ module.exports = {
   deleteEmployee,
   getOwnerRequests,
   getOwnerRestaurants,
-  deleteRequest
+  deleteRequest,
+  updateRequest,
 };

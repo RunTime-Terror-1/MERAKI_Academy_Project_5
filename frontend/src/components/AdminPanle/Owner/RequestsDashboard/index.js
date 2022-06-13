@@ -58,8 +58,7 @@ export const Requests = () => {
               onClick: async () => {
                 setCurrentRequest(request);
                 setCurrentIndex(index);
-                setIsRestaurantDialogShown(true)
-              
+                setIsRestaurantDialogShown(true);
               },
               text: "Create Restaurant",
               state: request.state,
@@ -73,7 +72,6 @@ export const Requests = () => {
   };
 
   const updateRequest = async (state) => {
-  
     if (state !== "Accepted") {
       await Owner.deleteRequest({
         token: auth.token,
@@ -135,8 +133,19 @@ export const Requests = () => {
       ) : (
         <></>
       )}
-      {isCreateRequestDialogShown ? <CreateRequest setIsRequestDialogShown= {setIsRequestDialogShown} /> : <></>}
-      {isCreateRestaurantDialogShown ? <CreateRestaurant setIsRestaurantDialogShown={setIsRestaurantDialogShown} /> : <></>}
+      {isCreateRequestDialogShown ? (
+        <CreateRequest setIsRequestDialogShown={setIsRequestDialogShown} />
+      ) : (
+        <></>
+      )}
+      {isCreateRestaurantDialogShown ? (
+        <CreateRestaurant
+          setIsRestaurantDialogShown={setIsRestaurantDialogShown}
+          currentIndex={currentIndex}
+        />
+      ) : (
+        <></>
+      )}
       <div className="user-dashboard" style={{ marginTop: "5px" }}>
         <div id="dash-title-div" className="user-row">
           <h4>ID</h4>

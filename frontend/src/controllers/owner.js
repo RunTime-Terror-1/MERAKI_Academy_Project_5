@@ -12,7 +12,6 @@ export class Owner {
           headers: { authorization: `Bearer ${token}` },
         }
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       return {
@@ -97,10 +96,9 @@ export class Owner {
       const response = await axios.get(`${hostUrl}/owner/requests`, {
         headers: { authorization: `Bearer ${token}` },
       });
-      console.log(response.data);
+
       return response.data;
     } catch (error) {
-      console.log(error);
       return {
         success: "false",
         massage: "Server Error",
@@ -135,6 +133,23 @@ export class Owner {
         success: false,
         massage: "Server Error",
         error,
+      };
+    }
+  }
+  static async updateRequest({ requestId, state, token }) {
+    try {
+      const response = await axios.put(
+        `${hostUrl}/owner/request`,
+        { requestId, state },
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return {
+        success: true,
+        massage: "Request State Change",
       };
     }
   }
