@@ -9,7 +9,7 @@ const query = `INSERT INTO meals (name,imgUrl,category,price,restaurant_id) VALU
 const data = [name,imgUrl,category,price,restaurant_id];
 
 connection.query(query, data, (err, result) => {
-
+    
     if (err) {
         res.status(500).json({
             success: false,
@@ -29,7 +29,7 @@ connection.query(query, data, (err, result) => {
 };
 //!.......END CreatMeal ............
 
-const deleteMealfromResturant=(req, res) => {
+const deleteMealFromRestaurant=(req, res) => {
     
     const Id = req.params.meal_id;
 
@@ -105,11 +105,11 @@ if (!result.affectedRows) {
 }
 //!.......END updateMeal   ............
 
-const getAllorder=(req,res)=>{
+const getAllOrder=(req,res)=>{
 
-    const   restarent_id =req.params.id
-    const query = `SELECT * FROM order  WHERE is_deleted=0 and restarent_id=? `;
-    const data = [restarent_id];
+    const   restaurant_id =req.params.id
+    const query = `SELECT * FROM order  WHERE is_deleted=0 and restaurant_id=? `;
+    const data = [restaurant_id];
 
     connection.query(query, data, (err, result) => {
         if (err) {
@@ -118,13 +118,13 @@ const getAllorder=(req,res)=>{
         if (result.length) {
             res.status(200).json({
                 success: true,
-                massage: `the restaurant name is: ${restarent_id}`,
+                massage: `the restaurant name is: ${restaurant_id}`,
                 result: result,
             });
         } else {
             res.status(404).json({
                 success: false,
-                massage: `the restaurant name is ${restarent_id} is not found now `,
+                massage: `the restaurant name is ${restaurant_id} is not found now `,
             });
         }
     });
@@ -133,10 +133,10 @@ const getAllorder=(req,res)=>{
 
 
 module.exports = {
-   creatMeal: createMeal,
-   deleteMealfromResturant,
+    createMeal,
+   deleteMealFromRestaurant,
    updateMeal,
-   getAllorder
+   getAllOrder
 
 
 };

@@ -5,6 +5,7 @@ import { Owner } from "../../../../../controllers/owner";
 import { Gender } from "../../../../Registration/Register/GenderDiv";
 import { ErrorsDiv } from "../../../../Registration/Register/ErrorsDiv";
 import { Registration } from "../../../../../controllers/registration";
+import { Employee } from "../../../../../controllers/employee";
 
 export const CreateMeal = ({ setIsMealDialogShown }) => {
   const [name, setName] = useState("");
@@ -53,7 +54,18 @@ export const CreateMeal = ({ setIsMealDialogShown }) => {
   };
 
   const createMeal = async () => {
-    
+    const response = await Employee.createMeal({
+      category,
+      imgUrl,
+      name,
+      price,
+      restaurant_id,
+      token: auth.token,
+    });
+    console.log(response);
+    if (response.success) {
+      setIsDialogShown(true);
+    }
   };
   return (
     <div id="signup-form">
@@ -61,8 +73,8 @@ export const CreateMeal = ({ setIsMealDialogShown }) => {
         buildAlertDialog({
           bgColor: "green",
           color: "white",
-          text: "Employee Created Successfully",
-          text2: `The employee can start his job `,
+          text: "Meal Created Successfully",
+          text2: `The meal is added to the stor `,
         })
       ) : (
         <></>
@@ -78,7 +90,7 @@ export const CreateMeal = ({ setIsMealDialogShown }) => {
           </button>
         </div>
 
-        <h1>Create Employee</h1>
+        <h1>Create Meal</h1>
         <hr />
 
         <div></div>
