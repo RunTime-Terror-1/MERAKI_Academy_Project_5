@@ -55,23 +55,29 @@ export const UserSlice = createSlice({
                 console.log("delete here")
                 return cartitem.id != action.payload.id;
             });
+            
+            state.price = state.price.filter((cartitem, index) => {
+                console.log("delete here")
+                return cartitem.id != action.payload.id;
+            });
+
 
         },
-
+     
         setPrice: (state, action) => {
             // state.price.push({price:action.payload.price,id:action.payload.indexitem})
             console.log("ghgh")
            
             if (state.price.length == 0) {
                 console.log("length")
-                state.price.push({ price: action.payload.price, id: action.payload.indexitem })
+                state.price.push({ price: action.payload.price, id: action.payload.indexitem,priceOne:action.payload. priceOne,name:action.payload.name  })
 
             } else {
                 console.log("not zero")
 
                 let loop = false
          
-
+                   
 
                 state.price = state.price.filter((element, index) => {
                     console.log(element.id)
@@ -85,23 +91,21 @@ export const UserSlice = createSlice({
                         return element
                     }
 
-
-
                 })
 
                 if (loop == false) {
-                    state.price.push({ price: action.payload.price, id: action.payload.indexitem })
+                    state.price.push({ price: action.payload.price, id: action.payload.indexitem,priceOne:action.payload. priceOne,name:action.payload.name })
                 }
             }
         },
-        setsumPriceUser: (state, action) => {
-            state.sumPriceUser = state.price.reduce((acc, elemnt, index) => {
+        // setsumPriceUser: (state, action) => {
+        //     state.sumPriceUser = state.price.reduce((acc, elemnt, index) => {
 
-                return acc + elemnt
-            })
-            console.log(state.sumPriceUser)
-            console.log("sum")
-        },
+        //         return acc + elemnt
+        //     })
+        //     console.log(state.sumPriceUser)
+        //     console.log("sum")
+        // },
 
 
         setTotal: (state, action) => {

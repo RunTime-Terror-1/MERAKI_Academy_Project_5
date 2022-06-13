@@ -6,6 +6,9 @@ import { deleteCart, setPrice, setsumPriceUser, setTotal } from '../../../../red
 import { AiTwotoneDelete } from "react-icons/ai";
 
 import { BsDashLg, BsDashCircleFill, BsPlusCircleFill } from "react-icons/bs";
+
+
+
 const Counter = ({ element }) => {
 
     const [cart, setCart] = useState("")
@@ -48,7 +51,7 @@ const Counter = ({ element }) => {
                 <BsPlusCircleFill className='iconesCounter'
                     onClick={() => {
                         nextPrice();
-                        dispatch(setPrice({ price: (realPrice * priceNumber) + realPrice, indexitem: element.id }));
+                        dispatch(setPrice({ price: (realPrice * priceNumber) + realPrice, indexitem: element.id ,priceOne:realPrice,name:element.name}));
                         dispatch(setTotal({ opr: "+", value: realPrice }));
                     }}
                 />
@@ -58,7 +61,7 @@ const Counter = ({ element }) => {
 
                     onClick={() => {
                         prevPrice()
-                        dispatch(setPrice({ price: (realPrice * priceNumber) - realPrice, indexitem: element.id }));
+                        dispatch(setPrice({ price: (realPrice * priceNumber) - realPrice, indexitem: element.id,priceOne:realPrice,name:element.name }));
                         dispatch(setTotal({ opr: "-", value: realPrice }));
                     }}
                 />
@@ -67,13 +70,14 @@ const Counter = ({ element }) => {
 
 
             <div className='Name_andP' >
-                <h3>{element.name + "gggHddHHg"}</h3 >
+                <h3>{element.name}</h3 >
                 <h3 className='h3_price'>{realPrice * priceNumber + "JD"}</h3></div>
 
 
             <div className='div_delete'> <AiTwotoneDelete className='deleteIcons'
                 onClick={() => {
                     dispatch(deleteCart({ id: element.id }))
+                    dispatch(setTotal({ opr: "-", value: realPrice }));
                     console.log(element.id)
                 }}
 

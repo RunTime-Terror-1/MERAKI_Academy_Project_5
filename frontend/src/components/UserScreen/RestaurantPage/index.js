@@ -172,7 +172,7 @@ const RestaurantPage = () => {
                 onClick={() => {
 
                   dispatch(setCart({ items: elementMall }))
-                  // dispatch(setPrice({ price: elementMall.price, indexitem: elementMall.id }))
+                  dispatch(setPrice({ price: elementMall.price, indexitem: elementMall.id,priceOne:elementMall.price,name:elementMall.name }))
 
                   dispatch(setTotal({ opr: "+", value: elementMall.price }));
                   console.log("44")

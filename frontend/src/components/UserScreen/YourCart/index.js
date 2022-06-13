@@ -33,7 +33,7 @@ const YourCart = () => {
 
    const complete=()=>{
   
-    Userinfor.islogin==true?  navigate("/Login"):navigate("/Login")
+    Userinfor.islogin==true? navigate("/CompleteOrder"):navigate("/Login")
 
    }
 
