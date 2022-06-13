@@ -1,17 +1,17 @@
 import react, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setRequests, setUsers } from "../../../../redux/reducers/superAdmin";
+import { setMeals, setRequests, setUsers } from "../../../../redux/reducers/superAdmin";
 import { Owner } from "../../../../controllers/owner";
 import "./style.css";
 import { CreateMeal } from "./CreateMeal";
+import { Employee } from "../../../../controllers/employee";
 
 
 export const Meals = () => {
   const dispatch = useDispatch();
   const [isDeleteDialogShown, setIsDeleteDialogShown] = useState(false);
 
-  const [isCreateMealDialogShown, setIsMealDialogShown] =
-    useState(false);
+  const [isCreateMealDialogShown, setIsMealDialogShown] = useState(false);
 
   const [currentIndex, setCurrentIndex] = useState({});
 
@@ -35,12 +35,11 @@ export const Meals = () => {
     );
   };
   const createRow = (meal, index) => {
-    console.log(meal);
     return (
-      <div className="user-row" key={meal.id + meal.name }>
+      <div className="user-row" key={meal.id + meal.name}>
         <h4>{meal.id}</h4>
         <h4>{meal.name}</h4>
-        <img src={`${meal.imgUrl}`} width="100%" height="50px"/>
+        <img src={`${meal.imgUrl}`} width="100%" height="50px" />
         <h4>{meal.price} $</h4>
         <h4>{meal.category} </h4>
         <div id="edit-btns-div">
@@ -110,6 +109,11 @@ export const Meals = () => {
     );
   };
 
+  const createOption = (restaurant,index)=>{
+    console.log(index);
+    return <option key={restaurant.id} value={index}>{restaurant.name}</option>
+  }
+
   return (
     <div>
       <div id="request-div">
@@ -119,11 +123,22 @@ export const Meals = () => {
 
         <button
           onClick={() => {
-          setIsMealDialogShown(true)
+            setIsMealDialogShown(true);
           }}
         >
           + Meal
         </button>
+      </div>
+      <div>
+        <h3>Restaurant</h3>
+        <select onChange={async (e)=>{
+         const {meals} = await Employee.getAllMeals({token:auth.token,restaurant_id:superAdminPanel.restaurants[e.target.value].id})
+         dispatch(setMeals(meals))
+        }}>
+          {superAdminPanel.restaurants.map((restaurant,index)=>{
+            return createOption(restaurant, index);
+          })}
+        </select>
       </div>
       {isDeleteDialogShown ? (
         deleteDialog({
@@ -133,11 +148,7 @@ export const Meals = () => {
       ) : (
         <></>
       )}
-      {/* {isCreateRequestDialogShown ? (
-        <CreateRequest setIsRequestDialogShown={setIsRequestDialogShown} />
-      ) : (
-        <></>
-      )} */}
+
       {isCreateMealDialogShown ? (
         <CreateMeal
           setIsMealDialogShown={setIsMealDialogShown}
