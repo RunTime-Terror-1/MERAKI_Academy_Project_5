@@ -95,7 +95,8 @@ export const LoginForm = () => {
           Login
         </button>
 
-       
+        <br/>
+        <br/>
       </div>
        
       <div id="create-new-account-button">
@@ -109,8 +110,8 @@ export const LoginForm = () => {
           Create New Account
         </button>
         <br/>
+
         <br/>
-         
       <div id="to-create-user">
        
       </div>
