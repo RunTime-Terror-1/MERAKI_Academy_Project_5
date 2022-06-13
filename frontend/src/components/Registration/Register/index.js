@@ -119,16 +119,20 @@ export const RegisterComponent = ({
           </button>
         </div>
 
-        <h1>Sign Up</h1>
-        <h4> it's quick and easy.</h4>
+        <h1>Create an Account</h1>
+        {/*<h4> it's quick and easy.</h4>*/}
+        
         <hr />
+
         <div id="register-username-div">
+         
           {createInput({
             placeholder: "First Name",
             type: "text",
             key: "FirstName",
             setState: setFirstName,
           })}
+          
           {createInput({
             placeholder: "Last Name",
             type: "text",
