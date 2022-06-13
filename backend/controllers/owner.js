@@ -114,8 +114,10 @@ const getAllEmployee = (req, res) => {
 
 const getOwnerRestaurants = (req, res) => {
   const owner_id = req.token.userId;
-  const query = "SELECT * FROM restaurants INNER JOIN users ";
-  connection.query(query, [owner_id], (err, restaurants) => {
+
+  const query =
+    "SELECT  email,firstName,lastName,name,orders,RS.id  FROM restaurants RS INNER JOIN users US ON US.id = ? AND RS.owner_id=? AND RS.is_deleted=0";
+  connection.query(query, [owner_id, owner_id], (err, restaurants) => {
     if (err) {
       return res.status(500).json({
         success: false,
@@ -140,7 +142,6 @@ const getOwnerRestaurants = (req, res) => {
 };
 const getOwnerRequests = (req, res) => {
   const owner_id = req.token.userId;
-  console.log(owner_id);
   const query =
     "SELECT firstName,lastName,restaurantName,state, email, requests.id  FROM users INNER JOIN requests ON requests.owner_id =? AND users.id=?";
   connection.query(query, [owner_id, owner_id], (err, requests) => {
@@ -207,6 +208,25 @@ const updateRequest = (req, res) => {
     });
   });
 };
+const deleteRestaurant = async (req, res) => {
+  const { id } = req.body;
+  const query = `UPDATE restaurants SET is_deleted=1 WHERE id=?`;
+  connection.query(query, [id], (err, result) => {
+    if (err) {
+      return res.status(409).json({
+        success: false,
+        massage: "Server Error",
+        err,
+      });
+    }
+    res.status(200).json({
+      success: true,
+      message: "Restaurant  Deleted Successfully",
+      results: result,
+    });
+  });
+};
+
 module.exports = {
   createRequest,
   createRestaurant,
@@ -216,4 +236,5 @@ module.exports = {
   getOwnerRestaurants,
   deleteRequest,
   updateRequest,
+  deleteRestaurant,
 };

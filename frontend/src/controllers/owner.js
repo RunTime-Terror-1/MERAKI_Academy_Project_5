@@ -153,4 +153,21 @@ export class Owner {
       };
     }
   }
+  static async deleteRestaurant({ id, token }) {
+    try {
+      const response = await axios.delete(
+        `${hostUrl}/owner/restaurant`,
+        {
+          headers: { authorization: `Bearer ${token}` },
+          data: { id },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return {
+        success: false,
+        error,
+      };
+    }
+  }
 }

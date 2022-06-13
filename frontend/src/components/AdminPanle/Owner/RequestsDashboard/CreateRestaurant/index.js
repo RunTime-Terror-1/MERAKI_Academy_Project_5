@@ -8,7 +8,6 @@ export const CreateRestaurant = ({
   setIsRestaurantDialogShown,
   currentIndex,
 }) => {
-  const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [Logo, setLogo] = useState("");
   const [category, setCategory] = useState("");
@@ -56,7 +55,7 @@ export const CreateRestaurant = ({
       lat: "none",
       lng: "none",
       location,
-      name,
+      name: superAdminPanel.requests[currentIndex].restaurantName,
       Logo,
       category,
       token: auth.token,
@@ -109,12 +108,6 @@ export const CreateRestaurant = ({
           type: "text",
           key: "text",
           setState: setLogo,
-        })}
-        {createInput({
-          placeholder: "Restaurant Name",
-          type: "text",
-          key: "text",
-          setState: setName,
         })}
 
         {createInput({
