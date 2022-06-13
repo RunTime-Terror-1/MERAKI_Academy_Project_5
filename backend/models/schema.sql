@@ -62,7 +62,7 @@ CREATE TABLE employees(
     id INT AUTO_INCREMENT NOT NULL,
     user_id INT NOT NULL,
     restaurant_id INT NOT NULL,
-    salary INT NOT NULL,
+    salary VARCHAR(255) NOT NULL,
     weeklyHours INT NOT NULL,
     shift VARCHAR(255) NOT NULL,
     FOREIGN KEY (restaurant_id) REFERENCES restaurants(id),

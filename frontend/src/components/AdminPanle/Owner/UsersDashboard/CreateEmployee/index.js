@@ -7,9 +7,7 @@ import { Gender } from "../../../../Registration/Register/GenderDiv";
 import { ErrorsDiv } from "../../../../Registration/Register/ErrorsDiv";
 import { Registration } from "../../../../../controllers/registration";
 
-export const CreateEmployee = ({
-  setIsEmployeeFormShown
-}) => {
+export const CreateEmployee = ({ setIsEmployeeFormShown }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [gender, setGender] = useState(null);
@@ -31,7 +29,7 @@ export const CreateEmployee = ({
   const buildAlertDialog = ({ bgColor, color, text, text2 }) => {
     setTimeout(() => {
       setIsDialogShown(false);
-      setIsEmployeeFormShown(false)
+      setIsEmployeeFormShown(false);
     }, 2500);
 
     return (
@@ -78,10 +76,10 @@ export const CreateEmployee = ({
       gender,
       email,
       shift,
-      salary,
+      salary: salary + "$",
       restaurant_id,
       weeklyHours,
-      token:auth.token
+      token: auth.token,
     };
     const inputForm = {
       FirstName: `${firstName} `,
@@ -96,13 +94,11 @@ export const CreateEmployee = ({
       inputForm: inputForm,
     });
     if (errors.length === 0) {
-      const {serverError} = await Owner.createEmployee({...employee});
+      const { serverError } = await Owner.createEmployee({ ...employee });
       if (serverError === "Email already taken") {
         setErrors([...errors, "Email already taken"]);
       } else {
-       
         setIsDialogShown(true);
-       
       }
     } else {
       setErrors(errors);
@@ -124,7 +120,7 @@ export const CreateEmployee = ({
         <div id="signup--exit-button">
           <button
             onClick={() => {
-              setIsEmployeeFormShown(false)
+              setIsEmployeeFormShown(false);
             }}
           >
             X
@@ -171,7 +167,7 @@ export const CreateEmployee = ({
           key: "Shift",
           setState: setShift,
         })}
-         {createInput({
+        {createInput({
           placeholder: "Restaurant Id",
           type: "number",
           key: "Restaurant Id",
