@@ -14,6 +14,7 @@ const register = async (req, res) => {
   const query = `INSERT INTO users (firstName, lastName,  email, password,gender, role_id) VALUES (?,?,?,?,?,?)`;
   const data = [firstName, lastName, email, encryptedPassword, gender,role_id];
   connection.query(query, data, (err, result) => {
+    console.log(result,err)
     if (err) {
       return res.status(409).json({
         success: false,
