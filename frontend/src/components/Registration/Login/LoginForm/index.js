@@ -94,9 +94,16 @@ export const LoginForm = () => {
         <button id="login-button" onClick={login}>
           Login
         </button>
+        <br/>
+        <br/>
+      
+
+        <button id="login-button-Google" onClick="">
+          Continue with Google
+        </button>
 
         <br/>
-        <br/>
+         
       </div>
        
       <div id="create-new-account-button">
