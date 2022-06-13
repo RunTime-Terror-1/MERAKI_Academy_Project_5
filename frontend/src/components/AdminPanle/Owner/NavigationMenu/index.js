@@ -49,7 +49,7 @@ export const NavigationMenu = ({setIsUsersShown}) => {
         <h4>User Management</h4>
       </div>
       {menuButton({ text: "Employee", icon: <HiUsers />, onClick: async () => {
-        const {users} = await SuperAdmin.getAllUsers({token:auth.token});
+        const {users} = await Owner.getAllEmployee({token:auth.token});
         setIsUsersShown(0);
         dispatch(setUsers(users))
       } })}

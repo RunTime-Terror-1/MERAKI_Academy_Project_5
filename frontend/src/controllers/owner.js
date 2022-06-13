@@ -65,7 +65,6 @@ export class Owner {
     weeklyHours,
     token,
   }) {
-   console.log(gender);
     try {
       const body = {
         firstName,
@@ -77,15 +76,19 @@ export class Owner {
         salary,
         weeklyHours,
       };
-      const response = await axios.post(`${hostUrl}/owner/employee/${restaurant_id}`, body, {
-        headers: { authorization: `Bearer ${token}` },
-      });
+      const response = await axios.post(
+        `${hostUrl}/owner/employee/${restaurant_id}`,
+        body,
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
       return response.data;
     } catch (error) {
       return {
         success: false,
         massage: "Error",
-        serverError: error.response.data.message
+        serverError: error.response.data.message,
       };
     }
   }
@@ -139,10 +142,8 @@ export class Owner {
       const response = await axios.get(`${hostUrl}/owner/restaurants`, {
         headers: { authorization: `Bearer ${token}` },
       });
-      console.log(response);
       return response.data;
     } catch (error) {
-      console.log(error);
       return {
         success: "false",
         massage: "Server Error",
@@ -151,7 +152,23 @@ export class Owner {
       };
     }
   }
+  static async getAllEmployee({ token }) {
+    try {
+      const response = await axios.get(`${hostUrl}/owner/employees`, {
+        headers: { authorization: `Bearer ${token}` },
+      });
 
+      return response.data;
+    } catch (error) {
+      return {
+        success: "false",
+        massage: "Server Error",
+        error,
+        users: [],
+      };
+    }
+  }
+  //
   static async updateRequest({ requestId, state, token }) {
     try {
       const response = await axios.put(

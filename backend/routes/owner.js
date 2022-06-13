@@ -29,12 +29,12 @@ ownerRouter.get(
   authorization("2"),
   getOwnerRestaurants
 );
-// ownerRouter.get(
-//   "/employees",
-//   authentication,
-//   authorization("2"),
-//   getAllEmployee
-// );
+ownerRouter.get(
+  "/employees",
+  authentication,
+  authorization("2"),
+  getAllEmployee
+);
 //post
 ownerRouter.post("/request", authentication, authorization("2"), createRequest);
 ownerRouter.post(
