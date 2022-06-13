@@ -22,9 +22,10 @@ export class Owner {
       };
     }
   }
-  static async createRestaurant({ location, lat, lng, name, token }) {
+  static async createRestaurant({ location, lat, lng, name, token,Logo,category }) {
     try {
-      const body = { location, lat, lng, name, token };
+      const body = { location, lat, lng, name,Logo,rest_category:category, token };
+      console.log(body);
       const response = await axios.post(`${hostUrl}/owner/restaurant`, body, {
         headers: { authorization: `Bearer ${token}` },
       });

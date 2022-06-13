@@ -7,8 +7,8 @@ import { setRequests } from "../../../../../redux/reducers/superAdmin";
 export const CreateRestaurant = ({}) => {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
-  const [logo, setLogo] = useState("");
-  const [Category, setCategory] = useState("");
+  const [Logo, setLogo] = useState("");
+  const [category, setCategory] = useState("");
 
   const [isDialogShown, setIsDialogShown] = useState("");
   const dispatch = useDispatch();
@@ -48,22 +48,8 @@ export const CreateRestaurant = ({}) => {
     );
   };
 
-  const createRequest = async () => {
-    if (name.replaceAll(" ", "") !== "") {
-      const { results } = await Owner.createRequest({
-        token: auth.token,
-        restaurantName: name,
-      });
-      const requests = [...superAdminPanel.requests];
-      requests.push({
-        ...requests[0],
-        id: results.insertId,
-        state: "In Progress",
-        restaurantName: name,
-      });
-      setIsDialogShown(true);
-      dispatch(setRequests(requests));
-    }
+  const createRestaurant = async () => {
+   await Owner.createRestaurant({lat:"none",lng:"none",location,name, Logo,category,token:auth.token})
   };
   return (
     <div id="signup-form">
@@ -82,7 +68,7 @@ export const CreateRestaurant = ({}) => {
           <button onClick={() => {}}>X</button>
         </div>
 
-        <h1>Create Request</h1>
+        <h1>Create Restaurant</h1>
         <hr />
 
         {createInput({
@@ -112,7 +98,7 @@ export const CreateRestaurant = ({}) => {
         })}
 
         <div id="signup-button-div">
-          <button onClick={createRequest}>Send Request</button>
+          <button onClick={createRestaurant}>Create Restaurant</button>
         </div>
       </div>
     </div>

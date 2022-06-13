@@ -23,10 +23,12 @@ const createRequest = async (req, res) => {
 
 const createRestaurant = async (req, res) => {
   const ownerId = req.token.userId;
-  const { location, lat, lng, name, orders, Logo, rest_category } = req.body;
-  const query = `INSERT INTO restaurants  ( location, lat, lng, name, orders, Logo, rest_category,owner_id) VALUES (?,?,?,?,?,?,?,?)`;
-  const data = [location, lat, lng, name, orders, Logo, rest_category, ownerId];
+  const { location, lat, lng, name, Logo, rest_category } = req.body;
+  console.log(location, lat, lng, name, Logo, rest_category);
+  const query = `INSERT INTO restaurants  ( location, lat, lng, name, Logo, rest_category,owner_id) VALUES (?,?,?,?,?,?,?,)`;
+  const data = [location, lat, lng, name, Logo, rest_category, ownerId];
   connection.query(query, data, (err, result) => {
+    console.log(err.message,result);
     if (err) {
       return res.status(500).json({
         success: false,
