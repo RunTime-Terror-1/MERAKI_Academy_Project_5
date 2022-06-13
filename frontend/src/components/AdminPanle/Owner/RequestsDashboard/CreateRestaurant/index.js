@@ -4,8 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Owner } from "../../../../../controllers/owner";
 import { setRequests } from "../../../../../redux/reducers/superAdmin";
 
-export const CreateRestaurant = ({}) => {
-  const [name, setName] = useState("");
+export const CreateRestaurant = ({
+  setIsRestaurantDialogShown,
+  currentIndex,
+}) => {
   const [location, setLocation] = useState("");
   const [Logo, setLogo] = useState("");
   const [category, setCategory] = useState("");
@@ -49,7 +51,30 @@ export const CreateRestaurant = ({}) => {
   };
 
   const createRestaurant = async () => {
-   await Owner.createRestaurant({lat:"none",lng:"none",location,name, Logo,category,token:auth.token})
+    const { results } = await Owner.createRestaurant({
+      lat: "none",
+      lng: "none",
+      location,
+      name: superAdminPanel.requests[currentIndex].restaurantName,
+      Logo,
+      category,
+      token: auth.token,
+    });
+    if (results.affectedRows) {
+      const requests = [...superAdminPanel.requests];
+      await Owner.updateRequest({
+        requestId: requests[currentIndex].id,
+        state: "Completed",
+        token: auth.token,
+      });
+      requests[currentIndex] = {
+        ...requests[currentIndex],
+        state: "Completed",
+      };
+
+      dispatch(setRequests(requests));
+      setIsRestaurantDialogShown(false);
+    }
   };
   return (
     <div id="signup-form">
@@ -65,7 +90,13 @@ export const CreateRestaurant = ({}) => {
       )}
       <div id="signup-form-inner">
         <div id="signup--exit-button">
-          <button onClick={() => {}}>X</button>
+          <button
+            onClick={() => {
+              setIsRestaurantDialogShown(false);
+            }}
+          >
+            X
+          </button>
         </div>
 
         <h1>Create Restaurant</h1>
@@ -76,12 +107,6 @@ export const CreateRestaurant = ({}) => {
           type: "text",
           key: "text",
           setState: setLogo,
-        })}
-        {createInput({
-          placeholder: "Restaurant Name",
-          type: "text",
-          key: "text",
-          setState: setName,
         })}
 
         {createInput({

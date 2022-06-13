@@ -4,9 +4,8 @@ import { HiUsers } from "react-icons/hi";
 import { BiGitPullRequest, BiLogOut } from "react-icons/bi";
 import { MdFastfood } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
-import react, { useEffect, useState } from "react";
 import { SuperAdmin } from "../../../../controllers/superAdmin";
-import { setRequests, setUsers } from "../../../../redux/reducers/superAdmin";
+import { setRequests, setRestaurants, setUsers } from "../../../../redux/reducers/superAdmin";
 import { Owner } from "../../../../controllers/owner";
 
 export const NavigationMenu = ({setIsUsersShown}) => {
@@ -50,7 +49,8 @@ export const NavigationMenu = ({setIsUsersShown}) => {
         <h4>User Management</h4>
       </div>
       {menuButton({ text: "Employee", icon: <HiUsers />, onClick: async () => {
-        const {users} = await SuperAdmin.getAllUsers({token:auth.token});
+        const {users} = await Owner.getAllEmployee({token:auth.token});
+        console.log(users);
         setIsUsersShown(0);
         dispatch(setUsers(users))
       } })}
@@ -67,9 +67,9 @@ export const NavigationMenu = ({setIsUsersShown}) => {
         text: "My Restaurants",
         icon: <MdFastfood />,
         onClick: async () => {
-          const {restaurants} = await SuperAdmin.getAllRestaurants({token:auth.token});
+          const {restaurants} = await Owner.getOwnerRestaurants({token:auth.token});
           setIsUsersShown(2);
-          dispatch(setRequests(restaurants))
+          dispatch(setRestaurants(restaurants))
         },
       })}
       <div id="user-management-div">

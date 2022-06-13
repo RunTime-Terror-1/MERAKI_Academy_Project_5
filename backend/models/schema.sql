@@ -1,7 +1,5 @@
 -- DROP DATABASE RUNTIME_TERROR;
-
 -- CREATE DATABASE RUNTIME_TERROR;
-
 USE RUNTIME_TERROR;
 
 CREATE TABLE roles (
@@ -16,13 +14,15 @@ CREATE TABLE users(
     lastName VARCHAR(255),
     email VARCHAR(255) NOT NULL UNIQUE,
     gender VARCHAR(255),
-    lastLogin DATE ,
+    lastLogin DATE,
     password VARCHAR(255),
     role_id INT,
     FOREIGN KEY (role_id) REFERENCES roles(id),
     is_deleted TINYINT DEFAULT 0,
     PRIMARY KEY (id)
 );
+
+
 
 CREATE TABLE carts (
     id INT AUTO_INCREMENT NOT NULL,
@@ -58,14 +58,27 @@ CREATE TABLE restaurants (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE restaurants_employee (
+CREATE TABLE employees(
     id INT AUTO_INCREMENT NOT NULL,
-    employee_id INT,
-    restarent_id INT,
-    FOREIGN KEY (restarent_id) REFERENCES restaurants(id),
-    FOREIGN KEY (employee_id) REFERENCES users(id),
+    user_id INT NOT NULL,
+    restaurant_id INT NOT NULL,
+    salary VARCHAR(255) NOT NULL,
+    weeklyHours INT NOT NULL,
+    shift VARCHAR(255) NOT NULL,
+    FOREIGN KEY (restaurant_id) REFERENCES restaurants(id),
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    is_deleted TINYINT DEFAULT 0,
     PRIMARY KEY (id)
 );
+-- CREATE TABLE restaurants_employee (
+--     id INT AUTO_INCREMENT NOT NULL,
+--     employee_id INT,
+--     restarent_id INT,
+--     FOREIGN KEY (restarent_id) REFERENCES restaurants(id),
+--     FOREIGN KEY (employee_id) REFERENCES users(id),
+--     PRIMARY KEY (id)
+-- );
+
 
 CREATE TABLE meals(
     id INT AUTO_INCREMENT NOT NULL,
@@ -73,9 +86,9 @@ CREATE TABLE meals(
     imgUrl VARCHAR(255) NOT NULL,
     category VARCHAR(255) NOT NULL,
     price INT NOT NULL,
-    restarent_id INT,
+    restaurant_id INT,
     is_deleted TINYINT DEFAULT 0,
-    FOREIGN KEY (restarent_id) REFERENCES restaurants(id),
+    FOREIGN KEY (restaurant_id) REFERENCES restaurants(id),
     PRIMARY KEY (id)
 );
 
@@ -115,27 +128,27 @@ CREATE TABLE orders (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE permissions (
-    id INT AUTO_INCREMENT NOT NULL,
-    permission VARCHAR(255) NOT NULL,
-    PRIMARY KEY (id)
-);
+-- CREATE TABLE permissions (
+--     id INT AUTO_INCREMENT NOT NULL,
+--     permission VARCHAR(255) NOT NULL,
+--     PRIMARY KEY (id)
+-- );
 
-CREATE TABLE role_permission (
-    id INT NOT NULL AUTO_INCREMENT NOT NULL,
-    role_id INT,
-    permission_id INT,
-    FOREIGN KEY (role_id) REFERENCES roles (id),
-    FOREIGN KEY (permission_id) REFERENCES permissions (id),
-    PRIMARY KEY (id)
-);
+-- CREATE TABLE role_permission (
+--     id INT NOT NULL AUTO_INCREMENT NOT NULL,
+--     role_id INT,
+--     permission_id INT,
+--     FOREIGN KEY (role_id) REFERENCES roles (id),
+--     FOREIGN KEY (permission_id) REFERENCES permissions (id),
+--     PRIMARY KEY (id)
+-- );
 
-CREATE TABLE requests(
-    id INT NOT NULL AUTO_INCREMENT NOT NULL,
-    restaurantName VARCHAR(255) NOT NULL,
-    state VARCHAR(255),
-    owner_Id INT,
-    FOREIGN KEY (owner_Id) REFERENCES users (id),
-    is_deleted TINYINT DEFAULT 0,
-    PRIMARY KEY (id)
-);
+-- CREATE TABLE requests(
+--     id INT NOT NULL AUTO_INCREMENT NOT NULL,
+--     restaurantName VARCHAR(255) NOT NULL,
+--     state VARCHAR(255),
+--     owner_Id INT,
+--     FOREIGN KEY (owner_Id) REFERENCES users (id),
+--     is_deleted TINYINT DEFAULT 0,
+--     PRIMARY KEY (id)
+-- );

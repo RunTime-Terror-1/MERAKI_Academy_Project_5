@@ -12,7 +12,6 @@ export class Owner {
           headers: { authorization: `Bearer ${token}` },
         }
       );
-      console.log( response.data);
       return response.data;
     } catch (error) {
       return {
@@ -22,10 +21,26 @@ export class Owner {
       };
     }
   }
-  static async createRestaurant({ location, lat, lng, name, token,Logo,category }) {
+  static async createRestaurant({
+    location,
+    lat,
+    lng,
+    name,
+    token,
+    Logo,
+    category,
+  }) {
     try {
-      const body = { location, lat, lng, name,Logo,rest_category:category, token };
-      console.log(body);
+      const body = {
+        location,
+        lat,
+        lng,
+        name,
+        Logo,
+        rest_category: category,
+        token,
+      };
+
       const response = await axios.post(`${hostUrl}/owner/restaurant`, body, {
         headers: { authorization: `Bearer ${token}` },
       });
@@ -43,20 +58,37 @@ export class Owner {
     lastName,
     email,
     password,
+    gender,
     restaurant_id,
+    shift,
+    salary,
+    weeklyHours,
     token,
   }) {
     try {
-      const body = { firstName, lastName, email, password, restaurant_id };
-      const response = await axios.post(`${hostUrl}/owner/employee`, body, {
-        headers: { authorization: `Bearer ${token}` },
-      });
+      const body = {
+        firstName,
+        gender,
+        lastName,
+        email,
+        password,
+        shift,
+        salary,
+        weeklyHours,
+      };
+      const response = await axios.post(
+        `${hostUrl}/owner/employee/${restaurant_id}`,
+        body,
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
       return response.data;
     } catch (error) {
       return {
         success: false,
         massage: "Error",
-        error,
+        serverError: error.response.data.message,
       };
     }
   }
@@ -75,16 +107,29 @@ export class Owner {
       };
     }
   }
-
+  static async deleteRequest({ requestId, token }) {
+    try {
+      const response = await axios.delete(`${hostUrl}/owner/request`, {
+        headers: { authorization: `Bearer ${token}` },
+        data: { requestId },
+      });
+      return response.data;
+    } catch (error) {
+      return {
+        success: false,
+        massage: "Server Error",
+        error,
+      };
+    }
+  }
   static async getOwnerRequests({ token }) {
     try {
       const response = await axios.get(`${hostUrl}/owner/requests`, {
         headers: { authorization: `Bearer ${token}` },
       });
-      console.log(response.data);
+
       return response.data;
     } catch (error) {
-      console.log(error);
       return {
         success: "false",
         massage: "Server Error",
@@ -103,21 +148,54 @@ export class Owner {
         success: "false",
         massage: "Server Error",
         error,
+        restaurants: [],
       };
     }
   }
-
-  static async deleteRequest({ requestId, token }) {
+  static async getAllEmployee({ token }) {
     try {
-      const response = await axios.delete(`${hostUrl}/owner/request`, {
+      const response = await axios.get(`${hostUrl}/owner/employees`, {
         headers: { authorization: `Bearer ${token}` },
-        data: { requestId },
+      });
+
+      return response.data;
+    } catch (error) {
+      return {
+        success: "false",
+        massage: "Server Error",
+        error,
+        users: [],
+      };
+    }
+  }
+  //
+  static async updateRequest({ requestId, state, token }) {
+    try {
+      const response = await axios.put(
+        `${hostUrl}/owner/request`,
+        { requestId, state },
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return {
+        success: true,
+        massage: "Request State Change",
+      };
+    }
+  }
+  static async deleteRestaurant({ id, token }) {
+    try {
+      const response = await axios.delete(`${hostUrl}/owner/restaurant`, {
+        headers: { authorization: `Bearer ${token}` },
+        data: { id },
       });
       return response.data;
     } catch (error) {
       return {
         success: false,
-        massage: "Server Error",
         error,
       };
     }
