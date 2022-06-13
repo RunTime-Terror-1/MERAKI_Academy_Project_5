@@ -57,6 +57,7 @@ export const CreateRequest = ({setIsRequestDialogShown}) => {
         state: "In Progress",
         restaurantName:name
       });
+      setIsRequestDialogShown(false)
       setIsDialogShown(true)
      dispatch(setRequests(requests))
     }

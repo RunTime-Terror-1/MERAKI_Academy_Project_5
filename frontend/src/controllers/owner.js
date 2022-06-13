@@ -111,12 +111,15 @@ export class Owner {
       const response = await axios.get(`${hostUrl}/owner/restaurants`, {
         headers: { authorization: `Bearer ${token}` },
       });
+      console.log(response);
       return response.data;
     } catch (error) {
+      console.log(error);
       return {
         success: "false",
         massage: "Server Error",
         error,
+        restaurants:[]
       };
     }
   }
