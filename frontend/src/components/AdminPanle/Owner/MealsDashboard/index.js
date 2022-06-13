@@ -12,6 +12,8 @@ export const Meals = () => {
   const [isUpdate, setIsUpdate] = useState(false);
   const [currentIndex, setCurrentIndex] = useState({});
   const [currentMeal, setCurrentMeal] = useState({});
+  const [resId, setResId] = useState({});
+
   const { superAdminPanel, auth } = useSelector((state) => {
     return state;
   });
@@ -121,6 +123,7 @@ export const Meals = () => {
               token: auth.token,
               restaurant_id: superAdminPanel.restaurants[e.target.value].id,
             });
+            setResId(superAdminPanel.restaurants[e.target.value].id)
             dispatch(setMeals(meals));
           }}
         >
@@ -144,6 +147,8 @@ export const Meals = () => {
           setIsMealDialogShown={setIsMealDialogShown}
           currentIndex={currentIndex}
           isUpdate={isUpdate}
+          setIsUpdate={setIsUpdate}
+          resId
         />
       ) : (
         <></>

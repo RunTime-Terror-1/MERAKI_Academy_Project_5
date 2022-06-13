@@ -1,28 +1,31 @@
 import React, { useContext, useState } from "react";
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
-import { Owner } from "../../../../../controllers/owner";
-import { Gender } from "../../../../Registration/Register/GenderDiv";
-import { ErrorsDiv } from "../../../../Registration/Register/ErrorsDiv";
-import { Registration } from "../../../../../controllers/registration";
+
 import { Employee } from "../../../../../controllers/employee";
+import { SuperAdminPanel } from "../../../SuperAdmin";
 
 export const CreateMeal = ({
   setIsMealDialogShown,
   isUpdate = false,
   currentIndex,
+  setIsUpdate,
+  resId,
 }) => {
-  const [name, setName] = useState("");
-  const [imgUrl, setImgUrl] = useState("");
-  const [category, setCategory] = useState("");
-  const [price, setPrice] = useState("");
-  const [restaurant_id, setRestaurant_id] = useState("");
-  const [isDialogShown, setIsDialogShown] = useState("");
-  const dispatch = useDispatch();
-
   const { auth, superAdminPanel } = useSelector((state) => {
     return state;
   });
+  const currentMeal = superAdminPanel.meals[currentIndex];
+  const [name, setName] = useState(isUpdate ? currentMeal.name : "");
+  const [imgUrl, setImgUrl] = useState(isUpdate ? currentMeal.imgUrl : "");
+  const [category, setCategory] = useState(
+    isUpdate ? currentMeal.category : ""
+  );
+  const [price, setPrice] = useState(isUpdate ? currentMeal.price : "");
+  const [restaurant_id, setRestaurant_id] = useState(isUpdate ? resId : "");
+  const [isDialogShown, setIsDialogShown] = useState("");
+  const dispatch = useDispatch();
+
   const buildAlertDialog = ({ bgColor, color, text, text2 }) => {
     setTimeout(() => {
       setIsDialogShown(false);
@@ -41,12 +44,13 @@ export const CreateMeal = ({
       </div>
     );
   };
-  const createInput = ({ placeholder, setState, type = "text", key = "" }) => {
+  const createInput = ({ placeholder, setState, type = "text", value }) => {
     return (
       <div>
         <input
           type={type}
           placeholder={placeholder}
+          defaultValue={value}
           min={1}
           onChange={(e) => {
             setState(e.target.value);
@@ -58,17 +62,39 @@ export const CreateMeal = ({
   };
 
   const createMeal = async () => {
-    const response = await Employee.createMeal({
-      category,
-      imgUrl,
-      name,
-      price,
-      restaurant_id,
-      token: auth.token,
-    });
-
-    if (response.success) {
-      setIsDialogShown(true);
+    if (!isUpdate) {
+      const response = await Employee.createMeal({
+        category,
+        imgUrl,
+        name,
+        price,
+        restaurant_id,
+        token: auth.token,
+      });
+      if (response.success) {
+        setIsDialogShown(true);
+      }
+    } else {
+      const response = await Employee.updateMeal({
+        category,
+        imgUrl,
+        name,
+        price,
+        restaurant_id,
+        mealId: currentMeal.id,
+        token: auth.token,
+      });
+      if (response.success) {
+        setIsDialogShown(true);
+        // const meals = [...SuperAdminPanel.meals];
+        // meals[currentIndex] = {
+        //   category,
+        //   imgUrl,
+        //   name,
+        //   price,
+        //   id:currentMeal.id
+        // };
+      }
     }
   };
   return (
@@ -77,7 +103,7 @@ export const CreateMeal = ({
         buildAlertDialog({
           bgColor: "green",
           color: "white",
-          text: "Meal Created Successfully",
+          text: `Meal ${isUpdate ? "Updated" : "Created"} Successfully`,
           text2: `The meal is added to the stor `,
         })
       ) : (
@@ -88,54 +114,54 @@ export const CreateMeal = ({
           <button
             onClick={() => {
               setIsMealDialogShown(false);
+              setIsUpdate(false);
             }}
           >
             X
           </button>
         </div>
 
-        <h1>{isUpdate?"Update Meal":"Create Meal"}</h1>
+        <h1>{isUpdate ? "Update Meal" : "Create Meal"}</h1>
         <hr />
-
-        <div></div>
 
         {createInput({
           placeholder: "Meal Name",
           type: "text",
-          key: "FirstName",
+          value: isUpdate ? currentMeal.name : name,
           setState: setName,
         })}
         {createInput({
           placeholder: "Meal Image Url",
           type: "text",
-          key: "LastName",
+          value: isUpdate ? currentMeal.imgUrl : imgUrl,
           setState: setImgUrl,
         })}
 
         {createInput({
           placeholder: "Category",
           type: "text",
-          key: "Category",
+          value: isUpdate ? currentMeal.category : category,
           setState: setCategory,
         })}
 
         {createInput({
           placeholder: "Price",
           type: "number",
-          key: "Price",
+          value: isUpdate ? currentMeal.price : price,
           setState: setPrice,
         })}
 
         {createInput({
           placeholder: "Restaurant Id",
           type: "number",
-          key: "Restaurant Id",
+          value: isUpdate ? resId : restaurant_id,
           setState: setRestaurant_id,
         })}
 
         <div id="signup-button-div">
           <button onClick={createMeal}>
-          {isUpdate?"Update Employee":"Create Employee"}</button>
+            {isUpdate ? "Update Meal" : "Create Meal"}
+          </button>
         </div>
       </div>
     </div>

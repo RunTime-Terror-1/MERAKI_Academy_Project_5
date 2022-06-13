@@ -22,7 +22,7 @@ employeeRouter.post("/",  createMeal);
 employeeRouter.delete("/:meal_id", deleteMealFromRestaurant);
 
 //update
-employeeRouter.put("/:id", updateMeal);
+employeeRouter.put("/:mealId", updateMeal);
 
 //get
 employeeRouter.get("/:id",  getAllOrder);

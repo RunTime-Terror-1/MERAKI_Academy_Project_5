@@ -1,13 +1,7 @@
 const connection = require("../models/db");
 
 const createMeal = (req, res) => {
-  const {
-    name,
-    imgUrl,
-    category,
-    price,
-    restaurant_id: restaurant_id,
-  } = req.body;
+  const { name, imgUrl, category, price, restaurant_id } = req.body;
 
   const query = `INSERT INTO meals (name,imgUrl,category,price,restaurant_id) VALUES (?,?,?,?,?);`;
   const data = [name, imgUrl, category, price, restaurant_id];
@@ -65,14 +59,16 @@ const deleteMealFromRestaurant = (req, res) => {
 //!.......END    deleteMealfromResturant, ............
 
 const updateMeal = (req, res) => {
-  const id = req.params.id;
+  const mealId = req.params.mealId;
+  const { name, imgUrl, category, price, restaurant_id } = req.body;
+  console.log(name, imgUrl, category, price, restaurant_id);
 
-  const { name, imgUrl, category, price } = req.body;
+  const query = `UPDATE meals SET name=?,imgUrl=?,category=?,price=? ,restaurant_id=? WHERE id=?;`;
 
-  const query = `UPDATE meals SET name=?,imgUrl=?,category=?,price=? WHERE id=?;`;
-
-  const data = [name, imgUrl, category, price, id];
+  const data = [name, imgUrl, category, Number(price), restaurant_id, mealId];
   connection.query(query, data, (err, result) => {
+   
+
     if (err) {
       return res.status(500).json({
         success: false,
@@ -91,7 +87,7 @@ const updateMeal = (req, res) => {
     } else {
       res.status(200).json({
         success: true,
-        massage: `Succeeded to delete meal with id: ${id}`,
+        massage: `Meal Updated`,
         result: result,
       });
     }
@@ -124,15 +120,15 @@ const getAllOrder = (req, res) => {
 };
 
 const getAllMeals = (req, res) => {
-    const restaurant_id = req.params.restaurant_id;
+  const restaurant_id = req.params.restaurant_id;
   const query = `SELECT imgUrl,category,price,RS.name,Ms.name,MS.id FROM meals MS  INNER JOIN restaurants RS ON MS.restaurant_id = ? And MS.restaurant_id = RS.id  `;
-  connection.query(query,[restaurant_id], (err, result) => {
+  connection.query(query, [restaurant_id], (err, result) => {
     if (err) {
       res.status(500).json({
         success: false,
         massage: "server error",
         err: err,
-        meals:[]
+        meals: [],
       });
     }
     res.status(200).json({
@@ -148,5 +144,5 @@ module.exports = {
   deleteMealFromRestaurant,
   updateMeal,
   getAllOrder,
-  getAllMeals
+  getAllMeals,
 };

@@ -31,6 +31,36 @@ export class Employee {
       };
     }
   }
+  static async updateMeal({
+    name,
+    imgUrl,
+    category,
+    price,
+    restaurant_id,
+    mealId,
+    token,
+  }) {
+    const body = {
+      name,
+      imgUrl,
+      category,
+      price,
+      restaurant_id,
+    };
+    try {
+      const response = await axios.put(`${hostUrl}/employee/${mealId}`, body, {
+        headers: { authorization: `Bearer ${token}` },
+      });
+      return response.data;
+    } catch (error) {
+      return {
+        success: false,
+        massage: "Error",
+        serverError: error.response.data.message,
+      };
+    }
+  }
+  
   static async getAllMeals({ token,restaurant_id }) {
 
     try {
