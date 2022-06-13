@@ -7,7 +7,9 @@ export const UserSlice = createSlice({
         cart: [],
         price: [],
         total: 0,
-        sumPriceUser: "",
+        sumpriceUser:0,
+        name:"",
+        Id
 
     },
     reducers: {
@@ -49,6 +51,7 @@ export const UserSlice = createSlice({
 
 
         },
+        //!......................................................................
         deleteCart: (state, action) => {
             // action = {type,payload:2}
             state.cart = state.cart.filter((cartitem, index) => {
@@ -63,7 +66,7 @@ export const UserSlice = createSlice({
 
 
         },
-     
+     //!......................................................................
         setPrice: (state, action) => {
             // state.price.push({price:action.payload.price,id:action.payload.indexitem})
             console.log("ghgh")
@@ -98,16 +101,16 @@ export const UserSlice = createSlice({
                 }
             }
         },
-        // setsumPriceUser: (state, action) => {
-        //     state.sumPriceUser = state.price.reduce((acc, elemnt, index) => {
+        //!......................................................................
+        setsumPriceUser: (state, action) => {
+            state.sumpriceUser = state.price.reduce((acc, elemnt, index) => {
 
-        //         return acc + elemnt
-        //     })
-        //     console.log(state.sumPriceUser)
-        //     console.log("sum")
-        // },
+                return acc + elemnt.price
+            },0)
+            
+        },
 
-
+  //!......................................................................
         setTotal: (state, action) => {
 
             //payload = {"opr":"+" , value:10}
@@ -121,12 +124,27 @@ export const UserSlice = createSlice({
             }
 
 
+        },
+//!......................................................................
+
+        setNameRest:(state,action)=>{
+            console.log("userrr")
+            if(state.name==""){
+                state.name=action.payload.name
+            }else{
+                state.name=action.payload.name
+            }
         }
     }
+//!......................................................................
 
+setId:(state,action)=>{
+
+
+}
 });
 
-export const { setCart, deleteCart, setPrice, setsumPriceUser, setTotal } =
+export const { setCart, deleteCart, setPrice, setsumPriceUser, setTotal,setNameRest} =
     UserSlice.actions;
 
 export default UserSlice.reducer;

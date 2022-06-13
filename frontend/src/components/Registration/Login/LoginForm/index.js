@@ -58,7 +58,10 @@ export const LoginForm = () => {
         email,
         password,
       });
+         console.log(response.cartId)
+         console.log(response.roleId)
 
+         
       dispatch(setlogin(response.token));
       if (response.message !== "Login Successful") {
         setErrors([...errors, response.message]);

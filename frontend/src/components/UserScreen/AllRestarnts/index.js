@@ -2,7 +2,7 @@ import './style.css'
 import React, { useState, useEffect, useContext } from "react";
 import { User } from "../../../controllers/user";
 import NavBar from '../NavBar';
-
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 
@@ -12,8 +12,22 @@ const AllRestarnts = () => {
     const navigate = useNavigate()
 
     const [restaurants, setRestaurants] = useState("")
+    const Userinfor = useSelector((state) => {
 
+        return {
+            yourCart: state.User.cart,
+            yourPrice: state.User.price,
+            yourTotal: state.User.total,
+            islogin: state.auth.isLoggedIn,
+            name: state.User.name,
+            token:state.auth.token
+        }
+    })
 
+console.log(Userinfor.token)
+
+console.log(Userinfor.token.payload)
+console.log(Userinfor.token.payload)
 
     const getRestarnts = async () => {
 

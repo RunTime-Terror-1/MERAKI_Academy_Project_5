@@ -74,3 +74,17 @@
     position: relative; 
     /* left: 45vw; */
 }
+.sumprice{
+    position: relative;
+    left:60vw;
+}
+.cityandarea{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+.bulidingandStreet{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
