@@ -144,8 +144,9 @@ const RestaurantPage = () => {
         <h1>categories</h1>
         <div className='All_Two-categore_map'>{categories ? categories.map((element, index) => {
           return (<div className='All_Two-categore_map_return' key={index}>
-            <a href={"#" + index} className="a_atAll"><div className='divButton'><button className='button'>{element}</button></div></a>
+            <a href={"#" + index} className="a_atAll"><div className='divButton'><button className='button'>{element+"hjhdd"}</button></div><i className='i'></i></a>
 
+            {/* <a href={"#" + index}   ><span>{element}</span><i></i></a> */}
           </div>)
         }) : <></>}</div>
 
