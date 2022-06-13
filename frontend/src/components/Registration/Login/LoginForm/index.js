@@ -72,6 +72,8 @@ export const LoginForm = () => {
 
   return (
     <div id="login-form-email-password-div">
+     <p id="login-label">login</p> 
+      <br/>
       {createInput({
         placeholder: "Email",
         type: "text",
@@ -85,20 +87,33 @@ export const LoginForm = () => {
         setState: setPassword,
       })}
       <ErrorsDiv errors={errors} />
+      <br/>
+       
       <div>
+
         <button id="login-button" onClick={login}>
           Login
         </button>
+
+       
       </div>
-      <hr />
+       
       <div id="create-new-account-button">
         <button
           onClick={() => {
             dispatch(setIsSignUpFormShown());
           }}
         >
+
+           
           Create New Account
         </button>
+        <br/>
+        <br/>
+         
+      <div id="to-create-user">
+       
+      </div>
       </div>
     </div>
   );
