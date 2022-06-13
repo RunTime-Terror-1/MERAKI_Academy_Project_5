@@ -6,6 +6,7 @@ import { Users } from "./UsersDashboard";
 import { Requests } from "./RequestsDashboard";
 import { NavigationBarPanel } from "../SuperAdmin/NavigationBar";
 import { Restaurants } from "../SuperAdmin/RestaurantDashboard";
+import { Meals } from "./MealsDashboard";
 
 export const OwnerPanel = () => {
   const dispatch = useDispatch();
@@ -24,8 +25,10 @@ export const OwnerPanel = () => {
           <Users />
         ) : isUsersShown === 1 ? (
           <Requests />
-        ) : (
-          <Restaurants isOwner={true} />
+        ) : isUsersShown === 2 ? (
+          <Requests />
+        ) :(
+          <Meals  />
         )}
       </div>
     </div>
