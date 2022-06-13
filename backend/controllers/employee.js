@@ -1,12 +1,12 @@
 const connection = require("../models/db");
 
 
-const creatMeal=(req,res)=>{
+const createMeal=(req,res)=>{
 
-const {name,imgUrl,category,price,restarent_id}=req.body
+const {name,imgUrl,category,price,restaurant_id: restaurant_id}=req.body
 
-const query = `INSERT INTO meals (name,imgUrl,category,price,restarent_id) VALUES (?,?,?,?,?);`;
-const data = [name,imgUrl,category,price,restarent_id];
+const query = `INSERT INTO meals (name,imgUrl,category,price,restaurant_id) VALUES (?,?,?,?,?);`;
+const data = [name,imgUrl,category,price,restaurant_id];
 
 connection.query(query, data, (err, result) => {
 
@@ -133,7 +133,7 @@ const getAllorder=(req,res)=>{
 
 
 module.exports = {
-   creatMeal,
+   creatMeal: createMeal,
    deleteMealfromResturant,
    updateMeal,
    getAllorder

@@ -26,7 +26,7 @@ export const OwnerPanel = () => {
         ) : isUsersShown === 1 ? (
           <Requests />
         ) : isUsersShown === 2 ? (
-          <Requests />
+          <Restaurants />
         ) :(
           <Meals  />
         )}

@@ -52,7 +52,9 @@ export const CreateMeal = ({ setIsMealDialogShown }) => {
     );
   };
 
-  const createMeal = async () => {};
+  const createMeal = async () => {
+    
+  };
   return (
     <div id="signup-form">
       {isDialogShown ? (
