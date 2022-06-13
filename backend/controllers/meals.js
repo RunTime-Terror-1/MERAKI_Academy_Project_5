@@ -43,8 +43,6 @@ const updateMealById = (req, res) => {
   });
 };
 
-
-
 const createNewMeal = (req, res) => {
 
 

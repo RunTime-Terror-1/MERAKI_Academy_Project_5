@@ -5,8 +5,9 @@ import { BiGitPullRequest, BiLogOut } from "react-icons/bi";
 import { MdFastfood } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
 import { SuperAdmin } from "../../../../controllers/superAdmin";
-import { setRequests, setRestaurants, setUsers } from "../../../../redux/reducers/superAdmin";
+import { setMeals, setRequests, setRestaurants, setUsers } from "../../../../redux/reducers/superAdmin";
 import { Owner } from "../../../../controllers/owner";
+import { Employee } from "../../../../controllers/employee";
 
 export const NavigationMenu = ({setIsUsersShown}) => {
   const dispatch = useDispatch();
@@ -88,9 +89,9 @@ export const NavigationMenu = ({setIsUsersShown}) => {
         text: "meals",
         icon: <MdFastfood />,
         onClick: async () => {
-          const {restaurants} = await SuperAdmin.getAllRestaurants({token:auth.token});
-          setIsUsersShown(2);
-          dispatch(setRequests(restaurants))
+          const {meals} = await Employee.getAllMeals({token:auth.token,restaurant_id:superAdminPanel.restaurants[0].id})
+          setIsUsersShown(3);
+          dispatch(setMeals(meals))
         },
       })}
       <button id="logout-btn">

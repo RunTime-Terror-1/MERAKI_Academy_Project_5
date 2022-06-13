@@ -1,29 +1,31 @@
 const express = require("express");
 
+const {
+  createMeal,
+  deleteMealFromRestaurant,
+  updateMeal,
+  getAllOrder,
+  getAllMeals
+} = require("../controllers/employee");
+const authentication = require("../middlewares/authentication");
+const authorization = require("../middlewares/authorization");
 
-const {  creatMeal,
-    deleteMealfromResturant,updateMeal,getAllorder
-  } = require("../controllers/employee");
-
-  //!..........Create employee router........................
-const employeRouter = express.Router();
+//!..........Create employee router........................
+const employeeRouter = express.Router();
 
 //!.......... Router  .................
 
-
-
-//post 
-employeRouter.post("/",creatMeal)
+//post
+employeeRouter.post("/",  createMeal);
 
 //delete
-employeRouter.delete("/:meal_id",deleteMealfromResturant)
+employeeRouter.delete("/:meal_id", deleteMealFromRestaurant);
 
 //update
-employeRouter.put("/:id",updateMeal)
-
+employeeRouter.put("/:mealId", updateMeal);
 
 //get
-employeRouter.put("/:id",getAllorder)
+employeeRouter.get("/:id",  getAllOrder);
+employeeRouter.get("/meals/:restaurant_id",authentication,authorization("2"),  getAllMeals);
 
-
-module.exports = employeRouter
+module.exports = employeeRouter;
