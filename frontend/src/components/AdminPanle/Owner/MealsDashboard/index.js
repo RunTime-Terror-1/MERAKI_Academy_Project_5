@@ -1,11 +1,14 @@
 import react, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setMeals, setRequests, setUsers } from "../../../../redux/reducers/superAdmin";
+import {
+  setMeals,
+  setRequests,
+  setUsers,
+} from "../../../../redux/reducers/superAdmin";
 import { Owner } from "../../../../controllers/owner";
 import "./style.css";
 import { CreateMeal } from "./CreateMeal";
 import { Employee } from "../../../../controllers/employee";
-
 
 export const Meals = () => {
   const dispatch = useDispatch();
@@ -39,7 +42,7 @@ export const Meals = () => {
       <div className="user-row" key={meal.id + meal.name}>
         <h4>{meal.id}</h4>
         <h4>{meal.name}</h4>
-        <img src={`${meal.imgUrl}`} width="100%" height="50px" />
+        <img src={`${meal.imgUrl}`} />
         <h4>{meal.price} $</h4>
         <h4>{meal.category} </h4>
         <div id="edit-btns-div">
@@ -109,10 +112,13 @@ export const Meals = () => {
     );
   };
 
-  const createOption = (restaurant,index)=>{
-    console.log(index);
-    return <option key={restaurant.id} value={index}>{restaurant.name}</option>
-  }
+  const createOption = (restaurant, index) => {
+    return (
+      <option key={restaurant.id} value={index}>
+        {restaurant.name}
+      </option>
+    );
+  };
 
   return (
     <div>
@@ -129,13 +135,18 @@ export const Meals = () => {
           + Meal
         </button>
       </div>
-      <div>
-        <h3>Restaurant</h3>
-        <select onChange={async (e)=>{
-         const {meals} = await Employee.getAllMeals({token:auth.token,restaurant_id:superAdminPanel.restaurants[e.target.value].id})
-         dispatch(setMeals(meals))
-        }}>
-          {superAdminPanel.restaurants.map((restaurant,index)=>{
+      <div id="selector-div">
+        <h3>Restaurant Name</h3>
+        <select
+          onChange={async (e) => {
+            const { meals } = await Employee.getAllMeals({
+              token: auth.token,
+              restaurant_id: superAdminPanel.restaurants[e.target.value].id,
+            });
+            dispatch(setMeals(meals));
+          }}
+        >
+          {superAdminPanel.restaurants.map((restaurant, index) => {
             return createOption(restaurant, index);
           })}
         </select>
@@ -161,7 +172,7 @@ export const Meals = () => {
         <div id="dash-title-div" className="user-row">
           <h4>ID</h4>
           <h4>NAME</h4>
-          <h4>LOGO</h4>
+          <h4>IMAGE</h4>
           <h4>PRICE</h4>
           <h4>CATEGORY</h4>
           <h4>ACTIONS</h4>
