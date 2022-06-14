@@ -25,7 +25,7 @@ const createMeal = (req, res) => {
 //!.......END CreatMeal ............
 
 const deleteMealFromRestaurant = (req, res) => {
-  const Id = req.params.meal_id;
+  const mealId = req.params.meal_id;
 
   const query = `UPDATE meals SET is_deleted=1 WHERE id=?`;
 
@@ -44,13 +44,13 @@ const deleteMealFromRestaurant = (req, res) => {
     if (!result.affectedRows) {
       return res.status(404).json({
         success: false,
-        massage: `The meal: ${Id} is not found`,
+        massage: `The meal: ${mealId} is not found`,
         err: err,
       });
     } else {
       res.status(200).json({
         success: true,
-        massage: `Succeeded to delete meal with id: ${Id}`,
+        massage: `Succeeded to delete meal with id: ${mealId}`,
         result: result,
       });
     }

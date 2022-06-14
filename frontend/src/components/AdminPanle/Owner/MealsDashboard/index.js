@@ -98,11 +98,13 @@ export const Meals = () => {
   };
 
   const deleteMeal = async () => {
-   
     await Employee.deleteMealFromRestaurant({
       mealId: currentMeal.id,
       token: auth.token,
     });
+    const meals = [...superAdminPanel.meals];
+    meals.splice(currentIndex,1);
+    dispatch(setMeals(meals))
   };
 
   return (
