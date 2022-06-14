@@ -25,9 +25,9 @@ const createMeal = (req, res) => {
 //!.......END CreatMeal ............
 
 const deleteMealFromRestaurant = (req, res) => {
-  const Id = req.params.meal_id;
+  const mealId = req.params.meal_id;
 
-  const query = `DELETE FROM meals WHERE id=?;`;
+  const query = `UPDATE meals SET is_deleted=1 WHERE id=?`;
 
   const data = [mealId];
 
@@ -44,13 +44,13 @@ const deleteMealFromRestaurant = (req, res) => {
     if (!result.affectedRows) {
       return res.status(404).json({
         success: false,
-        massage: `The meal: ${Id} is not found`,
+        massage: `The meal: ${mealId} is not found`,
         err: err,
       });
     } else {
       res.status(200).json({
         success: true,
-        massage: `Succeeded to delete meal with id: ${Id}`,
+        massage: `Succeeded to delete meal with id: ${mealId}`,
         result: result,
       });
     }
@@ -61,14 +61,10 @@ const deleteMealFromRestaurant = (req, res) => {
 const updateMeal = (req, res) => {
   const mealId = req.params.mealId;
   const { name, imgUrl, category, price, restaurant_id } = req.body;
-  console.log(name, imgUrl, category, price, restaurant_id);
-
   const query = `UPDATE meals SET name=?,imgUrl=?,category=?,price=? ,restaurant_id=? WHERE id=?;`;
 
   const data = [name, imgUrl, category, Number(price), restaurant_id, mealId];
   connection.query(query, data, (err, result) => {
-   
-
     if (err) {
       return res.status(500).json({
         success: false,
@@ -121,10 +117,10 @@ const getAllOrder = (req, res) => {
 
 const getAllMeals = (req, res) => {
   const restaurant_id = req.params.restaurant_id;
-  const query = `SELECT imgUrl,category,price,RS.name,Ms.name,MS.id FROM meals MS  INNER JOIN restaurants RS ON MS.restaurant_id = ? And MS.restaurant_id = RS.id  `;
+  const query = `SELECT imgUrl,category,price,RS.name,Ms.name,MS.id FROM meals MS  INNER JOIN restaurants RS ON MS.restaurant_id = ? And MS.restaurant_id = RS.id  AND MS.is_deleted=0`;
   connection.query(query, [restaurant_id], (err, result) => {
     if (err) {
-      res.status(500).json({
+     return res.status(500).json({
         success: false,
         massage: "server error",
         err: err,

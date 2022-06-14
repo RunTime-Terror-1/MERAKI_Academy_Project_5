@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Employee } from "../../../../../controllers/employee";
 import { SuperAdminPanel } from "../../../SuperAdmin";
+import { setMeals } from "../../../../../redux/reducers/superAdmin";
+import { createOption } from "..";
 
 export const CreateMeal = ({
   setIsMealDialogShown,
@@ -62,17 +64,17 @@ export const CreateMeal = ({
   };
 
   const createMeal = async () => {
+    const meal = { category, imgUrl, name, price };
     if (!isUpdate) {
       const response = await Employee.createMeal({
-        category,
-        imgUrl,
-        name,
-        price,
+        ...meal,
         restaurant_id,
         token: auth.token,
       });
       if (response.success) {
+        meal.id = response.result.insertId;
         setIsDialogShown(true);
+        dispatch(setMeals([...superAdminPanel.meals, meal]));
       }
     } else {
       const response = await Employee.updateMeal({
@@ -86,14 +88,15 @@ export const CreateMeal = ({
       });
       if (response.success) {
         setIsDialogShown(true);
-        // const meals = [...SuperAdminPanel.meals];
-        // meals[currentIndex] = {
-        //   category,
-        //   imgUrl,
-        //   name,
-        //   price,
-        //   id:currentMeal.id
-        // };
+        const meals = [...superAdminPanel.meals];
+        meals[currentIndex] = {
+          category,
+          imgUrl,
+          name,
+          price,
+          id: currentMeal.id,
+        };
+        dispatch(setMeals(meals));
       }
     }
   };
@@ -151,12 +154,20 @@ export const CreateMeal = ({
           setState: setPrice,
         })}
 
-        {createInput({
-          placeholder: "Restaurant Id",
-          type: "number",
-          value: isUpdate ? resId : restaurant_id,
-          setState: setRestaurant_id,
-        })}
+        {isUpdate ? (
+          <></>
+        ) : (
+          <select
+            style={{ padding: "10px", borderRadius: "5px" }}
+            onChange={async (e) => {
+              setRestaurant_id(superAdminPanel.restaurants[e.target.value].id);
+            }}
+          >
+            {superAdminPanel.restaurants.map((restaurant, index) => {
+              return createOption(restaurant, index);
+            })}
+          </select>
+        )}
 
         <div id="signup-button-div">
           <button onClick={createMeal}>

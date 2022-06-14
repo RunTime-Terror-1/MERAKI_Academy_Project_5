@@ -19,13 +19,13 @@ const employeeRouter = express.Router();
 employeeRouter.post("/",  createMeal);
 
 //delete
-employeeRouter.delete("/:meal_id", deleteMealFromRestaurant);
+employeeRouter.delete("/:meal_id", authentication,authorization("3"),deleteMealFromRestaurant);
 
 //update
 employeeRouter.put("/:mealId", updateMeal);
 
 //get
 employeeRouter.get("/:id",  getAllOrder);
-employeeRouter.get("/meals/:restaurant_id",authentication,authorization("2"),  getAllMeals);
+employeeRouter.get("/meals/:restaurant_id",authentication,authorization("3"),  getAllMeals);
 
 module.exports = employeeRouter;

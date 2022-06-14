@@ -5,6 +5,14 @@ import "./style.css";
 import { CreateMeal } from "./CreateMeal";
 import { Employee } from "../../../../controllers/employee";
 
+export const createOption = (restaurant, index) => {
+  return (
+    <option key={restaurant.id} value={index}>
+      {restaurant.name}
+    </option>
+  );
+};
+
 export const Meals = () => {
   const dispatch = useDispatch();
   const [isDeleteDialogShown, setIsDeleteDialogShown] = useState(false);
@@ -12,11 +20,11 @@ export const Meals = () => {
   const [isUpdate, setIsUpdate] = useState(false);
   const [currentIndex, setCurrentIndex] = useState({});
   const [currentMeal, setCurrentMeal] = useState({});
-  const [resId, setResId] = useState({});
-
   const { superAdminPanel, auth } = useSelector((state) => {
     return state;
   });
+  const [resId, setResId] = useState(superAdminPanel.restaurants[0].id);
+
   const createButton = ({ onClick, text, state }) => {
     return (
       <button
@@ -44,7 +52,7 @@ export const Meals = () => {
             onClick: async () => {
               setCurrentMeal(meal);
               setCurrentIndex(index);
-              setIsUpdate(true)
+              setIsUpdate(true);
               setIsMealDialogShown(true);
             },
             text: "Edit",
@@ -73,7 +81,7 @@ export const Meals = () => {
             {createButton({
               text: "Yes",
               onClick: async () => {
-                updateRequest(currentMeal.state);
+                deleteMeal(currentMeal.id);
                 setIsDeleteDialogShown(false);
               },
             })}
@@ -89,16 +97,15 @@ export const Meals = () => {
     );
   };
 
-  const createOption = (restaurant, index) => {
-    return (
-      <option key={restaurant.id} value={index}>
-        {restaurant.name}
-      </option>
-    );
+  const deleteMeal = async () => {
+    await Employee.deleteMealFromRestaurant({
+      mealId: currentMeal.id,
+      token: auth.token,
+    });
+    const meals = [...superAdminPanel.meals];
+    meals.splice(currentIndex,1);
+    dispatch(setMeals(meals))
   };
-
-  const updateRequest = async (state) => {};
-
 
   return (
     <div>
@@ -123,7 +130,7 @@ export const Meals = () => {
               token: auth.token,
               restaurant_id: superAdminPanel.restaurants[e.target.value].id,
             });
-            setResId(superAdminPanel.restaurants[e.target.value].id)
+            setResId(superAdminPanel.restaurants[e.target.value].id);
             dispatch(setMeals(meals));
           }}
         >
@@ -148,7 +155,7 @@ export const Meals = () => {
           currentIndex={currentIndex}
           isUpdate={isUpdate}
           setIsUpdate={setIsUpdate}
-          resId
+          resId={resId}
         />
       ) : (
         <></>
