@@ -29,7 +29,8 @@ const CompleteOrder = () => {
     const [pastAdress, setPastAdress] = useState("empty")
     const [messageLocation, setMessage] = useState("empty")
 
-    const [messageLocation, setMessage] = useState("empty")
+    const [payment, setPayment] = useState("Cash")
+
     //!.....................................
     let testadress = "false"
     //!.............
@@ -186,12 +187,12 @@ const CompleteOrder = () => {
 
 
             <div className='selelctadresss'>
-                <div><input type="radio" id="huey" name="drone" 
+                <div><input type="radio" id="huey" name="drone"
                     onChange={(e) => { newmessage() }}
                 />
                     <label for="huey">new</label></div>
 
-                <div><input type="radio" id="huey" name="drone" 
+                <div><input type="radio" id="huey" name="drone"
                     onChange={(e) => { pastmessage() }}
                 />
                     <label for="huey">Past</label>
@@ -203,19 +204,31 @@ const CompleteOrder = () => {
             <div>
                 <div className='paymentDiv'>
                     <div>
-                        <input type="radio" id="huey1" name="drone" value="huey"
-                            onChange={(e) => { }}
+                        <input type="radio" id="huey1" name="drone2" value="huey1"
+                            onChange={(e) => {
+                                setPayment("Visa");
+                                console.log(payment, "lllll", "Visa")
+                            }}
                         />
-                            <label for="huey1">Visa</label>
+                        <label for="huey1">Credit Card
+                        </label>
                     </div>
                     <div>
-                        <input type="radio" id="huey2" name="drone" value="huey"
-                            onChange={(e) => { pastmessage() }}
+                        <input type="radio" id="huey2" name="drone2" value="huey2"
+                            onChange={(e) => {
+                                setPayment("Cash");
+                                console.log(payment, "22222")
+                            }}
                         />
-                             <label for="huey2">cash</label>
+                        <label for="huey2">cash</label>
                     </div>
                 </div>
-                <div></div>
+                <div>{payment == "Visa" ?
+                 <div>
+
+
+
+                </div> : ""}</div>
             </div>
 
 
