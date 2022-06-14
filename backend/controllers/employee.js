@@ -27,7 +27,7 @@ const createMeal = (req, res) => {
 const deleteMealFromRestaurant = (req, res) => {
   const Id = req.params.meal_id;
 
-  const query = `DELETE FROM meals WHERE id=?;`;
+  const query = `UPDATE meals SET is_deleted=1 WHERE id=?`;
 
   const data = [mealId];
 
@@ -61,14 +61,10 @@ const deleteMealFromRestaurant = (req, res) => {
 const updateMeal = (req, res) => {
   const mealId = req.params.mealId;
   const { name, imgUrl, category, price, restaurant_id } = req.body;
-  console.log(name, imgUrl, category, price, restaurant_id);
-
   const query = `UPDATE meals SET name=?,imgUrl=?,category=?,price=? ,restaurant_id=? WHERE id=?;`;
 
   const data = [name, imgUrl, category, Number(price), restaurant_id, mealId];
   connection.query(query, data, (err, result) => {
-   
-
     if (err) {
       return res.status(500).json({
         success: false,
@@ -121,10 +117,10 @@ const getAllOrder = (req, res) => {
 
 const getAllMeals = (req, res) => {
   const restaurant_id = req.params.restaurant_id;
-  const query = `SELECT imgUrl,category,price,RS.name,Ms.name,MS.id FROM meals MS  INNER JOIN restaurants RS ON MS.restaurant_id = ? And MS.restaurant_id = RS.id  `;
+  const query = `SELECT imgUrl,category,price,RS.name,Ms.name,MS.id FROM meals MS  INNER JOIN restaurants RS ON MS.restaurant_id = ? And MS.restaurant_id = RS.id  AND MS.is_deleted=0`;
   connection.query(query, [restaurant_id], (err, result) => {
     if (err) {
-      res.status(500).json({
+     return res.status(500).json({
         success: false,
         massage: "server error",
         err: err,
