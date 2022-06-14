@@ -5,11 +5,17 @@ import { BiGitPullRequest, BiLogOut } from "react-icons/bi";
 import { MdFastfood } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
 import { SuperAdmin } from "../../../../controllers/superAdmin";
-import { setMeals, setRequests, setRestaurants, setUsers } from "../../../../redux/reducers/superAdmin";
+import {
+  setMeals,
+  setOrders,
+  setRequests,
+  setRestaurants,
+  setUsers,
+} from "../../../../redux/reducers/superAdmin";
 import { Owner } from "../../../../controllers/owner";
 import { Employee } from "../../../../controllers/employee";
 
-export const NavigationMenu = ({setIsUsersShown}) => {
+export const NavigationMenu = ({ setIsUsersShown }) => {
   const dispatch = useDispatch();
   const { superAdminPanel, auth } = useSelector((state) => {
     return state;
@@ -49,28 +55,35 @@ export const NavigationMenu = ({setIsUsersShown}) => {
       <div id="user-management-div">
         <h4>User Management</h4>
       </div>
-      {menuButton({ text: "Employee", icon: <HiUsers />, onClick: async () => {
-        const {users} = await Owner.getAllEmployee({token:auth.token});
-        console.log(users);
-        setIsUsersShown(0);
-        dispatch(setUsers(users))
-      } })}
+      {menuButton({
+        text: "Employee",
+        icon: <HiUsers />,
+        onClick: async () => {
+          const { users } = await Owner.getAllEmployee({ token: auth.token });
+          setIsUsersShown(0);
+          dispatch(setUsers(users));
+        },
+      })}
       {menuButton({
         text: "Requests",
         icon: <BiGitPullRequest />,
-        onClick:async () => {
-          const {requests} = await Owner.getOwnerRequests({token:auth.token});
+        onClick: async () => {
+          const { requests } = await Owner.getOwnerRequests({
+            token: auth.token,
+          });
           setIsUsersShown(1);
-          dispatch(setRequests(requests))
+          dispatch(setRequests(requests));
         },
       })}
-     {menuButton({
+      {menuButton({
         text: "My Restaurants",
         icon: <MdFastfood />,
         onClick: async () => {
-          const {restaurants} = await Owner.getOwnerRestaurants({token:auth.token});
+          const { restaurants } = await Owner.getOwnerRestaurants({
+            token: auth.token,
+          });
           setIsUsersShown(2);
-          dispatch(setRestaurants(restaurants))
+          dispatch(setRestaurants(restaurants));
         },
       })}
       <div id="user-management-div">
@@ -80,18 +93,24 @@ export const NavigationMenu = ({setIsUsersShown}) => {
         text: "Orders",
         icon: <MdFastfood />,
         onClick: async () => {
-          const {restaurants} = await SuperAdmin.getAllRestaurants({token:auth.token});
+          const {orders} = await Employee.getAllOrder({
+            token: auth.token,
+            restaurantId: superAdminPanel.restaurants[0].id,
+          });
           setIsUsersShown(4);
-          dispatch(setRequests(restaurants))
+          dispatch(setOrders(orders))
         },
       })}
-       {menuButton({
+      {menuButton({
         text: "meals",
         icon: <MdFastfood />,
         onClick: async () => {
-          const {meals} = await Employee.getAllMeals({token:auth.token,restaurant_id:superAdminPanel.restaurants[0].id})
+          const { meals } = await Employee.getAllMeals({
+            token: auth.token,
+            restaurant_id: superAdminPanel.restaurants[0].id,
+          });
           setIsUsersShown(3);
-          dispatch(setMeals(meals))
+          dispatch(setMeals(meals));
         },
       })}
       <button id="logout-btn">

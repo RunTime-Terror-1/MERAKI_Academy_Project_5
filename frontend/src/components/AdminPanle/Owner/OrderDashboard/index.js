@@ -1,6 +1,6 @@
 import react, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setMeals } from "../../../../redux/reducers/superAdmin";
+import { setMeals, setOrders } from "../../../../redux/reducers/superAdmin";
 import "./style.css";
 import { Employee } from "../../../../controllers/employee";
 
@@ -39,13 +39,14 @@ export const Orders = () => {
     );
   };
   const createRow = (order, index) => {
+    console.log(order);
     return (
       <div className="user-row" key={order.id + order.name}>
         <h4>{index + 1}</h4>
         <h4>{order.name}</h4>
-        <img src={`${order.imgUrl}`} />
-        <h4>{order.price} $</h4>
-        <h4>{order.category} </h4>
+        <h4>{order.notes}</h4>
+        <h4>{order.receipt} $</h4>
+        <h4>{superAdminPanel.orders.length } </h4>
         <div id="edit-btns-div">
           {createButton({
             onClick: async () => {
@@ -102,35 +103,23 @@ export const Orders = () => {
       token: auth.token,
     });
     const meals = [...superAdminPanel.meals];
-    meals.splice(currentIndex,1);
-    dispatch(setMeals(meals))
+    meals.splice(currentIndex, 1);
+    dispatch(setMeals(meals));
   };
 
   return (
     <div>
-      <div id="request-div">
-        <p>
-          <strong>Meals,</strong> you can add,update and remove restaurant meal
-        </p>
-
-        <button
-          onClick={() => {
-            setIsMealDialogShown(true);
-          }}
-        >
-          + Meal
-        </button>
-      </div>
+     
       <div id="selector-div">
         <h3>Restaurant Name</h3>
         <select
           onChange={async (e) => {
-            const { meals } = await Employee.getAllMeals({
+            const { orders } = await Employee.getAllOrder({
               token: auth.token,
-              restaurant_id: superAdminPanel.restaurants[e.target.value].id,
+              restaurantId: superAdminPanel.restaurants[e.target.value].id,
             });
             setResId(superAdminPanel.restaurants[e.target.value].id);
-            dispatch(setMeals(meals));
+            dispatch(setOrders(orders));
           }}
         >
           {superAdminPanel.restaurants.map((restaurant, index) => {
@@ -148,13 +137,12 @@ export const Orders = () => {
         <></>
       )}
 
-      
       <div className="user-dashboard" style={{ marginTop: "5px" }}>
         <div id="dash-title-div" className="user-row">
           <h4>ID</h4>
-          <h4>NAME</h4>
-          <h4>EMAIL</h4>
           <h4>STATE</h4>
+          <h4>PHONE</h4>
+          <h4>RECEIPT</h4>
           <h4>QUANTITY</h4>
           <h4>ACTIONS</h4>
         </div>
