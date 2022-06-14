@@ -225,10 +225,10 @@ const CompleteOrder = () => {
                 </div>
                 <div className='paymentcreditCardOremty' >{payment == "Visa" ?
                     <div className='divcreditCard'>
-                        <div><h3>Card Number</h3>  <input placeholder="    -   -  -  -  -   - " /> </div>
+                        <div className='divcreditCard_one'><h3>Card Number</h3>  <input placeholder="    -   -  -  -  -   - " /> </div>
 
-                        <div>
-                            <h3>Card Number</h3>
+                        <div className='divcreditCard_two'>
+                            <h3>Card expiry date</h3>
                             <div >
                                 <select className="inputmounth"
                                     onChange={(e) => {
@@ -271,7 +271,11 @@ const CompleteOrder = () => {
 
 
 
-                        <div></div>
+                        <div className='divcreditCard_three'>
+                        <h3>Card verification value</h3>
+                       <div><input className='verification' placeholder="number" /><img src="https://www.talabat.com/images/talabat/cvv_guide.png"/></div> 
+
+                        </div>
 
                     </div> : ""}
                 </div>
@@ -284,6 +288,8 @@ const CompleteOrder = () => {
                 saveAdress(Userinfor.userId)
 
             }}>place order</button>
+
+            <div>fgfgfgf</div>
 
         </div>
 

@@ -1,64 +1,76 @@
-*{
+* {
     /* scroll-behavior: unset; */
 }
-html, body {
+
+html,
+body {
     max-width: 100%;
     overflow-x: hidden;
 }
-.completeOrder{
+
+.completeOrder {
     display: flex;
     flex-direction: column;
 }
-.order{
+
+.order {
     width: 70vw;
     height: 100vh;
     /* background-color: darkblue; */
     position: relative;
-    left:15vw;
+    left: 15vw;
 
 
     text-align: start;
-  
+
     padding: 40px;
 }
-.divSummary{
+
+.divSummary {
     height: 10vh;
     /* background-color: darkmagenta; */
 }
-.title{
+
+.title {
     display: flex;
     flex-direction: row;
 
-   
+
 }
-.title_tow{
+
+.title_tow {
     display: flex;
     flex-direction: row;
     gap: 40px;
     /* position: relative;
     left: 30vw; */
 }
-.items{
-    width:40vw;
+
+.items {
+    width: 40vw;
     background-color: crimson;
 }
-.mealItems{
+
+.mealItems {
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
-.NameMeal{
-    width:37vw;
+
+.NameMeal {
+    width: 37vw;
     background-color: rgb(125, 139, 0);
 }
-.div_return_map{
+
+.div_return_map {
     display: flex;
     flex-direction: row;
- 
+
 
 }
-.insted__div_return_map{
-    width:30vw;
+
+.insted__div_return_map {
+    width: 30vw;
     display: flex;
     flex-direction: row;
     gap: 80px;
@@ -69,63 +81,74 @@ html, body {
 
 
 }
-.h3_quntity{
-   position:relative; 
-   /* left: 40vw; */
-}
-.h3_price{
-    position:relative; 
-    /* left: 45vw; */
-}
-.h3_totalprice{
-    position: relative; 
-    /* left: 45vw; */
-}
-.sumprice{
+
+.h3_quntity {
     position: relative;
-    left:60vw;
+    /* left: 40vw; */
+}
+
+.h3_price {
+    position: relative;
+    /* left: 45vw; */
+}
+
+.h3_totalprice {
+    position: relative;
+    /* left: 45vw; */
+}
+
+.sumprice {
+    position: relative;
+    left: 60vw;
 }
 
 /*.....       ..................                ............*/
 
-.location{
+.location {
     display: flex;
     flex-direction: row;
 
 }
-.inputLocation{
+
+.inputLocation {
     display: flex;
     flex-direction: column;
 }
-.cityandarea{
+
+.cityandarea {
     display: flex;
     flex-direction: row;
     gap: 30px;
 }
-.bulidingandStreet{
+
+.bulidingandStreet {
     display: flex;
     flex-direction: row;
     gap: 30px;
 }
-.Number{
-width:35vw;
+
+.Number {
+    width: 35vw;
 }
-.userPastLocation{
+
+.userPastLocation {
     width: 30vw;
-/* background-color: darkgreen; */
+    /* background-color: darkgreen; */
 }
-.imgadress{
-    width:50px;
+
+.imgadress {
+    width: 50px;
     height: 50px;
 }
 
-.div45{
+.div45 {
     display: flex;
     flex-direction: row;
     gap: 35px;
 }
-.iftrue{
-    width:180px;
+
+.iftrue {
+    width: 180px;
     height: 150px;
     background-color: crimson;
     display: flex;
@@ -133,14 +156,23 @@ width:35vw;
     gap: 10px;
 }
 
-.selelctadresss{
+.selelctadresss {
     display: flex;
     flex-direction: row;
     gap: 20px;
 }
+
 /*..... Cart       ..................                ............*/
 
-.inputmounth{
-width:10vw;
-height: 2vw;
+.inputmounth {
+    width: 10vw;
+    height: 2vw;
+}
+
+.verification {
+    width: 10vw;
+    height: 2vw;
+}
+.divcreditCard{
+    background-color: darkblue;
 }
