@@ -203,8 +203,9 @@ const senOrder = (req, res) => {
 const UpdateAdress= (req, res) => {
 
   const UserId= req.params.id
-  console.log(UserId)
+  console.log(UserId,"gg")
   const { street, city,notes,buldingNumber  } = req.body
+  console.log(street,city,notes,buldingNumber)
   const query ='update address SET street=?,city=?,notes=?,buldingNumber =?WHERE user_id=?;'
   const data = [ street, city,notes,buldingNumber,UserId];
   connection.query(query, data, (err, result) => {

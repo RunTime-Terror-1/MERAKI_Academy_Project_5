@@ -58,9 +58,19 @@ export class User {
     }
   }
 
-  static async UpdateAdress({ User_id }) {
+
+  static async UpdateAdress({ userid,city,buldingNumber, street, notes }) {
+    console.log(userid, "user", city,buldingNumber,street,"kkkk")
     try {
-      const response = await axios.get(`${hostUrl}/user/${User_id}`);
+      const response = await axios.put(`${hostUrl}/user/${userid}`, {
+        street,
+        city,
+        notes,
+        buldingNumber,
+     
+     
+
+      });
       return response.data;
     } catch (error) {
       return {

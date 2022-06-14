@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const UserSlice = createSlice({
     name: "User",
     initialState: {
+        Iduser: localStorage.getItem("userid") || "",
         cart: [],
         price: [],
         total: 0,
@@ -140,6 +141,7 @@ export const UserSlice = createSlice({
 //!......................................................................
         setidUser: (state, action) => {
             state.userId = action.payload.userId
+            localStorage.setItem("userid",action.payload.userId)
 
         }
 

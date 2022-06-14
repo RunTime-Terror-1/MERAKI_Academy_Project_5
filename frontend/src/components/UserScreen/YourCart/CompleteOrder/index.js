@@ -3,6 +3,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import NavBar from '../../NavBar';
+import { User } from '../../../../controllers/user';
 
 
 
@@ -36,25 +37,27 @@ const CompleteOrder = () => {
             islogin: state.auth.isLoggedIn,
             sumPrice: state.User.sumpriceUser,
             name: state.User.name,
-            userId: state.User.userId,
+            userId: state.User.Iduser,
         }
     })
 
 
 
 
-    console.log(Userinfor.yourPrice, "YourPrice   complete")
+    // console.log(Userinfor.yourPrice, "YourPrice   complete")
     //!..............................
 
 
     console.log(Userinfor.userId, "Yourid   complete")
 
 
-    const SaveAdress=()=>{
+    const saveAdress = async (id) => {
+
+             console.log(id,buildingNumber,545,street)         
+
+    const adress = await User.UpdateAdress({userid:id,city:Area,buldingNumber:buildingNumber,street:street,notes:Phone})
 
 
-
-        
     }
     // console.log(Userinfor.sumPrice, "YourPrice   complete")
     // const sumPriceee=()=>{
@@ -133,7 +136,11 @@ const CompleteOrder = () => {
 
             </div>
             <div>money</div>
-            <button >place order</button>
+            <button onClick={() => {
+
+                saveAdress(Userinfor.userId)
+
+            }}>place order</button>
 
         </div>
 
