@@ -30,7 +30,10 @@ const CompleteOrder = () => {
     const [messageLocation, setMessage] = useState("empty")
 
     const [payment, setPayment] = useState("Cash")
+    const [testComplete, settestComplete] = useState("false")
+    const [models, setmodels] = useState(false)
 
+    const [clickValue, setClick] = useState("No")
     //!.....................................
     let testadress = "false"
     //!.............
@@ -57,7 +60,7 @@ const CompleteOrder = () => {
 
 
     // console.log(Userinfor.userId, "Yourid   complete")
-
+//!..................Functions.............................................
 
     const saveAdress = async (id) => {
 
@@ -87,7 +90,7 @@ const CompleteOrder = () => {
         if (truevalue == "false") {
             setMessage("sorry not have past location please enter")
         } else {
-            setMessage("okey")
+            setMessage("good")
         }
     }
 
@@ -95,19 +98,32 @@ const CompleteOrder = () => {
     const newmessage = () => {
         if (Area != "empty" && Phone != "empty" && street != "empty" && Phone != "empty" && city != "empty") {
             console.log("welcomeeeeeeeegfg")
-            setMessage("done")
+            setMessage("good")
         } else {
             console.log("khkhkh")
             setMessage("enter all information")
 
         }
     }
+   const click=()=>{
+    alert("ggggggggggggggg");
+   
+   }
+
+const  toggleModel=()=>{
+    console.log("ghghg")
+    setmodels(!models)
+    console.log(models)
+}
 
 
+
+
+//!...............................................................
     useEffect(() => {
         getAdress(localStorage.getItem("userid"))
     }, [])
-
+//!...............................................................
     return (<div className='completeOrder'>
         <NavBar />
         <div className='order' >
@@ -208,6 +224,7 @@ const CompleteOrder = () => {
                             onChange={(e) => {
                                 setPayment("Visa");
                                 console.log(payment, "lllll", "Visa")
+                                settestComplete("true")
                             }}
                         />
                         <label for="huey1">Credit Card
@@ -218,6 +235,7 @@ const CompleteOrder = () => {
                             onChange={(e) => {
                                 setPayment("Cash");
                                 console.log(payment, "22222")
+                                settestComplete("true")
                             }}
                         />
                         <label for="huey2">cash</label>
@@ -272,8 +290,8 @@ const CompleteOrder = () => {
 
 
                         <div className='divcreditCard_three'>
-                        <h3>Card verification value</h3>
-                       <div><input className='verification' placeholder="number" /><img src="https://www.talabat.com/images/talabat/cvv_guide.png"/></div> 
+                            <h3>Card verification value</h3>
+                            <div><input className='verification' placeholder="number" /><img src="https://www.talabat.com/images/talabat/cvv_guide.png" /></div>
 
                         </div>
 
@@ -285,16 +303,19 @@ const CompleteOrder = () => {
 
             <button onClick={() => {
 
-                saveAdress(Userinfor.userId)
+                saveAdress(Userinfor.userId);
+                setClick("yes");
+               toggleModel();
+            
 
             }}>place order</button>
 
-            <div>fgfgfgf</div>
-
+           {/* <div>{clickValue=="yes"?messageLocation=="good"&&testComplete=="true"?<h3>okey order done</h3>:<h3>full all information</h3>:""}</div> */}
+           <div></div>
         </div>
 
 
-
+      
     </div>)
 
 }
