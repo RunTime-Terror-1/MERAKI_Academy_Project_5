@@ -81,7 +81,7 @@ export const NavigationMenu = ({setIsUsersShown}) => {
         icon: <MdFastfood />,
         onClick: async () => {
           const {restaurants} = await SuperAdmin.getAllRestaurants({token:auth.token});
-          setIsUsersShown(2);
+          setIsUsersShown(4);
           dispatch(setRequests(restaurants))
         },
       })}

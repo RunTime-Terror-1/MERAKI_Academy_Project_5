@@ -9,12 +9,13 @@ import { Restaurants } from "../SuperAdmin/RestaurantDashboard";
 import { Meals } from "./MealsDashboard";
 import { Owner } from "../../../controllers/owner";
 import { setRestaurants } from "../../../redux/reducers/superAdmin";
+import { Orders } from "./OrderDashboard";
 
 export const OwnerPanel = () => {
   const dispatch = useDispatch();
   const [hideMenu, setHideMenu] = useState(false);
   const [isUsersShown, setIsUsersShown] = useState(0);
-  const { superAdminPanel ,auth} = useSelector((state) => {
+  const { superAdminPanel, auth } = useSelector((state) => {
     return state;
   });
 
@@ -38,10 +39,13 @@ export const OwnerPanel = () => {
           <Requests />
         ) : isUsersShown === 2 ? (
           <Restaurants />
-        ) : (
+        ) : isUsersShown === 3 ? (
           <Meals />
+        ) : (
+          <Orders />
         )}
       </div>
     </div>
   );
 };
+//Orders
