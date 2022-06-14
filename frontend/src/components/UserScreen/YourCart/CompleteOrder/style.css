@@ -132,4 +132,10 @@ width:35vw;
     flex-direction: column;
     gap: 10px;
 }
+
+.selelctadresss{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
 /*.....       ..................                ............*/

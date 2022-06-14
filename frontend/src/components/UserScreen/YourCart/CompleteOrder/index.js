@@ -17,7 +17,7 @@ const CompleteOrder = () => {
     // const { state } = useLocation()
     // const { Name } = state
 
-    const [city, setCity] = useState("")
+    const [city, setCity] = useState("empty")
     const [Area, setArea] = useState("empty")
 
     const [Phone, setPhone] = useState("empty")
@@ -27,7 +27,9 @@ const CompleteOrder = () => {
     const [truevalue, settrue] = useState("false")
 
     const [pastAdress, setPastAdress] = useState("empty")
-    const [messageLocation, setMessage] = useState("")
+    const [messageLocation, setMessage] = useState("empty")
+
+    const [messageLocation, setMessage] = useState("empty")
     //!.....................................
     let testadress = "false"
     //!.............
@@ -80,19 +82,23 @@ const CompleteOrder = () => {
     }
 
     const pastmessage = () => {
-        if(testadress=="false") {
+        console.log(testadress)
+        if (truevalue == "false") {
             setMessage("sorry not have past location please enter")
+        } else {
+            setMessage("okey")
         }
     }
-  
-    
+
+
     const newmessage = () => {
-        if(Area == "empty" &&Phone=="empty"&&street=="empty") {
+        if (Area != "empty" && Phone != "empty" && street != "empty" && Phone != "empty" && city != "empty") {
             console.log("welcomeeeeeeeegfg")
-            setMessage("sorry not have past location please enter")
-        }else{
+            setMessage("done")
+        } else {
             console.log("khkhkh")
-            setMessage("sorry not have past location please enter")
+            setMessage("enter all information")
+
         }
     }
 
@@ -176,34 +182,44 @@ const CompleteOrder = () => {
 
             </div>
 
-            {/* {pastAdress?pastAdress.map((element,index)=>{
-                 return (<div className='return_pastAdress' key={index}>
-                      <div>city</div>
-
-                 </div>)
-                    
-
-                }):<div><img src="https://encrypted-tbn0.gstatic.com/images?
-                q=tbn:ANd9GcSyZ5u36QS_uhDLkGRATjK0z-teEOoWegxYug&usqp=CAU" /></div>} */}
 
 
-            <div >
-                <div><input type="radio" id="huey" name="drone" value="huey"
-                    onChange={(e) => {newmessage()}}
+
+            <div className='selelctadresss'>
+                <div><input type="radio" id="huey" name="drone" 
+                    onChange={(e) => { newmessage() }}
                 />
                     <label for="huey">new</label></div>
 
-                <div><input type="radio" id="huey" name="drone" value="huey"
-                    onChange={(e) => { console.log(e.target.value) }}
+                <div><input type="radio" id="huey" name="drone" 
+                    onChange={(e) => { pastmessage() }}
                 />
                     <label for="huey">Past</label>
                 </div>
 
+                <div>{messageLocation != "empty" ? <div>{messageLocation}</div> : ""}</div>
+            </div>
 
+            <div>
+                <div className='paymentDiv'>
+                    <div>
+                        <input type="radio" id="huey1" name="drone" value="huey"
+                            onChange={(e) => { }}
+                        />
+                            <label for="huey1">Visa</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="huey2" name="drone" value="huey"
+                            onChange={(e) => { pastmessage() }}
+                        />
+                             <label for="huey2">cash</label>
+                    </div>
+                </div>
+                <div></div>
             </div>
 
 
-            <div>money</div>
+
             <button onClick={() => {
 
                 saveAdress(Userinfor.userId)
