@@ -93,7 +93,8 @@ const updateMeal = (req, res) => {
 
 const getAllOrder = (req, res) => {
   const restaurant_id = req.params.id;
-  const query = `SELECT * FROM order  WHERE is_deleted=0 and restaurant_id=? `;
+  const query = `SELECT OS.id,email,state,receipt,quantity,MS.name,MS.price,AD.city,AD.notes,AD.notes,AD.buldingNumber FROM orders OS INNER JOIN address AD INNER JOIN  restaurants RS INNER JOIN users US INNER JOIN orders_meals OM INNER JOIN meals MS ON  AD.user_id= OS.user_id AND OS.user_id = US.id AND OS.restaurant_id = 1  AND  OS.restaurant_id = RS.id AND OM.order_id = OS.id AND MS.id = OM.meal_id AND OM.id; 
+  `;
   const data = [restaurant_id];
 
   connection.query(query, data, (err, result) => {

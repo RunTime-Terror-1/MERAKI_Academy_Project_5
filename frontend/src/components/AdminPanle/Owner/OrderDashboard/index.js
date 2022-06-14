@@ -38,33 +38,33 @@ export const Orders = () => {
       </button>
     );
   };
-  const createRow = (meal, index) => {
+  const createRow = (order, index) => {
     return (
-      <div className="user-row" key={meal.id + meal.name}>
+      <div className="user-row" key={order.id + order.name}>
         <h4>{index + 1}</h4>
-        <h4>{meal.name}</h4>
-        <img src={`${meal.imgUrl}`} />
-        <h4>{meal.price} $</h4>
-        <h4>{meal.category} </h4>
+        <h4>{order.name}</h4>
+        <img src={`${order.imgUrl}`} />
+        <h4>{order.price} $</h4>
+        <h4>{order.category} </h4>
         <div id="edit-btns-div">
           {createButton({
             onClick: async () => {
-              setCurrentMeal(meal);
+              setCurrentMeal(order);
               setCurrentIndex(index);
               setIsUpdate(true);
               setIsMealDialogShown(true);
             },
             text: "Edit",
-            state: meal.state,
+            state: order.state,
           })}
           {createButton({
             onClick: () => {
               setCurrentIndex(index);
-              setCurrentMeal(meal);
+              setCurrentMeal(order);
               setIsDeleteDialogShown(true);
             },
             text: "Delete",
-            state: meal.state,
+            state: order.state,
           })}
         </div>
       </div>
@@ -153,14 +153,14 @@ export const Orders = () => {
         <div id="dash-title-div" className="user-row">
           <h4>ID</h4>
           <h4>NAME</h4>
-          <h4>IMAGE</h4>
-          <h4>PRICE</h4>
-          <h4>CATEGORY</h4>
+          <h4>EMAIL</h4>
+          <h4>STATE</h4>
+          <h4>QUANTITY</h4>
           <h4>ACTIONS</h4>
         </div>
-        {superAdminPanel.meals ? (
-          superAdminPanel.meals.map((meal, index) => {
-            return createRow(meal, index);
+        {superAdminPanel.orders ? (
+          superAdminPanel.orders.map((order, index) => {
+            return createRow(order, index);
           })
         ) : (
           <></>
