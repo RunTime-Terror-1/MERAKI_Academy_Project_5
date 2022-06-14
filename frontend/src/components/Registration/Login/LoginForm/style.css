@@ -45,9 +45,28 @@
     border-radius:var(--border-radius);
     background-color:rgba(0, 128, 0, 0.637);
     color: var(--first-color);
+    font-weight: bold;
     cursor: pointer;
     border-radius: 8px;
+    margin-top: 2px;
     
+  }
+  #login-button-Google{
+    width: 100%;
+    padding: var(--input-padding);
+    border: 0.2px solid rgba(0, 0, 0, 0.333);
+    border-radius:var(--border-radius);
+    background-color:rgb(58, 68, 61);
+    color: var(--first-color);
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-top: 2px;
+  }
+
+  #login-button-Google:hover{
+
+    opacity: 0.9; 
   }
 
   #login-button:hover{
@@ -59,7 +78,7 @@
   }
 
   #login-label{
-    font-size: 50px;
+    font-size: 60px;
   }
 
 
