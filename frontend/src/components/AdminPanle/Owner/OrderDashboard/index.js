@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setMeals, setOrders } from "../../../../redux/reducers/superAdmin";
 import "./style.css";
 import { Employee } from "../../../../controllers/employee";
+import { ShowDetails } from "./OrderDetails";
 
 export const createOption = (restaurant, index) => {
   return (
@@ -15,32 +16,19 @@ export const createOption = (restaurant, index) => {
 export const Orders = () => {
   const dispatch = useDispatch();
   const [isDeleteDialogShown, setIsDeleteDialogShown] = useState(false);
-  const [isCreateMealDialogShown, setIsMealDialogShown] = useState(false);
-  const [isUpdate, setIsUpdate] = useState(false);
   const [currentIndex, setCurrentIndex] = useState({});
-  const [currentMeal, setCurrentMeal] = useState({});
+  const [currentOrder, setCurrentOrder] = useState({});
+  const [showDetails, setShowDetails] = useState({});
   const { superAdminPanel, auth } = useSelector((state) => {
     return state;
   });
   const [resId, setResId] = useState(superAdminPanel.restaurants[0].id);
 
-  const ordersId = useRef([]).current;
+  let ordersId = [];
   const createButton = ({ onClick, text, state }) => {
-    return (
-      <button
-        onClick={onClick}
-        style={
-          text !== "Edit"
-            ? { backgroundColor: "red" }
-            : { backgroundColor: "green" }
-        }
-      >
-        {text}
-      </button>
-    );
+    return <button onClick={onClick}>{text}</button>;
   };
   const createRow = (order, index) => {
-    console.log(order);
     return (
       <div className="user-row" key={order.id + order.name + index}>
         <h4>{index + 1}</h4>
@@ -51,21 +39,12 @@ export const Orders = () => {
         <div id="edit-btns-div">
           {createButton({
             onClick: async () => {
-              setCurrentMeal(order);
+              ordersId = [];
+              setCurrentOrder(order);
               setCurrentIndex(index);
-              setIsUpdate(true);
-              setIsMealDialogShown(true);
+              setShowDetails(true);
             },
-            text: "Edit",
-            state: order.state,
-          })}
-          {createButton({
-            onClick: () => {
-              setCurrentIndex(index);
-              setCurrentMeal(order);
-              setIsDeleteDialogShown(true);
-            },
-            text: "Delete",
+            text: "Details",
             state: order.state,
           })}
         </div>
@@ -82,7 +61,7 @@ export const Orders = () => {
             {createButton({
               text: "Yes",
               onClick: async () => {
-                deleteMeal(currentMeal.id);
+                deleteMeal(currentOrder.id);
                 setIsDeleteDialogShown(false);
               },
             })}
@@ -100,7 +79,7 @@ export const Orders = () => {
 
   const deleteMeal = async () => {
     await Employee.deleteMealFromRestaurant({
-      mealId: currentMeal.id,
+      mealId: currentOrder.id,
       token: auth.token,
     });
     const meals = [...superAdminPanel.meals];
@@ -127,6 +106,15 @@ export const Orders = () => {
           })}
         </select>
       </div>
+      {showDetails ? (
+        <ShowDetails
+          currentOrder={currentOrder}
+          setShowDetails={setShowDetails}
+          currentIndex={currentIndex}
+        />
+      ) : (
+        <></>
+      )}
 
       {isDeleteDialogShown ? (
         deleteDialog({
