@@ -46,6 +46,7 @@ export const RegisterComponent = ({
           type={type}
           placeholder={placeholder}
           onChange={(e) => {
+            console.log("test");
             setErrors(
               Registration.removeErrors({
                 isLoginForm: false,
