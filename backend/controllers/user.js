@@ -46,7 +46,7 @@ const getRestaurantByName = (req, res) => {
 //! ...........END getRestaurantByName ....................
 
 const getRestaurantById = (req, res) => {
-  console.log("id")
+
   const restaurantid = req.params.id;
   const query = `SELECT * FROM restaurants WHERE Id=?;`;
   const data = [restaurantid];
@@ -226,7 +226,33 @@ const UpdateAdress= (req, res) => {
   });
 
 };
+//! ........END  UpdateAdress .....
+const getAdressByUserId = (req, res) => {
 
+  const userId = req.params.id;
+  const query = `SELECT * FROM address WHERE user_id=?;`;
+  const data = [userId];
+  connection.query(query, data, (err, result) => {
+    if (err) {
+      res.status(500).json({ err });
+    }
+   
+    if (result.length) {
+      res.status(200).json({
+        success: true,
+        massage: `the adress user is: ${userId}`,
+        result: result,
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        massage: `the adress name is ${userId} is not found now `,
+      });
+    }
+  });
+};
+
+//! ........END getAdressByUserId  .....
 
 module.exports = {
   getAllRestaurants,
@@ -236,5 +262,6 @@ module.exports = {
   addMealToCart,
   deleteMealFromCart,
   senOrder,
-  UpdateAdress
+  UpdateAdress,
+  getAdressByUserId,
 };

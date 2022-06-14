@@ -38,14 +38,14 @@ const RestaurantPage = () => {
 
   const getRestarnt = async () => {
 
-    const responseRestarnt = await User.getRestaurantById({ restaurantId: 1 })
+    const responseRestarnt = await User.getRestaurantById({ restaurantId: 2 })
 
     console.log(responseRestarnt.result)
     await setRestaurants(responseRestarnt.result);
     // dispatch(setNameRest({ name: responseRestarnt[0].result.name }));
 
 
-    const responseMeal = await User.getMealsByRestaurant({ restaurantId: 1 })
+    const responseMeal = await User.getMealsByRestaurant({ restaurantId: 2})
     setMenu(responseMeal.result)
 
     setCategories(responseMeal.categories)

@@ -11,6 +11,7 @@ const {
   getRestaurantById,
   senOrder,
   UpdateAdress,
+  getAdressByUserId
 } = require("../controllers/user");
 
 
@@ -40,6 +41,9 @@ userRouter.get("/:restaurant_id",getMealByRestaurant);
 
 // get ( params )
 userRouter.get("/id/:id", getRestaurantById);
+
+// get (params)
+userRouter.get("/adress/:id", getAdressByUserId );
 
 //...........................................................
 //todo  post method
