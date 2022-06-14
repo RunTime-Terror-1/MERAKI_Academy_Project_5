@@ -308,19 +308,18 @@ const CompleteOrder = () => {
 
 
             }}>place order</button>
-
-            {/* <div>{clickValue=="yes"?messageLocation=="good"&&testComplete=="true"?<h3>okey order done</h3>:<h3>full all information</h3>:""}</div> */}
-            <div className='instedModel'>
+           <div>{models==true?<div className='instedModel' onClick={()=>{toggleModel()}} >
                 <div className='instedModel'>
                     <h2>fgffffffffffffffffff</h2>
                     <button
                         onClick={() => { toggleModel() }}>close
                     </button>
                 </div>
-            </div>
+            </div>:""}</div>
+            
         </div>
-
-
+ 
+        
 
     </div>)
 
