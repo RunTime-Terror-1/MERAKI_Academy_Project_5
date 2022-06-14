@@ -23,9 +23,12 @@ const CompleteOrder = () => {
     const [buildingNumber, setBuilding] = useState("")
     const [street, setstreet] = useState("")
 
-    const [color, setColor] = useState("true")
+    const [truevalue, settrue] = useState("false")
 
+    const [pastAdress, setPastAdress] = useState("")
     //!.....................................
+    let testadress = "false"
+    //!.............
     const dispatch = useDispatch();
 
     const Userinfor = useSelector((state) => {
@@ -48,7 +51,7 @@ const CompleteOrder = () => {
     //!..............................
 
 
-    console.log(Userinfor.userId, "Yourid   complete")
+    // console.log(Userinfor.userId, "Yourid   complete")
 
 
     const saveAdress = async (id) => {
@@ -59,12 +62,20 @@ const CompleteOrder = () => {
 
     }
 
-    const getAdress = async(userid) => {
-        console.log("idiiddid", userid)
+    const getAdress = async (userid) => {
+        // console.log("idiiddid", userid)
         const pastadess = await User.getaddrssByuserTd({ userid })
         console.log(pastadess.result)
-    }
+        console.log(pastadess.result[0].street, "kkkkkk")
+        if (pastadess.result[0].street != null) {
+            console.log("nulllll")
+            testadress = "true"
+            settrue("true")
 
+        }
+        setPastAdress(pastadess.result[0])
+        console.log(testadress)
+    }
 
 
     useEffect(() => {
@@ -103,35 +114,76 @@ const CompleteOrder = () => {
                 </div>
 
             </div>
-
-            <div className='inputLocation'>
-                <div className='cityandarea'>
-                    <input placeholder="City"
-                        onChange={(e) => {
-                            setCity(e.target.value);
-                        }}
-                    /><input placeholder="Area"
-                        onChange={(e) => {
-                            setArea(e.target.value);
+            <div className='location'>
+                <div className='inputLocation'>
+                    <div className='cityandarea'>
+                        <input placeholder="City"
+                            onChange={(e) => {
+                                setCity(e.target.value);
+                            }}
+                        /><input placeholder="Area"
+                            onChange={(e) => {
+                                setArea(e.target.value);
+                            }} />
+                    </div>
+                    <div className='bulidingandStreet'>
+                        <input placeholder="buldingNumber" onChange={(e) => {
+                            setBuilding(e.target.value);
                         }} />
-                </div>
-                <div className='bulidingandStreet'>
-                    <input placeholder="buldingNumber" onChange={(e) => {
-                        setBuilding(e.target.value);
-                    }} />
-                    <input placeholder="stretNumber" onChange={(e) => {
-                        setstreet(e.target.value);
-                    }} />
+                        <input placeholder="stretNumber" onChange={(e) => {
+                            setstreet(e.target.value);
+                        }} />
 
 
+                    </div>
+                    <div className='Number'>
+                        <input className='Number' placeholder="Number" onChange={(e) => {
+                            setPhone(e.target.value);
+                        }} />
+                    </div>
+
                 </div>
-                <div className='Number'>
-                    <input className='Number' placeholder="Number" onChange={(e) => {
-                        setPhone(e.target.value);
-                    }} />
+                <div className='userPastLocation'>{truevalue == "true" ?
+                    <div className='iftrue'>
+                        <div className='div45'>City:<h3>Amman</h3></div>
+                        <div className='div45'>Area:<h3>{pastAdress.city}</h3></div>
+                        <div className='div45'>street:<h3>{pastAdress.street}</h3></div>
+                        <div className='div45'>buildingNumber:<h3>{pastAdress.buldingNumber}</h3></div>
+                        <div className='div45'>phone:<h3>{pastAdress.notes}</h3></div>
+                    </div>
+                    : <div><img className="imgadress" src="http://cdn.onlinewebfonts.com/svg/img_554287.png" /><h1>fff</h1></div>}
                 </div>
+
 
             </div>
+
+            {/* {pastAdress?pastAdress.map((element,index)=>{
+                 return (<div className='return_pastAdress' key={index}>
+                      <div>city</div>
+
+                 </div>)
+                    
+
+                }):<div><img src="https://encrypted-tbn0.gstatic.com/images?
+                q=tbn:ANd9GcSyZ5u36QS_uhDLkGRATjK0z-teEOoWegxYug&usqp=CAU" /></div>} */}
+
+
+            <div >
+                <div><input type="radio" id="huey" name="drone" value="huey"
+                    onChange={(e) => { console.log(e.target.value) }}
+                />
+                    <label for="huey">new</label></div>
+
+                <div><input type="radio" id="huey" name="drone" value="huey"
+                    onChange={(e) => { console.log(e.target.value) }}
+                />
+                    <label for="huey">Past</label>
+                </div>
+          
+
+            </div>
+
+
             <div>money</div>
             <button onClick={() => {
 

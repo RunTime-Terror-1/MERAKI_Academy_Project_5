@@ -40,7 +40,7 @@ const RestaurantPage = () => {
 
     const responseRestarnt = await User.getRestaurantById({ restaurantId: 2 })
 
-    console.log(responseRestarnt.result)
+    // console.log(responseRestarnt.result)
     await setRestaurants(responseRestarnt.result);
     // dispatch(setNameRest({ name: responseRestarnt[0].result.name }));
 

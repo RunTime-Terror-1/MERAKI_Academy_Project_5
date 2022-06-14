@@ -1,3 +1,10 @@
+*{
+    /* scroll-behavior: unset; */
+}
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
 .completeOrder{
     display: flex;
     flex-direction: column;
@@ -79,6 +86,13 @@
     left:60vw;
 }
 
+/*.....       ..................                ............*/
+
+.location{
+    display: flex;
+    flex-direction: row;
+
+}
 .inputLocation{
     display: flex;
     flex-direction: column;
@@ -96,3 +110,26 @@
 .Number{
 width:35vw;
 }
+.userPastLocation{
+    width: 30vw;
+/* background-color: darkgreen; */
+}
+.imgadress{
+    width:50px;
+    height: 50px;
+}
+
+.div45{
+    display: flex;
+    flex-direction: row;
+    gap: 35px;
+}
+.iftrue{
+    width:180px;
+    height: 150px;
+    background-color: crimson;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+/*.....       ..................                ............*/
