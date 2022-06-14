@@ -7,7 +7,7 @@ import { setCart, setPrice } from '../../../redux/reducers/User';
 import { useDispatch, useSelector } from "react-redux";
 
 
-import { setTotal } from '../../../redux/reducers/User';
+import { setTotal, setNameRest } from '../../../redux/reducers/User';
 
 
 import { AiFillStar } from "react-icons/ai";
@@ -18,6 +18,7 @@ const RestaurantPage = () => {
 
   // const [sumreal, setSumreal] = useState(0)
   const [restaurant, setRestaurants] = useState("")
+  const [name, setName] = useState("")
   const [menu, setMenu] = useState("")
   const [categories, setCategories] = useState("")
   const [arraydetials, setArraydetials] = useState("")
@@ -30,20 +31,21 @@ const RestaurantPage = () => {
       yourCart: state.User.cart,
       yourPrice: state.User.price,
       sumPrice: state.User.sumPriceUser,
+      name: state.User.name,
     }
   })
 
 
   const getRestarnt = async () => {
 
-    const responseRestarnt = await User.getRestaurantById({ restaurantId: 1 })
+    const responseRestarnt = await User.getRestaurantById({ restaurantId: 2 })
 
-    console.log(responseRestarnt.result)
-    await setRestaurants(responseRestarnt.result)
+    // console.log(responseRestarnt.result)
+    await setRestaurants(responseRestarnt.result);
+    // dispatch(setNameRest({ name: responseRestarnt[0].result.name }));
 
 
-
-    const responseMeal = await User.getMealsByRestaurant({ restaurantId: 1 })
+    const responseMeal = await User.getMealsByRestaurant({ restaurantId: 2})
     setMenu(responseMeal.result)
 
     setCategories(responseMeal.categories)
@@ -83,10 +85,10 @@ const RestaurantPage = () => {
   }, [])
 
 
-  console.log(arraydetials)
-  console.log(Userinfor.yourPrice)
+  // console.log(arraydetials)
+  // console.log(Userinfor.yourPrice)
 
-  console.log(restaurant)
+  // console.log(restaurant[0].name)
 
   return (<div className="RestaurantPage">
     <div className='NavBarHere'>{<NavBar />}</div>
@@ -98,7 +100,7 @@ const RestaurantPage = () => {
         return (<div className='All_One_One_map_returndiv' >
           <div><img className='imgback' src={element.backImg} /></div>
 
-          <div className='div_restur_Name'><h1 className='H1_Name'>{element.name + "hghghg"}</h1>
+          <div className='div_restur_Name'><h1 className='H1_Name'>{element.name}</h1>
             {/* <img className='imgLogo' src={element.Logo} /> */}
             <div className='textadd'><AiFillStar className='star' /><h2 className='rating'>4.8</h2>
               <h2 className='location_res'>{"Jordan - " + element.location}</h2><br />
@@ -144,8 +146,9 @@ const RestaurantPage = () => {
         <h1>categories</h1>
         <div className='All_Two-categore_map'>{categories ? categories.map((element, index) => {
           return (<div className='All_Two-categore_map_return' key={index}>
-            <a href={"#" + index} className="a_atAll">{element}</a>
+            <a href={"#" + index} className="a_atAll"><div className='divButton'><button className='button'>{element + "hjhdd"}</button></div><i className='i'></i></a>
 
+            {/* <a href={"#" + index}   ><span>{element}</span><i></i></a> */}
           </div>)
         }) : <></>}</div>
 
@@ -169,9 +172,9 @@ const RestaurantPage = () => {
 
               <BsPlusCircleFill className='PluseIcone'
                 onClick={() => {
-
+                  dispatch(setNameRest({ name: restaurant[0].name }));
                   dispatch(setCart({ items: elementMall }))
-                  // dispatch(setPrice({ price: elementMall.price, indexitem: elementMall.id }))
+                  dispatch(setPrice({ price: elementMall.price, indexitem: elementMall.id, priceOne: elementMall.price, name: elementMall.name }))
 
                   dispatch(setTotal({ opr: "+", value: elementMall.price }));
                   console.log("44")

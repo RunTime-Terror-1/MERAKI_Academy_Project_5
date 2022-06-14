@@ -46,7 +46,7 @@ const getRestaurantByName = (req, res) => {
 //! ...........END getRestaurantByName ....................
 
 const getRestaurantById = (req, res) => {
-  console.log("id")
+
   const restaurantid = req.params.id;
   const query = `SELECT * FROM restaurants WHERE Id=?;`;
   const data = [restaurantid];
@@ -199,7 +199,60 @@ const senOrder = (req, res) => {
 
 };
 
+//! ........END deleteMealfromCart.....
+const UpdateAdress= (req, res) => {
 
+  const UserId= req.params.id
+  console.log(UserId,"gg")
+  const { street, city,notes,buldingNumber  } = req.body
+  console.log(street,city,notes,buldingNumber)
+  const query ='update address SET street=?,city=?,notes=?,buldingNumber =?WHERE user_id=?;'
+  const data = [ street, city,notes,buldingNumber,UserId];
+  connection.query(query, data, (err, result) => {
+    if (err) {
+      return res.json({
+        success:false,
+        message: `The adress is not Found`,
+        err:err
+
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: `Adress updated`,
+      articles: result
+    });
+  });
+
+};
+//! ........END  UpdateAdress .....
+const getAdressByUserId = (req, res) => {
+
+  const userId = req.params.id;
+  const query = `SELECT * FROM address WHERE user_id=?;`;
+  const data = [userId];
+  connection.query(query, data, (err, result) => {
+    if (err) {
+      res.status(500).json({ err });
+    }
+   
+    if (result.length) {
+      res.status(200).json({
+        success: true,
+        massage: `the adress user is: ${userId}`,
+        result: result,
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        massage: `the adress name is ${userId} is not found now `,
+      });
+    }
+  });
+};
+
+//! ........END getAdressByUserId  .....
 
 module.exports = {
   getAllRestaurants,
@@ -208,5 +261,7 @@ module.exports = {
   getMealByRestaurant,
   addMealToCart,
   deleteMealFromCart,
-  senOrder
+  senOrder,
+  UpdateAdress,
+  getAdressByUserId,
 };

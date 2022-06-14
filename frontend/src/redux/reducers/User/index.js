@@ -4,10 +4,14 @@ import { createSlice } from "@reduxjs/toolkit";
 export const UserSlice = createSlice({
     name: "User",
     initialState: {
+        Iduser: localStorage.getItem("userid") || "",
         cart: [],
         price: [],
         total: 0,
-        sumPriceUser: "",
+        sumpriceUser: 0,
+        name: "",
+        userId:"",
+
 
     },
     reducers: {
@@ -18,7 +22,7 @@ export const UserSlice = createSlice({
                 // console.log(action.payload.items,"length")
                 state.cart.push(action.payload.items)
 
-            }else{
+            } else {
                 console.log("55")
 
                 let loop = true
@@ -49,6 +53,7 @@ export const UserSlice = createSlice({
 
 
         },
+        //!......................................................................
         deleteCart: (state, action) => {
             // action = {type,payload:2}
             state.cart = state.cart.filter((cartitem, index) => {
@@ -56,21 +61,27 @@ export const UserSlice = createSlice({
                 return cartitem.id != action.payload.id;
             });
 
-        },
+            state.price = state.price.filter((cartitem, index) => {
+                console.log("delete here")
+                return cartitem.id != action.payload.id;
+            });
 
+
+        },
+        //!......................................................................
         setPrice: (state, action) => {
             // state.price.push({price:action.payload.price,id:action.payload.indexitem})
             console.log("ghgh")
-           
+
             if (state.price.length == 0) {
                 console.log("length")
-                state.price.push({ price: action.payload.price, id: action.payload.indexitem })
+                state.price.push({ price: action.payload.price, id: action.payload.indexitem, priceOne: action.payload.priceOne, name: action.payload.name })
 
             } else {
                 console.log("not zero")
 
                 let loop = false
-         
+
 
 
                 state.price = state.price.filter((element, index) => {
@@ -85,25 +96,23 @@ export const UserSlice = createSlice({
                         return element
                     }
 
-
-
                 })
 
                 if (loop == false) {
-                    state.price.push({ price: action.payload.price, id: action.payload.indexitem })
+                    state.price.push({ price: action.payload.price, id: action.payload.indexitem, priceOne: action.payload.priceOne, name: action.payload.name })
                 }
             }
         },
+        //!......................................................................
         setsumPriceUser: (state, action) => {
-            state.sumPriceUser = state.price.reduce((acc, elemnt, index) => {
+            state.sumpriceUser = state.price.reduce((acc, elemnt, index) => {
 
-                return acc + elemnt
-            })
-            console.log(state.sumPriceUser)
-            console.log("sum")
+                return acc + elemnt.price
+            }, 0)
+
         },
 
-
+        //!......................................................................
         setTotal: (state, action) => {
 
             //payload = {"opr":"+" , value:10}
@@ -117,12 +126,31 @@ export const UserSlice = createSlice({
             }
 
 
+        },
+        //!......................................................................
+
+        setNameRest: (state, action) => {
+            console.log("userrr")
+            if (state.name == "") {
+                state.name = action.payload.name
+            } else {
+                state.name = action.payload.name
+            }
+        },
+
+//!......................................................................
+        setidUser: (state, action) => {
+            state.userId = action.payload.userId
+            localStorage.setItem("userid",action.payload.userId)
+
         }
+
     }
+
 
 });
 
-export const { setCart, deleteCart, setPrice, setsumPriceUser, setTotal } =
+export const { setCart, deleteCart, setPrice, setsumPriceUser, setTotal, setNameRest,setidUser } =
     UserSlice.actions;
 
 export default UserSlice.reducer;

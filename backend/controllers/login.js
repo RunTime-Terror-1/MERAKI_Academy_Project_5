@@ -30,7 +30,7 @@ const login = (req, res) => {
               message: "Server Error",
             });
           }
-      
+
           if (isMatch) {
             const query = "SELECT * FROM carts WHERE  user_id = ?";
             connection.query(query, [result[0].id], (err, cartResult) => {
@@ -47,14 +47,18 @@ const login = (req, res) => {
                 cartId: cartResult[0].id,
               };
 
-          
+
 
               const SECRET = process.env.SECRET;
               const token = jwt.sign(payload, SECRET);
 
+              console.log(token.payload)
               return res.status(200).json({
                 success: true,
                 message: "Login Successful",
+                userId: result[0].id,
+                roleId:result[0].role_id,
+                cartId: cartResult[0].id,
                 token,
               });
             });
