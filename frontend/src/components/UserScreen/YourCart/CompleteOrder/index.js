@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import NavBar from '../../NavBar';
 import { User } from '../../../../controllers/user';
+import { empty } from 'dom/lib/mutation';
 
 
 
@@ -17,15 +18,16 @@ const CompleteOrder = () => {
     // const { Name } = state
 
     const [city, setCity] = useState("")
-    const [Area, setArea] = useState("")
+    const [Area, setArea] = useState("empty")
 
-    const [Phone, setPhone] = useState("")
-    const [buildingNumber, setBuilding] = useState("")
-    const [street, setstreet] = useState("")
+    const [Phone, setPhone] = useState("empty")
+    const [buildingNumber, setBuilding] = useState("empty")
+    const [street, setstreet] = useState("empty")
 
     const [truevalue, settrue] = useState("false")
 
-    const [pastAdress, setPastAdress] = useState("")
+    const [pastAdress, setPastAdress] = useState("empty")
+    const [messageLocation, setMessage] = useState("")
     //!.....................................
     let testadress = "false"
     //!.............
@@ -75,6 +77,23 @@ const CompleteOrder = () => {
         }
         setPastAdress(pastadess.result[0])
         console.log(testadress)
+    }
+
+    const pastmessage = () => {
+        if(testadress=="false") {
+            setMessage("sorry not have past location please enter")
+        }
+    }
+  
+    
+    const newmessage = () => {
+        if(Area == "empty" &&Phone=="empty"&&street=="empty") {
+            console.log("welcomeeeeeeeegfg")
+            setMessage("sorry not have past location please enter")
+        }else{
+            console.log("khkhkh")
+            setMessage("sorry not have past location please enter")
+        }
     }
 
 
@@ -170,7 +189,7 @@ const CompleteOrder = () => {
 
             <div >
                 <div><input type="radio" id="huey" name="drone" value="huey"
-                    onChange={(e) => { console.log(e.target.value) }}
+                    onChange={(e) => {newmessage()}}
                 />
                     <label for="huey">new</label></div>
 
@@ -179,7 +198,7 @@ const CompleteOrder = () => {
                 />
                     <label for="huey">Past</label>
                 </div>
-          
+
 
             </div>
 
