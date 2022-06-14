@@ -202,7 +202,7 @@ const CompleteOrder = () => {
             </div>
 
             <div>
-                <div className='paymentDiv'>
+                <div className='HowPayment'>
                     <div>
                         <input type="radio" id="huey1" name="drone2" value="huey1"
                             onChange={(e) => {
@@ -223,12 +223,58 @@ const CompleteOrder = () => {
                         <label for="huey2">cash</label>
                     </div>
                 </div>
-                <div>{payment == "Visa" ?
-                 <div>
+                <div className='paymentcreditCardOremty' >{payment == "Visa" ?
+                    <div className='divcreditCard'>
+                        <div><h3>Card Number</h3>  <input placeholder="    -   -  -  -  -   - " /> </div>
+
+                        <div>
+                            <h3>Card Number</h3>
+                            <div >
+                                <select className="inputmounth"
+                                    onChange={(e) => {
+                                        // setDestin(e.target.value);
+                                    }} >
+                                    <option >mm</option>
+                                    <option>01</option>
+                                    <option>02</option>
+                                    <option>03</option>
+                                    <option>04</option>
+                                    <option>05</option>
+                                    <option>06</option>
+                                    <option>07</option>
+                                    <option>08</option>
+                                    <option>09</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                </select>
+
+
+                                <select className="inputmounth"
+                                    onChange={(e) => {
+                                        // setDestin(e.target.value);
+                                    }} >
+                                    <option >yy</option>
+                                    <option>2022</option>
+                                    <option>2023</option>
+                                    <option>2024</option>
+                                    <option>2025</option>
+                                    <option>2026</option>
+                                    <option>2027</option>
+
+
+                                </select>
+
+                            </div>
+
+                        </div>
 
 
 
-                </div> : ""}</div>
+                        <div></div>
+
+                    </div> : ""}
+                </div>
             </div>
 
 

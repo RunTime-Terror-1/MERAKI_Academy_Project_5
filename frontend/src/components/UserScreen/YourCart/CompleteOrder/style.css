@@ -138,4 +138,9 @@ width:35vw;
     flex-direction: row;
     gap: 20px;
 }
-/*.....       ..................                ............*/
+/*..... Cart       ..................                ............*/
+
+.inputmounth{
+width:10vw;
+height: 2vw;
+}
