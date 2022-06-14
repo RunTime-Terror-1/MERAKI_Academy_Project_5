@@ -98,7 +98,7 @@ const addMealToCart = (req, res) => {
 const getMealByRestaurant = (req, res) => {
   const restaurant_id = req.params.restaurant_id;
 
-  const query = `SELECT * FROM meals WHERE restarent_id=?;`;
+  const query = `SELECT * FROM meals WHERE restaurant_id=?;`;
 
   const data = [restaurant_id];
   connection.query(query, data, (err, resultMeals) => {
