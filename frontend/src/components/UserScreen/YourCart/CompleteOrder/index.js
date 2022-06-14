@@ -125,9 +125,10 @@ const CompleteOrder = () => {
     //!...............................................................
     return (<div className='completeOrder'>
         <NavBar />
+     
         <div className='order' >
             <div className='summaryOrder'>
-                <div className='divSummary'><h1>Order Summary</h1></div>
+                <div className='divSummary'><h2 className='h2_order'>Order Summary</h2></div>
                 <div className='orderinformation'>
                     <h1>{Userinfor.name}</h1>
                     <div className='title'>
@@ -216,7 +217,7 @@ const CompleteOrder = () => {
                 <div>{messageLocation != "empty" ? <div>{messageLocation}</div> : ""}</div>
             </div>
 
-            <div>
+            <div className='Payment'>
                 <div className='HowPayment'>
                     <div>
                         <input type="radio" id="huey1" name="drone2" value="huey1"
