@@ -53,26 +53,23 @@ const CompleteOrder = () => {
 
     const saveAdress = async (id) => {
 
-             console.log(id,buildingNumber,545,street)         
 
-    const adress = await User.UpdateAdress({userid:id,city:Area,buldingNumber:buildingNumber,street:street,notes:Phone})
+        const adress = await User.UpdateAdress({ userid: id, city: Area, buldingNumber: buildingNumber, street: street, notes: Phone })
 
 
     }
-    // console.log(Userinfor.sumPrice, "YourPrice   complete")
-    // const sumPriceee=()=>{
-    //   let sum =0
-    //     Userinfor.sumPrice.map((element,index)=>{
-    //       sum=sum+element.price
-    //     })
-    //     console.log(sum)
-    // }
+
+    const getAdress = async(userid) => {
+        console.log("idiiddid", userid)
+        const pastadess = await User.getaddrssByuserTd({ userid })
+        console.log(pastadess.result)
+    }
 
 
 
-    // useEffect(() => {
-    //     //    sumPriceee()
-    // }, [])
+    useEffect(() => {
+        getAdress(localStorage.getItem("userid"))
+    }, [])
 
     return (<div className='completeOrder'>
         <NavBar />
@@ -91,7 +88,7 @@ const CompleteOrder = () => {
 
                     </div>
                     <div className='mealItems'>{Userinfor.yourPrice ? Userinfor.yourPrice.map((element, index) => {
-                        return (<div className='div_return_map'>
+                        return (<div className='div_return_map' keys={index}>
                             <h3 className='NameMeal'>{element.name}</h3>
                             <div className='insted__div_return_map'>
                                 <div className='h3_Qun'>{element.price / element.priceOne}</div>

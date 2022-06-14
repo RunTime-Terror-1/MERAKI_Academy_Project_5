@@ -83,6 +83,23 @@ export class User {
   }
 
 
+  static async getaddrssByuserTd({ userid }) {
+    console.log(userid)
+    try {
+      const response = await axios.get(`${hostUrl}/user/address/${userid}`);
+      return response.data;
+    } catch (error) {
+      return {
+        success: false,
+        massage: "Server Error",
+        error,
+        result: [],
+      };
+    }
+  }
+
+
+
 
 
 }

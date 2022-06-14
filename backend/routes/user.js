@@ -43,7 +43,7 @@ userRouter.get("/:restaurant_id",getMealByRestaurant);
 userRouter.get("/id/:id", getRestaurantById);
 
 // get (params)
-userRouter.get("/adress/:id", getAdressByUserId );
+userRouter.get("/address/:id", getAdressByUserId );
 
 //...........................................................
 //todo  post method
