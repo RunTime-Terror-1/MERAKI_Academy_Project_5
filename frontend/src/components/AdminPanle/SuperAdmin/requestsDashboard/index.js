@@ -53,7 +53,7 @@ export const Requests = () => {
     );
   };
 
-  const updateUser = async (state) => {
+  const updateRequest = async (state) => {
     await SuperAdmin.acceptRequest({
       requestId: currentRequest.id,
       state: state,
@@ -76,7 +76,7 @@ export const Requests = () => {
             {createButton({
               text: "Yes",
               onClick: async () => {
-                updateUser(state);
+                updateRequest(state);
                 setIsDeleteDialogShown(false);
                 setIsAcceptDialogShown(false);
               },

@@ -1,30 +1,35 @@
 import React, { useContext, useState } from "react";
 import "./style.css";
-import { Registration } from "../../../controllers/registration";
-import { ErrorsDiv } from "./ErrorsDiv";
-import "./style.css";
-import { Gender } from "./GenderDiv";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsSignUpFormShown } from "../../../redux/reducers/auth";
-export const RegisterComponent = ({
-  superAdminRegister = false,
-  setIsRegisterShown,
-}) => {
+import { Owner } from "../../../../../controllers/owner";
+import { setRequests } from "../../../../../redux/reducers/superAdmin";
+import { Gender } from "../../../../Registration/Register/GenderDiv";
+import { ErrorsDiv } from "../../../../Registration/Register/ErrorsDiv";
+import { Registration } from "../../../../../controllers/registration";
+
+export const CreateEmployee = ({ setIsEmployeeFormShown }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [gender, setGender] = useState(null);
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
-  const [isDialogShown, setIsDialogShown] = useState("");
   let [errors, setErrors] = useState([]);
+
+  const [shift, setShift] = useState("");
+  const [salary, setSalary] = useState("");
+  const [weeklyHours, setWeeklyHours] = useState("");
+  const [restaurant_id, setRestaurant_id] = useState("");
+
+  const [isDialogShown, setIsDialogShown] = useState("");
   const dispatch = useDispatch();
-  const { auth } = useSelector((state) => {
+
+  const { auth, superAdminPanel } = useSelector((state) => {
     return state;
   });
   const buildAlertDialog = ({ bgColor, color, text, text2 }) => {
     setTimeout(() => {
       setIsDialogShown(false);
+      setIsEmployeeFormShown(false);
     }, 2500);
 
     return (
@@ -45,6 +50,7 @@ export const RegisterComponent = ({
         <input
           type={type}
           placeholder={placeholder}
+          min={1}
           onChange={(e) => {
             setErrors(
               Registration.removeErrors({
@@ -62,7 +68,19 @@ export const RegisterComponent = ({
     );
   };
 
-  const signUp = async () => {
+  const createEmployee = async () => {
+    const employee = {
+      firstName,
+      lastName,
+      password,
+      gender,
+      email,
+      shift,
+      salary: salary + "$",
+      restaurant_id,
+      weeklyHours,
+      token: auth.token,
+    };
     const inputForm = {
       FirstName: `${firstName} `,
       LastName: ` ${lastName}`,
@@ -76,25 +94,11 @@ export const RegisterComponent = ({
       inputForm: inputForm,
     });
     if (errors.length === 0) {
-      
-      const serverError = await Registration.register({
-        firstName,
-        lastName,
-        email,
-        password,
-        gender,
-        role:superAdminRegister?role:1,
-      });
-    
+      const { serverError } = await Owner.createEmployee({ ...employee });
       if (serverError === "Email already taken") {
         setErrors([...errors, "Email already taken"]);
       } else {
         setIsDialogShown(true);
-        dispatch(setIsSignUpFormShown());
-        if(superAdminRegister){
-          setIsRegisterShown(false);
-        }
-        
       }
     } else {
       setErrors(errors);
@@ -106,8 +110,8 @@ export const RegisterComponent = ({
         buildAlertDialog({
           bgColor: "green",
           color: "white",
-          text: "SignUp Completed Successfully",
-          text2: `Welcome to our community ${firstName + " " + lastName}`,
+          text: "Employee Created Successfully",
+          text2: `The employee can start his job `,
         })
       ) : (
         <></>
@@ -116,29 +120,25 @@ export const RegisterComponent = ({
         <div id="signup--exit-button">
           <button
             onClick={() => {
-              dispatch(setIsSignUpFormShown());
-  
-              setIsRegisterShown(false);
+              setIsEmployeeFormShown(false);
             }}
           >
             X
           </button>
         </div>
 
-        <h1>Create an Account</h1>
-        {/*<h4> it's quick and easy.</h4>*/}
-        
+        <h1>Create Employee</h1>
         <hr />
 
+        <div></div>
+
         <div id="register-username-div">
-         
           {createInput({
             placeholder: "First Name",
             type: "text",
             key: "FirstName",
             setState: setFirstName,
           })}
-          
           {createInput({
             placeholder: "Last Name",
             type: "text",
@@ -153,26 +153,43 @@ export const RegisterComponent = ({
           key: "Email",
           setState: setEmail,
         })}
+
         {createInput({
           placeholder: "Password",
           type: "password",
           key: "Password",
           setState: setPassword,
         })}
-        {superAdminRegister ? (
-          createInput({
-            placeholder: "Role Id",
-            type: "number",
-            key: "number",
-            setState: setRole,
-          })
-        ) : (
-          <></>
-        )}
         <Gender setGender={setGender} errors={errors} setErrors={setErrors} />
+        {createInput({
+          placeholder: "Shift",
+          type: "text",
+          key: "Shift",
+          setState: setShift,
+        })}
+        {createInput({
+          placeholder: "Restaurant Id",
+          type: "number",
+          key: "Restaurant Id",
+          setState: setRestaurant_id,
+        })}
+        <div id="register-username-div">
+          {createInput({
+            placeholder: "Salary",
+            type: "number",
+            key: "Salary",
+            setState: setSalary,
+          })}
+          {createInput({
+            placeholder: "Weekly Hours",
+            type: "number",
+            key: "WeeklyHours",
+            setState: setWeeklyHours,
+          })}
+        </div>
         <ErrorsDiv errors={errors} />
         <div id="signup-button-div">
-          <button onClick={signUp}>Sign Up</button>
+          <button onClick={createEmployee}>Create Employee</button>
         </div>
       </div>
     </div>

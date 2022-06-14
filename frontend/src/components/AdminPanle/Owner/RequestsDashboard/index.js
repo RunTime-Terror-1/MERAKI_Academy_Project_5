@@ -1,13 +1,17 @@
 import react, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { SuperAdmin } from "../../../../controllers/superAdmin";
 import { setRequests, setUsers } from "../../../../redux/reducers/superAdmin";
+import { Owner } from "../../../../controllers/owner";
 import "./style.css";
+import { CreateRequest } from "./CreateRequest";
+import { CreateRestaurant } from "./CreateRestaurant";
 
 export const Requests = () => {
   const dispatch = useDispatch();
   const [isDeleteDialogShown, setIsDeleteDialogShown] = useState(false);
-  const [isAcceptDialogShown, setIsAcceptDialogShown] = useState(false);
+  const [isCreateRequestDialogShown, setIsRequestDialogShown] = useState(false);
+  const [isCreateRestaurantDialogShown, setIsRestaurantDialogShown] =
+    useState(false);
 
   const [currentIndex, setCurrentIndex] = useState({});
 
@@ -16,11 +20,21 @@ export const Requests = () => {
   const { superAdminPanel, auth } = useSelector((state) => {
     return state;
   });
-  const createButton = ({ onClick, text }) => {
-    return <button onClick={onClick}>{text}</button>;
+  const createButton = ({ onClick, text, state }) => {
+    return (
+      <button
+        onClick={onClick}
+        style={
+          state !== "Accepted"
+            ? { backgroundColor: "red" }
+            : { backgroundColor: "green" }
+        }
+      >
+        {text}
+      </button>
+    );
   };
   const createRow = (request, index) => {
-    console.log(request);
     return (
       <div className="user-row" key={request.id + request.email}>
         <h4>{request.id}</h4>
@@ -29,39 +43,45 @@ export const Requests = () => {
         <h4>{request.state}</h4>
         <h4>{request.restaurantName}</h4>
         <div id="edit-btns-div">
-            {request.state ==="In Progress"?createButton({
+          {request.state !== "Accepted" ? (
+            createButton({
               onClick: () => {
                 setCurrentIndex(index);
                 setCurrentRequest(request);
-                setIsAcceptDialogShown(true);
+                setIsDeleteDialogShown(true);
               },
               text: "Delete",
-            }):
+              state: request.state,
+            })
+          ) : request.state === "Accepted" ? (
             createButton({
               onClick: async () => {
                 setCurrentRequest(request);
-                setIsDeleteDialogShown(true);
                 setCurrentIndex(index);
+                setIsRestaurantDialogShown(true);
               },
-              text: "Reject",
-            })}``
-          </div>
+              text: "Create Restaurant",
+              state: request.state,
+            })
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
     );
   };
 
-  const updateUser = async (state) => {
-    await SuperAdmin.acceptRequest({
-      requestId: currentRequest.id,
-      state: state,
-      token: auth.token,
-    });
-    const requests = [...superAdminPanel.requests];
-    requests[currentIndex] = {
-      ...requests[currentIndex],
-      state: state,
-    };
-    dispatch(setRequests(requests));
+  const updateRequest = async (state) => {
+    if (state !== "Accepted") {
+      await Owner.deleteRequest({
+        token: auth.token,
+        requestId: currentRequest.id,
+      });
+      const requests = [...superAdminPanel.requests];
+      requests.splice(currentIndex, 1);
+      dispatch(setRequests(requests));
+    } else {
+    }
   };
   const deleteDialog = ({ title, text, state }) => {
     return (
@@ -73,16 +93,14 @@ export const Requests = () => {
             {createButton({
               text: "Yes",
               onClick: async () => {
-                updateUser(state);
+                updateRequest(currentRequest.state);
                 setIsDeleteDialogShown(false);
-                setIsAcceptDialogShown(false);
               },
             })}
             {createButton({
               text: "Cancel",
               onClick: async () => {
                 setIsDeleteDialogShown(false);
-                setIsAcceptDialogShown(false);
               },
             })}
           </div>
@@ -93,22 +111,38 @@ export const Requests = () => {
 
   return (
     <div>
+      <div id="request-div">
+        <p>
+          <strong>Requests,</strong> you can send and remove restaurant request
+        </p>
+
+        <button
+          onClick={() => {
+            setIsRequestDialogShown(true);
+          }}
+        >
+          {" "}
+          + Request
+        </button>
+      </div>
       {isDeleteDialogShown ? (
         deleteDialog({
-          text: "Request will be rejected, Are you sure?",
-          title: "Reject Request",
-          state: "Rejected",
+          text: "Request will be Deleted, Are you sure?",
+          title: "Delete Request",
         })
       ) : (
         <></>
       )}
-
-      {isAcceptDialogShown ? (
-        deleteDialog({
-          text: "Request will be Accepted, Are you sure?",
-          title: "Accept Request",
-          state: "Accepted",
-        })
+      {isCreateRequestDialogShown ? (
+        <CreateRequest setIsRequestDialogShown={setIsRequestDialogShown} />
+      ) : (
+        <></>
+      )}
+      {isCreateRestaurantDialogShown ? (
+        <CreateRestaurant
+          setIsRestaurantDialogShown={setIsRestaurantDialogShown}
+          currentIndex={currentIndex}
+        />
       ) : (
         <></>
       )}
@@ -121,7 +155,7 @@ export const Requests = () => {
           <h4>{"restaurant".toUpperCase()}</h4>
           <h4>ACTIONS</h4>
         </div>
-        {superAdminPanel.requests? (
+        {superAdminPanel.requests ? (
           superAdminPanel.requests.map((request, index) => {
             return createRow(request, index);
           })
