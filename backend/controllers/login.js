@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const login = (req, res) => {
-  console.log();
   const { email, password } = req.body;
   const query = "SELECT * FROM users WHERE email = ?";
   const data = [email];

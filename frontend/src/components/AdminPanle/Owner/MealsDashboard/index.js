@@ -42,7 +42,7 @@ export const Meals = () => {
   const createRow = (meal, index) => {
     return (
       <div className="user-row" key={meal.id + meal.name}>
-        <h4>{meal.id}</h4>
+        <h4>{index + 1}</h4>
         <h4>{meal.name}</h4>
         <img src={`${meal.imgUrl}`} />
         <h4>{meal.price} $</h4>

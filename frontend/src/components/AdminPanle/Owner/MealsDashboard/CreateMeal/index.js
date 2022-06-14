@@ -24,7 +24,7 @@ export const CreateMeal = ({
     isUpdate ? currentMeal.category : ""
   );
   const [price, setPrice] = useState(isUpdate ? currentMeal.price : "");
-  const [restaurant_id, setRestaurant_id] = useState(isUpdate ? resId : "");
+  const [restaurant_id, setRestaurant_id] = useState(isUpdate ? resId :1);
   const [isDialogShown, setIsDialogShown] = useState("");
   const dispatch = useDispatch();
 
