@@ -24,6 +24,7 @@ export const RegisterComponent = ({
   });
   const buildAlertDialog = ({ bgColor, color, text, text2 }) => {
     setTimeout(() => {
+      console.log("test");
       setIsDialogShown(false);
     }, 2500);
 
@@ -57,7 +58,9 @@ export const RegisterComponent = ({
             );
             setState(e.target.value);
           }}
+          
           className="input"
+          
         />
       </div>
     );
