@@ -176,3 +176,11 @@ body {
 .divcreditCard{
     background-color: darkblue;
 }
+
+/*...........................*/
+.instedModel{
+    display: block;
+    width:50vh;
+    height: 20vh;
+    background-color: crimson;
+}

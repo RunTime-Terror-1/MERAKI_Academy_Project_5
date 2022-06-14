@@ -60,7 +60,7 @@ const CompleteOrder = () => {
 
 
     // console.log(Userinfor.userId, "Yourid   complete")
-//!..................Functions.............................................
+    //!..................Functions.............................................
 
     const saveAdress = async (id) => {
 
@@ -73,8 +73,7 @@ const CompleteOrder = () => {
     const getAdress = async (userid) => {
         // console.log("idiiddid", userid)
         const pastadess = await User.getaddrssByuserTd({ userid })
-        console.log(pastadess.result)
-        console.log(pastadess.result[0].street, "kkkkkk")
+       
         if (pastadess.result[0].street != null) {
             console.log("nulllll")
             testadress = "true"
@@ -82,11 +81,11 @@ const CompleteOrder = () => {
 
         }
         setPastAdress(pastadess.result[0])
-        console.log(testadress)
+     
     }
 
     const pastmessage = () => {
-        console.log(testadress)
+    
         if (truevalue == "false") {
             setMessage("sorry not have past location please enter")
         } else {
@@ -97,7 +96,7 @@ const CompleteOrder = () => {
 
     const newmessage = () => {
         if (Area != "empty" && Phone != "empty" && street != "empty" && Phone != "empty" && city != "empty") {
-            console.log("welcomeeeeeeeegfg")
+        
             setMessage("good")
         } else {
             console.log("khkhkh")
@@ -105,25 +104,25 @@ const CompleteOrder = () => {
 
         }
     }
-   const click=()=>{
-    alert("ggggggggggggggg");
-   
-   }
+    const click = () => {
+        alert("ggggggggggggggg");
 
-const  toggleModel=()=>{
-    console.log("ghghg")
-    setmodels(!models)
-    console.log(models)
-}
+    }
 
-
+    const toggleModel = () => {
+        console.log("ghghg")
+        setmodels(!models)
+        console.log(models)
+    }
 
 
-//!...............................................................
+
+
+    //!...............................................................
     useEffect(() => {
         getAdress(localStorage.getItem("userid"))
     }, [])
-//!...............................................................
+    //!...............................................................
     return (<div className='completeOrder'>
         <NavBar />
         <div className='order' >
@@ -305,17 +304,24 @@ const  toggleModel=()=>{
 
                 saveAdress(Userinfor.userId);
                 setClick("yes");
-               toggleModel();
-            
+                toggleModel();
+
 
             }}>place order</button>
 
-           {/* <div>{clickValue=="yes"?messageLocation=="good"&&testComplete=="true"?<h3>okey order done</h3>:<h3>full all information</h3>:""}</div> */}
-           <div></div>
+            {/* <div>{clickValue=="yes"?messageLocation=="good"&&testComplete=="true"?<h3>okey order done</h3>:<h3>full all information</h3>:""}</div> */}
+            <div className='instedModel'>
+                <div className='instedModel'>
+                    <h2>fgffffffffffffffffff</h2>
+                    <button
+                        onClick={() => { toggleModel() }}>close
+                    </button>
+                </div>
+            </div>
         </div>
 
 
-      
+
     </div>)
 
 }
