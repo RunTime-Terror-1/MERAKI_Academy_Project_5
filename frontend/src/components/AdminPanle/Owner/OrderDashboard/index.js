@@ -1,4 +1,4 @@
-import react, { useEffect, useState } from "react";
+import react, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setMeals, setOrders } from "../../../../redux/reducers/superAdmin";
 import "./style.css";
@@ -24,6 +24,7 @@ export const Orders = () => {
   });
   const [resId, setResId] = useState(superAdminPanel.restaurants[0].id);
 
+  const ordersId = useRef([]).current;
   const createButton = ({ onClick, text, state }) => {
     return (
       <button
@@ -41,12 +42,12 @@ export const Orders = () => {
   const createRow = (order, index) => {
     console.log(order);
     return (
-      <div className="user-row" key={order.id + order.name}>
+      <div className="user-row" key={order.id + order.name + index}>
         <h4>{index + 1}</h4>
         <h4>{order.name}</h4>
         <h4>{order.notes}</h4>
         <h4>{order.receipt} $</h4>
-        <h4>{superAdminPanel.orders.length } </h4>
+        <h4>{superAdminPanel.orders.length} </h4>
         <div id="edit-btns-div">
           {createButton({
             onClick: async () => {
@@ -109,7 +110,6 @@ export const Orders = () => {
 
   return (
     <div>
-     
       <div id="selector-div">
         <h3>Restaurant Name</h3>
         <select
@@ -148,7 +148,10 @@ export const Orders = () => {
         </div>
         {superAdminPanel.orders ? (
           superAdminPanel.orders.map((order, index) => {
-            return createRow(order, index);
+            if (!ordersId.includes(order.id)) {
+              ordersId.push(order.id);
+              return createRow(order, index);
+            }
           })
         ) : (
           <></>
