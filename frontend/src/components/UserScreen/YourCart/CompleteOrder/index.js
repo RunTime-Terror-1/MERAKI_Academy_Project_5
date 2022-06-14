@@ -36,6 +36,7 @@ const CompleteOrder = () => {
             islogin: state.auth.isLoggedIn,
             sumPrice: state.User.sumpriceUser,
             name: state.User.name,
+            userId: state.User.userId,
         }
     })
 
@@ -45,8 +46,16 @@ const CompleteOrder = () => {
     console.log(Userinfor.yourPrice, "YourPrice   complete")
     //!..............................
 
-    console.log(Userinfor.sumPrice, "YourPrice   complete")
 
+    console.log(Userinfor.userId, "Yourid   complete")
+
+
+    const SaveAdress=()=>{
+
+
+
+        
+    }
     // console.log(Userinfor.sumPrice, "YourPrice   complete")
     // const sumPriceee=()=>{
     //   let sum =0
@@ -95,31 +104,36 @@ const CompleteOrder = () => {
 
             </div>
 
-            <div>
-                <div className='cityandarea'><input placeholder="City"
-                    onChange={(e) => {
-                        setCity(e.target.value);
-                    }}
-                /><input placeholder="Area"
-                    onChange={(e) => {
-                        setArea(e.target.value);
-                    }} /></div>
+            <div className='inputLocation'>
+                <div className='cityandarea'>
+                    <input placeholder="City"
+                        onChange={(e) => {
+                            setCity(e.target.value);
+                        }}
+                    /><input placeholder="Area"
+                        onChange={(e) => {
+                            setArea(e.target.value);
+                        }} />
+                </div>
                 <div className='bulidingandStreet'>
                     <input placeholder="buldingNumber" onChange={(e) => {
                         setBuilding(e.target.value);
-                    }} /><input placeholder="stretNumber" />
-                    <input placeholder="Number" onChange={(e) => {
+                    }} />
+                    <input placeholder="stretNumber" onChange={(e) => {
                         setstreet(e.target.value);
                     }} />
-                    <input placeholder="Number" onChange={(e) => {
+
+
+                </div>
+                <div className='Number'>
+                    <input className='Number' placeholder="Number" onChange={(e) => {
                         setPhone(e.target.value);
                     }} />
-
                 </div>
 
             </div>
             <div>money</div>
-            <button>done</button>
+            <button >place order</button>
 
         </div>
 

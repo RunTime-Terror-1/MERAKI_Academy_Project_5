@@ -58,6 +58,19 @@ export class User {
     }
   }
 
+  static async UpdateAdress({ User_id }) {
+    try {
+      const response = await axios.get(`${hostUrl}/user/${User_id}`);
+      return response.data;
+    } catch (error) {
+      return {
+        success: false,
+        massage: "Server Error",
+        error,
+        result: [],
+      };
+    }
+  }
 
 
 

@@ -10,6 +10,7 @@ const {
   deleteMealFromCart,
   getRestaurantById,
   senOrder,
+  UpdateAdress,
 } = require("../controllers/user");
 
 
@@ -59,8 +60,8 @@ userRouter.post("/sent/:meal_id",authentication,senOrder);
 userRouter.delete("/delete/:meal_id",authentication,deleteMealFromCart);
 
 
-
-
+//Update (params methods)
+userRouter.put("/:id",UpdateAdress);
 
 
 

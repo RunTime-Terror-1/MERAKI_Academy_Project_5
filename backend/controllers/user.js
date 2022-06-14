@@ -203,14 +203,16 @@ const senOrder = (req, res) => {
 const UpdateAdress= (req, res) => {
 
   const UserId= req.params.id
-  const { street, city,notes,bulidingNumber } = req.body
-  const query ='update  address SET street=?,city=?,notes=?,bulidingNumber=?,WHERE user_id=?;'
-  const data = [street, city,notes,bulidingNumber,UserId];
+  console.log(UserId)
+  const { street, city,notes,buldingNumber  } = req.body
+  const query ='update address SET street=?,city=?,notes=?,buldingNumber =?WHERE user_id=?;'
+  const data = [ street, city,notes,buldingNumber,UserId];
   connection.query(query, data, (err, result) => {
     if (err) {
       return res.json({
-        success: fals,
+        success:false,
         message: `The adress is not Found`,
+        err:err
 
       });
     }
@@ -233,4 +235,5 @@ module.exports = {
   addMealToCart,
   deleteMealFromCart,
   senOrder,
+  UpdateAdress
 };

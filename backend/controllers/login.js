@@ -56,6 +56,7 @@ const login = (req, res) => {
               return res.status(200).json({
                 success: true,
                 message: "Login Successful",
+                userId: result[0].id,
                 roleId:result[0].role_id,
                 cartId: cartResult[0].id,
                 token,

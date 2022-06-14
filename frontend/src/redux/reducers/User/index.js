@@ -7,9 +7,10 @@ export const UserSlice = createSlice({
         cart: [],
         price: [],
         total: 0,
-        sumpriceUser:0,
-        name:"",
-        Id
+        sumpriceUser: 0,
+        name: "",
+        userId:"",
+
 
     },
     reducers: {
@@ -20,7 +21,7 @@ export const UserSlice = createSlice({
                 // console.log(action.payload.items,"length")
                 state.cart.push(action.payload.items)
 
-            }else{
+            } else {
                 console.log("55")
 
                 let loop = true
@@ -58,7 +59,7 @@ export const UserSlice = createSlice({
                 console.log("delete here")
                 return cartitem.id != action.payload.id;
             });
-            
+
             state.price = state.price.filter((cartitem, index) => {
                 console.log("delete here")
                 return cartitem.id != action.payload.id;
@@ -66,21 +67,21 @@ export const UserSlice = createSlice({
 
 
         },
-     //!......................................................................
+        //!......................................................................
         setPrice: (state, action) => {
             // state.price.push({price:action.payload.price,id:action.payload.indexitem})
             console.log("ghgh")
-           
+
             if (state.price.length == 0) {
                 console.log("length")
-                state.price.push({ price: action.payload.price, id: action.payload.indexitem,priceOne:action.payload. priceOne,name:action.payload.name  })
+                state.price.push({ price: action.payload.price, id: action.payload.indexitem, priceOne: action.payload.priceOne, name: action.payload.name })
 
             } else {
                 console.log("not zero")
 
                 let loop = false
-         
-                   
+
+
 
                 state.price = state.price.filter((element, index) => {
                     console.log(element.id)
@@ -97,7 +98,7 @@ export const UserSlice = createSlice({
                 })
 
                 if (loop == false) {
-                    state.price.push({ price: action.payload.price, id: action.payload.indexitem,priceOne:action.payload. priceOne,name:action.payload.name })
+                    state.price.push({ price: action.payload.price, id: action.payload.indexitem, priceOne: action.payload.priceOne, name: action.payload.name })
                 }
             }
         },
@@ -106,11 +107,11 @@ export const UserSlice = createSlice({
             state.sumpriceUser = state.price.reduce((acc, elemnt, index) => {
 
                 return acc + elemnt.price
-            },0)
-            
+            }, 0)
+
         },
 
-  //!......................................................................
+        //!......................................................................
         setTotal: (state, action) => {
 
             //payload = {"opr":"+" , value:10}
@@ -125,26 +126,29 @@ export const UserSlice = createSlice({
 
 
         },
-//!......................................................................
+        //!......................................................................
 
-        setNameRest:(state,action)=>{
+        setNameRest: (state, action) => {
             console.log("userrr")
-            if(state.name==""){
-                state.name=action.payload.name
-            }else{
-                state.name=action.payload.name
+            if (state.name == "") {
+                state.name = action.payload.name
+            } else {
+                state.name = action.payload.name
             }
-        }
-    }
+        },
+
 //!......................................................................
+        setidUser: (state, action) => {
+            state.userId = action.payload.userId
 
-setId:(state,action)=>{
+        }
+
+    }
 
 
-}
 });
 
-export const { setCart, deleteCart, setPrice, setsumPriceUser, setTotal,setNameRest} =
+export const { setCart, deleteCart, setPrice, setsumPriceUser, setTotal, setNameRest,setidUser } =
     UserSlice.actions;
 
 export default UserSlice.reducer;

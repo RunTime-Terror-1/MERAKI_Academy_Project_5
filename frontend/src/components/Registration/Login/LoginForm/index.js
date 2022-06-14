@@ -9,7 +9,11 @@ import {
   setlogin,
 } from "../../../../redux/reducers/auth";
 
+import { setidUser } from "../../../../redux/reducers/User";
+
+
 export const LoginForm = () => {
+
   const dispatch = useDispatch();
   const { auth } = useSelector((state) => {
     return state;
@@ -58,14 +62,14 @@ export const LoginForm = () => {
         email,
         password,
       });
-         console.log(response.cartId)
-         console.log(response.roleId)
+     
 
-         
+      dispatch(setidUser({ userId: response.userId }));
+
       dispatch(setlogin(response.token));
       if (response.message !== "Login Successful") {
         setErrors([...errors, response.message]);
-      }else{
+      } else {
         navigate("/")
       }
     } else {
