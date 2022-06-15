@@ -9,7 +9,7 @@ const ScreenHome = () => {
   const [showMenu, setShowMenu] = useState(false);
 
   return (
-    <div className="ScreenHome">
+    <div id="homepage-div">
       {<NavBar setShowMenu={setShowMenu} showMenu={showMenu} />}
 
       {showMenu ? <MainNavigationMenu setShowMenu={setShowMenu} /> : <></>}
@@ -21,7 +21,7 @@ const ScreenHome = () => {
 
       <div id="join-us-div">
         <h1>
-          Join Us And grow your restaurant brand with KHK<span>EATS</span>
+          Join Us And Grow Your Restaurant Brand With  <span> KHK EATS</span>
         </h1>
 
         <div id="inner-join-us-div" >
