@@ -61,7 +61,7 @@ const Counter = ({ element }) => {
 
                     onClick={() => {
                         prevPrice()
-                        dispatch(setPrice({ price: (realPrice * priceNumber) - realPrice, indexitem: element.id,priceOne:realPrice,name:element.name }));
+                        dispatch(setPrice({ price: (realPrice * priceNumber) - realPrice, indexitem: element.id,priceOne:realPrice,name:element.name,  restaurantid:element.restaurant_id }));
                         dispatch(setTotal({ opr: "-", value: realPrice }));
                     }}
                 />

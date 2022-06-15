@@ -56,7 +56,7 @@ userRouter.get("/res/:restaurant_id",  getMealByRestaurant)
 
 
 //post 
-userRouter.post("/sent/:meal_id",authentication,senOrder);
+userRouter.post("/sent/:userId",senOrder);
 
 
 

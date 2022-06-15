@@ -98,7 +98,7 @@ const addMealToCart = (req, res) => {
 const getMealByRestaurant = (req, res) => {
   const restaurant_id = req.params.restaurant_id;
 
-  const query = `SELECT * FROM meals WHERE restaurant_id=?;`;
+  const query = `SELECT * FROM meals WHERE restaurant_id=? and   is_deleted=0;`;
 
   const data = [restaurant_id];
   connection.query(query, data, (err, resultMeals) => {
@@ -171,13 +171,13 @@ const deleteMealFromCart = (req, res) => {
 //! ........END deleteMealfromCart.....
 
 const senOrder = (req, res) => {
-  const user_id = req.token.userId
-  const meal_id = req.params.meal_id
-  const { quantity, receipt } = req.body
+  const user_id = req.params.userId
+  // const meal_id = req.params.meal_id
+  const {state, receipt ,resturantId,mealarray} = req.body
 
 
-  const query = `INSERT INTO orders(quantity,receipt,user_id,meal_id) VALUES (?,?,?,?);`;
-  const data = [quantity, receipt, user_id, meal_id];
+  const query = `INSERT INTO orders(state,receipt,restaurant_id,user_id) VALUES (?,?,?,?);`;
+  const data = [state, receipt,resturantId ,user_id ];
   connection.query(query, data, (err, result) => {
 
     if (err) {
@@ -186,12 +186,40 @@ const senOrder = (req, res) => {
         massage: "Server error",
         err: err,
       });
-    } else {
+    }else{
       res.status(200).json({
         success: true,
-        massage: "add meal to Order",
+        massage: `Succeeded to sent meal `,
         result: result,
       });
+    }
+    if(result){
+      console.log(mealarray)
+      console.log(result.insertId)
+      let A= mealarray.map((element,index)=>{
+        let quantity=element.price/element.priceOne
+        let mealid=element.id
+        const orderMeal = `INSERT INTO orders_meals (quantity,order_id,meal_id) VALUES (?,?,?)`
+        const data=[quantity,result.insertId,mealid]
+        connection.query(orderMeal,data, (err, re3) => {
+          // if (err) {
+          //   return res.status(500).json({
+          //     success: false,
+          //     message: err,
+          //   });
+          // }else{
+          //   res.status(201).json({
+          //     success: true,
+          //     message: "Account Created Successfully",
+          //     results: result,
+          //   });
+          // }
+
+         
+        });
+
+      })
+     
 
     }
 
@@ -203,9 +231,9 @@ const senOrder = (req, res) => {
 const UpdateAdress= (req, res) => {
 
   const UserId= req.params.id
-  console.log(UserId,"gg")
+  // console.log(UserId,"gg")
   const { street, city,notes,buldingNumber  } = req.body
-  console.log(street,city,notes,buldingNumber)
+  // console.log(street,city,notes,buldingNumber)
   const query ='update address SET street=?,city=?,notes=?,buldingNumber =?WHERE user_id=?;'
   const data = [ street, city,notes,buldingNumber,UserId];
   connection.query(query, data, (err, result) => {
@@ -253,6 +281,11 @@ const getAdressByUserId = (req, res) => {
 };
 
 //! ........END getAdressByUserId  .....
+
+
+
+
+
 
 module.exports = {
   getAllRestaurants,

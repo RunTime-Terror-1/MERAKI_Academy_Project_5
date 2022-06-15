@@ -45,7 +45,8 @@ const AllRestarnts = () => {
                     className="All_B_eachRestarant"
                     key={index}
                     onClick={() => {
-                      navigate("/RestaurantPage");
+                      console.log(elemnt.id)
+                      navigate("/RestaurantPage" ,{ state: { restId: elemnt.id } });
                     }}
                   >
                     <img className="logo" src={elemnt.backImg} />

@@ -1,25 +1,31 @@
-import "./style.css";
-import React, { useState, useEffect, useContext } from "react";
-import { User } from "../../../controllers/user";
-import NavBar from "../NavBar";
-import YourCart from "../YourCart";
-import { setCart, setPrice } from "../../../redux/reducers/User";
-import { useDispatch, useSelector } from "react-redux";
+import './style.css'
+import React, { useState, useEffect, useContext } from 'react'
+import { User } from '../../../controllers/user'
+import NavBar from '../NavBar'
+import YourCart from '../YourCart'
+import { setCart, setPrice } from '../../../redux/reducers/User'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { setTotal, setNameRest } from "../../../redux/reducers/User";
+import { setTotal, setNameRest } from '../../../redux/reducers/User'
 
-import { AiFillStar } from "react-icons/ai";
-import { BsPlusCircleFill } from "react-icons/bs";
+import { AiFillStar } from 'react-icons/ai'
+import { BsPlusCircleFill } from 'react-icons/bs'
+import { useLocation } from 'react-router-dom'
+
 const RestaurantPage = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+// console.log("start")
+//   const { state } = useLocation()
+//   const {restId} = state
+//     console.log(restId,"id")
 
-  // const [sumreal, setSumreal] = useState(0)
-  const [restaurant, setRestaurants] = useState("");
-  const [name, setName] = useState("");
-  const [menu, setMenu] = useState("");
-  const [categories, setCategories] = useState("");
-  const [arrayDetails, setArrayDetails] = useState("");
-  const cart = [];
+  const [sumreal, setSumreal] = useState(0)
+  const [restaurant, setRestaurants] = useState('')
+  const [name, setName] = useState('')
+  const [menu, setMenu] = useState('')
+  const [categories, setCategories] = useState('')
+  const [arrayDetails, setArrayDetails] = useState('')
+  const cart = []
 
   //!...................................................
   const Userinfor = useSelector((state) => {
@@ -28,41 +34,40 @@ const RestaurantPage = () => {
       yourPrice: state.User.price,
       sumPrice: state.User.sumPriceUser,
       name: state.User.name,
-    };
-  });
+    }
+  })
 
   const getRestaurant = async () => {
     const responseRestaurant = await User.getRestaurantById({
       restaurantId: 1,
-    });
+    })
 
-    await setRestaurants(responseRestaurant.result);
+    await setRestaurants(responseRestaurant.result)
 
-    const responseMeal = await User.getMealsByRestaurant({ restaurantId: 1});
-    setMenu(responseMeal.result);
+    const responseMeal = await User.getMealsByRestaurant({ restaurantId:1})
+    setMenu(responseMeal.result)
 
-    setCategories(responseMeal.categories);
+    setCategories(responseMeal.categories)
 
-    let arrayLoop = [];
+    let arrayLoop = []
 
     const filter = await responseMeal.categories.map((element, indexOne) => {
-     
-      arrayLoop.push({ catoName: element, mallloop: [] });
+      arrayLoop.push({ catoName: element, mallloop: [] })
       responseMeal.result.map((elem, indextow) => {
         if (elem.category.includes(element)) {
-    
-          arrayLoop[indexOne].mallloop.push(elem);
+          arrayLoop[indexOne].mallloop.push(elem)
         }
-      });
-    });
+      })
+    })
 
-    setArrayDetails(arrayLoop);
-  };
+    setArrayDetails(arrayLoop)
+
+
+  }
 
   useEffect(() => {
-    getRestaurant();
-  }, []);
-
+    getRestaurant()
+  }, [])
 
   return (
     <div className="RestaurantPage">
@@ -85,7 +90,7 @@ const RestaurantPage = () => {
                         <AiFillStar className="star" />
                         <h2 className="rating">4.8</h2>
                         <h2 className="location_res">
-                          {"Jordan - " + element.location}
+                          {'Jordan - ' + element.location}
                         </h2>
                         <br />
                         {/* <h2>{element.rest_category}</h2> */}
@@ -100,9 +105,9 @@ const RestaurantPage = () => {
                       </div>
                     </div>
                   </div>
-                );
+                )
               })
-            : ""}
+            : ''}
         </div>
         <div className="Allinformation_One_tow">
           <div className="Allinformation_One_tow_one">
@@ -129,16 +134,16 @@ const RestaurantPage = () => {
               categories.map((element, index) => {
                 return (
                   <div className="All_Two-categore_map_return" key={index}>
-                    <a href={"#" + index} className="a_atAll">
+                    <a href={'#' + index} className="a_atAll">
                       <div className="divButton">
-                        <button className="button">{element + "hjhdd"}</button>
+                        <button className="button">{element + 'hjhdd'}</button>
                       </div>
                       <i className="i"></i>
                     </a>
 
                     {/* <a href={"#" + index}   ><span>{element}</span><i></i></a> */}
                   </div>
-                );
+                )
               })
             ) : (
               <></>
@@ -147,7 +152,7 @@ const RestaurantPage = () => {
         </div>
 
         <div className="All_Two-menue">
-          {" "}
+          {' '}
           {arrayDetails
             ? arrayDetails.map((element, index) => {
                 return (
@@ -162,7 +167,7 @@ const RestaurantPage = () => {
                             return (
                               <div className="div_Mallloop_2">
                                 <div className="imgbox">
-                                  {" "}
+                                  {' '}
                                   <img
                                     className="eachMealimg"
                                     src={elementMall.imgUrl}
@@ -173,7 +178,7 @@ const RestaurantPage = () => {
                                     {elementMall.name}
                                   </h2>
                                   <h4 className="h2andh4">
-                                    {"$" + elementMall.price}
+                                    {'$' + elementMall.price}
                                   </h4>
                                 </div>
 
@@ -181,36 +186,38 @@ const RestaurantPage = () => {
                                   className="PluseIcone"
                                   onClick={() => {
                                     dispatch(
-                                      setNameRest({ name: restaurant[0].name })
-                                    );
-                                    dispatch(setCart({ items: elementMall }));
+                                      setNameRest({ name: restaurant[0].name }),
+                                    )
+                                    dispatch(setCart({ items: elementMall }))
+                                    // console.log(elementMall)
                                     dispatch(
                                       setPrice({
                                         price: elementMall.price,
                                         indexitem: elementMall.id,
                                         priceOne: elementMall.price,
                                         name: elementMall.name,
-                                      })
-                                    );
+                                        restaurantid:elementMall.restaurant_id
+                                      }),
+                                    )
 
                                     dispatch(
                                       setTotal({
-                                        opr: "+",
+                                        opr: '+',
                                         value: elementMall.price,
-                                      })
-                                    );
-                                    console.log("44");
+                                      }),
+                                    )
+                                    console.log('44')
                                   }}
                                 />
                               </div>
-                            );
+                            )
                           })
-                        : ""}
+                        : ''}
                     </div>
                   </div>
-                );
+                )
               })
-            : ""}
+            : ''}
         </div>
 
         <div className="All_Two_cart">
@@ -219,7 +226,7 @@ const RestaurantPage = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default RestaurantPage;
+export default RestaurantPage

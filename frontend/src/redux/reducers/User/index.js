@@ -75,7 +75,7 @@ export const UserSlice = createSlice({
 
             if (state.price.length == 0) {
                 console.log("length")
-                state.price.push({ price: action.payload.price, id: action.payload.indexitem, priceOne: action.payload.priceOne, name: action.payload.name })
+                state.price.push({ price: action.payload.price, id: action.payload.indexitem, priceOne: action.payload.priceOne, name: action.payload.name,restaurant:action.payload.restaurantid })
 
             } else {
                 console.log("not zero")
@@ -99,7 +99,7 @@ export const UserSlice = createSlice({
                 })
 
                 if (loop == false) {
-                    state.price.push({ price: action.payload.price, id: action.payload.indexitem, priceOne: action.payload.priceOne, name: action.payload.name })
+                    state.price.push({ price: action.payload.price, id: action.payload.indexitem, priceOne: action.payload.priceOne, name: action.payload.name ,restaurant:action.payload.restaurantid})
                 }
             }
         },
@@ -130,7 +130,7 @@ export const UserSlice = createSlice({
         //!......................................................................
 
         setNameRest: (state, action) => {
-            console.log("userrr")
+            // console.log("userrr")
             if (state.name == "") {
                 state.name = action.payload.name
             } else {
