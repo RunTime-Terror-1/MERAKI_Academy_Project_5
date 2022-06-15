@@ -74,7 +74,7 @@ export const CreateRequest = ({setIsRequestDialogShown}) => {
       ) : (
         <></>
       )}
-      <div id="signup-form-inner">
+      <div id="create-request-form-inner">
         <div id="signup--exit-button">
           <button onClick={() => {
             setIsRequestDialogShown(false)

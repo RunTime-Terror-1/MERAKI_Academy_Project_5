@@ -8,12 +8,23 @@ import { LoginComponent } from "./components/Registration/Login";
 import { OwnerPanel } from "./components/AdminPanle/Owner";
 import CompleteOrder from "./components/UserScreen/YourCart/CompleteOrder";
 import SortResturant from "./components/UserScreen/SortResturant";
+import { useEffect } from "react";
+import { User } from "./controllers/user";
+import { useDispatch } from "react-redux";
+import { setRestaurants } from "./redux/reducers/User";
 
 
 
 
 
 const App = () => {
+const dispatch = useDispatch();
+useEffect(()=>{
+  (async ()=>{
+    const{result}= await User.getAllRestaurants();
+    dispatch(setRestaurants(result));
+  })()
+},[])
   return (
     <div className="App">
       {/* <NavBar /> */}

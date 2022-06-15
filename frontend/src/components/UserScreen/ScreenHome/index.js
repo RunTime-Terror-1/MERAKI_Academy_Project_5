@@ -3,14 +3,20 @@ import React, { useState, useContext } from "react";
 import NavBar from "../NavBar";
 import { MainNavigationMenu } from "../NavBar/NavigationMenu";
 import joinUs from "../../../assets/images/joinus.png";
+import { useDispatch, useSelector } from "react-redux";
+import { LoginComponent } from "../../Registration/Login";
 
 const ScreenHome = () => {
-
+  const dispatch = useDispatch()
+  const {auth} = useSelector((state)=>{
+    return state;
+  })
   const [showMenu, setShowMenu] = useState(false);
 
   return (
     <div id="homepage-div">
       {<NavBar setShowMenu={setShowMenu} showMenu={showMenu} />}
+        {auth.showLoginForm?<LoginComponent/>:<></>}
 
       {showMenu ? <MainNavigationMenu setShowMenu={setShowMenu} /> : <></>}
 

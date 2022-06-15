@@ -4,12 +4,22 @@ import { HiUsers } from "react-icons/hi";
 import { BiGitPullRequest, BiLogOut } from "react-icons/bi";
 import { MdFastfood } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
-import { SuperAdmin } from "../../../../controllers/superAdmin";
-import { setRequests, setUsers } from "../../../../redux/reducers/superAdmin";
+
 import { AiOutlineMenu, AiOutlineMail } from "react-icons/ai";
 import { IoMdLogIn } from "react-icons/io";
 import { VscFeedback } from "react-icons/vsc";
 import { BiDetail } from "react-icons/bi";
+import {
+  setIsSignUpFormShown,
+  setlogout,
+  setShowLoginForm,
+} from "../../../../redux/reducers/auth";
+
+export const logOut = async ({dispatch}) => {
+  
+  await localStorage.setItem("token", "");
+  dispatch(setlogout(""))
+};
 
 //FcFeedback
 export const MainNavigationMenu = ({ setShowMenu }) => {
@@ -49,19 +59,36 @@ export const MainNavigationMenu = ({ setShowMenu }) => {
           />
         </div>
         {logoArea({})}
-        <div id="user-management-div">
-          <h4>REGISTRATION</h4>
-        </div>
-        {menuButton({
-          text: "Sign up",
-          icon: <HiUsers />,
-          onClick: async () => {},
-        })}
-        {menuButton({
-          text: "Login",
-          icon: <IoMdLogIn />,
-          onClick: async () => {},
-        })}
+
+        {auth.isLoggedIn ? (
+          <div>
+            <br />
+            <h3>Welcome Khaled</h3>
+            <br />
+          </div>
+        ) : (
+          <div>
+            <div id="user-management-div">
+              <h4>REGISTRATION</h4>
+            </div>
+            {menuButton({
+              text: "Sign up",
+              icon: <HiUsers />,
+              onClick: async () => {
+                dispatch(setShowLoginForm(true));
+                dispatch(setIsSignUpFormShown());
+              },
+            })}
+            {menuButton({
+              text: "Login",
+              icon: <IoMdLogIn />,
+              onClick: async () => {
+                dispatch(setShowLoginForm(true));
+              },
+            })}
+          </div>
+        )}
+
         <div id="user-management-div">
           <h4>JOIN US</h4>
         </div>
@@ -88,12 +115,16 @@ export const MainNavigationMenu = ({ setShowMenu }) => {
           icon: <BiDetail />,
           onClick: async () => {},
         })}
-        {/* <button id="logout-btn">
-        <div id="logout-div">
-          <BiLogOut />
-          <h4>LogOut</h4>
-        </div>
-      </button> */}
+        {auth.isLoggedIn ? (
+          <button onClick={()=>{logOut({dispatch})}} id="logout-btn1">
+            <div id="logout-div1">
+              <BiLogOut />
+              <h4>LogOut</h4>
+            </div>
+          </button>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
