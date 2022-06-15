@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
 
-const NavBar = () => {
+const NavBar = ({showMenu,setShowMenu}) => {
   const navigate = useNavigate();
   const searchForRestaurant = () => {};
   return (
@@ -16,7 +16,7 @@ const NavBar = () => {
         <AiOutlineMenu
           className="main-menu-btn"
           onClick={() => {
-            // setHideMenu(!hideMenu)
+            setShowMenu(!showMenu)
           }}
         />
         <img src="https://img.freepik.com/free-vector/restaurant-logo-design-template_79169-56.jpg?w=2000" />

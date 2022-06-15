@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 1px 0.5px 3px 0.5px var(--third-color);
+  box-shadow: 1px 0.5px 3px 1px black;
   padding-left: 2px;
   padding-right: 2px;
   height: 100%;
@@ -43,6 +43,7 @@
   color: black;
   border: 0.5px solid var(--second-color);
   border-radius: 10px;
+  font-weight: bold;
   cursor: pointer;
 }
 #main-nav-bar-btns button:hover {
