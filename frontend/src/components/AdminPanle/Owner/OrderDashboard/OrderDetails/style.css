@@ -1,18 +1,17 @@
 #order-inner {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: stretch;
   width: 80%;
   max-width: 800px;
-  min-height: 300px;
+  height: fit-content;
   padding: 10px;
   border: 0px solid black;
   border-radius: var(--border-radius);
   background-color: var(--first-color);
   box-shadow: 0px 0px 2px black;
+  gap: 4px;
 }
-
 
 .meal-row {
   display: grid;
@@ -45,7 +44,9 @@
   align-items: center;
   justify-content: center;
 }
-
+h5 {
+  margin: 0px;
+}
 .meal-row2 {
   display: grid;
   padding: 5px;
@@ -53,15 +54,14 @@
   font-size: 100%;
   color: rgb(6, 6, 6);
   border-bottom: 1px solid black;
-  grid-template-columns:15% 25% 25% 20% 15%;
+  grid-template-columns: 15% 25% 25% 20% 15%;
   align-items: center;
   justify-content: center;
 }
 
-
 #title-div1 {
   color: rgb(255, 249, 249);
-  background-color: rgba(14, 17, 21, 0.711);
+  background-color: rgba(14, 17, 21, 0.845);
   font-weight: bold;
 }
 
@@ -74,4 +74,5 @@
   border: 0.5px solid black;
   border-radius: 5px;
   color: white;
+  cursor: pointer;
 }

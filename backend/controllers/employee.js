@@ -88,7 +88,38 @@ const updateMeal = (req, res) => {
     }
   });
 };
+const updateOrderState = (req, res) => {
+  const orderId = req.params.orderId;
+  const {state } = req.body;
+  const query = `UPDATE orders SET state=? WHERE id=?;`;
+
+  const data = [state, orderId];
+  connection.query(query, data, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        massage: "Server Error",
+        err: err,
+      });
+    }
+    if (!result.affectedRows) {
+      return res.status(404).json({
+        success: false,
+        massage: `The order is not found`,
+        err: err,
+      });
+    } else {
+      res.status(200).json({
+        success: true,
+        massage: `Order Updated`,
+        result: result,
+      });
+    }
+  });
+};
+
 //!.......END updateMeal   ............
+
 
 const getAllOrder = (req, res) => {
   const restaurant_id = req.params.id;
@@ -136,10 +167,13 @@ const getAllMeals = (req, res) => {
   });
 };
 
+
+
 module.exports = {
   createMeal,
   deleteMealFromRestaurant,
   updateMeal,
   getAllOrder,
   getAllMeals,
+  updateOrderState,
 };

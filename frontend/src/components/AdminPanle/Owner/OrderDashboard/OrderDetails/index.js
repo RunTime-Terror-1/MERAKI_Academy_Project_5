@@ -1,10 +1,8 @@
 import React, { useContext, useState } from "react";
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
-import { Owner } from "../../../../../controllers/owner";
-import { Gender } from "../../../../Registration/Register/GenderDiv";
-import { ErrorsDiv } from "../../../../Registration/Register/ErrorsDiv";
-import { Registration } from "../../../../../controllers/registration";
+import { Employee } from "../../../../../controllers/employee";
+
 
 export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
   const [isDialogShown, setIsDialogShown] = useState("");
@@ -32,6 +30,10 @@ export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
     );
   };
 
+  const updateOrder = async (state) => {
+   const response=  await Employee.updateOrderState({ token: auth.token, orderId: currentOrder[0].id, state});
+    console.log(response);
+  };
   return (
     <div id="signup-form">
       {isDialogShown ? (
@@ -92,8 +94,8 @@ export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
           <h5>{total} $</h5>
         </div>
         <div id="order-btn">
-          <button>Complete The Order</button>
-          <button style={{ backgroundColor: "red" }}>Reject The Order</button>
+          <button onClick={()=>{updateOrder("Completed")}}>Complete The Order</button>
+          <button  onClick={()=>{updateOrder("Rejected")}} style={{ backgroundColor: "red" }}>Reject The Order</button>
         </div>
       </div>
     </div>
