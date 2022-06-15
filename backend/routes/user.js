@@ -36,7 +36,7 @@ userRouter.get("/", getAllRestaurants);
 userRouter.get("/name/:name", getRestaurantByName);
 
 // get (params)
-userRouter.get("/category/:category", getRestaurantByName);
+userRouter.get("/category/:category", getSortRestuarnts);
 
 
 // get (  params )

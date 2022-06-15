@@ -118,4 +118,21 @@ export class User {
       }
     }
   }
+
+  static async getSortResturants({ restaurantCategory }) {
+    try {
+      const response = await axios.get(`${hostUrl}/user/category/${restaurantCategory}`)
+
+      return response.data
+    } catch (error) {
+      return {
+        success: false,
+        massage: 'Server Error',
+        error,
+        result: [],
+      }
+    }
+  }
+
+
 }

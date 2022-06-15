@@ -5,7 +5,8 @@ import NavBar from '../NavBar'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { setrestaurantId } from '../../../redux/reducers/User'
-// import { setTotal, setNameRest } from '../../../redux/reducers/User'
+
+
 
 const AllRestarnts = () => {
   const navigate = useNavigate()
@@ -42,7 +43,10 @@ const AllRestarnts = () => {
 
         <div className="Continert">
           <div>
-            <button>burger</button>
+            <button  onClick={() => {
+              navigate('/SortResturants', {
+                state: { sortcategory:"pizza"},
+              }) }} >burger</button>
             <button>Pizza</button>
           </div>
           <div className="AllRestarnts_B">
@@ -55,10 +59,14 @@ const AllRestarnts = () => {
                       key={index}
                       onClick={() => {
                         // console.log(elemnt.id)
+
                         dispatch(setrestaurantId({ restId: elemnt.id }))
+                                                     
                         navigate('/RestaurantPage', {
                           state: { id: localStorage.getItem('restaurantId') },
-                        })
+                        }) 
+
+                                            
                       }}
                     >
                       <img className="logo" src={elemnt.backImg} />
