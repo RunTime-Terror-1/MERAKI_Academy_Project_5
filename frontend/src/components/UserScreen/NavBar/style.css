@@ -52,6 +52,9 @@
   border-radius: 20px;
   border: 0.5px solid var(--second-color);
 }
+#main-nav-bar input:focus {
+ outline: 1px solid orange;
+}
 
 #main-nav-bar-btns {
   display: flex;
@@ -70,6 +73,7 @@
   color: var(--first-color);
   background-color: var(--third-color);
   border: 0;
+  cursor: pointer;
 }
 .main-menu-btn {
   color: rgb(143, 41, 4);

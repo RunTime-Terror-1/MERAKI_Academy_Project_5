@@ -10,6 +10,7 @@ import {
   setrestaurantId,
   setSearchRestaurant,
 } from "../../../redux/reducers/User";
+import { logOut } from "./NavigationMenu";
 
 const NavBar = ({ showMenu, setShowMenu }) => {
   const navigate = useNavigate();
@@ -97,7 +98,11 @@ const NavBar = ({ showMenu, setShowMenu }) => {
           All Restaurants
         </button>
         {auth.isLoggedIn ? (
-          <button>
+          <button
+            onClick={() => {
+              logOut({dispatch});
+            }}
+          >
             <div style={{ display: "flex", gap: "2px" }}>
               <BiLogOut />
               <h4>LogOut</h4>
