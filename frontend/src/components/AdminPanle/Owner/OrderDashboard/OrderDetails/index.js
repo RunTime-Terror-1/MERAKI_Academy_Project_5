@@ -55,7 +55,7 @@ export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
           </button>
         </div>
 
-        <h1>ORDER DETAILS</h1>
+        <h1 style={{ color: "black" }}>ORDER DETAILS</h1>
         <hr />
         <div id="title-div1" className="meal-row">
           <h5>#</h5>
@@ -77,24 +77,25 @@ export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
           );
         })}
 
-        <div id="title-div1" className="meal-row">
+        <div id="title-div1" className="meal-row3">
           <h5>BUILDING #</h5>
+          <h5>STREET</h5>
           <h5>CITY</h5>
           <h5>PHONE</h5>
           <h5>TOTAL</h5>
         </div>
-        <div className="meal-row1">
+        <div className="meal-row2">
           <h5>{currentOrder[0].buldingNumber}</h5>
+          <h5>{currentOrder[0].street}</h5>
           <h5>{currentOrder[0].city}</h5>
           <h5>{currentOrder[0].notes}</h5>
           <h5>{total} $</h5>
         </div>
-        <div id = "order-btn">
-        <button>Accept Order</button>
-        <button>Reject Order</button>
+        <div id="order-btn">
+          <button>Complete The Order</button>
+          <button style={{ backgroundColor: "red" }}>Reject The Order</button>
+        </div>
       </div>
-      </div>
-     
     </div>
   );
 };
