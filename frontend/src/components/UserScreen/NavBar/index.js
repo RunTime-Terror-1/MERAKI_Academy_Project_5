@@ -1,34 +1,36 @@
-import './style.css'
+import "./style.css";
 
 import React, { useState, useContext } from "react";
 
 import { Link } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
+import { AiOutlineMenu } from "react-icons/ai";
 
 const NavBar = () => {
   const navigate = useNavigate();
-
-  return ( <div className="NavBar">
-
-        <div className="NavBar_One" > <h1>Aklat</h1>
-        </div>
-
-        <div className='NavBar_Tow'> <h1 onClick={
-          () => {
-            navigate("/AllRestarnts")
-          }
-
-        }>AllRestarnts</h1>
-
-          <h1>Accounts</h1></div>
-
-
-
-
-
+  const searchForRestaurant = () => {};
+  return (
+    <div id="main-nav-bar">
+      <div id="main-nav-bar-img-div">
+        <AiOutlineMenu
+          color="black"
+          onClick={() => {
+            // setHideMenu(!hideMenu)
+          }}
+        />
+        <img src="https://img.freepik.com/free-vector/restaurant-logo-design-template_79169-56.jpg?w=2000" />
+        <p>
+          KHK<span>EATS</span>
+        </p>
       </div>
 
+      <input
+        placeholder="Search for restaurant"
+        onChange={searchForRestaurant}
+      />
+      <button>My Account</button>
+    </div>
   );
 };
 

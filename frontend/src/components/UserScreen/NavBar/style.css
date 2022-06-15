@@ -1,20 +1,33 @@
-.NavBar {
-    display: flex;
-    flex-direction: row;
-    gap: 30vw;
-    background-color: chocolate;
+#main-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 1px 0.5px 3px 0.5px black;
+  padding-left: 2px;
+  padding-right: 2px;
 }
 
-.NavBar_One {
-    position: relative;
-    left: 10vw;
-
+#main-nav-bar-img-div {
+  display: flex;
+  align-items: center;
+}
+#main-nav-bar-img-div img {
+  width: 90px;
+  height: 90px;
 }
 
-.NavBar_Tow {
-    display: flex;
-    flex-direction: row;
-    gap: 5vw;
-    position: relative;
-    left: 25vw;
+#main-nav-bar p {
+  font-size: 30px;
+  text-shadow: 1px 1px 1px black;
+}
+#main-nav-bar span {
+  font-size: 30px;
+  color: orange;
+}
+
+#main-nav-bar input {
+  width: 40%;
+  padding: 10px;
+  border-radius: 20px;
+  border: 0.5px solid orange;
 }

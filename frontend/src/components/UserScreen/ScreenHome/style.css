@@ -1,9 +1,7 @@
 .ScreenHome {
     display: flex;
     flex-direction: column;
-    display: flex;
-    flex-direction: column;
-    gap: 5vh;
+    gap: 1vh;
 }
 
 .SH_first {
