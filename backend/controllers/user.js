@@ -281,7 +281,29 @@ const getAdressByUserId = (req, res) => {
 };
 
 //! ........END getAdressByUserId  .....
-
+const getSortRestuarnts = (req, res) => {
+  console.log("iddddsss")
+  const restaurantCategory = req.params.category;
+  const query = `SELECT * FROM restaurants WHERE rest_category=?;`;
+  const data = [restaurantCategory];
+  connection.query(query, data, (err, result) => {
+    if (err) {
+      res.status(500).json({ err });
+    }
+    if (result.length) {
+      res.status(200).json({
+        success: true,
+        massage: `the restaurant name is: ${restaurantCategory}`,
+        result: result,
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        massage: `the restaurant name is ${restaurantCategory} is not found now `,
+      });
+    }
+  });
+};
 
 
 
@@ -297,4 +319,5 @@ module.exports = {
   senOrder,
   UpdateAdress,
   getAdressByUserId,
+  getSortRestuarnts
 };
