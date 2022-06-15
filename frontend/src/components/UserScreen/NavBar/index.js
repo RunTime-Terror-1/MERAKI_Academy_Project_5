@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
 import { BiLogOut } from "react-icons/bi";
-import { setShowLoginForm } from "../../../redux/reducers/auth";
+import { setIsSignUpFormShown, setShowLoginForm } from "../../../redux/reducers/auth";
 
 const NavBar = ({ showMenu, setShowMenu }) => {
   const navigate = useNavigate();
@@ -15,6 +15,7 @@ const NavBar = ({ showMenu, setShowMenu }) => {
   });
   const showLoginPop = () => {
     dispatch(setShowLoginForm(true));
+    dispatch(setIsSignUpFormShown(true));
   };
   return (
     <div id="main-nav-bar">

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setIsSignUpFormShown,
   setlogin,
+  setShowLoginForm,
 } from "../../../../redux/reducers/auth";
 
 import { setidUser } from "../../../../redux/reducers/User";
@@ -87,6 +88,15 @@ export const LoginForm = () => {
 
   return (
     <div id="login-form-email-password-div">
+      <div id="signup--exit-button">
+        <button
+          onClick={() => {
+            dispatch(setShowLoginForm(false));
+          }}
+        >
+          X
+        </button>
+      </div>
       <p id="login-label">LOGIN</p>
       <hr />
       {createInput({
@@ -112,14 +122,16 @@ export const LoginForm = () => {
         <h5>OR</h5>
         {createButton({
           text: "Create New Account",
-          onClick: login,
+          onClick: () => {
+            dispatch(setIsSignUpFormShown(true));
+          },
           color: "white",
         })}
         <div id="google-div">
           <FcGoogle />
           {createButton({
             text: "Login With Google",
-            onClick: login,
+            onClick: () => {},
             color: "white",
           })}
         </div>

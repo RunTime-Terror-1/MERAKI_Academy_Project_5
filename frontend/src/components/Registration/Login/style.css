@@ -1,9 +1,11 @@
 #login-form {
   padding-top: 74px;
   padding-bottom: 112px;
-  background-color:transparent;
+  background-color:rgba(255, 255, 255, 0.666);
   height: 100vh;
   width: 100vw;
+  position: fixed;
+  z-index: 20;
   top: 0;
   left: 0;
 }

@@ -58,9 +58,7 @@ export const RegisterComponent = ({
             );
             setState(e.target.value);
           }}
-          
           className="input"
-          
         />
       </div>
     );
@@ -80,25 +78,23 @@ export const RegisterComponent = ({
       inputForm: inputForm,
     });
     if (errors.length === 0) {
-      
       const serverError = await Registration.register({
         firstName,
         lastName,
         email,
         password,
         gender,
-        role:superAdminRegister?role:1,
+        role: superAdminRegister ? role : 1,
       });
-    
+
       if (serverError === "Email already taken") {
         setErrors([...errors, "Email already taken"]);
       } else {
         setIsDialogShown(true);
         dispatch(setIsSignUpFormShown());
-        if(superAdminRegister){
+        if (superAdminRegister) {
           setIsRegisterShown(false);
         }
-        
       }
     } else {
       setErrors(errors);
@@ -121,7 +117,7 @@ export const RegisterComponent = ({
           <button
             onClick={() => {
               dispatch(setIsSignUpFormShown());
-  
+
               setIsRegisterShown(false);
             }}
           >
@@ -130,19 +126,17 @@ export const RegisterComponent = ({
         </div>
 
         <h1>Create an Account</h1>
-        {/*<h4> it's quick and easy.</h4>*/}
-        
+
         <hr />
 
         <div id="register-username-div">
-         
           {createInput({
             placeholder: "First Name",
             type: "text",
             key: "FirstName",
             setState: setFirstName,
           })}
-          
+
           {createInput({
             placeholder: "Last Name",
             type: "text",
