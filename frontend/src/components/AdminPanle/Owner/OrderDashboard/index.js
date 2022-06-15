@@ -1,9 +1,9 @@
-import react, { useEffect, useState } from "react";
+import react, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setMeals } from "../../../../redux/reducers/superAdmin";
+import { setMeals, setOrders } from "../../../../redux/reducers/superAdmin";
 import "./style.css";
-import { CreateMeal } from "./CreateMeal";
 import { Employee } from "../../../../controllers/employee";
+import { ShowDetails } from "./OrderDetails";
 
 export const createOption = (restaurant, index) => {
   return (
@@ -13,59 +13,42 @@ export const createOption = (restaurant, index) => {
   );
 };
 
-export const Meals = () => {
+export const Orders = () => {
   const dispatch = useDispatch();
   const [isDeleteDialogShown, setIsDeleteDialogShown] = useState(false);
-  const [isCreateMealDialogShown, setIsMealDialogShown] = useState(false);
-  const [isUpdate, setIsUpdate] = useState(false);
   const [currentIndex, setCurrentIndex] = useState({});
-  const [currentMeal, setCurrentMeal] = useState({});
+  const [currentOrder, setCurrentOrder] = useState({});
+  const [showDetails, setShowDetails] = useState(false);
   const { superAdminPanel, auth } = useSelector((state) => {
     return state;
   });
   const [resId, setResId] = useState(superAdminPanel.restaurants[0].id);
 
+  let ordersId = [];
+  const orderMeals = {};
+
   const createButton = ({ onClick, text, state }) => {
-    return (
-      <button
-        onClick={onClick}
-        style={
-          text !== "Edit"
-            ? { backgroundColor: "red" }
-            : { backgroundColor: "green" }
-        }
-      >
-        {text}
-      </button>
-    );
+    return <button onClick={onClick}>{text}</button>;
   };
-  const createRow = (meal, index) => {
+  const createRow = (order, index) => {
     return (
-      <div className="user-row" key={meal.id + meal.name}>
+      <div className="user-row" key={order.id + order.name + index}>
         <h4>{index + 1}</h4>
-        <h4>{meal.name}</h4>
-        <img src={`${meal.imgUrl}`} />
-        <h4>{meal.price} $</h4>
-        <h4>{meal.category} </h4>
+        <h4>{order.state}</h4>
+        <h4>{order.notes}</h4>
+        <h4>{order.receipt} $</h4>
+        <h4>{superAdminPanel.orders.length} </h4>
         <div id="edit-btns-div">
           {createButton({
             onClick: async () => {
-              setCurrentMeal(meal);
+              ordersId = [];
+  
+              setCurrentOrder(orderMeals[order.id]);
               setCurrentIndex(index);
-              setIsUpdate(true);
-              setIsMealDialogShown(true);
+              setShowDetails(true);
             },
-            text: "Edit",
-            state: meal.state,
-          })}
-          {createButton({
-            onClick: () => {
-              setCurrentIndex(index);
-              setCurrentMeal(meal);
-              setIsDeleteDialogShown(true);
-            },
-            text: "Delete",
-            state: meal.state,
+            text: "Details",
+            state: order.state,
           })}
         </div>
       </div>
@@ -81,7 +64,7 @@ export const Meals = () => {
             {createButton({
               text: "Yes",
               onClick: async () => {
-                deleteMeal(currentMeal.id);
+                deleteMeal(currentOrder.id);
                 setIsDeleteDialogShown(false);
               },
             })}
@@ -99,39 +82,26 @@ export const Meals = () => {
 
   const deleteMeal = async () => {
     await Employee.deleteMealFromRestaurant({
-      mealId: currentMeal.id,
+      mealId: currentOrder.id,
       token: auth.token,
     });
     const meals = [...superAdminPanel.meals];
-    meals.splice(currentIndex,1);
-    dispatch(setMeals(meals))
+    meals.splice(currentIndex, 1);
+    dispatch(setMeals(meals));
   };
 
   return (
     <div>
-      <div id="request-div">
-        <p>
-          <strong>Meals,</strong> you can add,update and remove restaurant meal
-        </p>
-
-        <button
-          onClick={() => {
-            setIsMealDialogShown(true);
-          }}
-        >
-          + Meal
-        </button>
-      </div>
       <div id="selector-div">
         <h3>Restaurant Name</h3>
         <select
           onChange={async (e) => {
-            const { meals } = await Employee.getAllMeals({
+            const { orders } = await Employee.getAllOrder({
               token: auth.token,
-              restaurant_id: superAdminPanel.restaurants[e.target.value].id,
+              restaurantId: superAdminPanel.restaurants[e.target.value].id,
             });
             setResId(superAdminPanel.restaurants[e.target.value].id);
-            dispatch(setMeals(meals));
+            dispatch(setOrders(orders));
           }}
         >
           {superAdminPanel.restaurants.map((restaurant, index) => {
@@ -139,6 +109,15 @@ export const Meals = () => {
           })}
         </select>
       </div>
+      {showDetails ? (
+        <ShowDetails
+          currentOrder={currentOrder}
+          setShowDetails={setShowDetails}
+          currentIndex={currentIndex}
+        />
+      ) : (
+        <></>
+      )}
 
       {isDeleteDialogShown ? (
         deleteDialog({
@@ -149,29 +128,24 @@ export const Meals = () => {
         <></>
       )}
 
-      {isCreateMealDialogShown ? (
-        <CreateMeal
-          setIsMealDialogShown={setIsMealDialogShown}
-          currentIndex={currentIndex}
-          isUpdate={isUpdate}
-          setIsUpdate={setIsUpdate}
-          resId={resId}
-        />
-      ) : (
-        <></>
-      )}
       <div className="user-dashboard" style={{ marginTop: "5px" }}>
         <div id="dash-title-div" className="user-row">
           <h4>ID</h4>
-          <h4>NAME</h4>
-          <h4>IMAGE</h4>
-          <h4>PRICE</h4>
-          <h4>CATEGORY</h4>
+          <h4>STATE</h4>
+          <h4>PHONE</h4>
+          <h4>RECEIPT</h4>
+          <h4>QUANTITY</h4>
           <h4>ACTIONS</h4>
         </div>
-        {superAdminPanel.meals ? (
-          superAdminPanel.meals.map((meal, index) => {
-            return createRow(meal, index);
+        {superAdminPanel.orders ? (
+          superAdminPanel.orders.map((order, index) => {
+            if (!ordersId.includes(order.id)) {
+              orderMeals[order.id] = [order];
+              ordersId.push(order.id);
+              return createRow(order, index);
+            } else {
+              orderMeals[order.id] = [...orderMeals[order.id], order];
+            }
           })
         ) : (
           <></>

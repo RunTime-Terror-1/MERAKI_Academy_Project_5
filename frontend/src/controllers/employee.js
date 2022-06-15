@@ -95,6 +95,23 @@ export class Employee {
       };
     }
   }
+  static async getAllOrder({
+    restaurantId,
+    token,
+  }) {
+    try {
+      const response = await axios.get(`${hostUrl}/employee/${restaurantId}`, {
+        headers: { authorization: `Bearer ${token}` },
+      });
+      return response.data;
+    } catch (error) {
+      return {
+        success: false,
+        massage: "Error",
+        serverError: error.response.data.message,
+      };
+    }
+  }
 
   
 }
