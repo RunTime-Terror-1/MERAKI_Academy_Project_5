@@ -2,8 +2,10 @@ import "./style.css";
 import React, { useState, useContext } from "react";
 import NavBar from "../NavBar";
 import { MainNavigationMenu } from "../NavBar/NavigationMenu";
+import joinUs from "../../../assets/images/joinus.png";
 
 const ScreenHome = () => {
+
   const [showMenu, setShowMenu] = useState(false);
 
   return (
@@ -19,9 +21,20 @@ const ScreenHome = () => {
 
       <div id="join-us-div">
         <h1>
-          Grow your restaurant brand with KHK<span>EATS</span>
+          Join Us And grow your restaurant brand with KHK<span>EATS</span>
         </h1>
-        <img src="https://previews.123rf.com/images/gkrphoto/gkrphoto2001/gkrphoto200100155/138448286-mix-of-fast-food-street-dishes-background-with-copy-space-top-view-natural-wooden-background-.jpg" />
+
+        <div id="inner-join-us-div" >
+          <img src={joinUs} />
+          <div id="inner2-join-us-div">
+            <h3>Become a Partner</h3>
+            <p>
+              Create your restaurant and control its flow, fill more tables and add your employees. Bring all your orders ,meals and restaurant
+              data into one place so you can do what you want.
+            </p>
+            <button>Find More</button>
+          </div>
+        </div>
       </div>
     </div>
   );

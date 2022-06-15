@@ -47,28 +47,69 @@
   cursor: pointer;
 }
 #main-nav-bar-btns button:hover {
-    color : var(--first-color);
-    background-color: var(--third-color);
-    border: 0;
+  color: var(--first-color);
+  background-color: var(--third-color);
+  border: 0;
 }
-.main-menu-btn{
-   color: rgb(143, 41, 4);
-   cursor: pointer;
+.main-menu-btn {
+  color: rgb(143, 41, 4);
+  cursor: pointer;
 }
 
-#welcome-div{
+#welcome-div {
   width: 100%;
   position: relative;
 }
-#welcome-div img{
+#welcome-div img {
   width: 100%;
   max-height: 400px;
-  
 }
-#welcome-div h1{
+#welcome-div h1 {
   position: absolute;
   color: white;
   width: 50%;
   left: 25%;
   top: 45%;
+}
+#join-us-div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  padding: 20px;
+}
+#inner-join-us-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+ 
+  box-shadow: 0px 0px 3px 1px var(--second-color);
+}
+#inner-join-us-div img {
+  width: 50%;
+}
+#inner2-join-us-div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+#inner2-join-us-div button {
+  padding: 10px;
+  background-color: var(--second-color);
+  color: black;
+  font-size: 1em;
+  border: 0.5px solid var(--second-color);
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#inner2-join-us-div button:hover {
+  color: var(--first-color);
+  background-color: var(--third-color);
+  border: 0;
 }
