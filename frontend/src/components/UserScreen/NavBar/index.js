@@ -19,10 +19,13 @@ const NavBar = ({showMenu,setShowMenu}) => {
             setShowMenu(!showMenu)
           }}
         />
+        <a href="http://localhost:3000/">
         <img src="https://img.freepik.com/free-vector/restaurant-logo-design-template_79169-56.jpg?w=2000" />
         <p>
           KHK<span>EATS</span>
         </p>
+        </a>
+        
       </div>
 
       <input
@@ -30,7 +33,9 @@ const NavBar = ({showMenu,setShowMenu}) => {
         onChange={searchForRestaurant}
       />
       <div id = "main-nav-bar-btns">
-        <button>All Restaurants</button>
+        <button onClick={()=>{
+          navigate("/AllRestarnts")
+        }}>All Restaurants</button>
         <button>My Account</button>
       </div>
     </div>
