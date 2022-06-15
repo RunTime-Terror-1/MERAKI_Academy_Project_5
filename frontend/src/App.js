@@ -11,6 +11,7 @@ import SortResturant from "./components/UserScreen/SortResturant";
 import { useEffect } from "react";
 import { User } from "./controllers/user";
 import { useDispatch } from "react-redux";
+import { setRestaurants } from "./redux/reducers/User";
 
 
 
@@ -21,7 +22,7 @@ const dispatch = useDispatch();
 useEffect(()=>{
   (async ()=>{
     const{result}= await User.getAllRestaurants();
-    dispatch()
+    dispatch(setRestaurants(result));
   })()
 },[])
   return (

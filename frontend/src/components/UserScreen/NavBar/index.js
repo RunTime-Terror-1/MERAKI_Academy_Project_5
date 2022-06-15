@@ -6,10 +6,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { BiLogOut } from "react-icons/bi";
 import { setShowLoginForm } from "../../../redux/reducers/auth";
 import { CreateRestaurant } from "../../AdminPanle/Owner/RequestsDashboard/CreateRestaurant";
+import { setSearchRestaurant } from "../../../redux/reducers/User";
 
 const NavBar = ({ showMenu, setShowMenu }) => {
   const navigate = useNavigate();
-  const searchForRestaurant = () => {};
+
   const dispatch = useDispatch();
   const { auth } = useSelector((state) => {
     return state;
@@ -21,10 +22,26 @@ const NavBar = ({ showMenu, setShowMenu }) => {
     dispatch(setShowLoginForm(true));
   };
   const createRestaurantCard = (restaurant) => {
+    return (
+      <div>
+        <img src={restaurant.backImg} />
+        <strong>{restaurant.name}</strong>
+      </div>
+    );
+  };
 
-    return(<div>
-
-    </div>);
+  const searchForRestaurant = (name) => {
+    if (name.length) {
+      dispatch(
+        setSearchRestaurant(
+          user.restaurants.filter((res) => {
+            return res.name.toLowerCase().includes(name.toLowerCase());
+          })
+        )
+      );
+    } else {
+      dispatch(setSearchRestaurant([]));
+    }
   };
   return (
     <div id="main-nav-bar">
@@ -45,11 +62,15 @@ const NavBar = ({ showMenu, setShowMenu }) => {
       <div style={{ width: "40%" }}>
         <input
           placeholder="Search By Restaurant Name"
-          onChange={searchForRestaurant}
+          onChange={(e) => {
+            searchForRestaurant(e.target.value);
+          }}
         />
-        {user.searchRestaurants.map((restaurant) => {
-          return createRestaurantCard(restaurant);
-        })}
+        <div>
+          {user.searchRestaurants.map((restaurant) => {
+            return createRestaurantCard(restaurant);
+          })}
+        </div>
       </div>
 
       <div id="main-nav-bar-btns">
