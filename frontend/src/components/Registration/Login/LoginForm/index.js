@@ -10,10 +10,8 @@ import {
 } from "../../../../redux/reducers/auth";
 
 import { setidUser } from "../../../../redux/reducers/User";
-
-
+import { FcGoogle } from "react-icons/fc";
 export const LoginForm = () => {
-
   const dispatch = useDispatch();
   const { auth } = useSelector((state) => {
     return state;
@@ -62,7 +60,6 @@ export const LoginForm = () => {
         email,
         password,
       });
-     
 
       dispatch(setidUser({ userId: response.userId }));
 
@@ -70,17 +67,28 @@ export const LoginForm = () => {
       if (response.message !== "Login Successful") {
         setErrors([...errors, response.message]);
       } else {
-        navigate("/")
+        navigate("/");
       }
     } else {
       setErrors(errors);
     }
   };
+  const createButton = ({ text, onClick, bkc, color }) => {
+    return (
+      <button
+        className="login-btn"
+        style={{ backgroundColor: bkc, color: color }}
+        onClick={onClick}
+      >
+        {text}
+      </button>
+    );
+  };
 
   return (
     <div id="login-form-email-password-div">
-     <p id="login-label">LOGIN</p> 
-      <br/>
+      <p id="login-label">LOGIN</p>
+      <hr />
       {createInput({
         placeholder: "Email",
         type: "text",
@@ -94,41 +102,27 @@ export const LoginForm = () => {
         setState: setPassword,
       })}
       <ErrorsDiv errors={errors} />
-      <br/>
-       
-      <div>
-
-        <button id="login-button" onClick={login}>
-          Login
-        </button>
-        <br/>
-        <br/>
-      
-
-        <button id="login-button-Google" onClick="">
-          Continue with Google
-        </button>
-
-        <br/>
-         
-      </div>
-       
-      <div id="create-new-account-button">
-        <button
-          onClick={() => {
-            dispatch(setIsSignUpFormShown());
-          }}
-        >
-
-           
-          Create New Account
-        </button>
-        <br/>
-
-        <br/>
-      <div id="to-create-user">
-       
-      </div>
+      <div id="btns-div-login">
+        {createButton({
+          text: "Login",
+          onClick: login,
+          bkc: "orange",
+          color: "black",
+        })}
+        <h5>OR</h5>
+        {createButton({
+          text: "Create New Account",
+          onClick: login,
+          color: "white",
+        })}
+        <div id="google-div">
+          <FcGoogle />
+          {createButton({
+            text: "Login With Google",
+            onClick: login,
+            color: "white",
+          })}
+        </div>
       </div>
     </div>
   );
