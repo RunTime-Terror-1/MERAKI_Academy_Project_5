@@ -98,7 +98,7 @@ export class User {
   // resturant_id: Userinfor.yourPrice[0].resturant_id,
   // mealarray: Userinfor.yourPrice,
 
-  static async sentOrder({ userid, state, receipt, resturantId, mealarray }) {
+  static async sentOrder({ userid, state, receipt, resturantId, mealarray, Quntity }) {
     console.log(userid, state, receipt, resturantId, mealarray)
     try {
       const response = await axios.post(`${hostUrl}/user/sent/${userid}`, {
@@ -107,6 +107,7 @@ export class User {
         receipt,
         resturantId,
         mealarray,
+        Quntity
       })
       return response.data
     } catch (error) {

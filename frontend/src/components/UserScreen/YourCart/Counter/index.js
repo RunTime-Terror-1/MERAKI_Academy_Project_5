@@ -29,7 +29,7 @@ const Counter = ({ element }) => {
         }
     })
     // console.log(Userinfor.yourCart, "cart cart")
-    // console.log(Userinfor.yourPrice, "Price Price ")
+    console.log(Userinfor.yourPrice, "Price Price ")
     //!..............................
 
 

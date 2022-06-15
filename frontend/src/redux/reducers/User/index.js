@@ -11,6 +11,7 @@ export const UserSlice = createSlice({
     name: '',
     userId: '',
     restaurantIdId:localStorage.getItem("restaurantId") || "",
+    Sumitems:0,
   },
   reducers: {
     setCart: (state, action) => {
@@ -137,8 +138,17 @@ export const UserSlice = createSlice({
         localStorage.setItem("restaurantId",action.payload.restId)
         // state.restaurantIdId = action.payload.restId
       },
+    //!......................................................................
+    setSumitems: (state, action) => {
+         let sumSum=0
+         state.price.map((element,index)=>{
+        sumSum=sumSum+(element.price / element.priceOne)
+
+         })
 
 
+         state.Sumitems=sumSum
+      },
   },
 })
 
@@ -151,6 +161,7 @@ export const {
   setNameRest,
   setidUser,
   setrestaurantId,
+  setSumitems
 } = UserSlice.actions
 
 export default UserSlice.reducer

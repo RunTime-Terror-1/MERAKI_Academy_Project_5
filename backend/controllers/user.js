@@ -173,11 +173,11 @@ const deleteMealFromCart = (req, res) => {
 const senOrder = (req, res) => {
   const user_id = req.params.userId
   // const meal_id = req.params.meal_id
-  const {state, receipt ,resturantId,mealarray} = req.body
+  const {state, receipt ,resturantId,mealarray,Quntity} = req.body
 
 
-  const query = `INSERT INTO orders(state,receipt,restaurant_id,user_id) VALUES (?,?,?,?);`;
-  const data = [state, receipt,resturantId ,user_id ];
+  const query = `INSERT INTO orders(quntity,state,receipt,restaurant_id,user_id) VALUES (?,?,?,?,?);`;
+  const data = [Quntity,state, receipt,resturantId ,user_id ];
   connection.query(query, data, (err, result) => {
 
     if (err) {

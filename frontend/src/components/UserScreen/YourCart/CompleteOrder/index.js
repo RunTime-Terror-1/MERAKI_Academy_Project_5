@@ -45,13 +45,15 @@ const CompleteOrder = () => {
       sumPrice: state.User.sumpriceUser,
       name: state.User.name,
       userId: state.User.Iduser,
+      sumItems:state.User.Sumitems
     }
   })
 
-  //   console.log(Userinfor.yourPrice, 'YourPrice fff  complete')
+    console.log(Userinfor.yourPrice, 'YourPrice fff  complete')
   //!..............................
 
   //   console.log(Userinfor.userId, 'Yourid   complete')
+    console.log(Userinfor.sumItems, 'Yourid   complete')
 
   //!..................Functions.............................................
 
@@ -128,6 +130,7 @@ const CompleteOrder = () => {
         receipt: Userinfor.sumPrice,
         resturantId: Userinfor.yourPrice[0].restaurant,
         mealarray: Userinfor.yourPrice,
+        Quntity:Userinfor.sumItems
       })
     }
   }
