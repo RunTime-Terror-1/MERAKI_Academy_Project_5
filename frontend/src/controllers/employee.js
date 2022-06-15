@@ -96,6 +96,25 @@ export class Employee {
     }
   }
 
+  static async deleteOrder({ orderId, token }) {
+    try {
+      const response = await axios.put(
+        `${hostUrl}/employee/order/delete/${orderId}`,
+        {},
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return {
+        success: false,
+        massage: "Error",
+        serverError: error.response.data.message,
+      };
+    }
+  }
+
   static async deleteMealFromRestaurant({ mealId, token }) {
     try {
       const response = await axios.delete(`${hostUrl}/employee/${mealId}`, {
@@ -124,4 +143,6 @@ export class Employee {
       };
     }
   }
+
+  //deleteOrder
 }

@@ -65,10 +65,13 @@ h5 {
   font-weight: bold;
 }
 
+#order-btn {
+  display: flex;
+  gap: 2px;
+}
 #order-btn button {
   text-align: center;
-  width: 49%;
-  margin: 1px;
+  flex: 1;
   padding: 5px;
   background-color: green;
   border: 0.5px solid black;

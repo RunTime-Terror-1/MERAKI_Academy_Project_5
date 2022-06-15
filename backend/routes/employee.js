@@ -7,6 +7,7 @@ const {
   getAllOrder,
   getAllMeals,
   updateOrderState,
+  deleteOrder
 } = require("../controllers/employee");
 const authentication = require("../middlewares/authentication");
 const authorization = require("../middlewares/authorization");
@@ -36,6 +37,14 @@ employeeRouter.put(
   updateOrderState
 );
 
+employeeRouter.put("/:mealId", authentication, authorization("3"), updateMeal);
+employeeRouter.put(
+  "/order/delete/:orderId",
+  authentication,
+  authorization("3"),
+  deleteOrder
+);
+//deleteOrder
 //get
 employeeRouter.get("/:id", authentication, authorization("3"), getAllOrder);
 employeeRouter.get(

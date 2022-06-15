@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Employee } from "../../../../../controllers/employee";
+import { setOrders } from "../../../../../redux/reducers/superAdmin";
 
 
 export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
@@ -32,20 +33,16 @@ export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
 
   const updateOrder = async (state) => {
    const response=  await Employee.updateOrderState({ token: auth.token, orderId: currentOrder[0].id, state});
-    console.log(response);
+   if(response.success){
+      const orders = [...superAdminPanel.orders];
+       orders[currentIndex]={...orders[currentIndex],state:state};
+      dispatch(setOrders(orders));
+      setShowDetails(false)
+   }
   };
   return (
     <div id="signup-form">
-      {isDialogShown ? (
-        buildAlertDialog({
-          bgColor: "green",
-          color: "white",
-          text: "Employee Created Successfully",
-          text2: `The employee can start his job `,
-        })
-      ) : (
-        <></>
-      )}
+  
       <div id="order-inner">
         <div id="signup--exit-button">
           <button
