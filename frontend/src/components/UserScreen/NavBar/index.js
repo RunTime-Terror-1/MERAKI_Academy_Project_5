@@ -6,7 +6,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { BiLogOut } from "react-icons/bi";
 import { setShowLoginForm } from "../../../redux/reducers/auth";
 import { CreateRestaurant } from "../../AdminPanle/Owner/RequestsDashboard/CreateRestaurant";
-import { setSearchRestaurant } from "../../../redux/reducers/User";
+import {
+  setrestaurantId,
+  setSearchRestaurant,
+} from "../../../redux/reducers/User";
 
 const NavBar = ({ showMenu, setShowMenu }) => {
   const navigate = useNavigate();
@@ -23,7 +26,15 @@ const NavBar = ({ showMenu, setShowMenu }) => {
   };
   const createRestaurantCard = (restaurant) => {
     return (
-      <div>
+      <div
+        className="results-search-div"
+        onClick={() => {
+          dispatch(setrestaurantId(restaurant.id));
+          dispatch(setSearchRestaurant([]));
+
+          navigate("/RestaurantPage");
+        }}
+      >
         <img src={restaurant.backImg} />
         <strong>{restaurant.name}</strong>
       </div>
@@ -59,18 +70,22 @@ const NavBar = ({ showMenu, setShowMenu }) => {
           </p>
         </a>
       </div>
-      <div style={{ width: "40%" }}>
+      <div id="search-div-main-page">
         <input
           placeholder="Search By Restaurant Name"
           onChange={(e) => {
             searchForRestaurant(e.target.value);
           }}
         />
-        <div>
-          {user.searchRestaurants.map((restaurant) => {
-            return createRestaurantCard(restaurant);
-          })}
-        </div>
+        {user.searchRestaurants.length ? (
+          <div id="inner-search-div">
+            {user.searchRestaurants.map((restaurant) => {
+              return createRestaurantCard(restaurant);
+            })}
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
 
       <div id="main-nav-bar-btns">
