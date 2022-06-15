@@ -2,9 +2,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 1px 0.5px 3px 0.5px black;
+  box-shadow: 1px 0.5px 3px 0.5px var(--third-color);
   padding-left: 2px;
   padding-right: 2px;
+  height: 100%;
 }
 
 #main-nav-bar-img-div {
@@ -18,16 +19,38 @@
 
 #main-nav-bar p {
   font-size: 30px;
-  text-shadow: 1px 1px 1px black;
+  text-shadow: 1px 1px 1px var(--third-color);
 }
 #main-nav-bar span {
   font-size: 30px;
-  color: orange;
+  color: var(--second-color);
 }
 
 #main-nav-bar input {
   width: 40%;
   padding: 10px;
   border-radius: 20px;
-  border: 0.5px solid orange;
+  border: 0.5px solid var(--second-color);
+}
+
+#main-nav-bar-btns {
+  display: flex;
+  gap: 4px;
+}
+#main-nav-bar-btns button {
+  padding: 10px;
+  background-color: var(--second-color);
+  color: black;
+  border: 0.5px solid var(--second-color);
+  border-radius: 10px;
+  cursor: pointer;
+}
+#main-nav-bar-btns button:hover {
+    color : var(--first-color);
+    background-color: var(--third-color);
+    border: 0;
+}
+.main-menu-btn{
+   color: rgb(143, 41, 4);
+   cursor: pointer;
 }

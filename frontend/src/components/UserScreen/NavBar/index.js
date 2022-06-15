@@ -14,7 +14,7 @@ const NavBar = () => {
     <div id="main-nav-bar">
       <div id="main-nav-bar-img-div">
         <AiOutlineMenu
-          color="black"
+          className="main-menu-btn"
           onClick={() => {
             // setHideMenu(!hideMenu)
           }}
@@ -29,7 +29,10 @@ const NavBar = () => {
         placeholder="Search for restaurant"
         onChange={searchForRestaurant}
       />
-      <button>My Account</button>
+      <div id = "main-nav-bar-btns">
+        <button>All Restaurants</button>
+        <button>My Account</button>
+      </div>
     </div>
   );
 };

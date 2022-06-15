@@ -9,11 +9,11 @@
 }
 :root{
   --first-color: white;
-  --second-color: #c1a208ce;
+  --second-color: orange;
   --third-color:black;
   --forth-color: #F0F2F5;
   --input-br-color: #E8F0FE;
-  --input-padding:12px;
+  --input-padding:10px;
   --border-radius: 5px;
   --button-padding:5px;
 }
