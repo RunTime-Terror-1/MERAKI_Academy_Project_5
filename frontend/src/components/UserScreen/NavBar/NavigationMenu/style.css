@@ -72,22 +72,23 @@
 .main-Nav-menu-btn:hover {
   background-color: black;
 }
-#logout-div {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px;
-  background-color: rgb(48, 51, 55);
-  text-align: start;
-}
-#logout-btn {
+
+#logout-btn1 {
   border: 0px;
   width: 100%;
   background-color: rgb(48, 51, 55);
   color: white;
+  padding: 10px;
   cursor: pointer;
 }
-
-#logout-btn div:hover {
-  background-color: rgb(205, 17, 17);
+#logout-div1 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px;
+  height: 100%;
+  text-align: start;
+}
+#logout-btn1:hover {
+  background-color: red;
 }
