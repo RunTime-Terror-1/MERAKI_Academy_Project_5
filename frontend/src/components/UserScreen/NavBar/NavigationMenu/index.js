@@ -4,21 +4,23 @@ import { HiUsers } from "react-icons/hi";
 import { BiGitPullRequest, BiLogOut } from "react-icons/bi";
 import { MdFastfood } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
-import react, { useEffect, useState } from "react";
 import { SuperAdmin } from "../../../../controllers/superAdmin";
 import { setRequests, setUsers } from "../../../../redux/reducers/superAdmin";
-import { Owner } from "../../../../controllers/owner";
-import { AiOutlineMenu } from "react-icons/ai";
+import { AiOutlineMenu, AiOutlineMail } from "react-icons/ai";
+import { IoMdLogIn } from "react-icons/io";
+import { VscFeedback } from "react-icons/vsc";
+import {BiDetail } from "react-icons/bi";
 
-export const MainNavigationMenu = ({ setShowMenu}) => {
+//FcFeedback
+export const MainNavigationMenu = ({ setShowMenu }) => {
   const dispatch = useDispatch();
   const { superAdminPanel, auth } = useSelector((state) => {
     return state;
   });
 
-  const userArea = () => {
+  const logoArea = () => {
     return (
-      <div id="main-nav-bar-img-div">
+      <div id="main-nav-bar-logo-div">
         <img src="https://img.freepik.com/free-vector/restaurant-logo-design-template_79169-56.jpg?w=2000" />
         <p>
           KHK<span>EATS</span>
@@ -29,7 +31,7 @@ export const MainNavigationMenu = ({ setShowMenu}) => {
 
   const menuButton = ({ text, onClick, icon }) => {
     return (
-      <div className="Nav-menu-btn">
+      <div className="main-Nav-menu-btn">
         {icon}
         <button onClick={onClick}>{text}</button>
       </div>
@@ -37,51 +39,98 @@ export const MainNavigationMenu = ({ setShowMenu}) => {
   };
 
   return (
-    <div id="nav-menu-bar">
-      <div id="title-nav-bar">
-      <AiOutlineMenu
-          className="main-menu-btn"
-          onClick={() => {
-            setShowMenu(false)
-          }}
-        />
-      </div>
-      {userArea({})}
-      <div id="user-management-div">
-        <h4>REGISTRATION</h4>
-      </div>
-      {menuButton({ text: "Sign up", icon: <HiUsers />, onClick: async () => {
-        const {users} = await SuperAdmin.getAllUsers({token:auth.token});
-        setShowMenu(0);
-        dispatch(setUsers(users))
-      } })}
-      {menuButton({
-        text: "Login",
-        icon: <BiGitPullRequest />,
-        onClick:async () => {
-          const {requests} =await SuperAdmin.getAllRequests({token:auth.token});
-          setShowMenu(1);
-          dispatch(setRequests(requests))
-        },
-      })}
-      <div id="user-management-div">
-        <h4>JOIN US</h4>
-      </div>
-      {menuButton({
-        text: "Create Your Restaurant",
-        icon: <MdFastfood />,
-        onClick: async () => {
-          const {restaurants} = await SuperAdmin.getAllRestaurants({token:auth.token});
-          setShowMenu(2);
-          dispatch(setRequests(restaurants))
-        },
-      })}
-      {/* <button id="logout-btn">
+    <div id="main-nav-menu-bar">
+      <div id="inner-main-nav-menu-bar">
+        <div id="main-title-nav-bar">
+          <AiOutlineMenu
+            onClick={() => {
+              setShowMenu(false);
+            }}
+          />
+        </div>
+        {logoArea({})}
+        <div id="user-management-div">
+          <h4>REGISTRATION</h4>
+        </div>
+        {menuButton({
+          text: "Sign up",
+          icon: <HiUsers />,
+          onClick: async () => {
+            const { users } = await SuperAdmin.getAllUsers({
+              token: auth.token,
+            });
+            setShowMenu(0);
+            dispatch(setUsers(users));
+          },
+        })}
+        {menuButton({
+          text: "Login",
+          icon: <IoMdLogIn />,
+          onClick: async () => {
+            const { requests } = await SuperAdmin.getAllRequests({
+              token: auth.token,
+            });
+            setShowMenu(1);
+            dispatch(setRequests(requests));
+          },
+        })}
+        <div id="user-management-div">
+          <h4>JOIN US</h4>
+        </div>
+        {menuButton({
+          text: "Create Your Restaurant",
+          icon: <MdFastfood />,
+          onClick: async () => {
+            const { restaurants } = await SuperAdmin.getAllRestaurants({
+              token: auth.token,
+            });
+            setShowMenu(2);
+            dispatch(setRequests(restaurants));
+          },
+        })}
+        <div id="user-management-div">
+          <h4>ABOUT</h4>
+        </div>
+        {menuButton({
+          text: "Contact US",
+          icon: <AiOutlineMail />,
+          onClick: async () => {
+            const { restaurants } = await SuperAdmin.getAllRestaurants({
+              token: auth.token,
+            });
+            setShowMenu(2);
+            dispatch(setRequests(restaurants));
+          },
+        })}
+        {menuButton({
+          text: "Feedback",
+          icon: <VscFeedback />,
+          onClick: async () => {
+            const { restaurants } = await SuperAdmin.getAllRestaurants({
+              token: auth.token,
+            });
+            setShowMenu(2);
+            dispatch(setRequests(restaurants));
+          },
+        })}
+        {menuButton({
+          text: "About",
+          icon: <BiDetail />,
+          onClick: async () => {
+            const { restaurants } = await SuperAdmin.getAllRestaurants({
+              token: auth.token,
+            });
+            setShowMenu(2);
+            dispatch(setRequests(restaurants));
+          },
+        })}
+        {/* <button id="logout-btn">
         <div id="logout-div">
           <BiLogOut />
           <h4>LogOut</h4>
         </div>
       </button> */}
+      </div>
     </div>
   );
 };
