@@ -32,7 +32,6 @@ const NavBar = ({ showMenu, setShowMenu }) => {
         onClick={() => {
           dispatch(setrestaurantId(restaurant.id));
           dispatch(setSearchRestaurant([]));
-
           navigate("/RestaurantPage");
         }}
       >
