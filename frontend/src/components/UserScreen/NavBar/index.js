@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
 import { BiLogOut } from "react-icons/bi";
-import { setIsSignUpFormShown, setShowLoginForm } from "../../../redux/reducers/auth";
+import { setShowLoginForm } from "../../../redux/reducers/auth";
+import { CreateRestaurant } from "../../AdminPanle/Owner/RequestsDashboard/CreateRestaurant";
 
 const NavBar = ({ showMenu, setShowMenu }) => {
   const navigate = useNavigate();
@@ -13,9 +14,17 @@ const NavBar = ({ showMenu, setShowMenu }) => {
   const { auth } = useSelector((state) => {
     return state;
   });
+  const user = useSelector((state) => {
+    return state.User;
+  });
   const showLoginPop = () => {
     dispatch(setShowLoginForm(true));
+  };
+  const createRestaurantCard = (restaurant) => {
 
+    return(<div>
+
+    </div>);
   };
   return (
     <div id="main-nav-bar">
@@ -33,11 +42,16 @@ const NavBar = ({ showMenu, setShowMenu }) => {
           </p>
         </a>
       </div>
+      <div style={{ width: "40%" }}>
+        <input
+          placeholder="Search By Restaurant Name"
+          onChange={searchForRestaurant}
+        />
+        {user.searchRestaurants.map((restaurant) => {
+          return createRestaurantCard(restaurant);
+        })}
+      </div>
 
-      <input
-        placeholder="Search for restaurant"
-        onChange={searchForRestaurant}
-      />
       <div id="main-nav-bar-btns">
         <button
           onClick={() => {
@@ -48,7 +62,7 @@ const NavBar = ({ showMenu, setShowMenu }) => {
         </button>
         {auth.isLoggedIn ? (
           <button>
-            <div>
+            <div style={{ display: "flex", gap: "2px" }}>
               <BiLogOut />
               <h4>LogOut</h4>
             </div>
