@@ -1,15 +1,18 @@
 import './style.css'
 import React, { useState, useContext, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
+import { useNavigate } from "react-router-dom";
 import NavBar from '../../NavBar'
 import { User } from '../../../../controllers/user'
 import { empty } from 'dom/lib/mutation'
 
 const CompleteOrder = () => {
-  // const navigate = useNavigate()
+
   // const { state } = useLocation()
   // const { Name } = state
+  const navigate = useNavigate();
+
+
 
   const [city, setCity] = useState('empty')
   const [Area, setArea] = useState('empty')
@@ -130,6 +133,16 @@ const CompleteOrder = () => {
         mealarray: Userinfor.yourPrice,
       })
     }
+  }
+  const move=()=>{
+     if(models && (testComplete == 'false' || popadress == 'false'){
+        setTimeout( ()=>{
+            navigate("/")
+        },3000)
+     }
+    
+//    navigate("/")
+
   }
 
   //!...............................................................
@@ -435,6 +448,8 @@ const CompleteOrder = () => {
                     sentUserOrder(Userinfor.userId)
                     setClick('yes')
                     toggleModel()
+
+                     move()
                   }}
                 >
                   PLACE ORDER 
@@ -447,8 +462,8 @@ const CompleteOrder = () => {
           </div>
         </div>
 
-        <div>
-          {models && (testComplete == 'false' || popadress == 'false') ? (
+        <div className='divdivModels'>
+          {c) ? (
             <div
               className="instedModel"
               onClick={() => {
@@ -456,8 +471,8 @@ const CompleteOrder = () => {
               }}
             >
               <div className="instedModel">
-                <h2>fgffffffffffffffffff</h2>
-                <button
+                <h2 className='h2h2PleaseCheck'>Please Check Your Information</h2>
+                <button  className='CloseButton'
                   onClick={() => {
                     toggleModel()
                   }}

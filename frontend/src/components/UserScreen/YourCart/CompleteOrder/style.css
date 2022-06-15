@@ -419,12 +419,7 @@ padding: 10px;
     font-weight: 400!important;
     font-family: open_sanssemibold;
 }
-.instedModel{
-    display: block;
-    width:50vh;
-    height: 20vh;
-    background-color: crimson;
-}
+
 .Tax{
         border-bottom: 4px solid rgb(238,238,238);
 }
@@ -448,4 +443,47 @@ position: relative;
     border-left: 4px solid rgb(238,238,238);
     /* background-color: aqua; */
     /* width: 40vw; */
+}
+
+
+
+.instedModel{
+    /* padding: 40px; */
+    display: block;
+    width:60vh;
+    height: 20vh;
+    background-color: rgb(158, 145, 148);
+
+
+    position: relative;
+
+    /* bottom: 30vh;  */
+
+}
+
+.divdivModels{
+    position: relative;
+    left: 20vw;
+    bottom: 60vh;
+}
+
+.h2h2PleaseCheck{
+    position: relative;
+    left: 30px;
+    top: 50px;
+}
+.CloseButton{
+    width: 100px;
+    height: 30px;
+    position: relative;
+    left: 160px;
+    top: 70px;
+}
+.CloseButton:hover{
+    background-color: crimson;
+    width: 100px;
+    height: 30px;
+    position: relative;
+    left: 160px;
+    top: 70px;
 }
