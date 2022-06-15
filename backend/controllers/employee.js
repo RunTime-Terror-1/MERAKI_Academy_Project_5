@@ -88,11 +88,71 @@ const updateMeal = (req, res) => {
     }
   });
 };
+const updateOrderState = (req, res) => {
+  const orderId = req.params.orderId;
+  const { state } = req.body;
+  const query = `UPDATE orders SET state=? WHERE id=?;`;
+
+  const data = [state, orderId];
+  connection.query(query, data, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        massage: "Server Error",
+        err: err,
+      });
+    }
+    if (!result.affectedRows) {
+      return res.status(404).json({
+        success: false,
+        massage: `The order is not found`,
+        err: err,
+      });
+    } else {
+      res.status(200).json({
+        success: true,
+        massage: `Order Updated`,
+        result: result,
+      });
+    }
+  });
+};
+const deleteOrder = (req, res) => {
+  const orderId = req.params.orderId;
+  const query = `UPDATE orders SET is_deleted=1 WHERE id=?;`;
+  console.log(orderId);
+
+  const data = [orderId];
+  connection.query(query, data, (err, result) => {
+    if (err) {
+      console.log(err.message);
+      return res.status(500).json({
+        success: false,
+        massage: "Server Error",
+        err: err,
+      });
+    }
+    if (!result.affectedRows) {
+      return res.status(404).json({
+        success: false,
+        massage: `The order is not found`,
+        err: err,
+      });
+    } else {
+      res.status(200).json({
+        success: true,
+        massage: `Order Updated`,
+        result: result,
+      });
+    }
+  });
+};
+
 //!.......END updateMeal   ............
 
 const getAllOrder = (req, res) => {
   const restaurant_id = req.params.id;
-  const query = `SELECT OS.id,email,state,receipt,quantity,MS.name,MS.price,AD.city,AD.notes,AD.notes,AD.buldingNumber FROM orders OS INNER JOIN address AD INNER JOIN  restaurants RS INNER JOIN users US INNER JOIN orders_meals OM INNER JOIN meals MS ON  AD.user_id= OS.user_id AND OS.user_id = US.id AND OS.restaurant_id = ?  AND  OS.restaurant_id = RS.id AND OM.order_id = OS.id AND MS.id = OM.meal_id AND OM.id; 
+  const query = `SELECT OS.id,email,state,receipt,quantity,MS.name,MS.price,AD.city,AD.notes,AD.street,AD.buldingNumber FROM orders OS INNER JOIN address AD INNER JOIN  restaurants RS INNER JOIN users US INNER JOIN orders_meals OM INNER JOIN meals MS ON  AD.user_id= OS.user_id AND OS.user_id = US.id AND OS.restaurant_id = ?  AND  OS.restaurant_id = RS.id AND OM.order_id = OS.id AND MS.id = OM.meal_id AND OM.id AND OS.is_deleted=0; 
   `;
   const data = [restaurant_id];
 
@@ -142,4 +202,6 @@ module.exports = {
   updateMeal,
   getAllOrder,
   getAllMeals,
+  updateOrderState,
+  deleteOrder,
 };

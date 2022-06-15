@@ -1,10 +1,9 @@
 import React, { useContext, useState } from "react";
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
-import { Owner } from "../../../../../controllers/owner";
-import { Gender } from "../../../../Registration/Register/GenderDiv";
-import { ErrorsDiv } from "../../../../Registration/Register/ErrorsDiv";
-import { Registration } from "../../../../../controllers/registration";
+import { Employee } from "../../../../../controllers/employee";
+import { setOrders } from "../../../../../redux/reducers/superAdmin";
+
 
 export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
   const [isDialogShown, setIsDialogShown] = useState("");
@@ -32,18 +31,18 @@ export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
     );
   };
 
+  const updateOrder = async (state) => {
+   const response=  await Employee.updateOrderState({ token: auth.token, orderId: currentOrder[0].id, state});
+   if(response.success){
+      const orders = [...superAdminPanel.orders];
+       orders[currentIndex]={...orders[currentIndex],state:state};
+      dispatch(setOrders(orders));
+      setShowDetails(false)
+   }
+  };
   return (
     <div id="signup-form">
-      {isDialogShown ? (
-        buildAlertDialog({
-          bgColor: "green",
-          color: "white",
-          text: "Employee Created Successfully",
-          text2: `The employee can start his job `,
-        })
-      ) : (
-        <></>
-      )}
+  
       <div id="order-inner">
         <div id="signup--exit-button">
           <button
@@ -55,7 +54,7 @@ export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
           </button>
         </div>
 
-        <h1>ORDER DETAILS</h1>
+        <h1 style={{ color: "black" }}>ORDER DETAILS</h1>
         <hr />
         <div id="title-div1" className="meal-row">
           <h5>#</h5>
@@ -77,24 +76,25 @@ export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
           );
         })}
 
-        <div id="title-div1" className="meal-row">
+        <div id="title-div1" className="meal-row3">
           <h5>BUILDING #</h5>
+          <h5>STREET</h5>
           <h5>CITY</h5>
           <h5>PHONE</h5>
           <h5>TOTAL</h5>
         </div>
-        <div className="meal-row1">
+        <div className="meal-row2">
           <h5>{currentOrder[0].buldingNumber}</h5>
+          <h5>{currentOrder[0].street}</h5>
           <h5>{currentOrder[0].city}</h5>
           <h5>{currentOrder[0].notes}</h5>
           <h5>{total} $</h5>
         </div>
-        <div id = "order-btn">
-        <button>Accept Order</button>
-        <button>Reject Order</button>
+        <div id="order-btn">
+          <button onClick={()=>{updateOrder("Completed")}}>Complete The Order</button>
+          <button  onClick={()=>{updateOrder("Rejected")}} style={{ backgroundColor: "red" }}>Reject The Order</button>
+        </div>
       </div>
-      </div>
-     
     </div>
   );
 };

@@ -28,7 +28,18 @@ export const Orders = () => {
   const orderMeals = {};
 
   const createButton = ({ onClick, text, state }) => {
-    return <button onClick={onClick}>{text}</button>;
+    return (
+      <button
+        style={
+          state === "In Progress"
+            ? { backgroundColor: "green" }
+            : { backgroundColor: "red" }
+        }
+        onClick={onClick}
+      >
+        {text}
+      </button>
+    );
   };
   const createRow = (order, index) => {
     return (
@@ -37,19 +48,29 @@ export const Orders = () => {
         <h4>{order.state}</h4>
         <h4>{order.notes}</h4>
         <h4>{order.receipt} $</h4>
-        <h4>{superAdminPanel.orders.length} </h4>
+        <h4>{orderMeals[order.id][0].quantity} </h4>
         <div id="edit-btns-div">
-          {createButton({
-            onClick: async () => {
-              ordersId = [];
-  
-              setCurrentOrder(orderMeals[order.id]);
-              setCurrentIndex(index);
-              setShowDetails(true);
-            },
-            text: "Details",
-            state: order.state,
-          })}
+          {order.state === "In Progress"
+            ? createButton({
+                onClick: async () => {
+                  ordersId = [];
+                  setCurrentOrder(orderMeals[order.id]);
+                  setCurrentIndex(index);
+                  setShowDetails(true);
+                },
+                text: "Details",
+                state: order.state,
+              })
+            : createButton({
+                onClick: async () => {
+                  ordersId = [];
+                  setCurrentOrder(orderMeals[order.id]);
+                  setCurrentIndex(index);
+                  setIsDeleteDialogShown(true);
+                },
+                text: "Delete",
+                state: order.state,
+              })}
         </div>
       </div>
     );
@@ -64,7 +85,7 @@ export const Orders = () => {
             {createButton({
               text: "Yes",
               onClick: async () => {
-                deleteMeal(currentOrder.id);
+                deleteOrder(currentOrder.id);
                 setIsDeleteDialogShown(false);
               },
             })}
@@ -80,14 +101,15 @@ export const Orders = () => {
     );
   };
 
-  const deleteMeal = async () => {
-    await Employee.deleteMealFromRestaurant({
-      mealId: currentOrder.id,
+  const deleteOrder = async () => {
+    await Employee.deleteOrder({
+      orderId: currentOrder[currentIndex].id,
       token: auth.token,
     });
-    const meals = [...superAdminPanel.meals];
-    meals.splice(currentIndex, 1);
-    dispatch(setMeals(meals));
+    const orders = [...superAdminPanel.orders].filter((order) => {
+      return order.id !== currentOrder[currentIndex].id;
+    });
+    dispatch(setOrders(orders));
   };
 
   return (
@@ -121,8 +143,8 @@ export const Orders = () => {
 
       {isDeleteDialogShown ? (
         deleteDialog({
-          text: "Meal will be Deleted, Are you sure?",
-          title: "Delete Meal",
+          text: "Order will be Deleted, Are you sure?",
+          title: "Delete Order",
         })
       ) : (
         <></>

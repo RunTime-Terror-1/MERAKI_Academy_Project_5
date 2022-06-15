@@ -77,11 +77,45 @@ export class Employee {
       };
     }
   }
+  static async updateOrderState({ orderId, token ,state }) {
+    try {
+      const response = await axios.put(
+        `${hostUrl}/employee/order/${orderId}`,
+        {state},
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return {
+        success: false,
+        massage: "Error",
+        serverError: error.response.data.message,
+      };
+    }
+  }
 
-  static async deleteMealFromRestaurant({
-    mealId,
-    token,
-  }) {
+  static async deleteOrder({ orderId, token }) {
+    try {
+      const response = await axios.put(
+        `${hostUrl}/employee/order/delete/${orderId}`,
+        {},
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return {
+        success: false,
+        massage: "Error",
+        serverError: error.response.data.message,
+      };
+    }
+  }
+
+  static async deleteMealFromRestaurant({ mealId, token }) {
     try {
       const response = await axios.delete(`${hostUrl}/employee/${mealId}`, {
         headers: { authorization: `Bearer ${token}` },
@@ -95,10 +129,7 @@ export class Employee {
       };
     }
   }
-  static async getAllOrder({
-    restaurantId,
-    token,
-  }) {
+  static async getAllOrder({ restaurantId, token }) {
     try {
       const response = await axios.get(`${hostUrl}/employee/${restaurantId}`, {
         headers: { authorization: `Bearer ${token}` },
@@ -113,5 +144,5 @@ export class Employee {
     }
   }
 
-  
+  //deleteOrder
 }
