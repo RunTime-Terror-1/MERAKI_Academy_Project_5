@@ -15,9 +15,9 @@ import { useLocation } from 'react-router-dom'
 const RestaurantPage = () => {
   const dispatch = useDispatch()
 // console.log("start")
-//   const { state } = useLocation()
-//   const {restId} = state
-//     console.log(restId,"id")
+  // const { state } = useLocation()
+  // const {id} = state
+    // console.log(localStorage.getItem("restaurantId"),"idaaaa")
 
   const [sumreal, setSumreal] = useState(0)
   const [restaurant, setRestaurants] = useState('')
@@ -34,17 +34,19 @@ const RestaurantPage = () => {
       yourPrice: state.User.price,
       sumPrice: state.User.sumPriceUser,
       name: state.User.name,
+      Idrestaurant:state.User.restaurantIdId,
     }
   })
 
   const getRestaurant = async () => {
+    // console.log( Userinfor.Idrestaurant,"4242")
     const responseRestaurant = await User.getRestaurantById({
-      restaurantId: 1,
+      restaurantId:localStorage.getItem("restaurantId"),
     })
 
     await setRestaurants(responseRestaurant.result)
 
-    const responseMeal = await User.getMealsByRestaurant({ restaurantId:1})
+    const responseMeal = await User.getMealsByRestaurant({ restaurantId:localStorage.getItem("restaurantId")})
     setMenu(responseMeal.result)
 
     setCategories(responseMeal.categories)

@@ -45,21 +45,23 @@ const CompleteOrder = () => {
     }
   })
 
-  console.log(Userinfor.yourPrice, 'YourPrice fff  complete')
+//   console.log(Userinfor.yourPrice, 'YourPrice fff  complete')
   //!..............................
 
-  console.log(Userinfor.userId, 'Yourid   complete')
+//   console.log(Userinfor.userId, 'Yourid   complete')
 
   //!..................Functions.............................................
 
   const saveAdress = async (id) => {
-    const adress = await User.UpdateAdress({
-      userid: id,
-      city: Area,
-      buldingNumber: buildingNumber,
-      street: street,
-      notes: Phone,
-    })
+    if(messageLocation=="good"){
+        const adress = await User.UpdateAdress({
+            userid: id,
+            city: Area,
+            buldingNumber: buildingNumber,
+            street: street,
+            notes: Phone,
+          })
+    }
   }
 
   //!........................................................
@@ -68,7 +70,7 @@ const CompleteOrder = () => {
     const pastadess = await User.getaddrssByuserTd({ userid })
 
     if (pastadess.result[0].street != null) {
-      console.log('nulllll')
+    //   console.log('nulllll')
       testadress = 'true'
       settrue('true')
     }
@@ -111,8 +113,8 @@ const CompleteOrder = () => {
   }
   //!........................................................
   const sentUserOrder = async (id) => {
-    console.log(Userinfor.sumPrice,"114")
-    console.log( Userinfor.yourPrice[0].restaurant,"114")
+    // console.log(Userinfor.sumPrice,"114")
+    // console.log( Userinfor.yourPrice[0].restaurant,"114")
     const userOrder = await User.sentOrder({
       userid: id,
       state: "progess",
@@ -126,6 +128,8 @@ const CompleteOrder = () => {
   useEffect(() => {
     getAdress(localStorage.getItem('userid'))
   }, [])
+
+
   //!...............................................................
   return (
     <div className="completeOrder">

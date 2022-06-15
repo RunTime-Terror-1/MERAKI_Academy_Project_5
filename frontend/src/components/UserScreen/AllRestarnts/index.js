@@ -4,9 +4,12 @@ import { User } from "../../../controllers/user";
 import NavBar from "../NavBar";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import{ setrestaurantId} from  '../../../redux/reducers/User'
+// import { setTotal, setNameRest } from '../../../redux/reducers/User'
 
 const AllRestarnts = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const [restaurants, setRestaurants] = useState("");
   const Userinfor = useSelector((state) => {
@@ -17,6 +20,7 @@ const AllRestarnts = () => {
       islogin: state.auth.isLoggedIn,
       name: state.User.name,
       token: state.auth.token,
+      Idrestaurant:state.User.restaurantIdId,
     };
   });
 
@@ -45,8 +49,9 @@ const AllRestarnts = () => {
                     className="All_B_eachRestarant"
                     key={index}
                     onClick={() => {
-                      console.log(elemnt.id)
-                      navigate("/RestaurantPage" ,{ state: { restId: elemnt.id } });
+                      // console.log(elemnt.id)
+                      dispatch(setrestaurantId({restId:elemnt.id}))
+                      navigate("/RestaurantPage",{ state: { id:localStorage.getItem("restaurantId") } });
                     }}
                   >
                     <img className="logo" src={elemnt.backImg} />
