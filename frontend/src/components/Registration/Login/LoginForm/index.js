@@ -68,7 +68,7 @@ export const LoginForm = () => {
       if (response.message !== "Login Successful") {
         setErrors([...errors, response.message]);
       } else {
-        navigate("/");
+        dispatch(setShowLoginForm());
       }
     } else {
       setErrors(errors);

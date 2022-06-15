@@ -5,7 +5,10 @@ import { ErrorsDiv } from "./ErrorsDiv";
 import "./style.css";
 import { Gender } from "./GenderDiv";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsSignUpFormShown } from "../../../redux/reducers/auth";
+import {
+  setIsSignUpFormShown,
+  setShowLoginForm,
+} from "../../../redux/reducers/auth";
 export const RegisterComponent = ({
   superAdminRegister = false,
   setIsRegisterShown,
@@ -24,7 +27,6 @@ export const RegisterComponent = ({
   });
   const buildAlertDialog = ({ bgColor, color, text, text2 }) => {
     setTimeout(() => {
-      console.log("test");
       setIsDialogShown(false);
     }, 2500);
 
@@ -47,7 +49,6 @@ export const RegisterComponent = ({
           type={type}
           placeholder={placeholder}
           onChange={(e) => {
-            console.log("test");
             setErrors(
               Registration.removeErrors({
                 isLoginForm: false,
@@ -91,7 +92,8 @@ export const RegisterComponent = ({
         setErrors([...errors, "Email already taken"]);
       } else {
         setIsDialogShown(true);
-        dispatch(setIsSignUpFormShown());
+        dispatch(setIsSignUpFormShown(false));
+        dispatch(setShowLoginForm(false));
         if (superAdminRegister) {
           setIsRegisterShown(false);
         }
@@ -116,8 +118,8 @@ export const RegisterComponent = ({
         <div id="signup--exit-button">
           <button
             onClick={() => {
-              dispatch(setIsSignUpFormShown());
-
+              dispatch(setIsSignUpFormShown(false));
+              dispatch(setShowLoginForm(false));
               setIsRegisterShown(false);
             }}
           >
@@ -125,7 +127,7 @@ export const RegisterComponent = ({
           </button>
         </div>
 
-        <h1>Create an Account</h1>
+        <h1>CREATE ACCOUNT</h1>
 
         <hr />
 
@@ -170,7 +172,16 @@ export const RegisterComponent = ({
         <Gender setGender={setGender} errors={errors} setErrors={setErrors} />
         <ErrorsDiv errors={errors} />
         <div id="signup-button-div">
-          <button onClick={signUp}>Sign Up</button>
+          <button
+            onClick={signUp}
+            style={
+              !superAdminRegister
+                ? { backgroundColor: "orange", color: "black" }
+                : { backgroundColor: "green", color: "white" }
+            }
+          >
+            Sign Up
+          </button>
         </div>
       </div>
     </div>

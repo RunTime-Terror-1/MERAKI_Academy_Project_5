@@ -15,7 +15,7 @@ const NavBar = ({ showMenu, setShowMenu }) => {
   });
   const showLoginPop = () => {
     dispatch(setShowLoginForm(true));
-    dispatch(setIsSignUpFormShown(true));
+
   };
   return (
     <div id="main-nav-bar">
