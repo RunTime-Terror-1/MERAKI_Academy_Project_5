@@ -192,8 +192,16 @@ padding: 10px;
 
 }
 .Enterh2_order{
+    display: flex;
+    flex-direction: row;
+   
     border-bottom: 4px solid rgb(238,238,238);
     padding: 10px;
+}
+.Enter{
+    width: 538px;
+    border-right: 4px solid rgb(238,238,238);
+    /* background-color: crimson; */
 }
 .locationTow{
     display: flex;
@@ -274,15 +282,36 @@ padding: 10px;
     display: flex;
     flex-direction: row;
     gap: 35px;
+    
 }
+.h2userLocation{
+    position: relative;
+    left: 30px;
+    font-size: 16px;
+    color: #212121;
+    font-weight: 400!important;
+    font-family: open_sanssemibold;
+}
+
 
 .iftrue {
     width: 180px;
     height: 150px;
-    background-color: crimson;
+    /* background-color: crimson; */
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
+
+    position: relative;
+    left: 20px;
+}
+.h2h2h2333{
+    width: 140px;
+    
+    font-size: 18px;
+    color: #212121;
+    font-weight: 400!important;
+    font-family: open_sanssemibold;
 }
 
 .selelctadresss {

@@ -1,18 +1,15 @@
 import './style.css'
 import React, { useState, useContext, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
 import NavBar from '../../NavBar'
 import { User } from '../../../../controllers/user'
 import { empty } from 'dom/lib/mutation'
 
 const CompleteOrder = () => {
-
   // const { state } = useLocation()
   // const { Name } = state
-  const navigate = useNavigate();
-
-
+  const navigate = useNavigate()
 
   const [city, setCity] = useState('empty')
   const [Area, setArea] = useState('empty')
@@ -134,15 +131,15 @@ const CompleteOrder = () => {
       })
     }
   }
-  const move=()=>{
-     if(models && (testComplete == 'false' || popadress == 'false'){
-        setTimeout( ()=>{
-            navigate("/")
-        },3000)
-     }
-    
-//    navigate("/")
+  const move = () => {
+    console.log(models, testComplete, popadress)
+    if (models && (testComplete == ' true' || popadress == 'true')) {
+      setTimeout(() => {
+        navigate('/')
+      }, 2000)
+    }
 
+    //    navigate("/")
   }
 
   //!...............................................................
@@ -205,7 +202,8 @@ const CompleteOrder = () => {
         <div className="location">
           <div className="Enterh2_order">
             {' '}
-            <h2 className="h2_order">Enter a new site</h2>
+            <h2 className="h2_order   Enter">Enter a new site</h2>
+            <h2 className="h2_order  lastSite ">  last site</h2>
           </div>
 
           <div className="locationTow">
@@ -257,19 +255,27 @@ const CompleteOrder = () => {
               {truevalue == 'true' ? (
                 <div className="iftrue">
                   <div className="div45">
-                    City:<h3>Amman</h3>
+                    <div className='h2h2h2PastLocation'> <h2 className='h2h2h2333'>City:</h2></div>
+                    <h3 className="h2userLocation">Amman</h3>
                   </div>
                   <div className="div45">
-                    Area:<h3>{pastAdress.city}</h3>
+                    <div className='h2h2h2PastLocation'> <h2 className='h2h2h2333'>Area:</h2></div>
+                    <h3 className="h2userLocation">{pastAdress.city}</h3>
                   </div>
                   <div className="div45">
-                    street:<h3>{pastAdress.street}</h3>
+                    <div className='h2h2h2PastLocation'><h2 className='h2h2h2333'>street:</h2></div>
+                    <h3 className="h2userLocation">{pastAdress.street}</h3>
                   </div>
                   <div className="div45">
-                    buildingNumber:<h3>{pastAdress.buldingNumber}</h3>
+                    <div className='h2h2h2PastLocation'><h2 className='h2h2h2333'>buildingNumber:</h2></div>
+                    <h3 className="h2userLocation">
+                      {pastAdress.buldingNumber}
+                    </h3>
                   </div>
                   <div className="div45">
-                    phone:<h3>{pastAdress.notes}</h3>
+                    <div  className='h2h2h2PastLocation'><h2 className='h2h2h2333'> phone:</h2></div>
+                
+                    <h3 className="h2userLocation">{pastAdress.notes}</h3>
                   </div>
                 </div>
               ) : (
@@ -433,37 +439,49 @@ const CompleteOrder = () => {
                 )}
               </div>
             </div>
-            <div className='divDivdiv'>
+            <div className="divDivdiv">
+              <div className="divTotalOrder">
+                <div className="divdivTotal">
+                  <h2 className="h2h2Total">Subtotal</h2>
+                  <h3 className="h3h3h3total">{Userinfor.sumPrice + ' JD'}</h3>
+                </div>
+                <div className="divdivTotal">
+                  <h2 className="h2h2Total">Delivery fee</h2>
+                  <h3 className="h3h3h3total"> 0.99 JD</h3>
+                </div>
+                <div className="divdivTotal   Tax">
+                  <h2 className="h2h2Total">Tax</h2>
+                  <h3 className="h3h3h3total"> 16 %</h3>
+                </div>
+                <div className="divdivTotal">
+                  <h2 className="h2h2Total">Total Amount</h2>
+                  <h3 className="h3h3h3total">
+                    {Userinfor.sumPrice + Userinfor.sumPrice * 0.16 + 1}
+                  </h3>
+                </div>
+                <div>
+                  {' '}
+                  <button
+                    className="PlaceOrder"
+                    onClick={() => {
+                      saveAdress(Userinfor.userId)
+                      sentUserOrder(Userinfor.userId)
+                      setClick('yes')
+                      toggleModel()
 
-            <div className='divTotalOrder'>
-              <div className='divdivTotal'><h2 className='h2h2Total'>Subtotal</h2><h3 className='h3h3h3total'>{Userinfor.sumPrice + " JD"}</h3></div>
-              <div className='divdivTotal'><h2 className='h2h2Total'>Delivery fee</h2><h3 className='h3h3h3total'> 0.99 JD</h3></div>
-              <div className='divdivTotal   Tax'  ><h2 className='h2h2Total'>Tax</h2><h3 className='h3h3h3total'> 16 %</h3></div>
-              <div className='divdivTotal'><h2 className='h2h2Total'>Total Amount</h2><h3 className='h3h3h3total'>{Userinfor.sumPrice+(Userinfor.sumPrice*0.16)+1}</h3></div>
-              <div >
-                {' '}
-                <button className='PlaceOrder'
-                  onClick={() => {
-                    saveAdress(Userinfor.userId)
-                    sentUserOrder(Userinfor.userId)
-                    setClick('yes')
-                    toggleModel()
-
-                     move()
-                  }}
-                >
-                  PLACE ORDER 
-                </button>
+                      move()
+                    }}
+                  >
+                    PLACE ORDER
+                  </button>
+                </div>
               </div>
             </div>
-
-            </div>
-           
           </div>
         </div>
 
-        <div className='divdivModels'>
-          {c) ? (
+        <div className="divdivModels">
+          {models && (testComplete == 'false' || popadress == 'false') ? (
             <div
               className="instedModel"
               onClick={() => {
@@ -471,8 +489,11 @@ const CompleteOrder = () => {
               }}
             >
               <div className="instedModel">
-                <h2 className='h2h2PleaseCheck'>Please Check Your Information</h2>
-                <button  className='CloseButton'
+                <h2 className="h2h2PleaseCheck">
+                  Please Check Your Information
+                </h2>
+                <button
+                  className="CloseButton"
                   onClick={() => {
                     toggleModel()
                   }}
@@ -482,12 +503,26 @@ const CompleteOrder = () => {
               </div>
             </div>
           ) : (
-            ''
+            ' '
+            // <div>
+            //   {models &&(testComplete == 'true' && popadress == 'true') ? (
+            //     <div className="instedModel">
+            //       <h2 className="h2h2PleaseCheck">Order Completed True </h2>
+            //     </div>
+            //   ) : (
+            //     ''
+            //   )}
+            // </div>
           )}
         </div>
       </div>
     </div>
   )
 }
+// ;<div>
+//   <div className="instedModel">
+//     <h2 className="h2h2PleaseCheck">Order Completed True </h2>
+//   </div>
+// </div>
 
 export default CompleteOrder
