@@ -19,6 +19,52 @@
 .AllRestarnts_C{
     width: 5vw;
 }
+.Continert{
+    /* background-color: darkorchid; */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.Continer_A{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    text-align: start;
+}
+.Continer_A_A{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    text-align: start;
+}
+.imgCategory{
+    width: 70px;
+    height: 70px;
+    border-radius: 50px;
+    position: relative;
+    left: 15px;
+}
+.imgCategory:hover{
+    width: 70px;
+    height: 70px;
+    border-radius: 50px;
+    transform: scale(1.2);
+}
+.DivimgCategory{
+    /* padding: 5px; */
+    width: 100px;
+    /* background-color: crimson; */
+    border-radius: 50px;
+}
+.DivimgCategory:hover{
+    /* padding: 5px; */
+    width: 100px;
+    background-color: rgb(233, 222, 67);
+    border-radius: 50px;
+    transform: scale(1.2);
+}
+
+
 .AllRestarnts_B{
     width: 85vw;
     display: flex;

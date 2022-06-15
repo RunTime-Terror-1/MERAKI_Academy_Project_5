@@ -5,6 +5,7 @@ import NavBar from '../NavBar'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
+import { setrestaurantId } from '../../../redux/reducers/User'
 
 const SortResturant = () => {
   let { state } = useLocation()
@@ -34,10 +35,10 @@ const SortResturant = () => {
     <div className="SortDiv">
       {<NavBar />}
 
-      <div className="AllAllRestarntsShow">
-        <div className="AllRestarnts_A"></div>
+      <div className="SortResturants">
+        <div className="SortRestarnts_A">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
 
-        <div className="SortDivOne">
+        <div className="SortRestarnts_B">
           {' '}
           {afterSort
             ? afterSort.map((elemnt, index) => {
@@ -47,9 +48,10 @@ const SortResturant = () => {
                     className="SortDivOne_one"
                     key={index}
                     onClick={() => {
-                      // console.log(elemnt.id)
+                    
+                    
 
-                      // dispatch(setrestaurantId({ restId: elemnt.id }))
+                      dispatch(setrestaurantId({ restId: elemnt.id }))
 
                       navigate('/RestaurantPage', {
                         state: { id: localStorage.getItem('restaurantId') },
@@ -66,7 +68,7 @@ const SortResturant = () => {
             : ' '}
         </div>
 
-        <div className="AllRestarnts_C"></div>
+        <div className="SortRestarnts_C">ssssssssssss</div>
       </div>
     </div>
   )
