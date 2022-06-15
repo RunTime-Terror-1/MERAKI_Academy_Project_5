@@ -190,85 +190,98 @@ const CompleteOrder = () => {
           </div>
         </div>
         <div className="location">
-          <div className="inputLocation">
+          <div className="Enterh2_order">
+            {' '}
             <h2 className="h2_order">Enter a new site</h2>
-            <div className="cityandarea">
-              <input
-                className="inputtag"
-                placeholder="City"
-                onChange={(e) => {
-                  setCity(e.target.value)
-                }}
-              />
-              <input
-                className="inputtag"
-                placeholder="Area"
-                onChange={(e) => {
-                  setArea(e.target.value)
-                }}
-              />
-            </div>
-            <div className="cityandarea">
-              <input
-                className="inputtag"
-                placeholder="buldingNumber"
-                onChange={(e) => {
-                  setBuilding(e.target.value)
-                }}
-              />
-              <input
-                className="inputtag"
-                placeholder="stretNumber"
-                onChange={(e) => {
-                  setstreet(e.target.value)
-                }}
-              />
-            </div>
-            <div className="Number">
-              <input
-                className="Number"
-                placeholder="Number"
-                onChange={(e) => {
-                  setPhone(e.target.value)
-                }}
-              />
-            </div>
           </div>
-          <div className="userPastLocation">
-            {truevalue == 'true' ? (
-              <div className="iftrue">
-                <div className="div45">
-                  City:<h3>Amman</h3>
-                </div>
-                <div className="div45">
-                  Area:<h3>{pastAdress.city}</h3>
-                </div>
-                <div className="div45">
-                  street:<h3>{pastAdress.street}</h3>
-                </div>
-                <div className="div45">
-                  buildingNumber:<h3>{pastAdress.buldingNumber}</h3>
-                </div>
-                <div className="div45">
-                  phone:<h3>{pastAdress.notes}</h3>
-                </div>
-              </div>
-            ) : (
-              <div className='divimageee'>
-                <h2 className="pastlocationmessage">You dont have a previous site ..</h2>
-                <img
-                  className="imgadresss"
-                  src="http://cdn.onlinewebfonts.com/svg/img_554287.png"
+
+          <div className="locationTow">
+            <div className="inputLocation">
+              <div className="cityandarea">
+                <input
+                  className="inputtag"
+                  placeholder="City"
+                  onChange={(e) => {
+                    setCity(e.target.value)
+                  }}
+                />
+                <input
+                  className="inputtag"
+                  placeholder="Area"
+                  onChange={(e) => {
+                    setArea(e.target.value)
+                  }}
                 />
               </div>
-            )}
+              <div className="cityandarea">
+                <input
+                  className="inputtag"
+                  placeholder="buldingNumber"
+                  onChange={(e) => {
+                    setBuilding(e.target.value)
+                  }}
+                />
+                <input
+                  className="inputtag"
+                  placeholder="stretNumber"
+                  onChange={(e) => {
+                    setstreet(e.target.value)
+                  }}
+                />
+              </div>
+              <div className="Number">
+                <input
+                  className="Number"
+                  placeholder="Number"
+                  onChange={(e) => {
+                    setPhone(e.target.value)
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="userPastLocation">
+              {truevalue == 'true' ? (
+                <div className="iftrue">
+                  <div className="div45">
+                    City:<h3>Amman</h3>
+                  </div>
+                  <div className="div45">
+                    Area:<h3>{pastAdress.city}</h3>
+                  </div>
+                  <div className="div45">
+                    street:<h3>{pastAdress.street}</h3>
+                  </div>
+                  <div className="div45">
+                    buildingNumber:<h3>{pastAdress.buldingNumber}</h3>
+                  </div>
+                  <div className="div45">
+                    phone:<h3>{pastAdress.notes}</h3>
+                  </div>
+                </div>
+              ) : (
+                <div className="divimageee">
+                  <h2 className="pastlocationmessage">
+                    You dont have a previous site ..
+                  </h2>
+                  <img
+                    className="imgadresss"
+                    src="http://cdn.onlinewebfonts.com/svg/img_554287.png"
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
         <div className="selelctadresss">
-            <h2 className='h2_order'  >Select Address</h2>
-          <div className='divnewAdress'>
-            <input className='inputSelect'
+          <div className="Selecth2_order">
+            <h2 className="h2_order">Select Address</h2>
+          </div>
+
+          <div className="divnewAdress">
+            <input
+              className="inputSelect"
               type="radio"
               id="huey"
               name="drone"
@@ -280,7 +293,8 @@ const CompleteOrder = () => {
           </div>
 
           <div>
-            <input className='inputSelect'
+            <input
+              className="inputSelect"
               type="radio"
               id="huey"
               name="drone"
@@ -291,119 +305,148 @@ const CompleteOrder = () => {
             <label for="huey">Past address</label>
           </div>
 
-          <div>
-            {messageLocation != 'empty' ? <div>{messageLocation}</div> : ''}
-          </div>
-        </div>
-
-        <div className="Payment">
-          <div className="HowPayment">
-
-         
-            <div>
-              <input
-                type="radio"
-                id="huey1"
-                name="drone2"
-                value="huey1"
-                onChange={(e) => {
-                  setPayment('Visa')
-                  console.log(payment, 'lllll', 'Visa')
-                  settestComplete('true')
-                  //   setPopadress("true")
-                }}
-              />
-              <label for="huey1">Credit Card</label>
-            </div>
-            <div>
-              <input
-                type="radio"
-                id="huey2"
-                name="drone2"
-                value="huey2"
-                onChange={(e) => {
-                  setPayment('Cash')
-                  console.log(payment, '22222')
-                  settestComplete('true')
-                  //   setPopadress("false")
-                }}
-              />
-              <label for="huey2">cash</label>
-            </div>
-          </div>
-          <div className="paymentcreditCardOremty">
-            {payment == 'Visa' ? (
-              <div className="divcreditCard">
-                <div className="divcreditCard_one">
-                  <h3>Card Number</h3>{' '}
-                  <input placeholder="    -   -  -  -  -   - " />{' '}
-                </div>
-
-                <div className="divcreditCard_two">
-                  <h3>Card expiry date</h3>
-                  <div>
-                    <select
-                      className="inputmounth"
-                      onChange={(e) => {
-                        // setDestin(e.target.value);
-                      }}
-                    >
-                      <option>mm</option>
-                      <option>01</option>
-                      <option>02</option>
-                      <option>03</option>
-                      <option>04</option>
-                      <option>05</option>
-                      <option>06</option>
-                      <option>07</option>
-                      <option>08</option>
-                      <option>09</option>
-                      <option>10</option>
-                      <option>11</option>
-                      <option>12</option>
-                    </select>
-
-                    <select
-                      className="inputmounth"
-                      onChange={(e) => {
-                        // setDestin(e.target.value);
-                      }}
-                    >
-                      <option>yy</option>
-                      <option>2022</option>
-                      <option>2023</option>
-                      <option>2024</option>
-                      <option>2025</option>
-                      <option>2026</option>
-                      <option>2027</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="divcreditCard_three">
-                  <h3>Card verification value</h3>
-                  <div>
-                    <input className="verification" placeholder="number" />
-                    <img src="https://www.talabat.com/images/talabat/cvv_guide.png" />
-                  </div>
-                </div>
-              </div>
+          <div className="divColorMessage">
+            {messageLocation != 'empty' ? (
+              <div className="messageColor">{messageLocation}</div>
             ) : (
               ''
             )}
           </div>
         </div>
 
-        <button
-          onClick={() => {
-            saveAdress(Userinfor.userId)
-            sentUserOrder(Userinfor.userId)
-            setClick('yes')
-            toggleModel()
-          }}
-        >
-          place order
-        </button>
+        <div className="Payment">
+          <div className="PaymentOne">
+            <h2 className="h2_order"> Payment Summary</h2>
+          </div>
+          <div className="Paymentwo">
+            <div className="Paymenttow_tow">
+              <div className="HowPayment">
+                <div>
+                  <input
+                    type="radio"
+                    id="huey1"
+                    name="drone2"
+                    value="huey1"
+                    onChange={(e) => {
+                      setPayment('Visa')
+                      console.log(payment, 'lllll', 'Visa')
+                      settestComplete('true')
+                      //   setPopadress("true")
+                    }}
+                  />
+                  <label for="huey1">Credit Card</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    id="huey2"
+                    name="drone2"
+                    value="huey2"
+                    onChange={(e) => {
+                      setPayment('Cash')
+                      console.log(payment, '22222')
+                      settestComplete('true')
+                      //   setPopadress("false")
+                    }}
+                  />
+                  <label for="huey2">cash</label>
+                </div>
+              </div>
+              <div className="paymentcreditCardOremty">
+                {payment == 'Visa' ? (
+                  <div className="divcreditCard">
+                    <div className="divcreditCard_one">
+                      <h3 className="cartVisah3">Card Number</h3>{' '}
+                      <input
+                        className="inputCardNumber"
+                        placeholder="    -   -  -  -  -   - "
+                      />{' '}
+                    </div>
+
+                    <div className="divcreditCard_two">
+                      <h3 className="cartVisah3">Card expiry date</h3>
+                      <div className="divCreditCard_two_two">
+                        <select
+                          className="inputmounth"
+                          onChange={(e) => {
+                            // setDestin(e.target.value);
+                          }}
+                        >
+                          <option>mm</option>
+                          <option>01</option>
+                          <option>02</option>
+                          <option>03</option>
+                          <option>04</option>
+                          <option>05</option>
+                          <option>06</option>
+                          <option>07</option>
+                          <option>08</option>
+                          <option>09</option>
+                          <option>10</option>
+                          <option>11</option>
+                          <option>12</option>
+                        </select>
+
+                        <select
+                          className="inputmounth"
+                          onChange={(e) => {
+                            // setDestin(e.target.value);
+                          }}
+                        >
+                          <option>yy</option>
+                          <option>2022</option>
+                          <option>2023</option>
+                          <option>2024</option>
+                          <option>2025</option>
+                          <option>2026</option>
+                          <option>2027</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="divcreditCard_three">
+                      <h3 className="cartVisah3">Card verification value</h3>
+                      <div className="divImageeee">
+                        <input className="verification" placeholder="number" />
+                        <img
+                          className="cartimage"
+                          src="https://www.talabat.com/images/talabat/cvv_guide.png"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  ''
+                )}
+              </div>
+            </div>
+            <div className='divDivdiv'>
+
+            <div className='divTotalOrder'>
+              <div className='divdivTotal'><h2 className='h2h2Total'>Subtotal</h2><h3 className='h3h3h3total'>{Userinfor.sumPrice + " JD"}</h3></div>
+              <div className='divdivTotal'><h2 className='h2h2Total'>Delivery fee</h2><h3 className='h3h3h3total'> 0.99 JD</h3></div>
+              <div className='divdivTotal   Tax'  ><h2 className='h2h2Total'>Tax</h2><h3 className='h3h3h3total'> 16 %</h3></div>
+              <div className='divdivTotal'><h2 className='h2h2Total'>Total Amount</h2><h3 className='h3h3h3total'>{Userinfor.sumPrice+(Userinfor.sumPrice*0.16)+1}</h3></div>
+              <div >
+                {' '}
+                <button className='PlaceOrder'
+                  onClick={() => {
+                    saveAdress(Userinfor.userId)
+                    sentUserOrder(Userinfor.userId)
+                    setClick('yes')
+                    toggleModel()
+                  }}
+                >
+                  PLACE ORDER 
+                </button>
+              </div>
+            </div>
+
+            </div>
+           
+          </div>
+        </div>
+
         <div>
           {models && (testComplete == 'false' || popadress == 'false') ? (
             <div
