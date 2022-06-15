@@ -103,6 +103,7 @@
 }
 
 #dash-title-div {
+  position: sticky;
   background-color: rgb(34, 35, 36);
   color: white;
   box-shadow: 2px 2px 2px 2px rgba(11, 11, 11, 0.999);

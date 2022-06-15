@@ -79,7 +79,7 @@ export const LoginForm = () => {
 
   return (
     <div id="login-form-email-password-div">
-     <p id="login-label">login</p> 
+     <p id="login-label">LOGIN</p> 
       <br/>
       {createInput({
         placeholder: "Email",
@@ -133,8 +133,3 @@ export const LoginForm = () => {
     </div>
   );
 };
-//useGoogleLogin
-//useGoogleLogout
-//GoogleLogin
-
-//resturanst

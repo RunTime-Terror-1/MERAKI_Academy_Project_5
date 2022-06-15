@@ -15,7 +15,7 @@ export const SuperAdminPanel = () => {
   });
   
   return (
-    <div style={{ width: "100vw", display: "flex" }}>
+    <div style={{ height:"100%", width: "100vw", display: "flex" }}>
       {hideMenu?<NavigationMenu setIsUsersShown={setIsUsersShown} />:<></>}
       <div style={{ color: "red", width: "100%" }}>
         <NavigationBarPanel setHideMenu={setHideMenu} hideMenu={hideMenu}/>

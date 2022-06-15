@@ -30,6 +30,7 @@
   background-color: rgb(34, 35, 36);
   width: 40vw;
   height: 100vh;
+  max-width: 400px;
   color: white;
   padding: 2px;
 }

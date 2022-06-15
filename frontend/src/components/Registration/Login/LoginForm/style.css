@@ -9,9 +9,7 @@
     background-color: var(--first-color);
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.579);
     width: 500px;
-    background-color: bisque;
     border-radius: 8px;
-   
   }
 
   .input1{
