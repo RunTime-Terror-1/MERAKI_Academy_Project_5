@@ -1,29 +1,43 @@
-import './style.css'
+import "./style.css";
 import React, { useState, useContext } from "react";
-
-import NavBar from '../NavBar';
-
+import NavBar from "../NavBar";
+import { MainNavigationMenu } from "../NavBar/NavigationMenu";
+import joinUs from "../../../assets/images/joinus.png";
 
 const ScreenHome = () => {
 
+  const [showMenu, setShowMenu] = useState(false);
 
-    return (<div className="ScreenHome">
-            {<NavBar/>}
-        <div className="SH_first">
-            <div className="SH_first_One" ><input placeholder="Location" /> <button className='SH_FOne_Button'>let`s go</button></div>
+  return (
+    <div id="homepage-div">
+      {<NavBar setShowMenu={setShowMenu} showMenu={showMenu} />}
+
+      {showMenu ? <MainNavigationMenu setShowMenu={setShowMenu} /> : <></>}
+
+      <div id="welcome-div">
+        <h1>You Can Order Food Online In Jordan</h1>
+        <img src="https://previews.123rf.com/images/gkrphoto/gkrphoto2001/gkrphoto200100155/138448286-mix-of-fast-food-street-dishes-background-with-copy-space-top-view-natural-wooden-background-.jpg" />
+      </div>
+
+      <div id="join-us-div">
+        <h1>
+          Join Us And Grow Your Restaurant Brand With  <span> KHK EATS</span>
+        </h1>
+
+        <div id="inner-join-us-div" >
+          <img src={joinUs} />
+          <div id="inner2-join-us-div">
+            <h3>Become a Partner</h3>
+            <p>
+              Create your restaurant and control its flow, fill more tables and add your employees. Bring all your orders ,meals and restaurant
+              data into one place so you can do what you want.
+            </p>
+            <button>Find More</button>
+          </div>
         </div>
-
-
-        <div className="SH_second">
-            <div className='SH_second_One'><img className="SH_secound_imgOne" src="https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=768,format=auto,quality=50/https://cdn.doordash.com/media/consumer/home/landing/new/ev_fla_wel_alt.jpg"  /></div>
-            <div className="SH_second_Tow"> <h1>Every Flavor Welcome</h1><br/><h2>Best Restaurants in New York City</h2></div>
-            <img src="https://images.deliveryhero.io/image/talabat/restaurants/logo_637776727794264228.jpg?width=115&height=104"/>
-            <img src="https://images.deliveryhero.io/image/talabat/Menuitems/download__T637805154353402633.jpg?width=172&amp;height=172"/>
-        </div>
-
-
+      </div>
     </div>
-    );
+  );
 };
 
 export default ScreenHome;

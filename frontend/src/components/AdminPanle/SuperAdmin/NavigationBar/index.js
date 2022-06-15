@@ -6,7 +6,7 @@ import { AiOutlineMenu } from "react-icons/ai";
 export const NavigationBarPanel = ({setHideMenu ,hideMenu }) => {
   const userArea = ({
     name = "Khaled",
-    imgUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Lionel_Messi_20180626.jpg/347px-Lionel_Messi_20180626.jpg",
+    imgUrl = "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80",
   }) => {
     return (
       <div id="user-img2-div">
