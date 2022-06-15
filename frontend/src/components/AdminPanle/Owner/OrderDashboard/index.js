@@ -18,13 +18,15 @@ export const Orders = () => {
   const [isDeleteDialogShown, setIsDeleteDialogShown] = useState(false);
   const [currentIndex, setCurrentIndex] = useState({});
   const [currentOrder, setCurrentOrder] = useState({});
-  const [showDetails, setShowDetails] = useState({});
+  const [showDetails, setShowDetails] = useState(false);
   const { superAdminPanel, auth } = useSelector((state) => {
     return state;
   });
   const [resId, setResId] = useState(superAdminPanel.restaurants[0].id);
 
   let ordersId = [];
+  const orderMeals = {};
+
   const createButton = ({ onClick, text, state }) => {
     return <button onClick={onClick}>{text}</button>;
   };
@@ -32,7 +34,7 @@ export const Orders = () => {
     return (
       <div className="user-row" key={order.id + order.name + index}>
         <h4>{index + 1}</h4>
-        <h4>{order.name}</h4>
+        <h4>{order.state}</h4>
         <h4>{order.notes}</h4>
         <h4>{order.receipt} $</h4>
         <h4>{superAdminPanel.orders.length} </h4>
@@ -40,7 +42,8 @@ export const Orders = () => {
           {createButton({
             onClick: async () => {
               ordersId = [];
-              setCurrentOrder(order);
+  
+              setCurrentOrder(orderMeals[order.id]);
               setCurrentIndex(index);
               setShowDetails(true);
             },
@@ -137,8 +140,11 @@ export const Orders = () => {
         {superAdminPanel.orders ? (
           superAdminPanel.orders.map((order, index) => {
             if (!ordersId.includes(order.id)) {
+              orderMeals[order.id] = [order];
               ordersId.push(order.id);
               return createRow(order, index);
+            } else {
+              orderMeals[order.id] = [...orderMeals[order.id], order];
             }
           })
         ) : (

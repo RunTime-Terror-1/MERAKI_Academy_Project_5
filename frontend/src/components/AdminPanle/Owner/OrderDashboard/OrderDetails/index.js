@@ -7,21 +7,9 @@ import { ErrorsDiv } from "../../../../Registration/Register/ErrorsDiv";
 import { Registration } from "../../../../../controllers/registration";
 
 export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [gender, setGender] = useState(null);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  let [errors, setErrors] = useState([]);
-
-  const [shift, setShift] = useState("");
-  const [salary, setSalary] = useState("");
-  const [weeklyHours, setWeeklyHours] = useState("");
-  const [restaurant_id, setRestaurant_id] = useState("");
-
   const [isDialogShown, setIsDialogShown] = useState("");
   const dispatch = useDispatch();
-
+  let total = 0;
   const { auth, superAdminPanel } = useSelector((state) => {
     return state;
   });
@@ -43,66 +31,7 @@ export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
       </div>
     );
   };
-  const createInput = ({ placeholder, setState, type = "text", key = "" }) => {
-    return (
-      <div>
-        <input
-          type={type}
-          placeholder={placeholder}
-          min={1}
-          onChange={(e) => {
-            setErrors(
-              Registration.removeErrors({
-                isLoginForm: false,
-                key: key,
-                value: e.target.value,
-                errors,
-              })
-            );
-            setState(e.target.value);
-          }}
-          className="input"
-        />
-      </div>
-    );
-  };
 
-  const createEmployee = async () => {
-    const employee = {
-      firstName,
-      lastName,
-      password,
-      gender,
-      email,
-      shift,
-      salary: salary + "$",
-      restaurant_id,
-      weeklyHours,
-      token: auth.token,
-    };
-    const inputForm = {
-      FirstName: `${firstName} `,
-      LastName: ` ${lastName}`,
-      Email: email,
-      Password: password,
-      Gender: gender,
-    };
-
-    errors = Registration.checkFormErrors({
-      isLoginForm: false,
-      inputForm: inputForm,
-    });
-    if (errors.length === 0) {
-      const { serverError } = await Owner.createEmployee({ ...employee });
-      if (serverError === "Email already taken") {
-        setErrors([...errors, "Email already taken"]);
-      } else {
-        setIsDialogShown(true);
-      }
-    } else {
-      setErrors(errors);
-    }
-  };
   return (
     <div id="signup-form">
       {isDialogShown ? (
@@ -128,11 +57,39 @@ export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
 
         <h1>ORDER DETAILS</h1>
         <hr />
+        <div id="dash-title-div" className="meal-row">
+          <h5>#</h5>
+          <h5>Meal Name</h5>
+          <h5>QUANTITY</h5>
+          <h5>Price</h5>
+        </div>
+        {currentOrder.map((meal, index) => {
+          total = total + meal.quantity * meal.price;
+          return (
+            <div>
+              <div className="meal-row1">
+                <h5>{index + 1}</h5>
+                <h5>{meal.name}</h5>
+                <h5>{meal.quantity}</h5>
+                <h5>{meal.price} $</h5>
+              </div>
+            </div>
+          );
+        })}
 
-        
-        
+        <div id="dash-title-div" className="meal-row">
+          <h5>BUILDING #</h5>
+          <h5>CITY</h5>
+          <h5>PHONE</h5>
+          <h5>TOTAL</h5>
+        </div>
+        <div className="meal-row1">
+          <h5>{currentOrder[0].buldingNumber}</h5>
 
-       
+          <h5>{currentOrder[0].city}</h5>
+          <h5>{currentOrder[0].notes}</h5>
+          <h5>{total} $</h5>
+        </div>
       </div>
     </div>
   );
