@@ -7,6 +7,7 @@ import RestaurantPage from "./components/UserScreen/RestaurantPage";
 import { LoginComponent } from "./components/Registration/Login";
 import { OwnerPanel } from "./components/AdminPanle/Owner";
 import CompleteOrder from "./components/UserScreen/YourCart/CompleteOrder";
+import SortResturant from "./components/UserScreen/SortResturant";
 
 
 
@@ -23,7 +24,7 @@ const App = () => {
         <Route path={"/AllRestarnts"} element={<AllRestarnts />} />
         <Route path={"/RestaurantPage"} element={<RestaurantPage />} />
         <Route path={"/login"} element={<LoginComponent />} />
-    
+        <Route path={"/SortResturants"} element={<SortResturant />} />
         <Route path={"/CompleteOrder"} element={<CompleteOrder />} />
     
   

@@ -6,7 +6,8 @@ import Counter from "./Counter";
 import { useNavigate } from "react-router-dom";
 import { setsumPriceUser } from "../../../redux/reducers/User";
 
-const YourCart = ({ name }) => {
+
+const YourCart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -31,7 +32,7 @@ const YourCart = ({ name }) => {
     Userinfor.islogin == true ? navigate("/CompleteOrder") : navigate("/Login");
   };
 
-  console.log(name);
+
   return (
     <div className="YourCartinRest">
       {Userinfor.yourCart !== 0 && Userinfor.yourCart.length ? (

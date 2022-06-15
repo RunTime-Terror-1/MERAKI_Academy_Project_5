@@ -16,7 +16,7 @@ const Counter = ({ element }) => {
 
     const [realPrice, setrealPrice] = useState(element.price)
 
-    console.log(element.id, "item13")
+    // console.log(element.id, "item13")
     // console.log(index, "55index")
     const dispatch = useDispatch();
 
@@ -28,8 +28,8 @@ const Counter = ({ element }) => {
             yourTotal: state.User.total,
         }
     })
-    console.log(Userinfor.yourCart, "cart cart")
-    console.log(Userinfor.yourPrice, "Price Price ")
+    // console.log(Userinfor.yourCart, "cart cart")
+    // console.log(Userinfor.yourPrice, "Price Price ")
     //!..............................
 
 
@@ -61,7 +61,7 @@ const Counter = ({ element }) => {
 
                     onClick={() => {
                         prevPrice()
-                        dispatch(setPrice({ price: (realPrice * priceNumber) - realPrice, indexitem: element.id,priceOne:realPrice,name:element.name }));
+                        dispatch(setPrice({ price: (realPrice * priceNumber) - realPrice, indexitem: element.id,priceOne:realPrice,name:element.name,  restaurantid:element.restaurant_id }));
                         dispatch(setTotal({ opr: "-", value: realPrice }));
                     }}
                 />
