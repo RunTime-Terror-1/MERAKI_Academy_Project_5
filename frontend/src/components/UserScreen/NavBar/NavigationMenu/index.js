@@ -9,7 +9,7 @@ import { setRequests, setUsers } from "../../../../redux/reducers/superAdmin";
 import { AiOutlineMenu, AiOutlineMail } from "react-icons/ai";
 import { IoMdLogIn } from "react-icons/io";
 import { VscFeedback } from "react-icons/vsc";
-import {BiDetail } from "react-icons/bi";
+import { BiDetail } from "react-icons/bi";
 
 //FcFeedback
 export const MainNavigationMenu = ({ setShowMenu }) => {
@@ -55,24 +55,12 @@ export const MainNavigationMenu = ({ setShowMenu }) => {
         {menuButton({
           text: "Sign up",
           icon: <HiUsers />,
-          onClick: async () => {
-            const { users } = await SuperAdmin.getAllUsers({
-              token: auth.token,
-            });
-            setShowMenu(0);
-            dispatch(setUsers(users));
-          },
+          onClick: async () => {},
         })}
         {menuButton({
           text: "Login",
           icon: <IoMdLogIn />,
-          onClick: async () => {
-            const { requests } = await SuperAdmin.getAllRequests({
-              token: auth.token,
-            });
-            setShowMenu(1);
-            dispatch(setRequests(requests));
-          },
+          onClick: async () => {},
         })}
         <div id="user-management-div">
           <h4>JOIN US</h4>
@@ -80,13 +68,7 @@ export const MainNavigationMenu = ({ setShowMenu }) => {
         {menuButton({
           text: "Create Your Restaurant",
           icon: <MdFastfood />,
-          onClick: async () => {
-            const { restaurants } = await SuperAdmin.getAllRestaurants({
-              token: auth.token,
-            });
-            setShowMenu(2);
-            dispatch(setRequests(restaurants));
-          },
+          onClick: async () => {},
         })}
         <div id="user-management-div">
           <h4>ABOUT</h4>
@@ -94,35 +76,17 @@ export const MainNavigationMenu = ({ setShowMenu }) => {
         {menuButton({
           text: "Contact US",
           icon: <AiOutlineMail />,
-          onClick: async () => {
-            const { restaurants } = await SuperAdmin.getAllRestaurants({
-              token: auth.token,
-            });
-            setShowMenu(2);
-            dispatch(setRequests(restaurants));
-          },
+          onClick: async () => {},
         })}
         {menuButton({
           text: "Feedback",
           icon: <VscFeedback />,
-          onClick: async () => {
-            const { restaurants } = await SuperAdmin.getAllRestaurants({
-              token: auth.token,
-            });
-            setShowMenu(2);
-            dispatch(setRequests(restaurants));
-          },
+          onClick: async () => {},
         })}
         {menuButton({
           text: "About",
           icon: <BiDetail />,
-          onClick: async () => {
-            const { restaurants } = await SuperAdmin.getAllRestaurants({
-              token: auth.token,
-            });
-            setShowMenu(2);
-            dispatch(setRequests(restaurants));
-          },
+          onClick: async () => {},
         })}
         {/* <button id="logout-btn">
         <div id="logout-div">
