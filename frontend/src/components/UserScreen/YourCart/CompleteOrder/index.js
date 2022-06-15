@@ -26,8 +26,11 @@ const CompleteOrder = () => {
   const [payment, setPayment] = useState('Cash')
   const [testComplete, settestComplete] = useState('false')
   const [models, setmodels] = useState(false)
-
+  const [popadress, setPopadress] = useState('false')
   const [clickValue, setClick] = useState('No')
+
+  const [pymentMethod, setPaymentMethod] = useState('empty')
+
   //!.....................................
   let testadress = 'false'
   //!.............
@@ -45,22 +48,22 @@ const CompleteOrder = () => {
     }
   })
 
-//   console.log(Userinfor.yourPrice, 'YourPrice fff  complete')
+  //   console.log(Userinfor.yourPrice, 'YourPrice fff  complete')
   //!..............................
 
-//   console.log(Userinfor.userId, 'Yourid   complete')
+  //   console.log(Userinfor.userId, 'Yourid   complete')
 
   //!..................Functions.............................................
 
   const saveAdress = async (id) => {
-    if(messageLocation=="good"){
-        const adress = await User.UpdateAdress({
-            userid: id,
-            city: Area,
-            buldingNumber: buildingNumber,
-            street: street,
-            notes: Phone,
-          })
+    if (messageLocation == 'good') {
+      const adress = await User.UpdateAdress({
+        userid: id,
+        city: Area,
+        buldingNumber: buildingNumber,
+        street: street,
+        notes: Phone,
+      })
     }
   }
 
@@ -70,7 +73,7 @@ const CompleteOrder = () => {
     const pastadess = await User.getaddrssByuserTd({ userid })
 
     if (pastadess.result[0].street != null) {
-    //   console.log('nulllll')
+      //   console.log('nulllll')
       testadress = 'true'
       settrue('true')
     }
@@ -80,8 +83,10 @@ const CompleteOrder = () => {
   const pastmessage = () => {
     if (truevalue == 'false') {
       setMessage('sorry not have past location please enter')
+      setPopadress('false')
     } else {
       setMessage('good')
+      setPopadress('true')
     }
   }
   //!........................................................
@@ -115,20 +120,22 @@ const CompleteOrder = () => {
   const sentUserOrder = async (id) => {
     // console.log(Userinfor.sumPrice,"114")
     // console.log( Userinfor.yourPrice[0].restaurant,"114")
-    const userOrder = await User.sentOrder({
-      userid: id,
-      state: "progess",
-      receipt: Userinfor.sumPrice,
-      resturantId: Userinfor.yourPrice[0].restaurant,
-      mealarray: Userinfor.yourPrice,
-    })
+    if (testComplete == 'true' && messageLocation == 'good') {
+      console.log('sentOrder')
+      const userOrder = await User.sentOrder({
+        userid: id,
+        state: 'progess',
+        receipt: Userinfor.sumPrice,
+        resturantId: Userinfor.yourPrice[0].restaurant,
+        mealarray: Userinfor.yourPrice,
+      })
+    }
   }
 
   //!...............................................................
   useEffect(() => {
     getAdress(localStorage.getItem('userid'))
   }, [])
-
 
   //!...............................................................
   return (
@@ -141,65 +148,76 @@ const CompleteOrder = () => {
             <h2 className="h2_order">Order Summary</h2>
           </div>
           <div className="orderinformation">
-            <h1>{Userinfor.name}</h1>
-            <div className="title">
+            <h1 className="restaauranttName">{Userinfor.name}</h1>
+            <div className="orderinformationtwo">
               <h2 className="items">items</h2>
               <div className="title_tow">
-                <h2> quantity</h2>
-                <h2> Price</h2>
+                <h2 className="h2"> quantity</h2>
+                <h2 className="h2"> Price</h2>
 
-                <h2>Total</h2>
+                <h2 className="h2">Total</h2>
               </div>
             </div>
-            <div className="mealItems">
-              {Userinfor.yourPrice
-                ? Userinfor.yourPrice.map((element, index) => {
-                    return (
-                      <div className="div_return_map" keys={index}>
-                        <h3 className="NameMeal">{element.name}</h3>
-                        <div className="insted__div_return_map">
-                          <div className="h3_Qun">
-                            {element.price / element.priceOne}
-                          </div>
-                          <div className="h3_Pri">{element.priceOne}</div>
-                          <div className="h3_totprice">
-                            {(element.price / element.priceOne) *
-                              element.priceOne +
-                              '  JD'}
+            <div className="orderinformationthree">
+              {/* {' '} */}
+              <div className="mealItems">
+                {Userinfor.yourPrice
+                  ? Userinfor.yourPrice.map((element, index) => {
+                      return (
+                        <div className="div_return_map" keys={index}>
+                          <h3 className="NameMeal">{element.name}</h3>
+                          <div className="insted__div_return_map">
+                            <div className="h3_Qun">
+                              {element.price / element.priceOne}
+                            </div>
+                            <div className="h3_Pri">
+                              {element.priceOne + ' JD'}
+                            </div>
+                            <div className="h3_totprice">
+                              {(element.price / element.priceOne) *
+                                element.priceOne +
+                                '  JD'}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    )
-                  })
-                : ''}
+                      )
+                    })
+                  : ''}
+              </div>{' '}
             </div>
-            <div className="sumprice">total:{Userinfor.sumPrice}</div>
+
+            {/* <div className="sumprice">total:{Userinfor.sumPrice}</div> */}
           </div>
         </div>
         <div className="location">
           <div className="inputLocation">
+            <h2 className="h2_order">Enter a new site</h2>
             <div className="cityandarea">
               <input
+                className="inputtag"
                 placeholder="City"
                 onChange={(e) => {
                   setCity(e.target.value)
                 }}
               />
               <input
+                className="inputtag"
                 placeholder="Area"
                 onChange={(e) => {
                   setArea(e.target.value)
                 }}
               />
             </div>
-            <div className="bulidingandStreet">
+            <div className="cityandarea">
               <input
+                className="inputtag"
                 placeholder="buldingNumber"
                 onChange={(e) => {
                   setBuilding(e.target.value)
                 }}
               />
               <input
+                className="inputtag"
                 placeholder="stretNumber"
                 onChange={(e) => {
                   setstreet(e.target.value)
@@ -236,20 +254,21 @@ const CompleteOrder = () => {
                 </div>
               </div>
             ) : (
-              <div>
+              <div className='divimageee'>
+                <h2 className="pastlocationmessage">You dont have a previous site ..</h2>
                 <img
-                  className="imgadress"
+                  className="imgadresss"
                   src="http://cdn.onlinewebfonts.com/svg/img_554287.png"
                 />
-                <h1>fff</h1>
               </div>
             )}
           </div>
         </div>
 
         <div className="selelctadresss">
-          <div>
-            <input
+            <h2 className='h2_order'  >Select Address</h2>
+          <div className='divnewAdress'>
+            <input className='inputSelect'
               type="radio"
               id="huey"
               name="drone"
@@ -257,11 +276,11 @@ const CompleteOrder = () => {
                 newmessage()
               }}
             />
-            <label for="huey">new</label>
+            <label for="huey">new address</label>
           </div>
 
           <div>
-            <input
+            <input className='inputSelect'
               type="radio"
               id="huey"
               name="drone"
@@ -269,7 +288,7 @@ const CompleteOrder = () => {
                 pastmessage()
               }}
             />
-            <label for="huey">Past</label>
+            <label for="huey">Past address</label>
           </div>
 
           <div>
@@ -279,6 +298,8 @@ const CompleteOrder = () => {
 
         <div className="Payment">
           <div className="HowPayment">
+
+         
             <div>
               <input
                 type="radio"
@@ -289,6 +310,7 @@ const CompleteOrder = () => {
                   setPayment('Visa')
                   console.log(payment, 'lllll', 'Visa')
                   settestComplete('true')
+                  //   setPopadress("true")
                 }}
               />
               <label for="huey1">Credit Card</label>
@@ -303,6 +325,7 @@ const CompleteOrder = () => {
                   setPayment('Cash')
                   console.log(payment, '22222')
                   settestComplete('true')
+                  //   setPopadress("false")
                 }}
               />
               <label for="huey2">cash</label>
@@ -382,7 +405,7 @@ const CompleteOrder = () => {
           place order
         </button>
         <div>
-          {models == true ? (
+          {models && (testComplete == 'false' || popadress == 'false') ? (
             <div
               className="instedModel"
               onClick={() => {
