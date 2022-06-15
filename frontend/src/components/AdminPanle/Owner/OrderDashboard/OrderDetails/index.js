@@ -44,7 +44,7 @@ export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
       ) : (
         <></>
       )}
-      <div id="signup-form-inner">
+      <div id="order-inner">
         <div id="signup--exit-button">
           <button
             onClick={() => {
@@ -57,7 +57,7 @@ export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
 
         <h1>ORDER DETAILS</h1>
         <hr />
-        <div id="dash-title-div" className="meal-row">
+        <div id="title-div1" className="meal-row">
           <h5>#</h5>
           <h5>Meal Name</h5>
           <h5>QUANTITY</h5>
@@ -77,7 +77,7 @@ export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
           );
         })}
 
-        <div id="dash-title-div" className="meal-row">
+        <div id="title-div1" className="meal-row">
           <h5>BUILDING #</h5>
           <h5>CITY</h5>
           <h5>PHONE</h5>
@@ -85,12 +85,16 @@ export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
         </div>
         <div className="meal-row1">
           <h5>{currentOrder[0].buldingNumber}</h5>
-
           <h5>{currentOrder[0].city}</h5>
           <h5>{currentOrder[0].notes}</h5>
           <h5>{total} $</h5>
         </div>
+        <div id = "order-btn">
+        <button>Accept Order</button>
+        <button>Reject Order</button>
       </div>
+      </div>
+     
     </div>
   );
 };
