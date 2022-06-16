@@ -114,6 +114,7 @@ export const UserSlice = createSlice({
 
     //!......................................................................
     setidUser: (state, action) => {
+      //khs
       state.userId = action.payload.userId;
       localStorage.setItem("userid", action.payload.userId);
     },

@@ -29,6 +29,7 @@ const NavBar = () => {
       <div
         className="results-search-div"
         onClick={async () => {
+          //kha
           await localStorage.setItem("restaurantId", restaurant.id);
           dispatch(setrestaurantId({ restId: restaurant.id }));
           dispatch(setSearchRestaurant([]));

@@ -220,7 +220,6 @@ const AllRestarnts = () => {
             {restaurants
               ? restaurants.map((elemnt, index) => {
                   if (index >= number && index < numbertow) {
-                    console.log("dfdfdfd");
                     return (
                       <div
                         className="All_B_eachRestarant"
