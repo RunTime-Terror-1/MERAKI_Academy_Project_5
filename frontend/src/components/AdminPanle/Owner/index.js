@@ -24,12 +24,12 @@ export const OwnerPanel = () => {
 
   useEffect(() => {
     (async () => {
-      User.roleId = await JSON.parse("user").roleId;
+      User.roleId = await JSON.parse(localStorage.getItem("user")).roleId;
       if (User.roleId == "2") {
         const { restaurants } = await Owner.getOwnerRestaurants({
           token: auth.token,
         });
-        console.log(restaurants);
+      
         dispatch(setRestaurants(restaurants));
         setIsUsersShown(2);
       } else {

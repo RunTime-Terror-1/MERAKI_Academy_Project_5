@@ -120,12 +120,10 @@ const updateOrderState = (req, res) => {
 const deleteOrder = (req, res) => {
   const orderId = req.params.orderId;
   const query = `UPDATE orders SET is_deleted=1 WHERE id=?;`;
-  console.log(orderId);
 
   const data = [orderId];
   connection.query(query, data, (err, result) => {
     if (err) {
-      console.log(err.message);
       return res.status(500).json({
         success: false,
         massage: "Server Error",
@@ -198,11 +196,10 @@ const getAllMeals = (req, res) => {
 
 const getEmployeeRestaurant = (req, res) => {
   const Employee_id = req.token.userId;
-  const query = "SELECT  EM.restaurant_id,RS.name,RS.id  FROM employees EM INNER JOIN restaurants RS ON  EM.user_id=? AND RS.id=EM.restaurant_id ";
+  const query =
+    "SELECT  EM.restaurant_id,RS.name,RS.id  FROM employees EM INNER JOIN restaurants RS ON  EM.user_id=? AND RS.id=EM.restaurant_id ";
   connection.query(query, [Employee_id], (err, restaurants) => {
-  
     if (err) {
-      console.log(err.message);
       return res.status(500).json({
         success: false,
         massage: "Server Error",
@@ -234,5 +231,4 @@ module.exports = {
   updateOrderState,
   deleteOrder,
   getEmployeeRestaurant,
-
 };

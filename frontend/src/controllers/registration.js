@@ -16,7 +16,6 @@ export class Registration {
     }
   }
   static async register({ firstName, lastName, email, password, gender, role = 1 }) {
-   console.log(firstName, lastName, email, password, gender,role);
     try {
       const user = {
         firstName,

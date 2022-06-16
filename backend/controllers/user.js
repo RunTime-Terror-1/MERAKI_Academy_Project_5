@@ -21,7 +21,6 @@ const getAllRestaurants = (req, res) => {
 //! ...........END   getAllRestaurants .......................
 
 const getRestaurantByName = (req, res) => {
-
   const restaurantName = req.params.name;
   const query = `SELECT * FROM restaurants WHERE name=?;`;
   const data = [restaurantName];
@@ -166,10 +165,9 @@ const deleteMealFromCart = (req, res) => {
 
 const senOrder = (req, res) => {
   const user_id = req.params.userId;
-  const {state, receipt ,resturantId,mealarray,Quntity} = req.body
+  const { state, receipt, resturantId, mealarray: mealArray, Quntity } = req.body;
   const query = `INSERT INTO orders(quantity,state,receipt,restaurant_id,user_id) VALUES (?,?,?,?,?);`;
-  const data = [Quntity,state, receipt,resturantId ,user_id ];
-
+  const data = [Quntity, state, receipt, resturantId, user_id];
   connection.query(query, data, (err, result) => {
     if (err) {
       return res.status(500).json({
@@ -178,22 +176,19 @@ const senOrder = (req, res) => {
         err: err,
       });
     }
-   
     if (result) {
-      let A = mealarray.map((element, index) => {
+      mealArray.map((element, index) => {
         let quantity = element.price / element.priceOne;
-        let mealid = element.id;
+        let mealId = element.id;
         const orderMeal = `INSERT INTO orders_meals (quantity,order_id,meal_id) VALUES (?,?,?)`;
-        const data = [quantity, result.insertId, mealid];
+        const data = [quantity, result.insertId, mealId];
         connection.query(orderMeal, data, (err, re3) => {
           if (err) {
             return res.status(500).json({
               success: false,
               message: err,
-            })};
-        
             });
-         
+          }
         });
       });
     }
