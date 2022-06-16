@@ -253,8 +253,13 @@ const AllRestarnts = () => {
 
           <div className="NextAndPervrs">
             <button   onClick={() => {
-                setNumber(number-12);
-                setNumbertow(numbertow-12)
+                   if(number==0){
+                    setNumber(number);
+                    setNumbertow(numbertow)
+                   }else{
+                    setNumber(number-12);
+                    setNumbertow(numbertow-12)
+                   }
                     if(pageNumber==1){
                       setpageNumber(1)
                     }else{
