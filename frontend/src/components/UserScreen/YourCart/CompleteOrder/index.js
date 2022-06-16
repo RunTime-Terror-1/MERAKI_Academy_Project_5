@@ -49,11 +49,11 @@ const CompleteOrder = () => {
     }
   })
 
-    console.log(Userinfor.yourPrice, 'YourPrice fff  complete')
+    // console.log(Userinfor.yourPrice, 'YourPrice fff  complete')
   //!..............................
 
   //   console.log(Userinfor.userId, 'Yourid   complete')
-    console.log(Userinfor.sumItems, 'Yourid  SumSumSum complete')
+    // console.log(Userinfor.sumItems, 'Yourid  SumSumSum complete')
 
   //!..................Functions.............................................
 
