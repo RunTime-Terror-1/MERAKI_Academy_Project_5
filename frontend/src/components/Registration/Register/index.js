@@ -86,7 +86,7 @@ export const RegisterComponent = ({
         email,
         password,
         gender,
-        role: superAdminRegister ? role : 1,
+        role: superAdminRegister ? role : 4,
       });
 
       if (serverError === "Email already taken") {
