@@ -254,12 +254,15 @@ const AllRestarnts = () => {
           <div className="NextAndPervrs">
             <button   onClick={() => {
                    if(number==0){
-                    setNumber(number);
-                    setNumbertow(numbertow)
+                    setNumber(0);
+                    setNumbertow(12)
+                    console.log("One")
                    }else{
                     setNumber(number-12);
                     setNumbertow(numbertow-12)
                    }
+                  //  setNumber(number-12);
+                  //  setNumbertow(numbertow-12)
                     if(pageNumber==1){
                       setpageNumber(1)
                     }else{
@@ -271,8 +274,11 @@ const AllRestarnts = () => {
             <h2>/{showNumber}</h2>
             <button
               onClick={() => {
-                setNumber(12);
+                setNumber(number+12);
                 setNumbertow(numbertow+12)
+                  // if(numbertow>restaurants.length)
+                  
+
                 if(showNumber==pageNumber){
                   setpageNumber(showNumber)
                 }else{
