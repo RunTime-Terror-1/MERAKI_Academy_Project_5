@@ -23,13 +23,15 @@
     /* background-color: darkorchid; */
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 50px;
 }
 .Continer_A{
     display: flex;
     flex-direction: row;
     gap: 30px;
     text-align: start;
+    /* border-bottom: 4px solid var(--second-color);; */
+    border-bottom: 3px solid rgb(253,222,98);
 }
 .Continer_A_A{
     display: flex;
