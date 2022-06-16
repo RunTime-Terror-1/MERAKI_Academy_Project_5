@@ -8,17 +8,17 @@ import { LoginComponent } from "../../Registration/Login";
 
 const ScreenHome = () => {
   const dispatch = useDispatch()
-  const {auth} = useSelector((state)=>{
+  const {auth,User} = useSelector((state)=>{
     return state;
   })
   const [showMenu, setShowMenu] = useState(false);
 
   return (
     <div id="homepage-div">
-      {<NavBar setShowMenu={setShowMenu} showMenu={showMenu} />}
+      {<NavBar />}
         {auth.showLoginForm?<LoginComponent/>:<></>}
 
-      {showMenu ? <MainNavigationMenu setShowMenu={setShowMenu} /> : <></>}
+     
 
       <div id="welcome-div">
         <h1>You Can Order Food Online In Jordan</h1>

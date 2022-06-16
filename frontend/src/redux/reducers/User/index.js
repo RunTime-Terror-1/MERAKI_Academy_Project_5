@@ -10,6 +10,7 @@ export const UserSlice = createSlice({
     restaurants: [],
     total: 0,
     sumpriceUser: 0,
+    showMenu: false,
     name: "",
     userId: "",
     restaurantIdId: localStorage.getItem("restaurantId") || "",
@@ -124,6 +125,11 @@ export const UserSlice = createSlice({
     setSearchRestaurant: (state, action) => {
       state.searchRestaurants = action.payload;
     },
+    //!......................................................................
+    setIsShowMenu: (state, action) => {
+      state.showMenu = !state.showMenu;
+    },
+   
   },
 });
 
@@ -137,7 +143,9 @@ export const {
   setidUser,
   setrestaurantId,
   setRestaurants,
-  setSearchRestaurant
+  setIsShowMenu,
+  setSearchRestaurant,
+  
 } = UserSlice.actions;
 
 export default UserSlice.reducer;
