@@ -25,6 +25,7 @@ export const RegisterComponent = ({
   const { auth } = useSelector((state) => {
     return state;
   });
+  
   const buildAlertDialog = ({ bgColor, color, text, text2 }) => {
     setTimeout(() => {
       setIsDialogShown(false);

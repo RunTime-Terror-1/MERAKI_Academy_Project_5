@@ -14,16 +14,18 @@ import {
   setlogout,
   setShowLoginForm,
 } from "../../../../redux/reducers/auth";
+import { Navigate, useNavigate } from "react-router-dom";
+import { setIsShowMenu } from "../../../../redux/reducers/User";
 
-export const logOut = async ({dispatch}) => {
-  
+export const logOut = async ({ dispatch }) => {
   await localStorage.setItem("token", "");
-  dispatch(setlogout(""))
+  dispatch(setlogout(""));
 };
 
 //FcFeedback
-export const MainNavigationMenu = ({ setShowMenu }) => {
+export const MainNavigationMenu = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { superAdminPanel, auth } = useSelector((state) => {
     return state;
   });
@@ -54,7 +56,7 @@ export const MainNavigationMenu = ({ setShowMenu }) => {
         <div id="main-title-nav-bar">
           <AiOutlineMenu
             onClick={() => {
-              setShowMenu(false);
+              dispatch(setIsShowMenu());
             }}
           />
         </div>
@@ -77,6 +79,7 @@ export const MainNavigationMenu = ({ setShowMenu }) => {
               onClick: async () => {
                 dispatch(setShowLoginForm(true));
                 dispatch(setIsSignUpFormShown());
+                dispatch(setIsShowMenu());
               },
             })}
             {menuButton({
@@ -84,6 +87,7 @@ export const MainNavigationMenu = ({ setShowMenu }) => {
               icon: <IoMdLogIn />,
               onClick: async () => {
                 dispatch(setShowLoginForm(true));
+                dispatch(setIsShowMenu());
               },
             })}
           </div>
@@ -95,20 +99,22 @@ export const MainNavigationMenu = ({ setShowMenu }) => {
         {menuButton({
           text: "Create Your Restaurant",
           icon: <MdFastfood />,
-          onClick: async () => {},
+          onClick: async () => {
+            navigate("/joinUs",{ state:true});
+            dispatch(setIsShowMenu());
+          },
         })}
         <div id="user-management-div">
           <h4>ABOUT</h4>
         </div>
-        {menuButton({
-          text: "Contact US",
-          icon: <AiOutlineMail />,
-          onClick: async () => {},
-        })}
+       
         {menuButton({
           text: "Feedback",
           icon: <VscFeedback />,
-          onClick: async () => {},
+          onClick: async () => {
+            navigate("/joinUs",{ state:false});
+            dispatch(setIsShowMenu());
+          },
         })}
         {menuButton({
           text: "About",
@@ -116,7 +122,12 @@ export const MainNavigationMenu = ({ setShowMenu }) => {
           onClick: async () => {},
         })}
         {auth.isLoggedIn ? (
-          <button onClick={()=>{logOut({dispatch})}} id="logout-btn1">
+          <button
+            onClick={() => {
+              logOut({ dispatch });
+            }}
+            id="logout-btn1"
+          >
             <div id="logout-div1">
               <BiLogOut />
               <h4>LogOut</h4>

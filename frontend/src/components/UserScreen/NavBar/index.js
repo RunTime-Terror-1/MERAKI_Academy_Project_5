@@ -1,18 +1,17 @@
 import "./style.css";
-import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
 import { BiLogOut } from "react-icons/bi";
 import { setShowLoginForm } from "../../../redux/reducers/auth";
-import { CreateRestaurant } from "../../AdminPanle/Owner/RequestsDashboard/CreateRestaurant";
 import {
   setrestaurantId,
   setSearchRestaurant,
+  setIsShowMenu
 } from "../../../redux/reducers/User";
 import { logOut } from "./NavigationMenu";
 
-const NavBar = ({ showMenu, setShowMenu }) => {
+const NavBar = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -60,7 +59,8 @@ const NavBar = ({ showMenu, setShowMenu }) => {
         <AiOutlineMenu
           className="main-menu-btn"
           onClick={() => {
-            setShowMenu(!showMenu);
+            console.log("SAdsad");
+            dispatch( setIsShowMenu());
           }}
         />
         <a href="http://localhost:3000/">
@@ -99,7 +99,7 @@ const NavBar = ({ showMenu, setShowMenu }) => {
         {auth.isLoggedIn ? (
           <button
             onClick={() => {
-              logOut({dispatch});
+              logOut({ dispatch });
             }}
           >
             <div style={{ display: "flex", gap: "2px" }}>
