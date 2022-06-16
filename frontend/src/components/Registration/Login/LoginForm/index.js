@@ -12,6 +12,7 @@ import {
 
 import { setidUser } from "../../../../redux/reducers/User";
 import { FcGoogle } from "react-icons/fc";
+import { User } from "../../../../controllers/user";
 export const LoginForm = () => {
   const dispatch = useDispatch();
   const { auth } = useSelector((state) => {
@@ -61,7 +62,11 @@ export const LoginForm = () => {
         email,
         password,
       });
-
+      console.log( response);
+      User.id = response.userId;
+      User.userName = response.userName;
+      User.imgUrl = response.imgUrl;
+      User.roleId = response.roleId;
       dispatch(setidUser({ userId: response.userId }));
 
       dispatch(setlogin(response.token));
@@ -69,6 +74,17 @@ export const LoginForm = () => {
         setErrors([...errors, response.message]);
       } else {
         dispatch(setShowLoginForm());
+        switch (User.roleId) {
+          case 1:
+            navigate("/superAdminPanel");
+            break;
+          case 4:
+            navigate("/");
+            break;
+          default:
+            navigate("/ownerPanel");
+            break;
+        }
       }
     } else {
       setErrors(errors);

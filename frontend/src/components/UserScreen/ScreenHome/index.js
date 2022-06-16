@@ -53,7 +53,7 @@ const ScreenHome = () => {
         <div id="inner-join-us-div">
           <img src={about} />
           <div id="inner2-join-us-div">
-            <h1>We Are <span style={{fontSize:"25px"}}> KHK EATS</span> </h1>
+            <h1>We Are KHK<span style={{fontSize:"25px"}}>EATS</span> </h1>
             <p >
               At KHK EATS, we want to provide a chance for you to search for a restaurant and get the food you love delivered.In addition to 
               that you can create your Own restaurant and be one of our family . We aim to make all restaurants data in Jordan available for all people inside or outside Jordan

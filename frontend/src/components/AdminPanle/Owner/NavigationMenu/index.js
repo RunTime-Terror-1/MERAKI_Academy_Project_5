@@ -14,6 +14,7 @@ import {
 } from "../../../../redux/reducers/superAdmin";
 import { Owner } from "../../../../controllers/owner";
 import { Employee } from "../../../../controllers/employee";
+import { User } from "../../../../controllers/user";
 
 export const NavigationMenu = ({ setIsUsersShown }) => {
   const dispatch = useDispatch();
@@ -52,40 +53,50 @@ export const NavigationMenu = ({ setIsUsersShown }) => {
         <h2>UMS</h2>
       </div>
       {userArea({})}
-      <div id="user-management-div">
-        <h4>User Management</h4>
-      </div>
-      {menuButton({
-        text: "Employee",
-        icon: <HiUsers />,
-        onClick: async () => {
-          const { users } = await Owner.getAllEmployee({ token: auth.token });
-          setIsUsersShown(0);
-          dispatch(setUsers(users));
-        },
-      })}
-      {menuButton({
-        text: "Requests",
-        icon: <BiGitPullRequest />,
-        onClick: async () => {
-          const { requests } = await Owner.getOwnerRequests({
-            token: auth.token,
-          });
-          setIsUsersShown(1);
-          dispatch(setRequests(requests));
-        },
-      })}
-      {menuButton({
-        text: "My Restaurants",
-        icon: <MdFastfood />,
-        onClick: async () => {
-          const { restaurants } = await Owner.getOwnerRestaurants({
-            token: auth.token,
-          });
-          setIsUsersShown(2);
-          dispatch(setRestaurants(restaurants));
-        },
-      })}
+
+      {User.roleId === "2" ? (
+        <div>
+          <div id="user-management-div">
+            <h4>User Management</h4>
+          </div>
+          {menuButton({
+            text: "Employee",
+            icon: <HiUsers />,
+            onClick: async () => {
+              const { users } = await Owner.getAllEmployee({
+                token: auth.token,
+              });
+              setIsUsersShown(0);
+              dispatch(setUsers(users));
+            },
+          })}
+          {menuButton({
+            text: "Requests",
+            icon: <BiGitPullRequest />,
+            onClick: async () => {
+              const { requests } = await Owner.getOwnerRequests({
+                token: auth.token,
+              });
+              setIsUsersShown(1);
+              dispatch(setRequests(requests));
+            },
+          })}
+          {menuButton({
+            text: "My Restaurants",
+            icon: <MdFastfood />,
+            onClick: async () => {
+              const { restaurants } = await Owner.getOwnerRestaurants({
+                token: auth.token,
+              });
+              setIsUsersShown(2);
+              dispatch(setRestaurants(restaurants));
+            },
+          })}
+        </div>
+      ) : (
+        <></>
+      )}
+
       <div id="user-management-div">
         <h4>Restaurant Management</h4>
       </div>
@@ -93,12 +104,13 @@ export const NavigationMenu = ({ setIsUsersShown }) => {
         text: "Orders",
         icon: <MdFastfood />,
         onClick: async () => {
-          const {orders} = await Employee.getAllOrder({
+          console.log(superAdminPanel.restaurants[0].id);
+          const { orders } = await Employee.getAllOrder({
             token: auth.token,
             restaurantId: superAdminPanel.restaurants[0].id,
           });
           setIsUsersShown(4);
-          dispatch(setOrders(orders))
+          dispatch(setOrders(orders));
         },
       })}
       {menuButton({
