@@ -79,6 +79,7 @@ export const MainNavigationMenu = () => {
               onClick: async () => {
                 dispatch(setShowLoginForm(true));
                 dispatch(setIsSignUpFormShown());
+                dispatch(setIsShowMenu());
               },
             })}
             {menuButton({
@@ -86,6 +87,7 @@ export const MainNavigationMenu = () => {
               icon: <IoMdLogIn />,
               onClick: async () => {
                 dispatch(setShowLoginForm(true));
+                dispatch(setIsShowMenu());
               },
             })}
           </div>
@@ -98,22 +100,21 @@ export const MainNavigationMenu = () => {
           text: "Create Your Restaurant",
           icon: <MdFastfood />,
           onClick: async () => {
-            navigate("/joinUs");
+            navigate("/joinUs",{ state:true});
             dispatch(setIsShowMenu());
           },
         })}
         <div id="user-management-div">
           <h4>ABOUT</h4>
         </div>
-        {menuButton({
-          text: "Contact US",
-          icon: <AiOutlineMail />,
-          onClick: async () => {},
-        })}
+       
         {menuButton({
           text: "Feedback",
           icon: <VscFeedback />,
-          onClick: async () => {},
+          onClick: async () => {
+            navigate("/joinUs",{ state:false});
+            dispatch(setIsShowMenu());
+          },
         })}
         {menuButton({
           text: "About",
