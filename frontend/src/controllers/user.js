@@ -1,6 +1,12 @@
 import axios from 'axios'
 import { hostUrl } from '..'
 export class User {
+  static userName =null;
+  static imgUrl = null;
+  static id =null;
+  static roleId = 4;
+
+
   static async getAllRestaurants() {
     try {
       const response = await axios.get(`${hostUrl}/user/`)
