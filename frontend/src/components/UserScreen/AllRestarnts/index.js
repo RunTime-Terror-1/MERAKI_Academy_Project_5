@@ -9,32 +9,22 @@ import { setrestaurantId } from "../../../redux/reducers/User";
 const AllRestaurants = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const [restaurants, setRestaurants] = useState("");
-
-  const [number, setNumber] = useState(0);
-  const [numberTow, setNumberTow] = useState(12);
-
-  const [showNumber, setShowNumber] = useState(0);
-
-  const [pageNumber, setPageNumber] = useState(1);
-
-  const UserInfo = useSelector((state) => {
-    return {
-      yourCart: state.User.cart,
-      yourPrice: state.User.price,
-      yourTotal: state.User.total,
-      isLogin: state.auth.isLoggedIn,
-      name: state.User.name,
-      token: state.auth.token,
-      idRestaurant: state.User.restaurantIdId,
-    };
-  });
+  let [totalPages, setTotalPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageBtn, setPageBtn] = useState([]);
 
   const getRestaurants = async () => {
     let responseRest = await User.getAllRestaurants();
     setRestaurants(responseRest.result);
-    setShowNumber(Math.ceil(responseRest.result.length / 12));
+    totalPages = Math.ceil(responseRest.result.length / 8);
+    const arr = [];
+    for (let i = 0; i < totalPages; i++) {
+      arr.push(i + 1);
+    }
+    console.log(arr, totalPages);
+    setTotalPages(totalPages);
+    setPageBtn(arr);
   };
 
   useEffect(() => {
@@ -77,6 +67,48 @@ const AllRestaurants = () => {
       </div>
     );
   };
+  const buildPageButton = (i) => {
+    return (
+      <div style={{display:"flex"}}>
+        <button
+          key={i}
+          onClick={() => {
+            if (currentPage < i) {
+              setCurrentPage(currentPage + 7);
+            } else if (i < currentPage) {
+              setCurrentPage(currentPage - 7);
+            }
+          }}
+        >
+          {i}
+        </button>
+        {i!==totalPages?<div id="cc"></div>:<></>}
+      </div>
+    );
+  };
+  const back = () => {
+    // if (number == 0) {
+    //   setNumber(0);
+    //   setNumberTow(12);
+    // } else {
+    //   setNumber(number - 12);
+    //   setNumberTow(numberTow - 12);
+    // }
+    // if (pageNumber == 1) {
+    //   setPageNumber(1);
+    // } else {
+    //   setPageNumber(pageNumber - 1);
+    // }
+  };
+  const next = () => {
+    // setNumber(number + 12);
+    // setNumberTow(numberTow + 12);
+    // if (totalPages == pageNumber) {
+    //   setPageNumber(totalPages);
+    // } else {
+    //   setPageNumber(pageNumber + 1);
+    // }
+  };
   return (
     <div className="AllRestarnts">
       <NavBar />
@@ -106,36 +138,27 @@ const AllRestaurants = () => {
                 url: "https://thumbs.dreamstime.com/b/vector-illustration-heart-shape-red-fruits-vegetables-healthy-nutrition-organic-concept-flat-style-127159995.jpg",
                 text: "Healthy",
               })}
-              {/* <div
-                onClick={() => {
-                  navigate("/SortResturants", {
-                    state: { sortcategory: "pizza" },
-                  });
-                }}
-              >
-                <div className="DivimgCategory">
-                  {" "}
-                  <img
-                    className="imgCategory"
-                    src="https://i0.wp.com/upandgoneblog.com/wp-content/uploads/2019/08/Ramen.jpg?fit=860%2C645&ssl=1"
-                  />
-                </div>
-                <h3 className="h3h3NameCategory">Asian</h3>
-              </div>*/}
             </div>
           </div>
 
           <div id="restaurants-div">
             {restaurants
               ? restaurants.map((element, index) => {
-                  if (index >= number && index < numberTow) {
+                  if (index >= currentPage - 1 && index < currentPage + 7) {
                     return buildRestaurantCard({ element, index });
                   }
                 })
               : " "}
           </div>
-
-        
+          {pageBtn.length > 1 ? (
+            <div id="pagination-div">
+              {pageBtn.map((i) => {
+                return buildPageButton(i);
+              })}
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </div>
@@ -188,3 +211,21 @@ export default AllRestaurants;
             </button>
           </div>
 */
+{
+  /* <div
+                onClick={() => {
+                  navigate("/SortResturants", {
+                    state: { sortcategory: "pizza" },
+                  });
+                }}
+              >
+                <div className="DivimgCategory">
+                  {" "}
+                  <img
+                    className="imgCategory"
+                    src="https://i0.wp.com/upandgoneblog.com/wp-content/uploads/2019/08/Ramen.jpg?fit=860%2C645&ssl=1"
+                  />
+                </div>
+                <h3 className="h3h3NameCategory">Asian</h3>
+              </div>*/
+}

@@ -98,3 +98,30 @@
   margin-top: 5px;
   text-align: center;
 }
+#pagination-div {
+  display: flex;
+  justify-content: start;
+  width: fit-content;
+  border-radius: 5px;
+  background-color: black;
+}
+#pagination-div button {
+  cursor: pointer;
+  border-radius: 5px;
+  color: white;
+  background-color: var(--third-color);
+  padding: 20px;
+  border: 0;
+}
+#pagination-div button:hover {
+  background-color: var(--first-color);
+  color: black;
+  border-radius: 1px;
+
+}
+#cc{
+    height: 100%;
+    width: 0.5px;
+    background-color: white;
+}
+
