@@ -1,173 +1,199 @@
-.AllRestarnts{
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    /* top:4vh;
-     */
-
-     gap: 20px;
+#restaurants-div {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 25% 25% 25% 25%;
+  gap: 10px;
 }
-.AllAllRestarntsShow{
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    top: 10px;
-}
-
-
-.AllRestarnts_A{
-    width: 5vw;
-}
-.AllRestarnts_C{
-    width: 5vw;
-}
-.Continert{
-    /* background-color: darkorchid; */
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-}
-.Continer_A{
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
-    text-align: start;
-    /* border-bottom: 4px solid var(--second-color);; */
-    border-bottom: 3px solid rgb(253,222,98);
-    /* background-color: rgb(248, 197, 167); */
-    height: 103px;
-    /* position: sticky;
-    top: 0; */
-}
-.Continer_A_A{
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
-    text-align: start;
-   
-}
-.imgCategory{
-    width: 70px;
-    height: 70px;
-    border-radius: 50px;
-    position: relative;
-    left: 15px;
-}
-.imgCategory:hover{
-    width: 70px;
-    height: 70px;
-    border-radius: 50px;
-    transform: scale(1.1);
-}
-.DivimgCategory{
-    /* padding: 5px; */
-    width: 100px;
-    /* background-color: rgb(255, 210, 113);; */
-    border-radius: 50px;
-
-    position: relative;
-    /* left: 10px; */
-}
-.DivimgCategory:hover{
-    /* padding: 5px; */
-    width: 100px;
-    /* height: 40px; */
-    background-color:  rgb(250, 236, 110);
-    border-radius: 50px;
-    transform: scale(1.1);
-}
-.h3h3NameCategory{
-    position: relative;
-    left: 20px;
+#rest-card-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: start;
+  box-shadow: 0px 0px 3px 1px var(--second-color);
+  height: 220px;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
-.AllRestarnts_B{
-    width: 85vw;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 40px;
+#rest-card-div img {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  min-height: 180px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
-.All_B_eachRestarant{
-    width:400px;
-    height: 188px;
-    text-align: start;
-    display: flex;
-    flex-direction: column;
-    border: 2px solid rgb(214, 202, 202);
-    /* border-radius: 10px; */
-    /* border:inset #B0B8B4; */
-    background-color: rgb(255,255,255);
-    
-    
+#rest-card-div h3 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 1.3em;
+  text-shadow: 0px 1px 1px black;
 }
-.All_B_eachRestarant:hover{
-    display: flex;
-    flex-direction: column;
-    border: 2px solid rgb(214, 202, 202);
-    /* border-radius: 10px; */
-    /* border-width: 18px; */
-    /* border:inset #B0B8B4; */
-    transform: scale(1.1);
-}
-.logo{
-    width:396px;
-    height:145px;
+
+.AllRestarnts {
+  display: flex;
+  flex-direction: column;
+  position: relative;
   
 }
+.first-restaurant-div {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  height: 100vh;
+  background: linear-gradient(
+    var(--first-color),
+    rgb(233, 207, 157),
+    rgb(243, 177, 54)
+  );
+}
 
-.divLogo{
-    width: 400px;
-    height: 18vh;
-    /* display: flex;
+.AllRestarnts_A {
+  width: 5vw;
+}
+.AllRestarnts_C {
+  width: 5vw;
+}
+.Continert {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  flex-direction: column;
+  gap: 20px;
+}
+.Continer_A {
+  display: flex;
+  flex-direction: row;
+  text-align: start;
+  width: 100%;
+  border-bottom: 3px solid rgb(253, 222, 98);
+}
+.Continer_A_A {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  gap: 20px;
+  text-align: start;
+}
+.imgCategory {
+  width: 70px;
+  height: 70px;
+  border-radius: 50px;
+  position: relative;
+  left: 15px;
+  cursor: pointer;
+}
+.imgCategory:hover {
+  width: 70px;
+  height: 70px;
+  border-radius: 50px;
+  transform: scale(1.1);
+}
+.DivimgCategory {
+  /* padding: 5px; */
+  width: 100px;
+  /* background-color: rgb(255, 210, 113);; */
+  border-radius: 50px;
+
+  position: relative;
+  /* left: 10px; */
+}
+.DivimgCategory:hover {
+  /* padding: 5px; */
+  width: 100px;
+  /* height: 40px; */
+  background-color: rgb(250, 236, 110);
+  border-radius: 50px;
+  transform: scale(1.1);
+}
+.h3h3NameCategory {
+  position: relative;
+  left: 20px;
+}
+
+.AllRestarnts_B {
+  width: 85vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+.All_B_eachRestarant {
+  width: 400px;
+  height: 188px;
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgb(214, 202, 202);
+  /* border-radius: 10px; */
+  /* border:inset #B0B8B4; */
+  background-color: rgb(255, 255, 255);
+}
+.All_B_eachRestarant:hover {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgb(214, 202, 202);
+  /* border-radius: 10px; */
+  /* border-width: 18px; */
+  /* border:inset #B0B8B4; */
+  transform: scale(1.1);
+}
+.logo {
+  width: 396px;
+  height: 145px;
+}
+
+.divLogo {
+  width: 400px;
+  height: 18vh;
+  /* display: flex;
     flex-direction: row;
     */
-    
-    background-color: crimson;
+
+  background-color: crimson;
 }
-.All_h2{
-    margin-top: 6px;
-    font-weight: 550;
-    font-size: 20px;
-    color: #000000;
-    font-family: UberMoveText, sans-serif;
+.All_h2 {
+  margin-top: 6px;
+  font-weight: 550;
+  font-size: 20px;
+  color: #000000;
+  font-family: UberMoveText, sans-serif;
 
-
-    -webkit-box-pack: justify;
-    justify-content: space-between;
-};
-.All_h2Categorry{
-    /* font-weight: 550; */
-    /* font-size: 15px;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+.All_h2Categorry {
+  /* font-weight: 550; */
+  /* font-size: 15px;
     color: #000000;
     font-family: UberMoveText, sans-serif; */
-    color: #545454;
-    font-size: 18px;
-    font-weight: normal;
-    font-family: UberMoveText, sans-serif;
-    
-    
-
+  color: #545454;
+  font-size: 18px;
+  font-weight: normal;
+  font-family: UberMoveText, sans-serif;
 }
 
-.NextAndPervrs{
-    width: 450px;
-    height: 100px;
-    text-align: top;
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    /* background-color: crimson; */
+.NextAndPervrs {
+  width: 450px;
+  height: 100px;
+  text-align: top;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  /* background-color: crimson; */
 
-    position: relative;
-    left: 550px;
+  position: relative;
+  left: 550px;
 }
-.ButtonAllresturants{
-    width: 100px;
-    height: 30px;
-background-color: var(  --second-color);
+.ButtonAllresturants {
+  width: 100px;
+  height: 30px;
+  background-color: var(--second-color);
 }
-.divNumberPage{
-    display: flex;
-    flex-direction: row;
+.divNumberPage {
+  display: flex;
+  flex-direction: row;
 }

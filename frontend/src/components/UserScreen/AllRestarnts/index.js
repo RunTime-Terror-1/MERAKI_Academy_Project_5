@@ -61,29 +61,19 @@ const AllRestaurants = () => {
 
   const buildRestaurantCard = ({ element, index }) => {
     return (
-      <div
-        className="All_B_eachRestarant"
-        key={index}
-        onClick={async () => {
-          await localStorage.setItem("restaurantId", element.id);
-          dispatch(setrestaurantId({ restId: element.id }));
-
-          navigate("/RestaurantPage", {
-            state: { id: localStorage.getItem("restaurantId") },
-          });
-        }}
-      >
-        <img className="logo" src={element.backImg} />
-
-        <h2 className="All_h2">{element.name}</h2>
-        <h2 className="All_h2Categorry">{element.rest_category}</h2>
+      <div key={element.id} id="rest-card-div">
+        <img src={element.backImg} />
+        <h3>{element.name}</h3>
+    
+      
+     
       </div>
     );
   };
   return (
     <div className="AllRestarnts">
       <NavBar />
-      <div className="AllAllRestarntsShow">
+      <div className="first-restaurant-div">
         <div className="Continert">
           <div className="Continer_A">
             <div className="Continer_A_A">
@@ -109,7 +99,7 @@ const AllRestaurants = () => {
                 url: "https://thumbs.dreamstime.com/b/vector-illustration-heart-shape-red-fruits-vegetables-healthy-nutrition-organic-concept-flat-style-127159995.jpg",
                 text: "Healthy",
               })}
-              <div
+              {/* <div
                 onClick={() => {
                   navigate("/SortResturants", {
                     state: { sortcategory: "pizza" },
@@ -124,15 +114,15 @@ const AllRestaurants = () => {
                   />
                 </div>
                 <h3 className="h3h3NameCategory">Asian</h3>
-              </div>
+              </div>*/}
             </div>
           </div>
 
-          <div className="AllRestarnts_B">
+          <div id="restaurants-div">
             {restaurants
               ? restaurants.map((element, index) => {
                   if (index >= number && index < numberTow) {
-                    return buildRestaurantCard({element, index});
+                    return buildRestaurantCard({ element, index });
                   }
                 })
               : " "}
