@@ -24,7 +24,7 @@ export const OwnerPanel = () => {
 
   useEffect(() => {
     (async () => {
-      if (User.roleId === "2") {
+      if (User.roleId == "2") {
         const { restaurants } = await Owner.getOwnerRestaurants({
           token: auth.token,
         });
@@ -35,12 +35,10 @@ export const OwnerPanel = () => {
           token: auth.token,
         });
         dispatch(setRestaurants(restaurants));
+
         const { orders } = await Employee.getAllOrder({
           token: auth.token,
-          restaurantId:
-            User.roleId == "2"
-              ? superAdminPanel.restaurants[0].id
-              : restaurants[0].id,
+          restaurantId: restaurants[0].id,
         });
         dispatch(setOrders(orders));
         setIsUsersShown(5);
@@ -65,6 +63,8 @@ export const OwnerPanel = () => {
         )}
       </div>
     </div>
-  ):<ErrorPage />;
+  ) : (
+    <ErrorPage />
+  );
 };
 //Orders

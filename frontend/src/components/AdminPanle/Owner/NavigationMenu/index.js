@@ -54,7 +54,7 @@ export const NavigationMenu = ({ setIsUsersShown }) => {
       </div>
       {userArea({})}
 
-      {User.roleId === "2" ? (
+      {User.roleId == "2" ? (
         <div>
           <div id="user-management-div">
             <h4>User Management</h4>

@@ -66,7 +66,7 @@ export const LoginForm = () => {
       User.userName = response.userName;
       User.imgUrl = response.imgUrl;
       User.roleId = response.roleId;
-      localStorage.setItem(
+     await localStorage.setItem(
         "user",
         JSON.stringify({
           id: User.id,
