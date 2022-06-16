@@ -1,23 +1,24 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import NavBar from "../../NavBar";
 import "./style.css";
 export const ContactUs = () => {
   const form = useRef();
-
+  const [isDialogShown, setIsDialogShown] = useState("");
   const sendEmail = (e) => {
     e.preventDefault();
     emailjs
       .sendForm("gmail", "template_bbp6ivy", form.current, "UIL5eTIcKg7otEk_r")
       .then(
         (result) => {
-          console.log(result.text);
+          setIsDialogShown(true);
+          e.target.reset();
         },
         (error) => {
           console.log(error.text);
         }
       );
-    e.target.reset()
+   
   };
   const createInput = ({ placeholder, setState, type = "text", name = "" }) => {
     return (
@@ -34,13 +35,38 @@ export const ContactUs = () => {
       </div>
     );
   };
+  const buildAlertDialog = ({ bgColor, color, text, text2 }) => {
+    setTimeout(() => {
+      setIsDialogShown(false);
+    }, 2500);
+    return (
+      <div id="Alert">
+        <div style={{ backgroundColor: `${bgColor}` }}>
+          <p>
+            <strong style={{ color: `${color}` }}>{text}</strong>
+            <br />
+            <small style={{ color: `${color}` }}>{text2}</small>
+          </p>
+        </div>
+      </div>
+    );
+  };
   return (
     <div>
       <NavBar />
+      {isDialogShown ? (
+        buildAlertDialog({
+          bgColor: "green",
+          color: "white",
+          text: "Email is sended successfully :)",
+          text2: `We will contact you soon :)`,
+        })
+      ) : (
+        <></>
+      )}
       <div id="contact-us-div">
         <img src="https://usercontent.one/wp/www.alltopeverything.com/wp-content/uploads/2020/08/fast-food-chains-1024x640.png?media=1644168245" />
         <div id="contact-us-form">
-         
           <div id="contact-us-form-inner">
             <h2>JOIN US </h2>
             <hr />
@@ -52,10 +78,12 @@ export const ContactUs = () => {
               ,meals and restaurant data into one place so you can do what you
               want.
             </p>
-            <br/>
+            <br />
             <h4>What Should I Do?</h4>
             <p>
-              Send us your connection data and the details about your restaurant using the form below then we will contact you as soon as possible :)
+              Send us your connection data and the details about your restaurant
+              using the form below then we will contact you as soon as possible
+              :)
             </p>
             <br />
             <form ref={form} onSubmit={sendEmail}>
@@ -82,7 +110,10 @@ export const ContactUs = () => {
                 type: "phone",
                 name: "phone",
               })}
-              <textarea placeholder="Details About Your Restaurants" name="message" />
+              <textarea
+                placeholder="Details About Your Restaurants"
+                name="message"
+              />
 
               <input className="input" id="submit" type="submit" value="Send" />
             </form>
