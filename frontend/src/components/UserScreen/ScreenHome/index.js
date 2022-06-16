@@ -58,14 +58,12 @@ const ScreenHome = () => {
               At KHK EATS, we want to provide a chance for you to search for a restaurant and get the food you love delivered.In addition to 
               that you can create your Own restaurant and be one of our family . We aim to make all restaurants data in Jordan available for all people inside or outside Jordan
             </p>
-            <hr/>
-             
+            
           </div>
         </div>
       </div>
 
- 
-      <div id="join-us-div">
+      <div id="footer-div">
         <div>Restaurants
           <a></a>
 
@@ -77,11 +75,6 @@ const ScreenHome = () => {
 
         </div>
         <div>Follow us on
-          <img/>
-          <img/>
-          <img/>
-          <img/>
-          
 
         </div>
 
