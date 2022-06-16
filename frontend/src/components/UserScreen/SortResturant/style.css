@@ -31,7 +31,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 40px;
-    background-color: chocolate;
+    /* background-color: chocolate; */
 }
 .SortDivOne_one{
     width:400px;

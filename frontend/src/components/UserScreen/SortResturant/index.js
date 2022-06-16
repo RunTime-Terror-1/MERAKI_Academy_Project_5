@@ -34,9 +34,9 @@ const SortResturant = () => {
   return (
     <div className="SortDiv">
       {<NavBar />}
-       <div>dddddddddddddddddddddddddddddd</div>
+       <div></div>
       <div className="SortResturants">
-        <div className="SortRestarnts_A">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+        <div className="SortRestarnts_A"></div>
 
         <div className="SortRestarnts_B">
           {' '}
@@ -60,7 +60,7 @@ const SortResturant = () => {
                   >
                     <img className="logo" src={elemnt.backImg} />
 
-                    <h2 className="All_h2">{elemnt.name + 'kjkjkj'}</h2>
+                    <h2 className="All_h2">{elemnt.name }</h2>
                     <h2 className="All_h2Categorry">{elemnt.rest_category}</h2>
                   </div>
                 )
@@ -68,7 +68,7 @@ const SortResturant = () => {
             : ' '}
         </div>
 
-        <div className="SortRestarnts_C">ssssssssssss</div>
+        <div className="SortRestarnts_C"></div>
       </div>
     </div>
   )

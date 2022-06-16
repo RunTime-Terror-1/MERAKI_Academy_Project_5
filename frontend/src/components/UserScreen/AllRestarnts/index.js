@@ -39,7 +39,8 @@ const AllRestarnts = () => {
 
     setRestaurants(responserest.result)
     console.log(responserest.result.length)
-    setshowNumber(Math.floor(responserest.result.length / 12))
+    // console.log(Math.ciresponserest.result.length)
+    setshowNumber(Math.ceil(responserest.result.length / 12))
   }
 
   useEffect(() => {
@@ -239,7 +240,7 @@ const AllRestarnts = () => {
                       >
                         <img className="logo" src={elemnt.backImg} />
 
-                        <h2 className="All_h2">{elemnt.name + 'kjkjkj'}</h2>
+                        <h2 className="All_h2">{elemnt.name }</h2>
                         <h2 className="All_h2Categorry">
                           {elemnt.rest_category}
                         </h2>
