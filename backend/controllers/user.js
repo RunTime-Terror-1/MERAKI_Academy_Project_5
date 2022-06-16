@@ -189,8 +189,7 @@ const senOrder = (req, res) => {
       
     }
     if(result){
-      console.log(mealarray)
-      console.log(result.insertId)
+    
       let A= mealarray.map((element,index)=>{
         let quantity=element.price/element.priceOne
         let mealid=element.id
@@ -282,7 +281,7 @@ const getAdressByUserId = (req, res) => {
 
 //! ........END getAdressByUserId  .....
 const getSortRestuarnts = (req, res) => {
-  console.log("iddddsss")
+  // console.log("iddddsss")
   const restaurantCategory = req.params.category;
   const query = `SELECT * FROM restaurants WHERE rest_category=?;`;
   const data = [restaurantCategory];

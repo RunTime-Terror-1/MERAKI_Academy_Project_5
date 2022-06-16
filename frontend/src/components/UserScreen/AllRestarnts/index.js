@@ -32,7 +32,8 @@ const AllRestarnts = () => {
     let responserest = await User.getAllRestaurants()
 
     setRestaurants(responserest.result)
-   setshowNumber(responserest.result.length/9)
+    console.log(responserest.result.length)
+   setshowNumber( Math.floor(responserest.result.length/12) )
 
   }
 
