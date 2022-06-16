@@ -135,7 +135,17 @@ const AllRestaurants = () => {
               : " "}
           </div>
 
-          <div className="NextAndPervrs">
+        
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AllRestaurants;
+
+/* 
+  <div className="NextAndPervrs">
             <button
               className="ButtonAllresturants"
               onClick={() => {
@@ -177,12 +187,4 @@ const AllRestaurants = () => {
               Next
             </button>
           </div>
-        </div>
-
-        <div className="AllRestarnts_C"></div>
-      </div>
-    </div>
-  );
-};
-
-export default AllRestaurants;
+*/
