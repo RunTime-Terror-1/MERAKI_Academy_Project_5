@@ -140,6 +140,14 @@
 }
 
 .NextAndPervrs{
+    width: 200px;
+    height: 50px;
+    text-align: top;
     display: flex;
     flex-direction: row;
+    background-color: crimson;
+}
+.ButtonAllresturants{
+    width: 50px;
+    height: 25px;
 }

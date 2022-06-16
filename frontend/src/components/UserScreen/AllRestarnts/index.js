@@ -252,7 +252,7 @@ const AllRestarnts = () => {
           </div>
 
           <div className="NextAndPervrs">
-            <button   onClick={() => {
+            <button  className='ButtonAllresturants'    onClick={() => {
                    if(number==0){
                     setNumber(0);
                     setNumbertow(12)
@@ -270,9 +270,10 @@ const AllRestarnts = () => {
                     }
 
               }}   >past</button>
-            <h2>{pageNumber}</h2>
-            <h2>/{showNumber}</h2>
-            <button
+              <div className='divNumberPage'> <h2>{pageNumber}</h2>
+            <h2>/{showNumber}</h2></div>
+           
+            <button className='ButtonAllresturants'
               onClick={() => {
                 setNumber(number+12);
                 setNumbertow(numbertow+12)
