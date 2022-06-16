@@ -6,13 +6,22 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { setrestaurantId } from '../../../redux/reducers/User'
 
-
-
 const AllRestarnts = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const [restaurants, setRestaurants] = useState('')
+
+  const [number, setNumber] = useState(0)
+  const [numbertow, setNumbertow] = useState(12)
+
+  const [showNumber, setshowNumber] = useState(0)
+
+  
+  const [pageNumber, setpageNumber] = useState(1)
+
+
+
   const Userinfor = useSelector((state) => {
     return {
       yourCart: state.User.cart,
@@ -26,9 +35,12 @@ const AllRestarnts = () => {
   })
 
   const getRestaurants = async () => {
-    let hotel = await User.getAllRestaurants()
+    let responserest = await User.getAllRestaurants()
 
-    setRestaurants(hotel.result)
+    setRestaurants(responserest.result)
+    console.log(responserest.result.length)
+    // console.log(Math.ciresponserest.result.length)
+    setshowNumber(Math.ceil(responserest.result.length / 12))
   }
 
   useEffect(() => {
@@ -42,43 +54,243 @@ const AllRestarnts = () => {
         <div className="AllRestarnts_A"></div>
 
         <div className="Continert">
-          <div>
-            <button  onClick={() => {
-              navigate('/SortResturants', {
-                state: { sortcategory:"pizza"},
-              }) }} >burger</button>
-            <button>Pizza</button>
+          <div className="Continer_A">
+            <div className="Continer_A_A">
+              <div
+                onClick={() => {
+                  navigate('/SortResturants', {
+                    state: { sortcategory: 'pizza' },
+                  })
+                }}
+              >
+                <div className="DivimgCategory">
+                  {' '}
+                  <img
+                    className="imgCategory"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4Zyu-T5WQ7bLxROPZPWo7u65WqNKpnk7NWQ&usqp=CAU"
+                  />
+                </div>
+
+                <h3 className="h3h3NameCategory">Pizza</h3>
+              </div>
+              <div
+                onClick={() => {
+                  navigate('/SortResturants', {
+                    state: { sortcategory: 'pizza' },
+                  })
+                }}
+              >
+                <div className="DivimgCategory">
+                  {' '}
+                  <img
+                    className="imgCategory"
+                    src="https://media-cdn.tripadvisor.com/media/photo-s/17/57/7d/17/2-egg-breakfast.jpg"
+                  />
+                </div>
+                <h3 className="h3h3NameCategory">Breakfast</h3>
+              </div>
+              <div
+                onClick={() => {
+                  navigate('/SortResturants', {
+                    state: { sortcategory: 'pizza' },
+                  })
+                }}
+              >
+                <div className="DivimgCategory">
+                  {' '}
+                  <img
+                    className="imgCategory"
+                    src="https://c8.alamy.com/comp/2F7BRP8/french-potato-pack-box-cartoon-fastfood-fry-potato-isolated-illustration-fast-food-2F7BRP8.jpg"
+                  />
+                </div>
+                <h3 className="h3h3NameCategory">Fast food</h3>
+              </div>
+              <div
+                onClick={() => {
+                  navigate('/SortResturants', {
+                    state: { sortcategory: 'pizza' },
+                  })
+                }}
+              >
+                <div className="DivimgCategory">
+                  {' '}
+                  <img
+                    className="imgCategory"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLKopRRHoSDAgqTfKGo8tn1y_iggg0CtY-YPVx-5V9elOO0080P-eAJi8zbqtpytywskg&usqp=CAU"
+                  />
+                </div>
+                <h3 className="h3h3NameCategory">Burgess</h3>
+              </div>
+              <div
+                onClick={() => {
+                  navigate('/SortResturants', {
+                    state: { sortcategory: 'pizza' },
+                  })
+                }}
+              >
+                <div className="DivimgCategory">
+                  {' '}
+                  <img
+                    className="imgCategory"
+                    src="https://thumbs.dreamstime.com/b/vector-illustration-heart-shape-red-fruits-vegetables-healthy-nutrition-organic-concept-flat-style-127159995.jpg"
+                  />
+                </div>
+                <h3 className="h3h3NameCategory">Healthy</h3>
+              </div>
+              <div
+                onClick={() => {
+                  navigate('/SortResturants', {
+                    state: { sortcategory: 'pizza' },
+                  })
+                }}
+              >
+                <div className="DivimgCategory">
+                  {' '}
+                  <img
+                    className="imgCategory"
+                    src="https://i0.wp.com/upandgoneblog.com/wp-content/uploads/2019/08/Ramen.jpg?fit=860%2C645&ssl=1"
+                  />
+                </div>
+                <h3 className="h3h3NameCategory">Asian</h3>
+              </div>
+              <div
+                onClick={() => {
+                  navigate('/SortResturants', {
+                    state: { sortcategory: 'pizza' },
+                  })
+                }}
+              >
+                <div className="DivimgCategory">
+                  {' '}
+                  <img
+                    className="imgCategory"
+                    src="https://media-cdn.tripadvisor.com/media/photo-s/18/3a/09/6c/bonefish-seafood-platter.jpg"
+                  />
+                </div>
+                <h3 className="h3h3NameCategory">Sea Food</h3>
+              </div>
+              <div
+                onClick={() => {
+                  navigate('/SortResturants', {
+                    state: { sortcategory: 'pizza' },
+                  })
+                }}
+              >
+                <div className="DivimgCategory">
+                  {' '}
+                  <img
+                    className="imgCategory"
+                    src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/190322-ham-sandwich-horizontal-1553721016.png"
+                  />
+                </div>
+                <h3 className="h3h3NameCategory">sandwichs</h3>
+              </div>
+              <div
+                onClick={() => {
+                  navigate('/SortResturants', {
+                    state: { sortcategory: 'pizza' },
+                  })
+                }}
+              >
+                <div className="DivimgCategory">
+                  {' '}
+                  <img
+                    className="imgCategory"
+                    src="https://cdn.loveandlemons.com/wp-content/uploads/2021/06/summer-desserts.jpg"
+                  />
+                </div>
+                <h3 className="h3h3NameCategory">Sweets</h3>
+              </div>
+              <div
+                onClick={() => {
+                  navigate('/SortResturants', {
+                    state: { sortcategory: 'pizza' },
+                  })
+                }}
+              >
+                <div className="DivimgCategory">
+                  {' '}
+                  <img
+                    className="imgCategory"
+                    src="https://images.deliveryhero.io/image/talabat/Menuitems/80850219637895358999912265.jpg"
+                  />
+                </div>
+                <h3 className="h3h3NameCategory">Juices</h3>
+              </div>
+            </div>
           </div>
           <div className="AllRestarnts_B">
             {restaurants
               ? restaurants.map((elemnt, index) => {
-                  // console.log(elemnt.Logo)
-                  return (
-                    <div
-                      className="All_B_eachRestarant"
-                      key={index}
-                      onClick={() => {
-                        // console.log(elemnt.id)
+                  if (index >= number &&index<numbertow) {
+                    console.log('dfdfdfd')
+                    return (
+                      <div
+                        className="All_B_eachRestarant"
+                        key={index}
+                        onClick={() => {
+                          // console.log(elemnt.id)
 
-                        dispatch(setrestaurantId({ restId: elemnt.id }))
-                                                     
-                        navigate('/RestaurantPage', {
-                          state: { id: localStorage.getItem('restaurantId') },
-                        }) 
+                          dispatch(setrestaurantId({ restId: elemnt.id }))
 
-                                            
-                      }}
-                    >
-                      <img className="logo" src={elemnt.backImg} />
+                          navigate('/RestaurantPage', {
+                            state: { id: localStorage.getItem('restaurantId') },
+                          })
+                        }}
+                      >
+                        <img className="logo" src={elemnt.backImg} />
 
-                      <h2 className="All_h2">{elemnt.name + 'kjkjkj'}</h2>
-                      <h2 className="All_h2Categorry">
-                        {elemnt.rest_category}
-                      </h2>
-                    </div>
-                  )
+                        <h2 className="All_h2">{elemnt.name }</h2>
+                        <h2 className="All_h2Categorry">
+                          {elemnt.rest_category}
+                        </h2>
+                      </div>
+                    )
+                  }
+                  console.log(index)
                 })
               : ' '}
+          </div>
+
+          <div className="NextAndPervrs">
+            <button  className='ButtonAllresturants'    onClick={() => {
+                   if(number==0){
+                    setNumber(0);
+                    setNumbertow(12)
+                    console.log("One")
+                   }else{
+                    setNumber(number-12);
+                    setNumbertow(numbertow-12)
+                   }
+                  //  setNumber(number-12);
+                  //  setNumbertow(numbertow-12)
+                    if(pageNumber==1){
+                      setpageNumber(1)
+                    }else{
+                      setpageNumber(pageNumber-1)
+                    }
+
+              }}   >past</button>
+              <div className='divNumberPage'> <h2>{pageNumber}</h2>
+            <h2>/{showNumber}</h2></div>
+           
+            <button className='ButtonAllresturants'
+              onClick={() => {
+                setNumber(number+12);
+                setNumbertow(numbertow+12)
+                  // if(numbertow>restaurants.length)
+                  
+
+                if(showNumber==pageNumber){
+                  setpageNumber(showNumber)
+                }else{
+                  setpageNumber(pageNumber+1)
+                }
+    
+              }}
+            >
+              Next
+            </button>
           </div>
         </div>
 

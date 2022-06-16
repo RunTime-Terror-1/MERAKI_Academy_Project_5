@@ -45,13 +45,15 @@ const CompleteOrder = () => {
       sumPrice: state.User.sumpriceUser,
       name: state.User.name,
       userId: state.User.Iduser,
+      sumItems:state.User.Sumitems
     }
   })
 
-  //   console.log(Userinfor.yourPrice, 'YourPrice fff  complete')
+    console.log(Userinfor.yourPrice, 'YourPrice fff  complete')
   //!..............................
 
   //   console.log(Userinfor.userId, 'Yourid   complete')
+    console.log(Userinfor.sumItems, 'Yourid  SumSumSum complete')
 
   //!..................Functions.............................................
 
@@ -118,7 +120,7 @@ const CompleteOrder = () => {
   }
   //!........................................................
   const sentUserOrder = async (id) => {
-    // console.log(Userinfor.sumPrice,"114")
+    console.log(Userinfor.sumPrice,"1144444444444444444444")
     // console.log( Userinfor.yourPrice[0].restaurant,"114")
     if (testComplete == 'true' && messageLocation == 'good') {
       console.log('sentOrder')
@@ -128,9 +130,11 @@ const CompleteOrder = () => {
         receipt: Userinfor.sumPrice,
         resturantId: Userinfor.yourPrice[0].restaurant,
         mealarray: Userinfor.yourPrice,
+        Quntity:Userinfor.sumItems
       })
     }
   }
+    //!........................................................
   const move = () => {
     console.log(models, testComplete, popadress)
     if (models && (testComplete == ' true' || popadress == 'true')) {
@@ -466,7 +470,7 @@ const CompleteOrder = () => {
                     onClick={() => {
                       saveAdress(Userinfor.userId)
                       sentUserOrder(Userinfor.userId)
-                      setClick('yes')
+                    //   setClick('yes')
                       toggleModel()
 
                       move()

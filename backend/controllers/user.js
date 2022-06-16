@@ -166,11 +166,10 @@ const deleteMealFromCart = (req, res) => {
 
 const senOrder = (req, res) => {
   const user_id = req.params.userId;
-  // const meal_id = req.params.meal_id
-  const { state, receipt, resturantId, mealarray } = req.body;
+  const {state, receipt ,resturantId,mealarray,Quntity} = req.body
+  const query = `INSERT INTO orders(quantity,state,receipt,restaurant_id,user_id) VALUES (?,?,?,?,?);`;
+  const data = [Quntity,state, receipt,resturantId ,user_id ];
 
-  const query = `INSERT INTO orders(state,receipt,restaurant_id,user_id) VALUES (?,?,?,?);`;
-  const data = [state, receipt, resturantId, user_id];
   connection.query(query, data, (err, result) => {
     if (err) {
       return res.status(500).json({
@@ -178,9 +177,8 @@ const senOrder = (req, res) => {
         massage: "Server error",
         err: err,
       });
-    } else {
-      
     }
+   
     if (result) {
       let A = mealarray.map((element, index) => {
         let quantity = element.price / element.priceOne;
@@ -192,8 +190,10 @@ const senOrder = (req, res) => {
             return res.status(500).json({
               success: false,
               message: err,
+            })};
+        
             });
-          }
+         
         });
       });
     }

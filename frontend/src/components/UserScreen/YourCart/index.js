@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Counter from "./Counter";
 import { useNavigate } from "react-router-dom";
-import { setsumPriceUser } from "../../../redux/reducers/User";
+import { setsumPriceUser,setSumitems} from "../../../redux/reducers/User";
 
 
 const YourCart = () => {
@@ -59,6 +59,7 @@ const YourCart = () => {
               onClick={() => {
                 complete();
                 dispatch(setsumPriceUser());
+                dispatch(setSumitems())
               }}
             >
               Go to the checkout

@@ -10,10 +10,15 @@ export const UserSlice = createSlice({
     restaurants: [],
     total: 0,
     sumpriceUser: 0,
+    name: '',
+    userId: '',
+    restaurantIdId:localStorage.getItem("restaurantId") || "",
+    Sumitems:0,
     showMenu: false,
     name: "",
     userId: "",
     restaurantIdId: localStorage.getItem("restaurantId") || "",
+
   },
   reducers: {
     setCart: (state, action) => {
@@ -114,9 +119,21 @@ export const UserSlice = createSlice({
     },
     //!......................................................................
     setrestaurantId: (state, action) => {
-      localStorage.setItem("restaurantId", action.payload.restId);
-      // state.restaurantIdId = action.payload.restId
-    },
+        localStorage.setItem("restaurantId",action.payload.restId)
+        // state.restaurantIdId = action.payload.restId
+      },
+    //!......................................................................
+    setSumitems: (state, action) => {
+         let sumSum=0
+         state.price.map((element,index)=>{
+        sumSum=sumSum+(element.price / element.priceOne)
+
+         })
+
+
+         state.Sumitems=sumSum
+      },
+    
     //!......................................................................
     setRestaurants: (state, action) => {
       state.restaurants = action.payload;
@@ -129,7 +146,7 @@ export const UserSlice = createSlice({
     setIsShowMenu: (state, action) => {
       state.showMenu = !state.showMenu;
     },
-   
+
   },
 });
 
@@ -142,10 +159,11 @@ export const {
   setNameRest,
   setidUser,
   setrestaurantId,
+  setSumitems,
   setRestaurants,
   setIsShowMenu,
   setSearchRestaurant,
-  
-} = UserSlice.actions;
+} = UserSlice.actions
+
 
 export default UserSlice.reducer;

@@ -7,24 +7,31 @@
 
      gap: 20px;
 }
-.AllAllRestarntsShow{
+.SortResturants{
     display: flex;
     flex-direction: row;
+    /* background-color: crimson; */
+    position: relative;
+    top:20px
 }
 
 
-.AllRestarnts_A{
+.SortRestarnts_A{
+    width: 5vw;
+    /* background-color: chartreuse; */
+}
+
+
+.SortRestarnts_C{
     width: 5vw;
 }
-.AllRestarnts_C{
-    width: 5vw;
-}
-.AllRestarnts_B{
+.SortRestarnts_B{
     width: 85vw;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 40px;
+    /* background-color: chocolate; */
 }
 .SortDivOne_one{
     width:400px;
