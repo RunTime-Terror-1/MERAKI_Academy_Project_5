@@ -8,8 +8,10 @@ import { NavigationBarPanel } from "../SuperAdmin/NavigationBar";
 import { Restaurants } from "../SuperAdmin/RestaurantDashboard";
 import { Meals } from "./MealsDashboard";
 import { Owner } from "../../../controllers/owner";
-import { setRestaurants } from "../../../redux/reducers/superAdmin";
+import { setOrders, setRestaurants } from "../../../redux/reducers/superAdmin";
 import { Orders } from "./OrderDashboard";
+import { User } from "../../../controllers/user";
+import { Employee } from "../../../controllers/employee";
 
 export const OwnerPanel = () => {
   const dispatch = useDispatch();
@@ -21,11 +23,27 @@ export const OwnerPanel = () => {
 
   useEffect(() => {
     (async () => {
-      const { restaurants } = await Owner.getOwnerRestaurants({
-        token: auth.token,
-      });
-      setIsUsersShown(2);
-      dispatch(setRestaurants(restaurants));
+      if (User.roleId === "2") {
+        const { restaurants } = await Owner.getOwnerRestaurants({
+          token: auth.token,
+        });
+        dispatch(setRestaurants(restaurants));
+        setIsUsersShown(2);
+      } else {
+        const { restaurants } = await Employee.getEmployeeRestaurant({
+          token: auth.token,
+        });
+        dispatch(setRestaurants(restaurants));
+        const { orders } = await Employee.getAllOrder({
+          token: auth.token,
+          restaurantId:
+            User.roleId == "2"
+              ? superAdminPanel.restaurants[0].id
+              : superAdminPanel.restaurants[0].restaurant_id,
+        });
+        dispatch(setOrders(orders));
+        setIsUsersShown(5);
+      }
     })();
   }, []);
   return (

@@ -1,7 +1,6 @@
 const connection = require("../models/db");
 
 const authorization = (string) => {
-
   return function (req, res, next) {
     const user_id = req.token.userId;
     const data = [user_id];

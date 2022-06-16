@@ -104,11 +104,14 @@ export const NavigationMenu = ({ setIsUsersShown }) => {
         text: "Orders",
         icon: <MdFastfood />,
         onClick: async () => {
-          console.log(superAdminPanel.restaurants[0].id);
           const { orders } = await Employee.getAllOrder({
             token: auth.token,
-            restaurantId: superAdminPanel.restaurants[0].id,
+            restaurantId:
+              User.roleId == "2"
+                ? superAdminPanel.restaurants[0].id
+                : superAdminPanel.restaurants[0].restaurant_id,
           });
+       
           setIsUsersShown(4);
           dispatch(setOrders(orders));
         },
@@ -119,7 +122,10 @@ export const NavigationMenu = ({ setIsUsersShown }) => {
         onClick: async () => {
           const { meals } = await Employee.getAllMeals({
             token: auth.token,
-            restaurant_id: superAdminPanel.restaurants[0].id,
+            restaurant_id:
+              User.roleId == "2"
+                ? superAdminPanel.restaurants[0].id
+                : superAdminPanel.restaurants[0].restaurant_id,
           });
           setIsUsersShown(3);
           dispatch(setMeals(meals));

@@ -196,6 +196,35 @@ const getAllMeals = (req, res) => {
   });
 };
 
+const getEmployeeRestaurant = (req, res) => {
+  const Employee_id = req.token.userId;
+  const query = "SELECT  EM.restaurant_id,RS.name,RS.id  FROM employees EM INNER JOIN restaurants RS ON  EM.user_id=? AND RS.id=EM.restaurant_id ";
+  connection.query(query, [Employee_id], (err, restaurants) => {
+  
+    if (err) {
+      console.log(err.message);
+      return res.status(500).json({
+        success: false,
+        massage: "Server Error",
+        err,
+      });
+    }
+    if (restaurants.length) {
+      res.status(200).json({
+        success: true,
+        message: "All Restaurants",
+        restaurants,
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        message: "Not Found",
+        restaurants: [],
+      });
+    }
+  });
+};
+
 module.exports = {
   createMeal,
   deleteMealFromRestaurant,
@@ -204,4 +233,6 @@ module.exports = {
   getAllMeals,
   updateOrderState,
   deleteOrder,
+  getEmployeeRestaurant,
+
 };
