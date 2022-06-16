@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Employee } from "../../../../../controllers/employee";
 import { setOrders } from "../../../../../redux/reducers/superAdmin";
 
-
 export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
   const [isDialogShown, setIsDialogShown] = useState("");
   const dispatch = useDispatch();
@@ -32,17 +31,20 @@ export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
   };
 
   const updateOrder = async (state) => {
-   const response=  await Employee.updateOrderState({ token: auth.token, orderId: currentOrder[0].id, state});
-   if(response.success){
+    const response = await Employee.updateOrderState({
+      token: auth.token,
+      orderId: currentOrder[0].id,
+      state,
+    });
+    if (response.success) {
       const orders = [...superAdminPanel.orders];
-       orders[currentIndex]={...orders[currentIndex],state:state};
+      orders[currentIndex] = { ...orders[currentIndex], state: state };
       dispatch(setOrders(orders));
-      setShowDetails(false)
-   }
+      setShowDetails(false);
+    }
   };
   return (
     <div id="signup-form">
-  
       <div id="order-inner">
         <div id="signup--exit-button">
           <button
@@ -53,12 +55,11 @@ export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
             X
           </button>
         </div>
-
         <h1 style={{ color: "black" }}>ORDER DETAILS</h1>
         <hr />
         <div id="title-div1" className="meal-row">
           <h5>#</h5>
-          <h5>Meal Name</h5>
+          <h5>MEAL NAME</h5>
           <h5>QUANTITY</h5>
           <h5>Price</h5>
         </div>
@@ -75,7 +76,8 @@ export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
             </div>
           );
         })}
-
+        <h3 >{"Delivery Information"}</h3>
+    
         <div id="title-div1" className="meal-row3">
           <h5>BUILDING #</h5>
           <h5>STREET</h5>
@@ -91,8 +93,21 @@ export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
           <h5>{total} $</h5>
         </div>
         <div id="order-btn">
-          <button onClick={()=>{updateOrder("Completed")}}>Complete The Order</button>
-          <button  onClick={()=>{updateOrder("Rejected")}} style={{ backgroundColor: "red" }}>Reject The Order</button>
+          <button
+            onClick={() => {
+              updateOrder("Completed");
+            }}
+          >
+            Complete The Order
+          </button>
+          <button
+            onClick={() => {
+              updateOrder("Rejected");
+            }}
+            style={{ backgroundColor: "red" }}
+          >
+            Reject The Order
+          </button>
         </div>
       </div>
     </div>

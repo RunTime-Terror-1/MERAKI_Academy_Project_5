@@ -15,17 +15,17 @@ import {
 import { Owner } from "../../../../controllers/owner";
 import { Employee } from "../../../../controllers/employee";
 import { User } from "../../../../controllers/user";
+import { setlogout } from "../../../../redux/reducers/auth";
+import { useNavigate } from "react-router-dom";
 
 export const NavigationMenu = ({ setIsUsersShown }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { superAdminPanel, auth } = useSelector((state) => {
     return state;
   });
 
-  const userArea = ({
-    name = "Khaled",
-    imgUrl = "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80",
-  }) => {
+  const userArea = ({ name = User.userName, imgUrl = User.imgUr }) => {
     return (
       <div id="user-img-div">
         <div>
@@ -111,7 +111,7 @@ export const NavigationMenu = ({ setIsUsersShown }) => {
                 ? superAdminPanel.restaurants[0].id
                 : superAdminPanel.restaurants[0].restaurant_id,
           });
-       
+
           setIsUsersShown(4);
           dispatch(setOrders(orders));
         },
@@ -131,7 +131,13 @@ export const NavigationMenu = ({ setIsUsersShown }) => {
           dispatch(setMeals(meals));
         },
       })}
-      <button id="logout-btn">
+      <button
+        onClick={() => {
+          dispatch(setlogout());
+          navigate("/");
+        }}
+        id="logout-btn"
+      >
         <div id="logout-div">
           <BiLogOut />
           <h4>LogOut</h4>
