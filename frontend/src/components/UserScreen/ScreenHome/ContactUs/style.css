@@ -34,6 +34,19 @@
   min-height: 100%;
   max-height: fit-content;
 }
+#contact-us-form-inner span{
+    font-weight: 800;
+}
+#contact-us-form-inner h2{
+    font-weight: 900;
+    text-shadow: 0px 1px 1px black;
+}
+#contact-us-form-inner h4{
+    text-shadow: 0px 1px 1px black;
+    font-size: larger;
+    color: black;
+}
+
 #contact-us-form-inner form {
   display: flex;
   flex-direction: column;
@@ -47,6 +60,7 @@
   resize: none;
   border-radius: 5px;
   width: 100%;
+  font-family: 'Times New Roman', Times, serif;
 }
 #submit {
   background-color: green;

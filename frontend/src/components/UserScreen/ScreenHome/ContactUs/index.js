@@ -17,6 +17,7 @@ export const ContactUs = () => {
           console.log(error.text);
         }
       );
+    e.target.reset()
   };
   const createInput = ({ placeholder, setState, type = "text", name = "" }) => {
     return (
@@ -81,7 +82,7 @@ export const ContactUs = () => {
                 type: "phone",
                 name: "phone",
               })}
-              <textarea placeholder="Details About your restaurants" name="message" />
+              <textarea placeholder="Details About Your Restaurants" name="message" />
 
               <input className="input" id="submit" type="submit" value="Send" />
             </form>
