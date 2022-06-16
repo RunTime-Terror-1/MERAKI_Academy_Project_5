@@ -39,7 +39,7 @@ export const OwnerPanel = () => {
           restaurantId:
             User.roleId == "2"
               ? superAdminPanel.restaurants[0].id
-              : superAdminPanel.restaurants[0].restaurant_id,
+              : restaurants[0].id,
         });
         dispatch(setOrders(orders));
         setIsUsersShown(5);

@@ -62,11 +62,20 @@ export const LoginForm = () => {
         email,
         password,
       });
-      console.log( response);
       User.id = response.userId;
       User.userName = response.userName;
       User.imgUrl = response.imgUrl;
       User.roleId = response.roleId;
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          id: User.id,
+          userName: User.userName,
+          imgUrl: User.imgUrl,
+          roleId: User.roleId,
+        })
+      );
+     
       dispatch(setidUser({ userId: response.userId }));
 
       dispatch(setlogin(response.token));

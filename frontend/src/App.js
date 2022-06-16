@@ -18,7 +18,13 @@ import { MainNavigationMenu } from "./components/UserScreen/NavBar/NavigationMen
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
+
     (async () => {
+      const user =await JSON.parse(localStorage.getItem("user"))
+      User.userName = user.userName;
+      User.roleId = user.roleId;
+      User.imgUrl = user.imgUrl;
+      User.id = user.id;
       const { result } = await User.getAllRestaurants();
       dispatch(setRestaurants(result));
     })();
