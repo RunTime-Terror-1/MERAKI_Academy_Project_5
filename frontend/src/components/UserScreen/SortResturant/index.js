@@ -34,7 +34,7 @@ const SortResturant = () => {
   return (
     <div className="SortDiv">
       {<NavBar />}
-
+       <div>dddddddddddddddddddddddddddddd</div>
       <div className="SortResturants">
         <div className="SortRestarnts_A">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
 

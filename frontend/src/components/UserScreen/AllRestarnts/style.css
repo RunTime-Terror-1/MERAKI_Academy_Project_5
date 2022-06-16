@@ -10,6 +10,8 @@
 .AllAllRestarntsShow{
     display: flex;
     flex-direction: row;
+    position: relative;
+    top: 10px;
 }
 
 
@@ -32,12 +34,17 @@
     text-align: start;
     /* border-bottom: 4px solid var(--second-color);; */
     border-bottom: 3px solid rgb(253,222,98);
+    /* background-color: rgb(248, 197, 167); */
+    height: 103px;
+    /* position: sticky;
+    top: 0; */
 }
 .Continer_A_A{
     display: flex;
     flex-direction: row;
     gap: 30px;
     text-align: start;
+   
 }
 .imgCategory{
     width: 70px;
@@ -50,24 +57,28 @@
     width: 70px;
     height: 70px;
     border-radius: 50px;
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 .DivimgCategory{
     /* padding: 5px; */
     width: 100px;
-    /* background-color: crimson; */
+    /* background-color: rgb(255, 210, 113);; */
     border-radius: 50px;
+
+    position: relative;
+    /* left: 10px; */
 }
 .DivimgCategory:hover{
     /* padding: 5px; */
     width: 100px;
-    background-color: rgb(233, 222, 67);
+    /* height: 40px; */
+    background-color:  rgb(250, 236, 110);
     border-radius: 50px;
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 .h3h3NameCategory{
     position: relative;
-    left: 10px;
+    left: 20px;
 }
 
 .AllRestarnts_B{
@@ -140,14 +151,23 @@
 }
 
 .NextAndPervrs{
-    width: 200px;
-    height: 50px;
+    width: 450px;
+    height: 100px;
     text-align: top;
     display: flex;
     flex-direction: row;
-    background-color: crimson;
+    gap: 10px;
+    /* background-color: crimson; */
+
+    position: relative;
+    left: 550px;
 }
 .ButtonAllresturants{
-    width: 50px;
-    height: 25px;
+    width: 100px;
+    height: 30px;
+background-color: var(  --second-color);
+}
+.divNumberPage{
+    display: flex;
+    flex-direction: row;
 }
