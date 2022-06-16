@@ -136,3 +136,8 @@
     
 
 }
+
+.NextAndPervrs{
+    display: flex;
+    flex-direction: row;
+}

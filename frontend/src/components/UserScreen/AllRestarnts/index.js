@@ -11,10 +11,14 @@ const AllRestarnts = () => {
   const dispatch = useDispatch()
 
   const [restaurants, setRestaurants] = useState('')
-  
+
   const [number, setNumber] = useState(0)
+  const [numbertow, setNumbertow] = useState(12)
 
   const [showNumber, setshowNumber] = useState(0)
+  const [pageNumber, setpageNumber] = useState(0)
+
+
 
   const Userinfor = useSelector((state) => {
     return {
@@ -33,8 +37,7 @@ const AllRestarnts = () => {
 
     setRestaurants(responserest.result)
     console.log(responserest.result.length)
-   setshowNumber( Math.floor(responserest.result.length/12) )
-
+    setshowNumber(Math.floor(responserest.result.length / 12))
   }
 
   useEffect(() => {
@@ -65,7 +68,7 @@ const AllRestarnts = () => {
                   />
                 </div>
 
-                <h3 className='h3h3NameCategory'>Pizza</h3>
+                <h3 className="h3h3NameCategory">Pizza</h3>
               </div>
               <div
                 onClick={() => {
@@ -81,7 +84,7 @@ const AllRestarnts = () => {
                     src="https://media-cdn.tripadvisor.com/media/photo-s/17/57/7d/17/2-egg-breakfast.jpg"
                   />
                 </div>
-                <h3  className='h3h3NameCategory'>Breakfast</h3>
+                <h3 className="h3h3NameCategory">Breakfast</h3>
               </div>
               <div
                 onClick={() => {
@@ -97,7 +100,7 @@ const AllRestarnts = () => {
                     src="https://c8.alamy.com/comp/2F7BRP8/french-potato-pack-box-cartoon-fastfood-fry-potato-isolated-illustration-fast-food-2F7BRP8.jpg"
                   />
                 </div>
-                <h3  className='h3h3NameCategory'>Fast food</h3>
+                <h3 className="h3h3NameCategory">Fast food</h3>
               </div>
               <div
                 onClick={() => {
@@ -113,7 +116,7 @@ const AllRestarnts = () => {
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLKopRRHoSDAgqTfKGo8tn1y_iggg0CtY-YPVx-5V9elOO0080P-eAJi8zbqtpytywskg&usqp=CAU"
                   />
                 </div>
-                <h3  className='h3h3NameCategory'>Burgess</h3>
+                <h3 className="h3h3NameCategory">Burgess</h3>
               </div>
               <div
                 onClick={() => {
@@ -129,7 +132,7 @@ const AllRestarnts = () => {
                     src="https://thumbs.dreamstime.com/b/vector-illustration-heart-shape-red-fruits-vegetables-healthy-nutrition-organic-concept-flat-style-127159995.jpg"
                   />
                 </div>
-                <h3  className='h3h3NameCategory'>Healthy</h3>
+                <h3 className="h3h3NameCategory">Healthy</h3>
               </div>
               <div
                 onClick={() => {
@@ -145,7 +148,7 @@ const AllRestarnts = () => {
                     src="https://i0.wp.com/upandgoneblog.com/wp-content/uploads/2019/08/Ramen.jpg?fit=860%2C645&ssl=1"
                   />
                 </div>
-                <h3  className='h3h3NameCategory'>Asian</h3>
+                <h3 className="h3h3NameCategory">Asian</h3>
               </div>
               <div
                 onClick={() => {
@@ -161,7 +164,7 @@ const AllRestarnts = () => {
                     src="https://media-cdn.tripadvisor.com/media/photo-s/18/3a/09/6c/bonefish-seafood-platter.jpg"
                   />
                 </div>
-                <h3  className='h3h3NameCategory'>Sea Food</h3>
+                <h3 className="h3h3NameCategory">Sea Food</h3>
               </div>
               <div
                 onClick={() => {
@@ -177,7 +180,7 @@ const AllRestarnts = () => {
                     src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/190322-ham-sandwich-horizontal-1553721016.png"
                   />
                 </div>
-                <h3  className='h3h3NameCategory'>sandwichs</h3>
+                <h3 className="h3h3NameCategory">sandwichs</h3>
               </div>
               <div
                 onClick={() => {
@@ -193,7 +196,7 @@ const AllRestarnts = () => {
                     src="https://cdn.loveandlemons.com/wp-content/uploads/2021/06/summer-desserts.jpg"
                   />
                 </div>
-                <h3  className='h3h3NameCategory'>Sweets</h3>
+                <h3 className="h3h3NameCategory">Sweets</h3>
               </div>
               <div
                 onClick={() => {
@@ -209,47 +212,57 @@ const AllRestarnts = () => {
                     src="https://images.deliveryhero.io/image/talabat/Menuitems/80850219637895358999912265.jpg"
                   />
                 </div>
-                <h3  className='h3h3NameCategory'>Juices</h3>
+                <h3 className="h3h3NameCategory">Juices</h3>
               </div>
             </div>
-            
           </div>
           <div className="AllRestarnts_B">
             {restaurants
               ? restaurants.map((elemnt, index) => {
-                if(index>=number){
-                  console.log("dfdfdfd")
-                  return (
-                    <div
-                      className="All_B_eachRestarant"
-                      key={index}
-                      onClick={() => {
-                        // console.log(elemnt.id)
+                  if (index >= number &&index<numbertow) {
+                    console.log('dfdfdfd')
+                    return (
+                      <div
+                        className="All_B_eachRestarant"
+                        key={index}
+                        onClick={() => {
+                          // console.log(elemnt.id)
 
-                        dispatch(setrestaurantId({ restId: elemnt.id }))
+                          dispatch(setrestaurantId({ restId: elemnt.id }))
 
-                        navigate('/RestaurantPage', {
-                          state: { id: localStorage.getItem('restaurantId') },
-                        })
-                      }}
-                    >
-                      <img className="logo" src={elemnt.backImg} />
+                          navigate('/RestaurantPage', {
+                            state: { id: localStorage.getItem('restaurantId') },
+                          })
+                        }}
+                      >
+                        <img className="logo" src={elemnt.backImg} />
 
-                      <h2 className="All_h2">{elemnt.name + 'kjkjkj'}</h2>
-                      <h2 className="All_h2Categorry">
-                        {elemnt.rest_category}
-                      </h2>
-                    </div>
-                  )
-
-                }
+                        <h2 className="All_h2">{elemnt.name + 'kjkjkj'}</h2>
+                        <h2 className="All_h2Categorry">
+                          {elemnt.rest_category}
+                        </h2>
+                      </div>
+                    )
+                  }
                   console.log(index)
-    
                 })
               : ' '}
           </div>
 
-          <div><button >past</button><h2></h2><h2>/{showNumber}</h2><button onClick={()=>{setNumber(4)}}>Next</button></div>
+          <div className="NextAndPervrs">
+            <button   >past</button>
+            <h2>{pageNumber}</h2>
+            <h2>/{showNumber}</h2>
+            <button
+              onClick={() => {
+                setNumber(12);
+                setNumbertow(numbertow+12)
+
+              }}
+            >
+              Next
+            </button>
+          </div>
         </div>
 
         <div className="AllRestarnts_C"></div>
