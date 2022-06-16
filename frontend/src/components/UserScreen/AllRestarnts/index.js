@@ -250,7 +250,11 @@ const AllRestarnts = () => {
           </div>
 
           <div className="NextAndPervrs">
-            <button   >past</button>
+            <button   onClick={() => {
+                setNumber(number-12);
+                setNumbertow(numbertow-12)
+
+              }}   >past</button>
             <h2>{pageNumber}</h2>
             <h2>/{showNumber}</h2>
             <button
