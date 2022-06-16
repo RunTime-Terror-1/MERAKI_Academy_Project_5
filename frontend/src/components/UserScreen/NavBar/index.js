@@ -7,7 +7,7 @@ import { setShowLoginForm } from "../../../redux/reducers/auth";
 import {
   setrestaurantId,
   setSearchRestaurant,
-  setIsShowMenu
+  setIsShowMenu,
 } from "../../../redux/reducers/User";
 import { logOut } from "./NavigationMenu";
 
@@ -28,8 +28,9 @@ const NavBar = () => {
     return (
       <div
         className="results-search-div"
-        onClick={() => {
-          dispatch(setrestaurantId(restaurant.id));
+        onClick={async () => {
+          await localStorage.setItem("restaurantId", restaurant.id);
+          dispatch(setrestaurantId({ restId: restaurant.id }));
           dispatch(setSearchRestaurant([]));
           navigate("/RestaurantPage");
         }}
@@ -60,7 +61,7 @@ const NavBar = () => {
           className="main-menu-btn"
           onClick={() => {
             console.log("SAdsad");
-            dispatch( setIsShowMenu());
+            dispatch(setIsShowMenu());
           }}
         />
         <a href="http://localhost:3000/">

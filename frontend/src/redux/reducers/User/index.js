@@ -119,8 +119,7 @@ export const UserSlice = createSlice({
     },
     //!......................................................................
     setrestaurantId: (state, action) => {
-        localStorage.setItem("restaurantId",action.payload.restId)
-        // state.restaurantIdId = action.payload.restId
+        state.restaurantIdId = action.payload.restId
       },
     //!......................................................................
     setSumitems: (state, action) => {
