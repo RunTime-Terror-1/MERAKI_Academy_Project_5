@@ -16,7 +16,9 @@ const AllRestarnts = () => {
   const [numbertow, setNumbertow] = useState(12)
 
   const [showNumber, setshowNumber] = useState(0)
-  const [pageNumber, setpageNumber] = useState(0)
+
+  
+  const [pageNumber, setpageNumber] = useState(1)
 
 
 
@@ -253,6 +255,7 @@ const AllRestarnts = () => {
             <button   onClick={() => {
                 setNumber(number-12);
                 setNumbertow(numbertow-12)
+                setpageNumber(pageNumber-1)
 
               }}   >past</button>
             <h2>{pageNumber}</h2>
@@ -261,7 +264,12 @@ const AllRestarnts = () => {
               onClick={() => {
                 setNumber(12);
                 setNumbertow(numbertow+12)
-
+                if(showNumber==pageNumber){
+                  setpageNumber(showNumber)
+                }else{
+                  setpageNumber(pageNumber+1)
+                }
+    
               }}
             >
               Next
