@@ -64,18 +64,36 @@ const ScreenHome = () => {
       </div>
 
       <div id="footer-div">
-        <div>Restaurants
-          <a></a>
-
+        <div id="footer-fiv-Restaurants"><h2>Restaurants</h2>
+       <h4>Pizza Nina</h4>
+       <h4>Caldo Restaurant</h4>
+       <h4>Fettuccine House</h4>
+       <h4>Angela restaurant</h4> 
+       
         </div>
-        <div>Popular Cuisines
-
+        <div>
+        <h2>Popular Cuisines</h2>
+          
+        <h4>Fast food</h4>
+       <h4>Break fast</h4>
+       <h4>Pizza</h4>
+       <h4>Sea Food</h4> 
         </div>
-        <div>Popular Areas
 
+        <div>
+        <h2>Popular Areas</h2>
+          
+        <h4>Amman</h4>
+       <h4>Zarqa</h4>
+       <h4>Aqapa</h4>
+       <h4>Irbid</h4> 
         </div>
-        <div>Follow us on
-
+        <div>
+        <h2>Follow us on</h2>
+        <h4>Twitter</h4>
+        <h4>Facebook</h4>
+       <h4>Instgram</h4>
+       <h4>Instagram</h4> 
         </div>
 
       </div>

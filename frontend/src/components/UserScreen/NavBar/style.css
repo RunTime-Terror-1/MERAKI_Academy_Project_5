@@ -113,7 +113,8 @@
   background-color: white;
   border-radius: 5px;
   box-shadow: 0px 0px 1px 1px black;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
+
 }
 #inner-join-us-div {
   display: flex;
@@ -157,6 +158,41 @@
   text-shadow: 1px 1px 1px var(--third-color);
 }
 
+#footer-div{
+  display: flex;
+  max-width:100%;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 0px 1px 1px black;
+  background-color: #262626;
+  color: antiquewhite;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  padding: 10px;
+  border-top-left-radius:30px ;
+  border-top-right-radius:30px ;
+ 
+}
+#footer-fiv-Restaurants{
+padding-bottom: 20px;
+}
+h4{
+
+  padding-top: 10px;
+  margin-bottom: 15px;
+
+}
+h2{
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+h4:hover{
+color:orange;
+cursor:pointer;
+}
 #join-us-div span {
   font-size: 30px;
   color: var(--second-color);
