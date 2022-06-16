@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import { User } from "./controllers/user";
 import { useDispatch } from "react-redux";
 import { setRestaurants } from "./redux/reducers/User";
+import { ContactUs } from "./components/UserScreen/ScreenHome/ContactUs";
 
 
 
@@ -30,6 +31,7 @@ useEffect(()=>{
       {/* <NavBar /> */}
       <Routes>
         <Route path={"/"} element={<ScreenHome />} />
+        <Route path={"/c"} element={<ContactUs />} />
         <Route path="/SuperAdminPanel" element={<SuperAdminPanel />} />
         <Route path="/OwnerPanel" element={<OwnerPanel />} />
         <Route path={"/AllRestarnts"} element={<AllRestarnts />} />
