@@ -61,12 +61,19 @@ const AllRestaurants = () => {
 
   const buildRestaurantCard = ({ element, index }) => {
     return (
-      <div key={element.id} id="rest-card-div">
+      <div
+        onClick={async () => {
+          await localStorage.setItem("restaurantId", element.id);
+          dispatch(setrestaurantId({ restId: element.id }));
+          navigate("/RestaurantPage", {
+            state: { id: localStorage.getItem("restaurantId") },
+          });
+        }}
+        key={element.id}
+        id="rest-card-div"
+      >
         <img src={element.backImg} />
         <h3>{element.name}</h3>
-    
-      
-     
       </div>
     );
   };
