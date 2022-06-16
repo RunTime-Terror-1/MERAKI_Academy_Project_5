@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setRestaurants } from "./redux/reducers/User";
 import { ContactUs } from "./components/UserScreen/ScreenHome/ContactUs";
 import { MainNavigationMenu } from "./components/UserScreen/NavBar/NavigationMenu";
+import { ErrorPage } from "./components/ErrorPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -42,13 +43,15 @@ const App = () => {
       <Routes>
         <Route path={"/"} element={<ScreenHome />} />
         <Route path={"/joinUs"} element={<ContactUs />} />
-        <Route path="/SuperAdminPanel" element={<SuperAdminPanel />} />
-        <Route path="/OwnerPanel" element={<OwnerPanel />} />
+        <Route path="/SuperAdminPanel/:name/:random" element={<SuperAdminPanel />} />
+        <Route path="/OwnerPanel/:name/:random" element={<OwnerPanel />} />
         <Route path={"/AllRestarnts"} element={<AllRestarnts />} />
         <Route path={"/RestaurantPage"} element={<RestaurantPage />} />
         <Route path={"/login"} element={<LoginComponent />} />
         <Route path={"/SortResturants"} element={<SortResturant />} />
         <Route path={"/CompleteOrder"} element={<CompleteOrder />} />
+        <Route path={"*"} element={<ErrorPage />} />
+       
       </Routes>
     </div>
   );

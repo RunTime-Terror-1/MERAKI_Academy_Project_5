@@ -85,13 +85,13 @@ export const LoginForm = () => {
         dispatch(setShowLoginForm());
         switch (User.roleId) {
           case 1:
-            navigate("/superAdminPanel");
+            navigate(`/superAdminPanel/${User.userName}/${User.imgUrl}`);
             break;
           case 4:
             navigate("/");
             break;
           default:
-            navigate("/ownerPanel");
+            navigate(`/ownerPanel/${User.userName}/${User.imgUrl}`);
             break;
         }
       }

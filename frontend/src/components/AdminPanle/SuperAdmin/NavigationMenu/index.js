@@ -10,10 +10,12 @@ import { setRequests, setUsers } from "../../../../redux/reducers/superAdmin";
 
 import { User } from "../../../../controllers/user";
 import { setlogout } from "../../../../redux/reducers/auth";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 export const NavigationMenu = ({setIsUsersShown}) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const { superAdminPanel, auth } = useSelector((state) => {
     return state;
   });
@@ -77,7 +79,7 @@ export const NavigationMenu = ({setIsUsersShown}) => {
       })}
       <button  onClick = {()=>{
         dispatch(setlogout());
-        Navigate("/")
+        navigate("/")
       }}id="logout-btn">
         <div id="logout-div">
           <BiLogOut />

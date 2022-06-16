@@ -12,6 +12,7 @@ import { setOrders, setRestaurants } from "../../../redux/reducers/superAdmin";
 import { Orders } from "./OrderDashboard";
 import { User } from "../../../controllers/user";
 import { Employee } from "../../../controllers/employee";
+import { ErrorPage } from "../../ErrorPage";
 
 export const OwnerPanel = () => {
   const dispatch = useDispatch();
@@ -46,7 +47,7 @@ export const OwnerPanel = () => {
       }
     })();
   }, []);
-  return (
+  return User.roleId == 2 || User.roleId == 3 ? (
     <div style={{ width: "100vw", display: "flex" }}>
       {hideMenu ? <NavigationMenu setIsUsersShown={setIsUsersShown} /> : <></>}
       <div style={{ color: "red", width: "100%" }}>
@@ -64,6 +65,6 @@ export const OwnerPanel = () => {
         )}
       </div>
     </div>
-  );
+  ):<ErrorPage />;
 };
 //Orders
