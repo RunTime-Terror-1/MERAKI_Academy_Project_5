@@ -255,7 +255,11 @@ const AllRestarnts = () => {
             <button   onClick={() => {
                 setNumber(number-12);
                 setNumbertow(numbertow-12)
-                setpageNumber(pageNumber-1)
+                    if(pageNumber==1){
+                      setpageNumber(1)
+                    }else{
+                      setpageNumber(pageNumber-1)
+                    }
 
               }}   >past</button>
             <h2>{pageNumber}</h2>
