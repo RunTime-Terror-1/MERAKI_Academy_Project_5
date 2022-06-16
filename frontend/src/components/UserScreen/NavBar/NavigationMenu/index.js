@@ -4,16 +4,28 @@ import { HiUsers } from "react-icons/hi";
 import { BiGitPullRequest, BiLogOut } from "react-icons/bi";
 import { MdFastfood } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
-import { SuperAdmin } from "../../../../controllers/superAdmin";
-import { setRequests, setUsers } from "../../../../redux/reducers/superAdmin";
+
 import { AiOutlineMenu, AiOutlineMail } from "react-icons/ai";
 import { IoMdLogIn } from "react-icons/io";
 import { VscFeedback } from "react-icons/vsc";
 import { BiDetail } from "react-icons/bi";
+import {
+  setIsSignUpFormShown,
+  setlogout,
+  setShowLoginForm,
+} from "../../../../redux/reducers/auth";
+import { Navigate, useNavigate } from "react-router-dom";
+import { setIsShowMenu } from "../../../../redux/reducers/User";
+
+export const logOut = async ({ dispatch }) => {
+  await localStorage.setItem("token", "");
+  dispatch(setlogout(""));
+};
 
 //FcFeedback
-export const MainNavigationMenu = ({ setShowMenu }) => {
+export const MainNavigationMenu = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { superAdminPanel, auth } = useSelector((state) => {
     return state;
   });
@@ -44,56 +56,86 @@ export const MainNavigationMenu = ({ setShowMenu }) => {
         <div id="main-title-nav-bar">
           <AiOutlineMenu
             onClick={() => {
-              setShowMenu(false);
+              dispatch(setIsShowMenu());
             }}
           />
         </div>
         {logoArea({})}
-        <div id="user-management-div">
-          <h4>REGISTRATION</h4>
-        </div>
-        {menuButton({
-          text: "Sign up",
-          icon: <HiUsers />,
-          onClick: async () => {},
-        })}
-        {menuButton({
-          text: "Login",
-          icon: <IoMdLogIn />,
-          onClick: async () => {},
-        })}
+
+        {auth.isLoggedIn ? (
+          <div>
+            <br />
+            <h3>Welcome Khaled</h3>
+            <br />
+          </div>
+        ) : (
+          <div>
+            <div id="user-management-div">
+              <h4>REGISTRATION</h4>
+            </div>
+            {menuButton({
+              text: "Sign up",
+              icon: <HiUsers />,
+              onClick: async () => {
+                dispatch(setShowLoginForm(true));
+                dispatch(setIsSignUpFormShown());
+                dispatch(setIsShowMenu());
+              },
+            })}
+            {menuButton({
+              text: "Login",
+              icon: <IoMdLogIn />,
+              onClick: async () => {
+                dispatch(setShowLoginForm(true));
+                dispatch(setIsShowMenu());
+              },
+            })}
+          </div>
+        )}
+
         <div id="user-management-div">
           <h4>JOIN US</h4>
         </div>
         {menuButton({
           text: "Create Your Restaurant",
           icon: <MdFastfood />,
-          onClick: async () => {},
+          onClick: async () => {
+            navigate("/joinUs",{ state:true});
+            dispatch(setIsShowMenu());
+          },
         })}
         <div id="user-management-div">
           <h4>ABOUT</h4>
         </div>
-        {menuButton({
-          text: "Contact US",
-          icon: <AiOutlineMail />,
-          onClick: async () => {},
-        })}
+       
         {menuButton({
           text: "Feedback",
           icon: <VscFeedback />,
-          onClick: async () => {},
+          onClick: async () => {
+            navigate("/joinUs",{ state:false});
+            dispatch(setIsShowMenu());
+          },
         })}
         {menuButton({
           text: "About",
           icon: <BiDetail />,
           onClick: async () => {},
         })}
-        {/* <button id="logout-btn">
-        <div id="logout-div">
-          <BiLogOut />
-          <h4>LogOut</h4>
-        </div>
-      </button> */}
+        {auth.isLoggedIn ? (
+          <button
+            onClick={() => {
+              logOut({ dispatch });
+            }}
+            id="logout-btn1"
+          >
+            <div id="logout-div1">
+              <BiLogOut />
+              <h4>LogOut</h4>
+            </div>
+          </button>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

@@ -143,6 +143,22 @@ export class Employee {
       };
     }
   }
+  static async getEmployeeRestaurant({ token }) {
+    try {
+      const response = await axios.get(`${hostUrl}/employee/get/restaurant`, {
+        headers: { authorization: `Bearer ${token}` },
+      });
+      return response.data;
+    } catch (error) {
+      return {
+        success: false,
+        massage: "Error",
+        serverError: error.response.data.message,
+      };
+    }
+  }
+
+  //getEmployeeRestaurant
 
   //deleteOrder
 }

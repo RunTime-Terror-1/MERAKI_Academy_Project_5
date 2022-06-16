@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Owner } from "../../../../../controllers/owner";
-import { setRequests } from "../../../../../redux/reducers/superAdmin";
+
 import { Gender } from "../../../../Registration/Register/GenderDiv";
 import { ErrorsDiv } from "../../../../Registration/Register/ErrorsDiv";
 import { Registration } from "../../../../../controllers/registration";
@@ -116,7 +116,7 @@ export const CreateEmployee = ({ setIsEmployeeFormShown }) => {
       ) : (
         <></>
       )}
-      <div id="signup-form-inner">
+      <div id="employee-form-inner">
         <div id="signup--exit-button">
           <button
             onClick={() => {
@@ -129,8 +129,6 @@ export const CreateEmployee = ({ setIsEmployeeFormShown }) => {
 
         <h1>Create Employee</h1>
         <hr />
-
-        <div></div>
 
         <div id="register-username-div">
           {createInput({

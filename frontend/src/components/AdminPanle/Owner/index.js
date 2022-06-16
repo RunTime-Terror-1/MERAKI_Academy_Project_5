@@ -8,8 +8,11 @@ import { NavigationBarPanel } from "../SuperAdmin/NavigationBar";
 import { Restaurants } from "../SuperAdmin/RestaurantDashboard";
 import { Meals } from "./MealsDashboard";
 import { Owner } from "../../../controllers/owner";
-import { setRestaurants } from "../../../redux/reducers/superAdmin";
+import { setOrders, setRestaurants } from "../../../redux/reducers/superAdmin";
 import { Orders } from "./OrderDashboard";
+import { User } from "../../../controllers/user";
+import { Employee } from "../../../controllers/employee";
+import { ErrorPage } from "../../ErrorPage";
 
 export const OwnerPanel = () => {
   const dispatch = useDispatch();
@@ -21,14 +24,30 @@ export const OwnerPanel = () => {
 
   useEffect(() => {
     (async () => {
-      const { restaurants } = await Owner.getOwnerRestaurants({
-        token: auth.token,
-      });
-      setIsUsersShown(2);
-      dispatch(setRestaurants(restaurants));
+      User.roleId = await JSON.parse("user").roleId;
+      if (User.roleId == "2") {
+        const { restaurants } = await Owner.getOwnerRestaurants({
+          token: auth.token,
+        });
+        console.log(restaurants);
+        dispatch(setRestaurants(restaurants));
+        setIsUsersShown(2);
+      } else {
+        const { restaurants } = await Employee.getEmployeeRestaurant({
+          token: auth.token,
+        });
+        dispatch(setRestaurants(restaurants));
+
+        const { orders } = await Employee.getAllOrder({
+          token: auth.token,
+          restaurantId: restaurants[0].id,
+        });
+        dispatch(setOrders(orders));
+        setIsUsersShown(5);
+      }
     })();
   }, []);
-  return (
+  return User.roleId == 2 || User.roleId == 3 ? (
     <div style={{ width: "100vw", display: "flex" }}>
       {hideMenu ? <NavigationMenu setIsUsersShown={setIsUsersShown} /> : <></>}
       <div style={{ color: "red", width: "100%" }}>
@@ -46,6 +65,8 @@ export const OwnerPanel = () => {
         )}
       </div>
     </div>
+  ) : (
+    <ErrorPage />
   );
 };
 //Orders

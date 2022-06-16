@@ -11,9 +11,10 @@
   --first-color: white;
   --second-color: orange;
   --third-color:black;
-  --forth-color: #F0F2F5;
+  --forth-color: rgba(210, 185, 138, 0);
   --input-br-color: #E8F0FE;
   --input-padding:10px;
   --border-radius: 5px;
   --button-padding:5px;
 }
+

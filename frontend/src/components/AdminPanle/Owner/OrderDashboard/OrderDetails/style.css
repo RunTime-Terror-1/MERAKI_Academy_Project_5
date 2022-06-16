@@ -12,7 +12,12 @@
   box-shadow: 0px 0px 2px black;
   gap: 4px;
 }
-
+#order-inner h3 {
+  color: rgb(14, 17, 14);
+  text-shadow: 0px 1px 1px black;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 .meal-row {
   display: grid;
   padding: 5px;

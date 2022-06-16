@@ -7,7 +7,10 @@ const {
   getAllOrder,
   getAllMeals,
   updateOrderState,
-  deleteOrder
+  getEmployeeRestaurant,
+  deleteOrder,
+  s
+ 
 } = require("../controllers/employee");
 const authentication = require("../middlewares/authentication");
 const authorization = require("../middlewares/authorization");
@@ -53,5 +56,12 @@ employeeRouter.get(
   authorization("3"),
   getAllMeals
 );
+employeeRouter.get(
+  "/get/restaurant/",
+  authentication,
+  authorization("3"),
+  getEmployeeRestaurant
+);
 
+//getEmployeeRestaurant
 module.exports = employeeRouter;

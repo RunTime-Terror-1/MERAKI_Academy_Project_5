@@ -1,50 +1,12 @@
-.ScreenHome {
-    display: flex;
-    flex-direction: column;
-    gap: 1vh;
-}
-
-.SH_first {
-    height: 60vh;
-    /* display: flex;
-    flex-direction: row; */
-    /* justify-content: center; */
-    background-image: url(https://image.shutterstock.com/z/stock-photo-salad-with-tomatoes-greens-dressing-oil-and-feta-cheese-in-blue-plate-on-white-wooden-background-269131160.jpg);
-
-}
-
-.SH_first_One {
-    width: 30vw;
-    height: 6vh;
-    display: flex;
-    flex-direction: row;
-    gap: 2Vw;
-
-    position: relative;
-    top: 30vh;
-    left: 40vw;
-}
-
-.SH_FOne_Button{
-    background-color: coral;
-}
-
-.SH_second{
-display: flex;
-flex-direction: row;
-gap: 5vW;
-background-color: rgb(255,240,237);
-
-}
-.SH_second_One{
-    position: relative;
-    left: 10vw;
-}
-.SH_second_Tow{
-    position: relative;
-    left: 10vw;
-}
-.SH_secound_imgOne{
-    width: 35vw;
-    height: 50vh;
-}
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgb(5, 5, 5);
+  }
+  
