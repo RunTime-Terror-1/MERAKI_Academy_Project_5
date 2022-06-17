@@ -120,9 +120,7 @@ CREATE TABLE orders (
     PRIMARY KEY (id)
 );
 
-<<<<<<< HEAD
--- INSERT INTO restaurants  (location,backImg,Logo,lat, lng,name, rest_category,owner_id) VALUES ('Amman','https://img.cdn4dd.com/cdn-cgi/image/fit=cover,width=1000,height=300,format=auto,quality=80/https://doordash-static.s3.amazonaws.com/media/store/header/fff33026-470a-444b-a248-9c0237da449f.jpg','https://img.cdn4dd.com/cdn-cgi/image/fit=cover,width=1000,height=300,format=auto,quality=80/https://doordash-static.s3.amazonaws.com/media/store/header/fff33026-470a-444b-a248-9c0237da449f.jpg','dd','ddd','The Ice Cream Parlor','pizza',1)
-=======
+
 
 CREATE TABLE orders_meals (
     id INT AUTO_INCREMENT NOT NULL,
@@ -134,6 +132,6 @@ CREATE TABLE orders_meals (
     PRIMARY KEY (id)
 );
 INSERT INTO restaurants  (location,backImg,Logo,lat, lng,name, rest_category,owner_id) VALUES ('Amman','https://img.cdn4dd.com/cdn-cgi/image/fit=cover,width=1000,height=300,format=auto,quality=80/https://doordash-static.s3.amazonaws.com/media/store/header/fff33026-470a-444b-a248-9c0237da449f.jpg','https://img.cdn4dd.com/cdn-cgi/image/fit=cover,width=1000,height=300,format=auto,quality=80/https://doordash-static.s3.amazonaws.com/media/store/header/fff33026-470a-444b-a248-9c0237da449f.jpg','dd','ddd','The Ice Cream Parlor','pizza',1)
->>>>>>> 888f3e979c0c8a57ecc29943ea7ee6563b149a4e
+
 
 -- INSERT INTO meals (name, imgUrl,category,price, restaurant_id) VALUES ("issdcddddsd_c","https://img.cdn4dd.com/p/fit=cover,width=150,height=150,format=jpeg,quality=50/media/photosV2/d18fd6d5-dda4-4113-8eec-a039bb114db7-retina-large.JPG","ice_creddddddama",10,1);
