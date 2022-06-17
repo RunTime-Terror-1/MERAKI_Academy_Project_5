@@ -81,7 +81,7 @@ const AllRestaurants = () => {
               setCurrentPage(currentPage - 11);
             }
           }}
-        >
+        > 
           {i}
         </button>
         {i !== totalPages ? <div id="border"></div> : <></>}

@@ -549,10 +549,11 @@ const CompleteOrder = () => {
                         <button
                           className="CloseButton"
                           onClick={() => {
-                            toggleModel()
+                            toggleModel();
+                            navigate('/');
                           }}
                         >
-                          close
+                          HomePage
                         </button>
                       </div>
                     </div>
