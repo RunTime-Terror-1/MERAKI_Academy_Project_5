@@ -504,13 +504,13 @@ const CompleteOrder = () => {
         <div className="divdivModels">
           {models && (testComplete == 'false' || popadress == 'false') ? (
             <div
-              className="instedModel"
+              className="instedModelOne"
               onClick={() => {
                 toggleModel()
               }}
             >
               <div className="BigBiginsted">
-    
+              
                 <div className="instedModel">
                   <h2 className="h2h2PleaseCheck">
                     Please Check Your Information
@@ -524,6 +524,7 @@ const CompleteOrder = () => {
                     close
                   </button>
                 </div>
+             
               </div>
             </div>
           ) : (

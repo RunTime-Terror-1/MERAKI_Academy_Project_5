@@ -488,23 +488,19 @@ body {
   display: block;
   width: 60vh;
   height: 20vh;
-  background-color: rgb(212, 147, 147);
+  /* background-color: rgb(212, 147, 147); */
 
   position: relative;
 
   /* bottom: 30vh;  */
 }
 
-.divdivModels {
-    /* height: 100vh; */
-  position: relative;
-  right: 20vw;
-  bottom: 100vh;
-}
+
 
 .h2h2PleaseCheck {
+    color: black;
   position: relative;
-  left: 30px;
+  left: 50px;
   top: 50px;
 }
 .CloseButton {
@@ -515,35 +511,52 @@ body {
   top: 70px;
 }
 .CloseButton:hover {
-  background-color: crimson;
+  background-color: rgb(252, 4, 53);
   width: 100px;
   height: 30px;
   position: relative;
   left: 160px;
   top: 70px;
+  cursor: pointer;
 }
 
-.BigBiginsted{
-    /* padding: 500px; */
-    width: 100vw;
-    height: 150vh;
-    position: relative;
-    /* bottom: 27vh; */
-    /* background-color:var(--first-color); */
-    background-color: crimson;
-    opacity: 0.6;
-}
 
-.instedModel {
+
+.instedModelOne {
     /* padding: 40px; */
+    text-align: start;
     display: block;
-    width: 60vh;
-    height: 20vh;
-    background-color: rgb(124, 33, 33);
-  
+    width: 100vw;
+    height: 155vh;
+ 
+    background-color:var(--first-color);
+    opacity: 0.8;
     position: relative;
-    left: 50vw;
-    height: 45vh;
+    right: 20vw;
+    bottom: 130vh;
   
     /* bottom: 30vh;  */
   }
+
+.BigBiginsted{
+    border-radius: 25px;
+    /* padding: 500px; */
+     width: 28vw;
+    height: 30vh;
+    position: relative; 
+    left: 36vw;
+    top:60vh;
+    /* bottom: 27vh; */
+    /* background-color:var(--first-color); */
+    background-color: var(--second-color);
+    opacity: 7;
+    box-shadow: 0px 1px 15px 4px var(--third-color);
+
+   
+}
+
+
+
+
+
+  
