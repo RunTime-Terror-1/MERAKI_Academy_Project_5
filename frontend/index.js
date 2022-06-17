@@ -114,13 +114,13 @@ export const UserSlice = createSlice({
 
     //!......................................................................
     setidUser: (state, action) => {
-      //khs
       state.userId = action.payload.userId;
       localStorage.setItem("userid", action.payload.userId);
     },
     //!......................................................................
     setrestaurantId: (state, action) => {
-        state.restaurantIdId = action.payload.restId
+        localStorage.setItem("restaurantId",action.payload.restId)
+        // state.restaurantIdId = action.payload.restId
       },
     //!......................................................................
     setSumitems: (state, action) => {

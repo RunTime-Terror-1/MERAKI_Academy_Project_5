@@ -44,7 +44,6 @@ const createRestaurant = async (req, res) => {
   });
 };
 const createEmployee = async (req, res) => {
-  console.log(req.body);
   const restaurant_id = req.params.restaurant_id;
   const {
     firstName,

@@ -39,7 +39,7 @@ const RestaurantPage = () => {
   })
 
   const getRestaurant = async () => {
-    // console.log( Userinfor.Idrestaurant,"4242")
+// console.log( Userinfor.Idrestaurant,"4242")
     const responseRestaurant = await User.getRestaurantById({
       restaurantId:localStorage.getItem("restaurantId"),
     })

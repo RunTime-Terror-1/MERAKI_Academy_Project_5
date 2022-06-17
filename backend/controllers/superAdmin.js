@@ -48,7 +48,7 @@ const getAllRequests = (req, res) => {
     "SELECT firstName,lastName,restaurantName,state, email, requests.id  FROM users INNER JOIN requests ON requests.owner_id =users.id AND  requests.state=? ";
 
   connection.query(query, ["In Progress"], (err, result) => {
-    console.log(err, result);
+  
     if (err) {
       return res.status(500).json({
         success: false,

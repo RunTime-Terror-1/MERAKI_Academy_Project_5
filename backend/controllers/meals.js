@@ -3,7 +3,7 @@ const connection = require("../models/db");
 
 const deleteMealById = (req, res) => {
   const mealId = req.params.mealId;
-  console.log(mealId)
+ 
   const query = "DELETE FROM meals WHERE id=?;;";
   connection.query(query, [mealId], (err, result) => {
     if (err) {

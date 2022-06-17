@@ -5,6 +5,7 @@
   flex-direction: column;
   gap: 10px;
   width: 100%;
+
   background-color: white;
   border-radius: 5px;
   box-shadow: 0px 0px 1px 1px black;
@@ -18,7 +19,6 @@
  
 }
  
-
 #footer-div h4 {
   padding-top: 10px;
   margin-bottom: 15px;
@@ -33,6 +33,32 @@ color:orange;
 cursor:pointer;
 }
  
- 
- 
+#main-nav-bar input:focus {
+ outline: 1px solid orange;
+}
+
+#main-nav-bar-btns {
+  display: flex;
+  gap: 4px;
+}
+#main-nav-bar-btns button {
+  padding: 10px;
+  background-color: var(--second-color);
+  color: black;
+  border: 0.5px solid var(--second-color);
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#main-nav-bar-btns button:hover {
+  color: var(--first-color);
+  background-color: var(--third-color);
+  border: 0;
+  cursor: pointer;
+}
+.main-menu-btn {
+  color: rgb(143, 41, 4);
+  cursor: pointer;
+}
+
 
