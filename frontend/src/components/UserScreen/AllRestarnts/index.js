@@ -82,33 +82,11 @@ const AllRestaurants = () => {
         >
           {i}
         </button>
-        {i!==totalPages?<div id="cc"></div>:<></>}
+        {i!==totalPages?<div id="border"></div>:<></>}
       </div>
     );
   };
-  const back = () => {
-    // if (number == 0) {
-    //   setNumber(0);
-    //   setNumberTow(12);
-    // } else {
-    //   setNumber(number - 12);
-    //   setNumberTow(numberTow - 12);
-    // }
-    // if (pageNumber == 1) {
-    //   setPageNumber(1);
-    // } else {
-    //   setPageNumber(pageNumber - 1);
-    // }
-  };
-  const next = () => {
-    // setNumber(number + 12);
-    // setNumberTow(numberTow + 12);
-    // if (totalPages == pageNumber) {
-    //   setPageNumber(totalPages);
-    // } else {
-    //   setPageNumber(pageNumber + 1);
-    // }
-  };
+ 
   return (
     <div className="AllRestarnts">
       <NavBar />
@@ -167,65 +145,3 @@ const AllRestaurants = () => {
 
 export default AllRestaurants;
 
-/* 
-  <div className="NextAndPervrs">
-            <button
-              className="ButtonAllresturants"
-              onClick={() => {
-                if (number == 0) {
-                  setNumber(0);
-                  setNumberTow(12);
-                } else {
-                  setNumber(number - 12);
-                  setNumberTow(numberTow - 12);
-                }
-                if (pageNumber == 1) {
-                  setPageNumber(1);
-                } else {
-                  setPageNumber(pageNumber - 1);
-                }
-              }}
-            >
-              past
-            </button>
-            <div className="divNumberPage">
-              {" "}
-              <h2>{pageNumber}</h2>
-              <h2>/{showNumber}</h2>
-            </div>
-
-            <button
-              className="ButtonAllresturants"
-              onClick={() => {
-                setNumber(number + 12);
-                setNumberTow(numberTow + 12);
-
-                if (showNumber == pageNumber) {
-                  setPageNumber(showNumber);
-                } else {
-                  setPageNumber(pageNumber + 1);
-                }
-              }}
-            >
-              Next
-            </button>
-          </div>
-*/
-{
-  /* <div
-                onClick={() => {
-                  navigate("/SortResturants", {
-                    state: { sortcategory: "pizza" },
-                  });
-                }}
-              >
-                <div className="DivimgCategory">
-                  {" "}
-                  <img
-                    className="imgCategory"
-                    src="https://i0.wp.com/upandgoneblog.com/wp-content/uploads/2019/08/Ramen.jpg?fit=860%2C645&ssl=1"
-                  />
-                </div>
-                <h3 className="h3h3NameCategory">Asian</h3>
-              </div>*/
-}
