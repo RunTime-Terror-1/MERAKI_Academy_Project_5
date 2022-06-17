@@ -59,7 +59,7 @@ const CompleteOrder = () => {
   //!..................Functions.............................................
 
   const saveAdress = async (id) => {
-    console.log(messageLocation, testComplete, '636363')
+    console.log(messageLocation, testComplete, '62 63 63')
     if (messageLocation == 'good' && testComplete == 'true') {
       const adress = await User.UpdateAdress({
         userid: id,
@@ -125,7 +125,7 @@ const CompleteOrder = () => {
   }
   //!........................................................
   const sentUserOrder = async (id) => {
-    console.log(Userinfor.sumPrice, '1144444444444444444444')
+    console.log(messageLocation, testComplete, '144   128 128')
     // console.log( Userinfor.yourPrice[0].restaurant,"114")
     if (testComplete == 'true' && messageLocation == 'good') {
       console.log('sentOrder')
@@ -510,7 +510,6 @@ const CompleteOrder = () => {
               }}
             >
               <div className="BigBiginsted">
-              
                 <div className="instedModel">
                   <h2 className="h2h2PleaseCheck">
                     Please Check Your Information
@@ -524,20 +523,39 @@ const CompleteOrder = () => {
                     close
                   </button>
                 </div>
-             
               </div>
             </div>
           ) : (
-            ' '
-            // <div>
-            //   {models &&(testComplete == 'true' && popadress == 'true') ? (
-            //     <div className="instedModel">
-            //       <h2 className="h2h2PleaseCheck">Order Completed True </h2>
-            //     </div>
-            //   ) : (
-            //     ''
-            //   )}
-            // </div>
+            <div>
+              {models && testComplete == 'true' && popadress == 'true' ? (
+               
+                  <div
+                    className="instedModelOne"
+                    onClick={() => {
+                      toggleModel()
+                    }}
+                  >
+                    <div className="BigBiginsted">
+                      <div className="instedModel">
+                        <h2 className="h2h2PleaseCheck">
+                          Order Completed will access you
+                        </h2>
+                        <button
+                          className="CloseButton"
+                          onClick={() => {
+                            toggleModel()
+                          }}
+                        >
+                          close
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                
+              ) : (
+                ''
+              )}
+            </div>
           )}
         </div>
       </div>
