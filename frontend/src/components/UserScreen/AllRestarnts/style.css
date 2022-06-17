@@ -6,8 +6,8 @@ gap: 5px;
 #restaurants-div {
   display: grid;
   width: 100%;
-  grid-template-columns: 24% 24% 24% 24%;
-  gap: 1.1%;
+  grid-template-columns: 32% 32% 32%;
+  gap: 1.6%;
 }
 #rest-card-div {
   display: flex;
@@ -55,10 +55,11 @@ gap: 5px;
   );
 }
 .Continert1 {
-  width: 98%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-top: 20px;
 }
 
 
@@ -69,7 +70,7 @@ gap: 5px;
   justify-content: center;
   padding: 10px;
   flex-direction: column;
- gap: 20px;
+ gap: 30px;
 }
 #categoryIcon{
   display: flex;
@@ -104,10 +105,11 @@ gap: 5px;
   padding: 5px;  
   justify-content: center;
   gap: 10px;
+  height: fit-content;
   text-align: start;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
 }
 .imgCategory {
   width: 70px;

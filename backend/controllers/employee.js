@@ -150,13 +150,13 @@ const deleteOrder = (req, res) => {
 
 const getAllOrder = (req, res) => {
   const restaurant_id = req.params.id;
-  const query = `SELECT OS.id,email,state,receipt,quantity,MS.name,MS.price,AD.city,AD.notes,AD.street,AD.buldingNumber FROM orders OS INNER JOIN address AD INNER JOIN  restaurants RS INNER JOIN users US INNER JOIN orders_meals OM INNER JOIN meals MS ON  AD.user_id= OS.user_id AND OS.user_id = US.id AND OS.restaurant_id = ?  AND  OS.restaurant_id = RS.id AND OM.order_id = OS.id AND MS.id = OM.meal_id AND OM.id AND OS.is_deleted=0; 
+  const query = `SELECT OS.id,email,state,receipt,OS.quantity,MS.name,MS.price,AD.city,AD.notes,AD.street,AD.buldingNumber FROM orders OS INNER JOIN address AD INNER JOIN  restaurants RS INNER JOIN users US INNER JOIN orders_meals OM INNER JOIN meals MS ON  AD.user_id= OS.user_id AND OS.user_id = US.id AND OS.restaurant_id = ?  AND  OS.restaurant_id = RS.id AND OM.order_id = OS.id AND MS.id = OM.meal_id AND OM.id AND OS.is_deleted=0; 
   `;
   const data = [restaurant_id];
 
   connection.query(query, data, (err, orders) => {
     if (err) {
-      res.status(500).json({ err });
+      return res.status(500).json({ err });
     }
     if (orders.length) {
       res.status(200).json({
