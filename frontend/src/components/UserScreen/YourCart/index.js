@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Counter from "./Counter";
 import { useNavigate } from "react-router-dom";
 import { setsumPriceUser,setSumitems} from "../../../redux/reducers/User";
+import { setShowLoginForm } from "../../../redux/reducers/auth";
 
 
 const YourCart = () => {
@@ -18,6 +19,7 @@ const YourCart = () => {
       yourTotal: state.User.total,
       islogin: state.auth.isLoggedIn,
       name: state.User.name,
+      LoginForm:state.auth.showLoginForm,
     };
   });
 
@@ -29,7 +31,7 @@ const YourCart = () => {
 
 
   const complete = () => {
-    Userinfor.islogin == true ? navigate("/CompleteOrder") : navigate("/Login");
+    Userinfor.islogin == true ?dispatch(setShowLoginForm(true)) : navigate("/Login");
   };
 
 

@@ -64,7 +64,7 @@ export class User {
     }
   }
 
-  static async UpdateAdress({ userid, city, buldingNumber, street, notes }) {
+  static async UpdateAddress({ userid, city, buldingNumber, street, notes }) {
     console.log(userid, 'userssss', city, buldingNumber, street)
     try {
       const response = await axios.put(`${hostUrl}/user/${userid}`, {

@@ -170,6 +170,7 @@ const senOrder = (req, res) => {
   const data = [Quntity, state, receipt, resturantId, user_id];
   connection.query(query, data, (err, result) => {
     if (err) {
+      console.log(err.message);
       return res.status(500).json({
         success: false,
         massage: "Server error",
