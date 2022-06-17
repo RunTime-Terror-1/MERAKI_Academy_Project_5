@@ -6,299 +6,142 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setrestaurantId } from "../../../redux/reducers/User";
 
-const AllRestarnts = () => {
+const AllRestaurants = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const [restaurants, setRestaurants] = useState("");
-
-  const [number, setNumber] = useState(0);
-  const [numbertow, setNumbertow] = useState(12);
-
-  const [showNumber, setshowNumber] = useState(0);
-
-  const [pageNumber, setpageNumber] = useState(1);
-
-  const Userinfor = useSelector((state) => {
-    return {
-      yourCart: state.User.cart,
-      yourPrice: state.User.price,
-      yourTotal: state.User.total,
-      islogin: state.auth.isLoggedIn,
-      name: state.User.name,
-      token: state.auth.token,
-      Idrestaurant: state.User.restaurantIdId,
-    };
-  });
+  let [totalPages, setTotalPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageBtn, setPageBtn] = useState([]);
 
   const getRestaurants = async () => {
-    let responserest = await User.getAllRestaurants();
-
-    setRestaurants(responserest.result);
-    console.log(responserest.result.length);
-    // console.log(Math.ciresponserest.result.length)
-    setshowNumber(Math.ceil(responserest.result.length / 12));
+    let responseRest = await User.getAllRestaurants();
+    setRestaurants(responseRest.result);
+    totalPages = Math.ceil(responseRest.result.length / 8);
+    const arr = [];
+    for (let i = 0; i < totalPages; i++) {
+      arr.push(i + 1);
+    }
+    console.log(arr, totalPages);
+    setTotalPages(totalPages);
+    setPageBtn(arr);
   };
 
   useEffect(() => {
     getRestaurants();
   }, []);
 
+  const buildCategoryIcon = ({ url, text = "Pizza" }) => {
+    return (
+      <div
+        onClick={() => {
+          navigate("/SortResturants", {
+            state: { sortcategory: "pizza" },
+          });
+        }}
+      >
+        <div className="DivimgCategory">
+          <img className="imgCategory" src={url} />
+        </div>
+
+        <h3 className="h3h3NameCategory">{text}</h3>
+      </div>
+    );
+  };
+
+  const buildRestaurantCard = ({ element, index }) => {
+    return (
+      <div
+        onClick={async () => {
+          await localStorage.setItem("restaurantId", element.id);
+          dispatch(setrestaurantId({ restId: element.id }));
+          navigate("/RestaurantPage", {
+            state: { id: localStorage.getItem("restaurantId") },
+          });
+        }}
+        key={element.id}
+        id="rest-card-div"
+      >
+        <img src={element.backImg} />
+        <h3>{element.name}</h3>
+      </div>
+    );
+  };
+  const buildPageButton = (i) => {
+    return (
+      <div style={{display:"flex"}}>
+        <button
+          key={i}
+          onClick={() => {
+            if (currentPage < i) {
+              setCurrentPage(currentPage + 7);
+            } else if (i < currentPage) {
+              setCurrentPage(currentPage - 7);
+            }
+          }}
+        >
+          {i}
+        </button>
+        {i!==totalPages?<div id="border"></div>:<></>}
+      </div>
+    );
+  };
+ 
   return (
     <div className="AllRestarnts">
-      {<NavBar />}
-      <div className="AllAllRestarntsShow">
-        <div className="AllRestarnts_A"></div>
-
+      <NavBar />
+      <div className="first-restaurant-div">
         <div className="Continert">
           <div className="Continer_A">
             <div className="Continer_A_A">
-              <div
-                onClick={() => {
-                  navigate("/SortResturants", {
-                    state: { sortcategory: "pizza" },
-                  });
-                }}
-              >
-                <div className="DivimgCategory">
-                  {" "}
-                  <img
-                    className="imgCategory"
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4Zyu-T5WQ7bLxROPZPWo7u65WqNKpnk7NWQ&usqp=CAU"
-                  />
-                </div>
+              {buildCategoryIcon({
+                url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4Zyu-T5WQ7bLxROPZPWo7u65WqNKpnk7NWQ&usqp=CAU",
+                text: "Pizza",
+              })}
+              {buildCategoryIcon({
+                url: "https://media-cdn.tripadvisor.com/media/photo-s/17/57/7d/17/2-egg-breakfast.jpg",
+                text: "Breakfast",
+              })}
+              {buildCategoryIcon({
+                url: "https://c8.alamy.com/comp/2F7BRP8/french-potato-pack-box-cartoon-fastfood-fry-potato-isolated-illustration-fast-food-2F7BRP8.jpg",
+                text: "Fast food",
+              })}
 
-                <h3 className="h3h3NameCategory">Pizza</h3>
-              </div>
-              <div
-                onClick={() => {
-                  navigate("/SortResturants", {
-                    state: { sortcategory: "pizza" },
-                  });
-                }}
-              >
-                <div className="DivimgCategory">
-                  {" "}
-                  <img
-                    className="imgCategory"
-                    src="https://media-cdn.tripadvisor.com/media/photo-s/17/57/7d/17/2-egg-breakfast.jpg"
-                  />
-                </div>
-                <h3 className="h3h3NameCategory">Breakfast</h3>
-              </div>
-              <div
-                onClick={() => {
-                  navigate("/SortResturants", {
-                    state: { sortcategory: "pizza" },
-                  });
-                }}
-              >
-                <div className="DivimgCategory">
-                  {" "}
-                  <img
-                    className="imgCategory"
-                    src="https://c8.alamy.com/comp/2F7BRP8/french-potato-pack-box-cartoon-fastfood-fry-potato-isolated-illustration-fast-food-2F7BRP8.jpg"
-                  />
-                </div>
-                <h3 className="h3h3NameCategory">Fast food</h3>
-              </div>
-              <div
-                onClick={() => {
-                  navigate("/SortResturants", {
-                    state: { sortcategory: "pizza" },
-                  });
-                }}
-              >
-                <div className="DivimgCategory">
-                  {" "}
-                  <img
-                    className="imgCategory"
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLKopRRHoSDAgqTfKGo8tn1y_iggg0CtY-YPVx-5V9elOO0080P-eAJi8zbqtpytywskg&usqp=CAU"
-                  />
-                </div>
-                <h3 className="h3h3NameCategory">Burgess</h3>
-              </div>
-              <div
-                onClick={() => {
-                  navigate("/SortResturants", {
-                    state: { sortcategory: "pizza" },
-                  });
-                }}
-              >
-                <div className="DivimgCategory">
-                  {" "}
-                  <img
-                    className="imgCategory"
-                    src="https://thumbs.dreamstime.com/b/vector-illustration-heart-shape-red-fruits-vegetables-healthy-nutrition-organic-concept-flat-style-127159995.jpg"
-                  />
-                </div>
-                <h3 className="h3h3NameCategory">Healthy</h3>
-              </div>
-              <div
-                onClick={() => {
-                  navigate("/SortResturants", {
-                    state: { sortcategory: "pizza" },
-                  });
-                }}
-              >
-                <div className="DivimgCategory">
-                  {" "}
-                  <img
-                    className="imgCategory"
-                    src="https://i0.wp.com/upandgoneblog.com/wp-content/uploads/2019/08/Ramen.jpg?fit=860%2C645&ssl=1"
-                  />
-                </div>
-                <h3 className="h3h3NameCategory">Asian</h3>
-              </div>
-              <div
-                onClick={() => {
-                  navigate("/SortResturants", {
-                    state: { sortcategory: "pizza" },
-                  });
-                }}
-              >
-                <div className="DivimgCategory">
-                  {" "}
-                  <img
-                    className="imgCategory"
-                    src="https://media-cdn.tripadvisor.com/media/photo-s/18/3a/09/6c/bonefish-seafood-platter.jpg"
-                  />
-                </div>
-                <h3 className="h3h3NameCategory">Sea Food</h3>
-              </div>
-              <div
-                onClick={() => {
-                  navigate("/SortResturants", {
-                    state: { sortcategory: "pizza" },
-                  });
-                }}
-              >
-                <div className="DivimgCategory">
-                  {" "}
-                  <img
-                    className="imgCategory"
-                    src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/190322-ham-sandwich-horizontal-1553721016.png"
-                  />
-                </div>
-                <h3 className="h3h3NameCategory">sandwichs</h3>
-              </div>
-              <div
-                onClick={() => {
-                  navigate("/SortResturants", {
-                    state: { sortcategory: "pizza" },
-                  });
-                }}
-              >
-                <div className="DivimgCategory">
-                  {" "}
-                  <img
-                    className="imgCategory"
-                    src="https://cdn.loveandlemons.com/wp-content/uploads/2021/06/summer-desserts.jpg"
-                  />
-                </div>
-                <h3 className="h3h3NameCategory">Sweets</h3>
-              </div>
-              <div
-                onClick={() => {
-                  navigate("/SortResturants", {
-                    state: { sortcategory: "pizza" },
-                  });
-                }}
-              >
-                <div className="DivimgCategory">
-                  {" "}
-                  <img
-                    className="imgCategory"
-                    src="https://images.deliveryhero.io/image/talabat/Menuitems/80850219637895358999912265.jpg"
-                  />
-                </div>
-                <h3 className="h3h3NameCategory">Juices</h3>
-              </div>
+              {buildCategoryIcon({
+                url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLKopRRHoSDAgqTfKGo8tn1y_iggg0CtY-YPVx-5V9elOO0080P-eAJi8zbqtpytywskg&usqp=CAU",
+                text: "Burgess",
+              })}
+
+              {buildCategoryIcon({
+                url: "https://thumbs.dreamstime.com/b/vector-illustration-heart-shape-red-fruits-vegetables-healthy-nutrition-organic-concept-flat-style-127159995.jpg",
+                text: "Healthy",
+              })}
             </div>
           </div>
-          <div className="AllRestarnts_B">
+
+          <div id="restaurants-div">
             {restaurants
-              ? restaurants.map((elemnt, index) => {
-                  if (index >= number && index < numbertow) {
-                    return (
-                      <div
-                        className="All_B_eachRestarant"
-                        key={index}
-                        onClick={async () => {
-                          await localStorage.setItem("restaurantId", elemnt.id);
-                          dispatch(setrestaurantId({ restId: elemnt.id }));
-
-                          navigate("/RestaurantPage", {
-                            state: { id: localStorage.getItem("restaurantId") },
-                          });
-                        }}
-                      >
-                        <img className="logo" src={elemnt.backImg} />
-
-                        <h2 className="All_h2">{elemnt.name}</h2>
-                        <h2 className="All_h2Categorry">
-                          {elemnt.rest_category}
-                        </h2>
-                      </div>
-                    );
+              ? restaurants.map((element, index) => {
+                  if (index >= currentPage - 1 && index < currentPage + 7) {
+                    return buildRestaurantCard({ element, index });
                   }
-                  console.log(index);
                 })
               : " "}
           </div>
-
-          <div className="NextAndPervrs">
-            <button
-              className="ButtonAllresturants"
-              onClick={() => {
-                if (number == 0) {
-                  setNumber(0);
-                  setNumbertow(12);
-                  console.log("One");
-                } else {
-                  setNumber(number - 12);
-                  setNumbertow(numbertow - 12);
-                }
-                //  setNumber(number-12);
-                //  setNumbertow(numbertow-12)
-                if (pageNumber == 1) {
-                  setpageNumber(1);
-                } else {
-                  setpageNumber(pageNumber - 1);
-                }
-              }}
-            >
-              past
-            </button>
-            <div className="divNumberPage">
-              {" "}
-              <h2>{pageNumber}</h2>
-              <h2>/{showNumber}</h2>
+          {pageBtn.length > 1 ? (
+            <div id="pagination-div">
+              {pageBtn.map((i) => {
+                return buildPageButton(i);
+              })}
             </div>
-
-            <button
-              className="ButtonAllresturants"
-              onClick={() => {
-                setNumber(number + 12);
-                setNumbertow(numbertow + 12);
-                // if(numbertow>restaurants.length)
-
-                if (showNumber == pageNumber) {
-                  setpageNumber(showNumber);
-                } else {
-                  setpageNumber(pageNumber + 1);
-                }
-              }}
-            >
-              Next
-            </button>
-          </div>
+          ) : (
+            <></>
+          )}
         </div>
-
-        <div className="AllRestarnts_C"></div>
       </div>
     </div>
   );
 };
 
-export default AllRestarnts;
+export default AllRestaurants;
+
