@@ -127,6 +127,7 @@ const CompleteOrder = () => {
         <div id="summery">
           <h1>Order Summary</h1>
           <h2>{Userinfor.name} Restaurant</h2>
+          <div id="summary2">
           <div className="table-row">
             <h3>#</h3>
             <h3>Items</h3>
@@ -149,6 +150,7 @@ const CompleteOrder = () => {
           ) : (
             <></>
           )}
+           </div>
         </div>
 
         <div className="location">
