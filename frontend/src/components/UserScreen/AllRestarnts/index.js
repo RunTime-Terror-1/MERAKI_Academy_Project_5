@@ -3,18 +3,20 @@ import React, { useState, useEffect, useContext } from "react";
 import { User } from "../../../controllers/user";
 import NavBar from "../NavBar";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { setrestaurantId } from "../../../redux/reducers/User";
 
 const AllRestaurants = () => {
-  const {state} = useLocation();
+  const { state } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [restaurants, setRestaurants] = useState("");
   let [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageBtn, setPageBtn] = useState([]);
-  const[currentCategory, setCurrentCategory] = useState(state=="all"?"":state);
+  const [currentCategory, setCurrentCategory] = useState(
+    state == "all" ? "" : state
+  );
 
   useEffect(() => {
     getRestaurants();
@@ -35,10 +37,10 @@ const AllRestaurants = () => {
     return (
       <div
         key={text}
-        id= "categoryIcon"
+        id="categoryIcon"
         onClick={() => {
-          setCurrentCategory(text.toLowerCase())
-         navigate(`/AllRestarnts/${text.toLowerCase()}`)
+          setCurrentCategory(text.toLowerCase());
+          navigate(`/AllRestarnts/${text.toLowerCase()}`);
         }}
       >
         <div className="DivimgCategory">
@@ -108,14 +110,13 @@ const AllRestaurants = () => {
       text: "Healthy",
     },
     {
-      url:"https://cdn.loveandlemons.com/wp-content/uploads/2021/06/summer-desserts.jpg",
-      text:"Sweets"
+      url: "https://cdn.loveandlemons.com/wp-content/uploads/2021/06/summer-desserts.jpg",
+      text: "Sweets",
     },
     {
-      url:"https://images.deliveryhero.io/image/talabat/Menuitems/80850219637895358999912265.jpg",
-      text:"Juices"
+      url: "https://images.deliveryhero.io/image/talabat/Menuitems/80850219637895358999912265.jpg",
+      text: "Juices",
     },
-  
   ];
 
   return (
@@ -135,7 +136,11 @@ const AllRestaurants = () => {
             <div id="restaurants-div">
               {restaurants
                 ? restaurants.map((element, index) => {
-                    if (index >= currentPage - 1 && index < currentPage + 11 && element.rest_category.includes(currentCategory)) {
+                    if (
+                      index >= currentPage - 1 &&
+                      index < currentPage + 11 &&
+                      element.rest_category.includes(currentCategory)
+                    ) {
                       return buildRestaurantCard({ element, index });
                     }
                   })
