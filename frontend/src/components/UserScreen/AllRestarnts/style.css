@@ -42,39 +42,67 @@
   flex-direction: row;
   width: 100%;
   align-items: flex-start;
-  height: 100vh;
+  height: 84.3vh;
   background: linear-gradient(
     var(--first-color),
     rgb(233, 207, 157),
     rgb(243, 177, 54)
   );
 }
+.Continert1 {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+ 
+}
+
 
 .Continert {
-  width: 100%;
+  width:90%;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 10px;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
 }
-.Continer_A img {
+#categoryIcon{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+.Continer_A{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.Continer_A_A img {
   box-shadow: 1px 1px 1px 1px black;
   border-radius: 20px;
 }
-.Continer_A h3 {
+.Continer_A_A h3 {
   color: var(--third-color);
+ 
   text-shadow: 0px 1px 1px black;
 }
-
+#inner-div-m{
+  display: flex;
+  flex-direction: column;
+}
 .Continer_A_A {
   display: flex;
-  flex-direction: row;
-  width: 100%;
+  flex-direction: column;
+  background-color: var(--first-color);
+  box-shadow: 1px 1px 2px 0.5px black;
+  padding: 5px;  
   justify-content: center;
-  gap: 20px;
+  gap: 10px;
   text-align: start;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 .imgCategory {
   width: 70px;
@@ -122,7 +150,7 @@
 #pagination-div button:hover {
   background-color: var(--first-color);
   color: black;
-  border-radius: 1px;
+  border-radius: 3px;
 }
 #border {
   height: 100%;
