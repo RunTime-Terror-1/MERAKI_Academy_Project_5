@@ -227,10 +227,16 @@ body {
 
 .Number {
     border-radius: 10px;
-    padding: 10px;
+    /* padding: 10px; */
   /* width: 35vw; */
   height: 25px;
   width: 29.3vw;
+}
+.inputtagNumber{
+    border-radius: 10px;
+    padding: 10px;
+    height: 25px;
+    width: 29.3vw;
 }
 /* .divColorMessage{
     padding: 20px;
@@ -490,9 +496,10 @@ body {
 }
 
 .divdivModels {
+    /* height: 100vh; */
   position: relative;
-  left: 20vw;
-  bottom: 60vh;
+  right: 20vw;
+  bottom: 100vh;
 }
 
 .h2h2PleaseCheck {
@@ -515,3 +522,28 @@ body {
   left: 160px;
   top: 70px;
 }
+
+.BigBiginsted{
+    /* padding: 500px; */
+    width: 100vw;
+    height: 150vh;
+    position: relative;
+    /* bottom: 27vh; */
+    /* background-color:var(--first-color); */
+    background-color: crimson;
+    opacity: 0.6;
+}
+
+.instedModel {
+    /* padding: 40px; */
+    display: block;
+    width: 60vh;
+    height: 20vh;
+    background-color: rgb(124, 33, 33);
+  
+    position: relative;
+    left: 50vw;
+    height: 45vh;
+  
+    /* bottom: 30vh;  */
+  }
