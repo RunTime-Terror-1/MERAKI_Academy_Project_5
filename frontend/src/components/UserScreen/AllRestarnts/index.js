@@ -76,7 +76,7 @@ const AllRestaurants = () => {
     return (
       <div style={{ display: "flex" }} key={i + "k"}>
         <button
-          style={currentIndex === i ? { backgroundColor: "orange" } : {}}
+          style={currentPage === i ? { backgroundColor: "white",color:"black" } : {}}
           onClick={() => {
             if (currentPage < i) {
               setCurrentIndex(currentIndex + (i - currentPage) * 9);
