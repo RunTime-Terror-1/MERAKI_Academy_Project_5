@@ -104,6 +104,7 @@ USE RUNTIME_TERROR;
 --     PRIMARY KEY (id)
 -- );
 
+
 DROP TABLE orders_meals;
 DROP TABLE orders;
 CREATE TABLE orders (
@@ -118,6 +119,7 @@ CREATE TABLE orders (
     is_deleted TINYINT DEFAULT 0,
     PRIMARY KEY (id)
 );
+
 
 CREATE TABLE orders_meals (
     id INT AUTO_INCREMENT NOT NULL,

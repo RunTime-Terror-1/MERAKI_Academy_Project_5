@@ -465,26 +465,31 @@ const CompleteOrder = () => {
             </div>
           ) : (
             <div>
-              {models && testComplete == "true" && popAddress == "true" ? (
-                <div
-                  className="instedModelOne"
-                  onClick={() => {
-                    toggleModel();
-                  }}
-                >
-                  <div className="BigBiginsted">
-                    <div className="instedModel">
-                      <h2 className="h2h2PleaseCheck">
-                        Order Completed will access you
-                      </h2>
-                      <button
-                        className="CloseButton"
-                        onClick={() => {
-                          toggleModel();
-                        }}
-                      >
-                        close
-                      </button>
+              {models && testComplete == 'true' && popadress == 'true' ? (
+               
+                  <div
+                    className="instedModelOne"
+                    onClick={() => {
+                      toggleModel()
+                    }}
+                  >
+                    <div className="BigBiginsted">
+                      <div className="instedModel">
+                        <h2 className="h2h2PleaseCheck">
+                          Order Completed will access you
+                        </h2>
+                        <button
+                          className="CloseButton"
+                          onClick={() => {
+                            toggleModel();
+                            navigate('/');
+                          }}
+                        >
+                          HomePage
+                        </button>
+                      </div>
+
+              
                     </div>
                   </div>
                 </div>
