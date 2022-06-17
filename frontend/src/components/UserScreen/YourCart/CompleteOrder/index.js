@@ -25,7 +25,6 @@ const CompleteOrder = () => {
   let testAddress = "false";
   //!.............
   const dispatch = useDispatch();
- 
 
   const Userinfor = useSelector((state) => {
     return {
@@ -40,11 +39,9 @@ const CompleteOrder = () => {
     };
   });
 
-
   const saveAddress = async (id) => {
-    // console.log(messageLocation, testComplete, '62 63 63')
     if (messageLocation == "good" && testComplete == "true") {
-      const adress = await User.UpdateAdress({
+      const address = await User.UpdateAddress({
         userid: id,
         city: Area,
         buldingNumber: buildingNumber,
@@ -56,11 +53,9 @@ const CompleteOrder = () => {
 
   //!........................................................
   const getAdress = async (userid) => {
-    // console.log("idiiddid", userid)
     const pastadess = await User.getaddrssByuserTd({ userid });
 
     if (pastadess.result[0].street != null) {
-      //   console.log('nulllll')
       testAddress = "true";
       setTrue("true");
     }
@@ -87,31 +82,17 @@ const CompleteOrder = () => {
       city != "empty"
     ) {
       setMessage("good");
-      console.log(messageLocation, "105.105");
     } else {
       await setMessage("enter all information");
-      //   console.log(messageLocation,"109.109")
     }
   };
-  //   console.log(messageLocation, '112 112')
-
-  //!........................................................
-  // const click = () => {
-  //     alert("ggggggggggggggg");
-
-  // }
 
   const toggleModel = () => {
-    console.log("ghghg");
     setModels(!models);
-    // console.log(models)
   };
   //!........................................................
   const sentUserOrder = async (id) => {
-    // console.log(messageLocation, testComplete, '144   128 128')
-    // console.log( Userinfor.yourPrice[0].restaurant,"114")
     if (testComplete == "true" && messageLocation == "good") {
-      console.log(Userinfor);
       await User.sentOrder({
         userid: id,
         state: "progess",
@@ -124,11 +105,8 @@ const CompleteOrder = () => {
   };
   //!........................................................
   const move = () => {
-    console.log(models, testComplete, messageLocation, "146");
     if (testComplete == "true" && messageLocation == "good") {
-      console.log("in in");
       setTimeout(() => {
-        console.log("move move");
         navigate("/");
       }, 2000);
     }
@@ -145,54 +123,34 @@ const CompleteOrder = () => {
   return (
     <div className="completeOrder">
       <NavBar />
-
       <div className="order">
-        <div className="summaryOrder">
-          <div className="divSummary">
-            <h2 className="h2_order">Order Summary</h2>
+        <div id="summery">
+          <h1>Order Summary</h1>
+          <h2>{Userinfor.name} Restaurant</h2>
+          <div className="table-row">
+            <h3>#</h3>
+            <h3>Items</h3>
+            <h3>Quantity</h3>
+            <h3>Price</h3>
+            <h3>Total</h3>
           </div>
-          <div className="orderinformation">
-            <h1 className="restaauranttName">{Userinfor.name}</h1>
-            <div className="orderinformationtwo">
-              <h2 className="items">items</h2>
-              <div className="title_tow">
-                <h2 className="h2"> quantity</h2>
-                <h2 className="h2"> Price</h2>
-
-                <h2 className="h2">Total</h2>
-              </div>
-            </div>
-            <div className="orderinformationthree">
-              {/* {' '} */}
-              <div className="mealItems">
-                {Userinfor.yourPrice
-                  ? Userinfor.yourPrice.map((element, index) => {
-                      return (
-                        <div className="div_return_map" keys={index}>
-                          <h3 className="NameMeal">{element.name}</h3>
-                          <div className="insted__div_return_map">
-                            <div className="h3_Qun">
-                              {element.price / element.priceOne}
-                            </div>
-                            <div className="h3_Pri">
-                              {element.priceOne + " JD"}
-                            </div>
-                            <div className="h3_totprice">
-                              {(element.price / element.priceOne) *
-                                element.priceOne +
-                                "  JD"}
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })
-                  : ""}
-              </div>{" "}
-            </div>
-
-            {/* <div className="sumprice">total:{Userinfor.sumPrice}</div> */}
-          </div>
+          {Userinfor.yourPrice ? (
+            Userinfor.yourPrice.map((element, index) => {
+              return (
+                <div key={index} className="table-row">
+                  <strong>{index + 1}</strong>
+                  <strong>{element.name}</strong>
+                  <strong>{element.price / element.priceOne}</strong>
+                  <strong>{element.priceOne}</strong>
+                  <strong>{element.price}</strong>
+                </div>
+              );
+            })
+          ) : (
+            <></>
+          )}
         </div>
+
         <div className="location">
           <div className="Enterh2_order">
             {" "}
@@ -354,7 +312,6 @@ const CompleteOrder = () => {
                     value="huey1"
                     onChange={(e) => {
                       setPayment("Visa");
-                      console.log(payment, "lllll", "Visa");
                       setTestComplete("true");
                       //   setPopadress("true")
                     }}
@@ -369,7 +326,6 @@ const CompleteOrder = () => {
                     value="huey2"
                     onChange={(e) => {
                       setPayment("Cash");
-                      console.log(payment, "22222");
                       setTestComplete("true");
                       //   setPopadress("false")
                     }}
@@ -412,12 +368,7 @@ const CompleteOrder = () => {
                           <option>12</option>
                         </select>
 
-                        <select
-                          className="inputmounth"
-                          onChange={(e) => {
-                            // setDestin(e.target.value);
-                          }}
-                        >
+                        <select className="inputmounth" onChange={(e) => {}}>
                           <option>yy</option>
                           <option>2022</option>
                           <option>2023</option>
@@ -545,10 +496,31 @@ const CompleteOrder = () => {
     </div>
   );
 };
-// ;<div>
-//   <div className="instedModel">
-//     <h2 className="h2h2PleaseCheck">Order Completed True </h2>
-//   </div>
-// </div>
 
 export default CompleteOrder;
+/* 
+ <div className="mealItems">
+                {Userinfor.yourPrice
+                  ? Userinfor.yourPrice.map((element, index) => {
+                      return (
+                        <div className="div_return_map" keys={index}>
+                          <h3 className="NameMeal">{element.name}</h3>
+                          <div className="insted__div_return_map">
+                            <div className="h3_Qun">
+                              {element.price / element.priceOne}
+                            </div>
+                            <div className="h3_Pri">
+                              {element.priceOne + " JD"}
+                            </div>
+                            <div className="h3_totprice">
+                              {(element.price / element.priceOne) *
+                                element.priceOne +
+                                "  JD"}
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })
+                  : ""}
+              </div>{" "}
+*/

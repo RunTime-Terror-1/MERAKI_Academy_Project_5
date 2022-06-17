@@ -1,7 +1,9 @@
-html,
-body {
-  max-width: 100%;
-  /* overflow-x: hidden; */
+.table-row{
+  display: grid;
+  width: 100%;
+  grid-template-columns: 10% 22% 22% 22% 24% ;
+  text-align: center;
+ 
 }
 
 .completeOrder {
