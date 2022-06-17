@@ -465,7 +465,7 @@ const CompleteOrder = () => {
             </div>
           ) : (
             <div>
-              {models && testComplete == 'true' && popadress == 'true' ? (
+              {models && testComplete == 'true' && popAddress == 'true' ? (
                
                   <div
                     className="instedModelOne"
