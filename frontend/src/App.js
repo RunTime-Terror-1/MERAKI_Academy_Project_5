@@ -7,7 +7,7 @@ import RestaurantPage from "./components/UserScreen/RestaurantPage";
 import { LoginComponent } from "./components/Registration/Login";
 import { OwnerPanel } from "./components/AdminPanle/Owner";
 import CompleteOrder from "./components/UserScreen/YourCart/CompleteOrder";
-import SortResturant from "./components/UserScreen/SortResturant";
+
 import { useEffect } from "react";
 import { User } from "./controllers/user";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,16 +19,15 @@ import { ErrorPage } from "./components/ErrorPage";
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-
     (async () => {
-      const user =await JSON.parse(localStorage.getItem("user"))
-      if(user){
+      const user = await JSON.parse(localStorage.getItem("user"));
+      if (user) {
         User.userName = user.userName;
         User.roleId = user.roleId;
         User.imgUrl = user.imgUrl;
         User.id = user.id;
       }
-     
+
       const { result } = await User.getAllRestaurants();
       dispatch(setRestaurants(result));
     })();
@@ -46,15 +45,17 @@ const App = () => {
       <Routes>
         <Route path={"/"} element={<ScreenHome />} />
         <Route path={"/joinUs"} element={<ContactUs />} />
-        <Route path="/SuperAdminPanel/:name/:random" element={<SuperAdminPanel />} />
+        <Route
+          path="/SuperAdminPanel/:name/:random"
+          element={<SuperAdminPanel />}
+        />
         <Route path="/OwnerPanel/:name/:random" element={<OwnerPanel />} />
         <Route path={"/AllRestarnts"} element={<AllRestaurants />} />
         <Route path={"/RestaurantPage"} element={<RestaurantPage />} />
         <Route path={"/login"} element={<LoginComponent />} />
-        <Route path={"/SortResturants"} element={<SortResturant />} />
+
         <Route path={"/CompleteOrder"} element={<CompleteOrder />} />
         <Route path={"*"} element={<ErrorPage />} />
-       
       </Routes>
     </div>
   );

@@ -13,6 +13,7 @@ const AllRestaurants = () => {
   let [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageBtn, setPageBtn] = useState([]);
+  const[currentCategory, setCurrentCategory] = useState("");
 
   useEffect(() => {
     getRestaurants();
@@ -35,9 +36,7 @@ const AllRestaurants = () => {
         key={text}
         id= "categoryIcon"
         onClick={() => {
-          navigate("/SortResturants", {
-            state: { sortcategory: "pizza" },
-          });
+         setCurrentCategory(text.toLocaleLowerCase())
         }}
       >
         <div className="DivimgCategory">
@@ -134,7 +133,7 @@ const AllRestaurants = () => {
             <div id="restaurants-div">
               {restaurants
                 ? restaurants.map((element, index) => {
-                    if (index >= currentPage - 1 && index < currentPage + 11) {
+                    if (index >= currentPage - 1 && index < currentPage + 11 && element.rest_category.includes(currentCategory)) {
                       return buildRestaurantCard({ element, index });
                     }
                   })
