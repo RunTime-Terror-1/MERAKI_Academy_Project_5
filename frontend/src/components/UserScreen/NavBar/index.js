@@ -61,7 +61,6 @@ const NavBar = () => {
         <AiOutlineMenu
           className="main-menu-btn"
           onClick={() => {
-            console.log("SAdsad");
             dispatch(setIsShowMenu());
           }}
         />
@@ -93,7 +92,7 @@ const NavBar = () => {
       <div id="main-nav-bar-btns">
         <button
           onClick={() => {
-            navigate("/AllRestarnts");
+            navigate("/AllRestarnts/all",{state:"all"});
           }}
         >
           All Restaurants
