@@ -3,17 +3,18 @@ import React, { useState, useEffect, useContext } from "react";
 import { User } from "../../../controllers/user";
 import NavBar from "../NavBar";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import { setrestaurantId } from "../../../redux/reducers/User";
 
 const AllRestaurants = () => {
+  const {state} = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [restaurants, setRestaurants] = useState("");
   let [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageBtn, setPageBtn] = useState([]);
-  const[currentCategory, setCurrentCategory] = useState("");
+  const[currentCategory, setCurrentCategory] = useState(state=="all"?"":state);
 
   useEffect(() => {
     getRestaurants();
@@ -36,7 +37,8 @@ const AllRestaurants = () => {
         key={text}
         id= "categoryIcon"
         onClick={() => {
-         setCurrentCategory(text.toLocaleLowerCase())
+          setCurrentCategory(text.toLowerCase())
+         navigate(`/AllRestarnts/${text.toLowerCase()}`)
         }}
       >
         <div className="DivimgCategory">

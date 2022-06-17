@@ -50,7 +50,7 @@ const App = () => {
           element={<SuperAdminPanel />}
         />
         <Route path="/OwnerPanel/:name/:random" element={<OwnerPanel />} />
-        <Route path={"/AllRestarnts"} element={<AllRestaurants />} />
+        <Route path={"/AllRestarnts/:category"} element={<AllRestaurants />} />
         <Route path={"/RestaurantPage"} element={<RestaurantPage />} />
         <Route path={"/login"} element={<LoginComponent />} />
 
