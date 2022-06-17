@@ -1,3 +1,5 @@
+
+
 import "./style.css";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
@@ -89,14 +91,16 @@ const NavBar = () => {
         )}
       </div>
 
+
       <div id="main-nav-bar-btns">
-        <button
+        <a
+        href="http://localhost:3000/AllRestarnts/all"
           onClick={() => {
             navigate("/AllRestarnts/all",{state:"all"});
           }}
         >
           All Restaurants
-        </button>
+        </a>
         {auth.isLoggedIn ? (
           <button
             onClick={() => {
