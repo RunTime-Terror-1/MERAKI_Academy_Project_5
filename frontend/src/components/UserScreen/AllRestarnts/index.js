@@ -21,7 +21,7 @@ const AllRestaurants = () => {
   const getRestaurants = async () => {
     let responseRest = await User.getAllRestaurants();
     setRestaurants(responseRest.result);
-    totalPages = Math.ceil(responseRest.result.length / 8);
+    totalPages = Math.ceil(responseRest.result.length / 12);
     const arr = [];
     for (let i = 0; i < totalPages; i++) {
       arr.push(i + 1);
@@ -73,9 +73,9 @@ const AllRestaurants = () => {
         <button
           onClick={() => {
             if (currentPage < i) {
-              setCurrentPage(currentPage + 7);
+              setCurrentPage(currentPage + 11);
             } else if (i < currentPage) {
-              setCurrentPage(currentPage - 7);
+              setCurrentPage(currentPage - 11);
             }
           }}
         >
@@ -106,10 +106,19 @@ const AllRestaurants = () => {
       url: "https://thumbs.dreamstime.com/b/vector-illustration-heart-shape-red-fruits-vegetables-healthy-nutrition-organic-concept-flat-style-127159995.jpg",
       text: "Healthy",
     },
+    {
+      url:"https://cdn.loveandlemons.com/wp-content/uploads/2021/06/summer-desserts.jpg",
+      text:"Sweets"
+    },
+    {
+      url:"https://images.deliveryhero.io/image/talabat/Menuitems/80850219637895358999912265.jpg",
+      text:"Juices"
+    },
+  
   ];
 
   return (
-    <div className="AllRestarnts">
+    <div className="Al">
       <NavBar />
       <div className="first-restaurant-div">
         <div className="Continert1">
@@ -125,7 +134,7 @@ const AllRestaurants = () => {
             <div id="restaurants-div">
               {restaurants
                 ? restaurants.map((element, index) => {
-                    if (index >= currentPage - 1 && index < currentPage + 7) {
+                    if (index >= currentPage - 1 && index < currentPage + 11) {
                       return buildRestaurantCard({ element, index });
                     }
                   })
