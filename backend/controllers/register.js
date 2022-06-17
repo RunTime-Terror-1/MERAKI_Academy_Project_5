@@ -16,10 +16,11 @@ const register = async (req, res) => {
   connection.query(query, data, (err, result) => {
     
     if (err) {
+      console.log(err.message)
       return res.status(409).json({
         success: false,
         message: "Email already taken",
-        err,
+        err:err.message
       });
     }
     if (result) {

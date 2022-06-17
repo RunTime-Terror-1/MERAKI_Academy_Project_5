@@ -1,518 +1,562 @@
-
-
 html,
 body {
-    max-width: 100%;
-    /* overflow-x: hidden; */
+  max-width: 100%;
+  /* overflow-x: hidden; */
 }
 
 .completeOrder {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    /* background-color:rgb(191,186,182); */
-    background-color:rgb(238,238,238);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* background-color: var(  --second-color);; */
+  /* background-color: rgb(238, 238, 238); */
+  background: linear-gradient(
+    var(--first-color),
+    rgb(233, 207, 157),
+    rgb(255, 213, 136)
+  );
 }
 
 .order {
-    width: 70vw;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    background-color: rgb(255,255,255);
-    /* background-color:rgb(251,250,251); */
-    /* border: 4px solid rgb(14, 11, 11); */
-    position: relative;
-    left: 15vw;
+  width: 70vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  /* background-color: rgb(255, 255, 255); */
+  background-color: transparent;
+  /* background-color: rgb(255, 255, 255); */
+  position: relative;
+  left: 15vw;
 
+  text-align: start;
 
-    text-align: start;
+  padding: 60px;
 
-    padding: 60px;
+  /* border: 4px solid var(  --second-color); */
 }
 
-
-.h2_order{
-    color: #212121;
-    font-size: 27px;
-    font-weight: 400!important;
-    font-family: open_sanssemibold;
+.h2_order {
+  color: #212121;
+  font-size: 27px;
+  font-weight: 400 !important;
+  font-family: open_sanssemibold;
 }
 
-
-.size{
-
+.size {
 }
 /*...........summaryOrder..................*/
 
-
-.summaryOrder{
-
-
-    border: 4px solid rgb(238,238,238);
+.summaryOrder {
+  border-radius: 10px;
+  /* border: 1px solid  var(  --second-color);; */
+  background-color: var(--first-color);
+  /* box-shadow: 2px 1px 10px var(--second-color); */
+  box-shadow: 0px 1px 3px 1px var(--third-color);
+  /* background-color: transparent; */
+  /* border: 4px solid rgb(238, 238, 238); */
 }
 .divSummary {
-    height: 10vh;
-    border-bottom: 4px solid rgb(238,238,238);
-    padding: 10px;
-    /* background-color: darkmagenta; */
+  border-radius: 15px;
+  height: 10vh;
+  /* border: 1px solid  var(  --second-color);; */
+  border-bottom: 4px solid rgb(238, 238, 238);
+  padding: 10px;
+  background-color: var(--first-color);
 }
-.orderinformation{
-    padding: 10px;
-    /* background-color: darkgoldenrod; */
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-}
-
-.orderinformationtwo{
-    display: flex;
-    flex-direction: row;
-    /* gap:20px; */
-    /* background-color: cornsilk; */
-    background-color:rgb(238,248,290);
+.orderinformation {
+  padding: 10px;
+  /* background-color: darkgoldenrod; */
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
-.restaauranttName{
-    font-size: 24px;
-    color: #212121;
-    font-weight: 400!important;
-    font-family: open_sanssemibold;
+.orderinformationtwo {
+  display: flex;
+  flex-direction: row;
+  /* gap:20px; */
+  /* background-color: cornsilk; */
+  background-color: rgb(238, 248, 290);
 }
 
-
+.restaauranttName {
+  font-size: 24px;
+  color: #212121;
+  font-weight: 400 !important;
+  font-family: open_sanssemibold;
+}
 
 .items {
-    width: 35vw;
-    /* background-color: crimson; */
-    font-size: 25px;
-    color: #212121;
-    font-weight: 400!important;
-    font-family: open_sanssemibold;
+  width: 35vw;
+  /* background-color: crimson; */
+  font-size: 25px;
+  color: #212121;
+  font-weight: 400 !important;
+  font-family: open_sanssemibold;
 }
 .title_tow {
-    display: flex;
-    flex-direction: row;
-    gap: 50px;
-    width:25vw;
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  width: 25vw;
 
-
-    font-size: 25px;
-    /* color: #212121; */
-    font-weight: 400!important;
-    font-family: open_sanssemibold;
-  
+  font-size: 25px;
+  /* color: #212121; */
+  font-weight: 400 !important;
+  font-family: open_sanssemibold;
 }
-.h2{
-    font-size: 25px;
-    /* color: #212121; */
-    font-weight: 400!important;
-    font-family: open_sanssemibold;
+.h2 {
+  font-size: 25px;
+  /* color: #212121; */
+  font-weight: 400 !important;
+  font-family: open_sanssemibold;
 }
-.orderinformationthree{
-    /* background-color: darkgreen; */
-    position: relative;
-    top:10px;
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
+.orderinformationthree {
+  /* background-color: darkgreen; */
+  position: relative;
+  top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
 }
 .mealItems {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
-
-
 
 .div_return_map {
-    display: flex;
-    flex-direction: row;
-    /* background-color: cornsilk; */
-
-
+  display: flex;
+  flex-direction: row;
+  /* background-color: cornsilk; */
 }
 .NameMeal {
-    width: 35vw;
-    font-size: 20px;
-    /* color: #212121; */
-    font-weight: 400!important;
-    font-family: open_sanssemibold;
-    /* background-color: rgb(125, 139, 0); */
+  width: 35vw;
+  font-size: 20px;
+  /* color: #212121; */
+  font-weight: 400 !important;
+  font-family: open_sanssemibold;
+  /* background-color: rgb(125, 139, 0); */
 }
 .insted__div_return_map {
-    width: 25vw;
-    display: flex;
-    flex-direction: row;
-    gap: 90px;
+  width: 25vw;
+  display: flex;
+  flex-direction: row;
+  gap: 90px;
 
-
-    position: relative;
-    left: 9px;
-padding: 10px;
-
+  position: relative;
+  left: 9px;
+  padding: 10px;
 }
-.h3_Pri{
-    position: relative;
-   left: 20px;
+.h3_Pri {
+  position: relative;
+  left: 20px;
 }
 .h3_quntity {
-    position: relative;
-    /* left: 40vw; */
+  position: relative;
+  /* left: 40vw; */
 }
 
 .h3_price {
-    position: relative;
-    /* left: 45vw; */
+  position: relative;
+  /* left: 45vw; */
 }
 
 .h3_totalprice {
-    position: relative;
-    /* left: 45vw; */
+  position: relative;
+  /* left: 45vw; */
 }
 
 .sumprice {
-    position: relative;
-    left: 60vw;
+  position: relative;
+  left: 60vw;
 }
-
-
 
 /*..... location      ..................                ............*/
 
 .location {
-    display: flex;
-    flex-direction: column;
-    gap:10px;
-   /* width: 40vw; */
-    /* background-color: darkred; */
-    border: 4px solid rgb(238,238,238);
-   
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* width: 40vw; */
+  box-shadow: 0px 1px 3px 1px var(--third-color);
+  background-color: var(--first-color);
+  /* box-shadow: 2px 1px 8px var(--second-color); */
+  /* border: 1px solid rgb(34, 33, 33); */
+  /* border: 1px solid  var(  --second-color);; */
+}
+.Enterh2_order {
+  display: flex;
+  flex-direction: row;
 
+  border-bottom: 4px solid rgb(238, 238, 238);
+  padding: 10px;
 }
-.Enterh2_order{
-    display: flex;
-    flex-direction: row;
-   
-    border-bottom: 4px solid rgb(238,238,238);
-    padding: 10px;
+.Enter {
+  width: 538px;
+  border-right: 4px solid rgb(238, 238, 238);
+  /* background-color: crimson; */
 }
-.Enter{
-    width: 538px;
-    border-right: 4px solid rgb(238,238,238);
-    /* background-color: crimson; */
-}
-.locationTow{
-    display: flex;
-    flex-direction: row;
-    /* background-color: cornflowerblue; */
-    padding: 10px;
+.locationTow {
+  display: flex;
+  flex-direction: row;
+  /* background-color: cornflowerblue; */
+  padding: 10px;
 }
 .inputLocation {
-    width: 43vw;
-    display: flex;
-    flex-direction: column;
-    gap:10px;
-    border-right: 4px solid rgb(238,238,238);
+  width: 43vw;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-right: 4px solid rgb(238, 238, 238);
 }
 
-.inputtag{
-    height:30px;
-    width:13vw;
+.inputtag {
+    border-radius: 10px;
+    padding: 10px;
+  height: 30px;
+  width: 13vw;
 }
 .cityandarea {
-    display: flex;
-    flex-direction: row;
-    gap: 50px;
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
 }
 
-
 .Number {
-    /* width: 35vw; */
-    height:25px;
-    width:29.3vw;
+    border-radius: 10px;
+    /* padding: 10px; */
+  /* width: 35vw; */
+  height: 25px;
+  width: 29.3vw;
+}
+.inputtagNumber{
+    border-radius: 10px;
+    padding: 10px;
+    height: 25px;
+    width: 29.3vw;
 }
 /* .divColorMessage{
     padding: 20px;
 } */
-.messageColor{
-    /* padding: 10px; */
-    color: rgb(160, 23, 23);
-    position: relative;
-    left: 20px;
+.messageColor {
+  /* padding: 10px; */
+  color: rgb(160, 23, 23);
+  position: relative;
+  left: 20px;
 }
 
 /*.....  past location      ..................                ............*/
 .userPastLocation {
-    width: 30vw;
-    /* background-color: darkgreen; */
+  width: 30vw;
+  /* background-color: darkgreen; */
 }
 .imgadresss {
-    width: 8vw;
-    height: 18vh;
-    opacity: 0.5;
-    position: relative;
-    left: 8vw;
-    bottom: 18px;
+  width: 8vw;
+  height: 18vh;
+  opacity: 0.5;
+  position: relative;
+  left: 8vw;
+  bottom: 18px;
 }
 
-
-
-.pastlocationmessage{
-    position: relative;
-    left: 60px;
-    top:60px;
-    font-size: 18px;
-    opacity: 0.6;
-    /* color: #212121; */
-    /* font-weight: 400!important;
+.pastlocationmessage {
+  position: relative;
+  left: 60px;
+  top: 60px;
+  font-size: 18px;
+  opacity: 0.6;
+  /* color: #212121; */
+  /* font-weight: 400!important;
     font-family: open_sanssemibold; */
-
-
 }
-.divimageee{
-    display: flex;
-    flex-direction: column;
-    /* background-color: crimson; */
-
+.divimageee {
+  display: flex;
+  flex-direction: column;
+  /* background-color: crimson; */
 }
 /*......................*/
 .div45 {
-    display: flex;
-    flex-direction: row;
-    gap: 35px;
-    
+  display: flex;
+  flex-direction: row;
+  gap: 35px;
 }
-.h2userLocation{
-    position: relative;
-    left: 30px;
-    font-size: 16px;
-    color: #212121;
-    font-weight: 400!important;
-    font-family: open_sanssemibold;
+.h2userLocation {
+  position: relative;
+  left: 30px;
+  font-size: 16px;
+  color: #212121;
+  font-weight: 400 !important;
+  font-family: open_sanssemibold;
 }
-
 
 .iftrue {
-    width: 180px;
-    height: 150px;
-    /* background-color: crimson; */
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+  width: 180px;
+  height: 150px;
+  /* background-color: crimson; */
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 
-    position: relative;
-    left: 20px;
+  position: relative;
+  left: 20px;
 }
-.h2h2h2333{
-    width: 140px;
-    
-    font-size: 18px;
-    color: #212121;
-    font-weight: 400!important;
-    font-family: open_sanssemibold;
+.h2h2h2333 {
+  width: 140px;
+
+  font-size: 18px;
+  color: #212121;
+  font-weight: 400 !important;
+  font-family: open_sanssemibold;
 }
 
 .selelctadresss {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: var(--first-color);
+  /* box-shadow: 2px 1px 8px var(--second-color); */
+  box-shadow: 0px 1px 3px 1px var(--third-color);
 
-    display: flex;
-    flex-direction:column;
-    gap: 15px;
-
-    border: 4px solid rgb(238,238,238);
+  /* border: 4px solid rgb(238, 238, 238); */
 }
-.Selecth2_order{
-    padding: 10px;
-    border-bottom: 4px solid rgb(238,238,238);
-
+.Selecth2_order {
+  padding: 10px;
+  border-bottom: 4px solid rgb(238, 238, 238);
 }
-.divnewAdress{
-    /* width: 20px; */
-    /* background-color: darkorchid; */
+.divnewAdress {
+  /* width: 20px; */
+  /* background-color: darkorchid; */
 }
-.inputSelect{
-    width: 40px;
-    /* height: 80px; */
+.inputSelect {
+  width: 40px;
+  /* height: 80px; */
 }
-
-
-
-
-
-
 
 /*..... Payment      ..................                ............*/
 
-.Payment{
+.Payment {
+  border-radius: 12px;
+  background-color: var(--first-color);
+  box-shadow: 0px 1px 5px 1px var(--third-color);
 
-    /* background-color: darkorange; */
-    border: 4px solid rgb(238,238,238);
-    display: flex;
-    flex-direction: column;
-
+  /* background-color: darkorange; */
+  /* border: 4px solid rgb(238, 238, 238); */
+  display: flex;
+  flex-direction: column;
 }
-.PaymentOne{
-    padding: 10px;
-    border-bottom: 4px solid rgb(238,238,238);
+.PaymentOne {
+  padding: 10px;
+  border-bottom: 4px solid rgb(238, 238, 238);
 }
-.Paymentwo{
-    padding: 10px;
-    display: flex;
-    flex-direction: row;
-    /* gap: 10px; */
+.Paymentwo {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  /* gap: 10px; */
 }
-.Paymenttow_One{
-    display: flex;
-    flex-direction: column;
+.Paymenttow_One {
+  display: flex;
+  flex-direction: column;
 }
-.HowPayment{
-    width: 36vw;
-    /* border-right: 4px solid rgb(238,238,238); */
-    display: flex;
-    flex-direction: column;
-    gap:15px
-
-
+.HowPayment {
+  width: 36vw;
+  /* border-right: 4px solid rgb(238,238,238); */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 /*..... Cart       ..................                ............*/
-.cartVisah3{
-
-    font-size: 15px;
-    /* color: #212121; */
-    font-weight: 400!important;
-    font-family: open_sanssemibold;
-
+.cartVisah3 {
+  font-size: 15px;
+  /* color: #212121; */
+  font-weight: 400 !important;
+  font-family: open_sanssemibold;
 }
-.divImageeee{
-    display: flex;
-    flex-direction: row;
-    gap: 40px;
+.divImageeee {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
 }
-.inputCardNumber{
-    width: 18vw;
-    height: 2vw;
+.inputCardNumber {
+  width: 18vw;
+  height: 2vw;
 }
 .inputmounth {
-    width: 5vw;
-    height: 2vw;
+  width: 5vw;
+  height: 2vw;
 }
 
 .verification {
-    width: 6vw;
-    height: 32px;
+  width: 6vw;
+  height: 32px;
 }
-.divcreditCard{
-    padding: 10px;
-    background-color: rgb(231, 216, 216);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.divcreditCard {
+  padding: 10px;
+  background-color: rgb(231, 216, 216);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
-.cartimage{
-    width: 115px;
-    height: 40px;
+.cartimage {
+  width: 115px;
+  height: 40px;
 }
-.divCreditCard_two_two{
-    display: flex;
-    flex-direction: row;
-    gap:55px
+.divCreditCard_two_two {
+  display: flex;
+  flex-direction: row;
+  gap: 55px;
 }
 
 /*.............completOrder.. (place order)............*/
 
-.divdivTotal{
-    display: flex;
-    flex-direction: row;
-    /* gap: 180px; */
-    position: relative;
-    left: 20px;
-}.divTotalOrder{
-    /* border-left: 4px solid rgb(238,238,238); */
-    display: flex;
-    flex-direction: column;
-    gap: 5Px;
+.divdivTotal {
+  display: flex;
+  flex-direction: row;
+  /* gap: 180px; */
+  position: relative;
+  left: 20px;
 }
-.h2h2Total{
-    width: 220px;
-    /* background-color: crimson; */
-    font-size: 18px;
-    /* color: #212121; */
-    font-weight: 400!important;
-    font-family: open_sanssemibold;
+.divTotalOrder {
+  /* border-left: 4px solid rgb(238,238,238); */
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
-.h3h3h3total{
-    font-size: 15px;
-    /* color: #212121; */
-    font-weight: 400!important;
-    font-family: open_sanssemibold;
+.h2h2Total {
+  width: 220px;
+  /* background-color: crimson; */
+  font-size: 18px;
+  /* color: #212121; */
+  font-weight: 400 !important;
+  font-family: open_sanssemibold;
 }
-
-.Tax{
-        border-bottom: 4px solid rgb(238,238,238);
+.h3h3h3total {
+  font-size: 15px;
+  /* color: #212121; */
+  font-weight: 400 !important;
+  font-family: open_sanssemibold;
 }
 
-.PlaceOrder{
-    width: 18vw;
-    height: 5vh;
-
-    font-size: 25px;
-    /* color: #212121; */
-    font-weight: 400!important;
-    font-family: open_sanssemibold;
-
-background-color: rgb(147, 199, 92);
-position: relative;
-    left: 20px;
-
+.Tax {
+  border-bottom: 4px solid rgb(238, 238, 238);
 }
 
-.divDivdiv{
-    border-left: 4px solid rgb(238,238,238);
-    /* background-color: aqua; */
-    /* width: 40vw; */
+.PlaceOrder {
+  width: 18vw;
+  height: 5vh;
+
+  font-size: 25px;
+  /* color: #212121; */
+  font-weight: 400 !important;
+  font-family: open_sanssemibold;
+
+  background-color: var(--second-color);
+  position: relative;
+  left: 20px;
+
+  cursor: pointer;
+}
+.PlaceOrder:hover {
+  width: 18vw;
+  height: 5vh;
+  color: rgb(253, 247, 247);
+  font-size: 25px;
+  /* color: #212121; */
+  font-weight: 400 !important;
+  font-family: open_sanssemibold;
+
+  background-color: var(--third-color);
+  position: relative;
+  left: 20px;
+
+  cursor: pointer;
+}
+
+.divDivdiv {
+  border-left: 4px solid rgb(238, 238, 238);
+  /* background-color: aqua; */
+  /* width: 40vw; */
+}
+
+.instedModel {
+  /* padding: 40px; */
+  display: block;
+  width: 60vh;
+  height: 20vh;
+  /* background-color: rgb(212, 147, 147); */
+
+  position: relative;
+
+  /* bottom: 30vh;  */
 }
 
 
 
-.instedModel{
+.h2h2PleaseCheck {
+    color: black;
+  position: relative;
+  left: 50px;
+  top: 50px;
+}
+.CloseButton {
+  width: 100px;
+  height: 30px;
+  position: relative;
+  left: 160px;
+  top: 70px;
+}
+.CloseButton:hover {
+  background-color: rgb(252, 4, 53);
+  width: 100px;
+  height: 30px;
+  position: relative;
+  left: 160px;
+  top: 70px;
+  cursor: pointer;
+}
+
+
+
+.instedModelOne {
     /* padding: 40px; */
+    text-align: start;
     display: block;
-    width:60vh;
-    height: 20vh;
-    background-color: rgb(212, 147, 147);
-
-
+    width: 100vw;
+    height: 155vh;
+ 
+    background-color:var(--first-color);
+    opacity: 0.8;
     position: relative;
-
+    right: 20vw;
+    bottom: 130vh;
+  
     /* bottom: 30vh;  */
+  }
 
+.BigBiginsted{
+    border-radius: 25px;
+    /* padding: 500px; */
+     width: 28vw;
+    height: 30vh;
+    position: relative; 
+    left: 36vw;
+    top:60vh;
+    /* bottom: 27vh; */
+    /* background-color:var(--first-color); */
+    background-color: var(--second-color);
+    opacity: 7;
+    box-shadow: 0px 1px 15px 4px var(--third-color);
+
+   
 }
 
-.divdivModels{
-    position: relative;
-    left: 20vw;
-    bottom: 60vh;
-}
 
-.h2h2PleaseCheck{
-    position: relative;
-    left: 30px;
-    top: 50px;
-}
-.CloseButton{
-    width: 100px;
-    height: 30px;
-    position: relative;
-    left: 160px;
-    top: 70px;
-}
-.CloseButton:hover{
-    background-color: crimson;
-    width: 100px;
-    height: 30px;
-    position: relative;
-    left: 160px;
-    top: 70px;
-}
+
+
+
+  

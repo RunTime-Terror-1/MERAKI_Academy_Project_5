@@ -11,6 +11,8 @@ const CompleteOrder = () => {
   // const { Name } = state
   const navigate = useNavigate()
 
+
+
   const [city, setCity] = useState('empty')
   const [Area, setArea] = useState('empty')
 
@@ -25,6 +27,7 @@ const CompleteOrder = () => {
 
   const [payment, setPayment] = useState('Cash')
   const [testComplete, settestComplete] = useState('false')
+
   const [models, setmodels] = useState(false)
   const [popadress, setPopadress] = useState('false')
   const [clickValue, setClick] = useState('No')
@@ -35,6 +38,8 @@ const CompleteOrder = () => {
   let testadress = 'false'
   //!.............
   const dispatch = useDispatch()
+ console.log(models ,"39   39")
+
 
   const Userinfor = useSelector((state) => {
     return {
@@ -45,20 +50,21 @@ const CompleteOrder = () => {
       sumPrice: state.User.sumpriceUser,
       name: state.User.name,
       userId: state.User.Iduser,
-      sumItems:state.User.Sumitems
+      sumItems: state.User.Sumitems,
     }
   })
 
-    console.log(Userinfor.yourPrice, 'YourPrice fff  complete')
+  // console.log(Userinfor.yourPrice, 'YourPrice fff  complete')
   //!..............................
 
   //   console.log(Userinfor.userId, 'Yourid   complete')
-    console.log(Userinfor.sumItems, 'Yourid  SumSumSum complete')
+  // console.log(Userinfor.sumItems, 'Yourid  SumSumSum complete')
 
   //!..................Functions.............................................
 
   const saveAdress = async (id) => {
-    if (messageLocation == 'good') {
+    // console.log(messageLocation, testComplete, '62 63 63')
+    if (messageLocation == 'good' && testComplete == 'true') {
       const adress = await User.UpdateAdress({
         userid: id,
         city: Area,
@@ -93,7 +99,7 @@ const CompleteOrder = () => {
   }
   //!........................................................
 
-  const newmessage = () => {
+  const newmessage = async () => {
     if (
       Area != 'empty' &&
       Phone != 'empty' &&
@@ -102,11 +108,14 @@ const CompleteOrder = () => {
       city != 'empty'
     ) {
       setMessage('good')
+      console.log(messageLocation, '105.105')
     } else {
-      console.log('khkhkh')
-      setMessage('enter all information')
+      await setMessage('enter all information')
+      //   console.log(messageLocation,"109.109")
     }
   }
+//   console.log(messageLocation, '112 112')
+
   //!........................................................
   // const click = () => {
   //     alert("ggggggggggggggg");
@@ -116,29 +125,31 @@ const CompleteOrder = () => {
   const toggleModel = () => {
     console.log('ghghg')
     setmodels(!models)
-    console.log(models)
+    // console.log(models)
   }
   //!........................................................
   const sentUserOrder = async (id) => {
-    console.log(Userinfor.sumPrice,"1144444444444444444444")
+    // console.log(messageLocation, testComplete, '144   128 128')
     // console.log( Userinfor.yourPrice[0].restaurant,"114")
     if (testComplete == 'true' && messageLocation == 'good') {
-      console.log('sentOrder')
-      const userOrder = await User.sentOrder({
+      console.log(Userinfor)
+       await User.sentOrder({
         userid: id,
         state: 'progess',
         receipt: Userinfor.sumPrice,
         resturantId: Userinfor.yourPrice[0].restaurant,
         mealarray: Userinfor.yourPrice,
-        Quntity:Userinfor.sumItems
+        Quntity: Userinfor.sumItems,
       })
     }
   }
-    //!........................................................
+  //!........................................................
   const move = () => {
-    console.log(models, testComplete, popadress)
-    if (models && (testComplete == ' true' || popadress == 'true')) {
+    console.log(models ,testComplete ,messageLocation ,"146")
+    if ( testComplete == 'true' && messageLocation== 'good') {
+        console.log("in in")
       setTimeout(() => {
+        console.log("move move")
         navigate('/')
       }, 2000)
     }
@@ -207,7 +218,7 @@ const CompleteOrder = () => {
           <div className="Enterh2_order">
             {' '}
             <h2 className="h2_order   Enter">Enter a new site</h2>
-            <h2 className="h2_order  lastSite ">  last site</h2>
+            <h2 className="h2_order  lastSite "> last site</h2>
           </div>
 
           <div className="locationTow">
@@ -238,7 +249,7 @@ const CompleteOrder = () => {
                 />
                 <input
                   className="inputtag"
-                  placeholder="stretNumber"
+                  placeholder="stretName"
                   onChange={(e) => {
                     setstreet(e.target.value)
                   }}
@@ -246,7 +257,7 @@ const CompleteOrder = () => {
               </div>
               <div className="Number">
                 <input
-                  className="Number"
+                  className="inputtagNumber"
                   placeholder="Number"
                   onChange={(e) => {
                     setPhone(e.target.value)
@@ -259,26 +270,38 @@ const CompleteOrder = () => {
               {truevalue == 'true' ? (
                 <div className="iftrue">
                   <div className="div45">
-                    <div className='h2h2h2PastLocation'> <h2 className='h2h2h2333'>City:</h2></div>
+                    <div className="h2h2h2PastLocation">
+                      {' '}
+                      <h2 className="h2h2h2333">City:</h2>
+                    </div>
                     <h3 className="h2userLocation">Amman</h3>
                   </div>
                   <div className="div45">
-                    <div className='h2h2h2PastLocation'> <h2 className='h2h2h2333'>Area:</h2></div>
+                    <div className="h2h2h2PastLocation">
+                      {' '}
+                      <h2 className="h2h2h2333">Area:</h2>
+                    </div>
                     <h3 className="h2userLocation">{pastAdress.city}</h3>
                   </div>
                   <div className="div45">
-                    <div className='h2h2h2PastLocation'><h2 className='h2h2h2333'>street:</h2></div>
+                    <div className="h2h2h2PastLocation">
+                      <h2 className="h2h2h2333">street:</h2>
+                    </div>
                     <h3 className="h2userLocation">{pastAdress.street}</h3>
                   </div>
                   <div className="div45">
-                    <div className='h2h2h2PastLocation'><h2 className='h2h2h2333'>buildingNumber:</h2></div>
+                    <div className="h2h2h2PastLocation">
+                      <h2 className="h2h2h2333">buildingNumber:</h2>
+                    </div>
                     <h3 className="h2userLocation">
                       {pastAdress.buldingNumber}
                     </h3>
                   </div>
                   <div className="div45">
-                    <div  className='h2h2h2PastLocation'><h2 className='h2h2h2333'> phone:</h2></div>
-                
+                    <div className="h2h2h2PastLocation">
+                      <h2 className="h2h2h2333"> phone:</h2>
+                    </div>
+
                     <h3 className="h2userLocation">{pastAdress.notes}</h3>
                   </div>
                 </div>
@@ -467,11 +490,11 @@ const CompleteOrder = () => {
                   {' '}
                   <button
                     className="PlaceOrder"
-                    onClick={() => {
+                    onClick={async() => {
                       saveAdress(Userinfor.userId)
                       sentUserOrder(Userinfor.userId)
-                    //   setClick('yes')
-                      toggleModel()
+
+                      await toggleModel()
 
                       move()
                     }}
@@ -487,36 +510,58 @@ const CompleteOrder = () => {
         <div className="divdivModels">
           {models && (testComplete == 'false' || popadress == 'false') ? (
             <div
-              className="instedModel"
+              className="instedModelOne"
               onClick={() => {
                 toggleModel()
               }}
             >
-              <div className="instedModel">
-                <h2 className="h2h2PleaseCheck">
-                  Please Check Your Information
-                </h2>
-                <button
-                  className="CloseButton"
-                  onClick={() => {
-                    toggleModel()
-                  }}
-                >
-                  close
-                </button>
+              <div className="BigBiginsted">
+                <div className="instedModel">
+                  <h2 className="h2h2PleaseCheck">
+                    Please Check Your Information
+                  </h2>
+                  <button
+                    className="CloseButton"
+                    onClick={() => {
+                      toggleModel()
+                    }}
+                  >
+                    close
+                  </button>
+                </div>
               </div>
             </div>
           ) : (
-            ' '
-            // <div>
-            //   {models &&(testComplete == 'true' && popadress == 'true') ? (
-            //     <div className="instedModel">
-            //       <h2 className="h2h2PleaseCheck">Order Completed True </h2>
-            //     </div>
-            //   ) : (
-            //     ''
-            //   )}
-            // </div>
+            <div>
+              {models && testComplete == 'true' && popadress == 'true' ? (
+               
+                  <div
+                    className="instedModelOne"
+                    onClick={() => {
+                      toggleModel()
+                    }}
+                  >
+                    <div className="BigBiginsted">
+                      <div className="instedModel">
+                        <h2 className="h2h2PleaseCheck">
+                          Order Completed will access you
+                        </h2>
+                        <button
+                          className="CloseButton"
+                          onClick={() => {
+                            toggleModel()
+                          }}
+                        >
+                          close
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                
+              ) : (
+                ''
+              )}
+            </div>
           )}
         </div>
       </div>
