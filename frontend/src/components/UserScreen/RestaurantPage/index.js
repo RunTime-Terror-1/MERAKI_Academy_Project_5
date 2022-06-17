@@ -20,7 +20,7 @@ const RestaurantPage = () => {
     // console.log(localStorage.getItem("restaurantId"),"idaaaa")
 
   const [sumreal, setSumreal] = useState(0)
-  const [restaurant, setRestaurants] = useState('')
+  const [restaurant, setRestaurants] = useState([])
   const [name, setName] = useState('')
   const [menu, setMenu] = useState('')
   const [categories, setCategories] = useState('')
@@ -44,7 +44,9 @@ const RestaurantPage = () => {
       restaurantId:localStorage.getItem("restaurantId"),
     })
 
-    await setRestaurants(responseRestaurant.result)
+  setRestaurants(responseRestaurant.result)
+      //  console.log(responseRestaurant.result)
+      //  console.log(restaurant)
 
     const responseMeal = await User.getMealsByRestaurant({ restaurantId:localStorage.getItem("restaurantId")})
     setMenu(responseMeal.result)
@@ -70,21 +72,21 @@ const RestaurantPage = () => {
   useEffect(() => {
     getRestaurant()
   }, [])
-
+console.log(restaurant)
   return (
     <div className="RestaurantPage">
-      <div className="NavBarHere">{<NavBar />}</div>
+      <div >{<NavBar />}</div>
 
       <div className="Allinformation_One">
         <div className="All_One_map">
-          {restaurant
+          {restaurant.length
             ? restaurant.map((element, index) => {
                 return (
                   <div className="All_One_One_map_returndiv">
                     <div>
                       <img className="imgback" src={element.backImg} />
                     </div>
-
+                        
                     <div className="div_restur_Name">
                       <h1 className="H1_Name">{element.name}</h1>
                       {/* <img className='imgLogo' src={element.Logo} /> */}
@@ -113,7 +115,8 @@ const RestaurantPage = () => {
         </div>
         <div className="Allinformation_One_tow">
           <div className="Allinformation_One_tow_one">
-            <h1 className="h1h1 G1 ">Group Order</h1>
+            <div className='divdivdidv' ><h1 >{restaurant.length?restaurant[0].rest_category:""}</h1></div>
+           
           </div>
           <div className="Allinformation_One_tow_tow">
             <div className="div1">
@@ -138,7 +141,7 @@ const RestaurantPage = () => {
                   <div className="All_Two-categore_map_return" key={index}>
                     <a href={'#' + index} className="a_atAll">
                       <div className="divButton">
-                        <button className="button">{element + 'hjhdd'}</button>
+                        <button className="button">{element }</button>
                       </div>
                       <i className="i"></i>
                     </a>

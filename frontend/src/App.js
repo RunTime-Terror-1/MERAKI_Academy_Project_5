@@ -52,7 +52,7 @@ const App = () => {
         <Route path="/OwnerPanel/:name/:random" element={<OwnerPanel />} />
         <Route path={"/AllRestarnts/:category"} element={<AllRestaurants />} />
         <Route path={"/RestaurantPage"} element={<RestaurantPage />} />
-        <Route path={"/login"} element={<LoginComponent />} />
+        {/* <Route path={"/login"} element={<LoginComponent />} /> */}
 
         <Route path={"/CompleteOrder"} element={<CompleteOrder />} />
         <Route path={"*"} element={<ErrorPage />} />

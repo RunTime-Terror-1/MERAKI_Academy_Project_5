@@ -105,7 +105,7 @@ USE RUNTIME_TERROR;
 
 -- CREATE TABLE orders (
 --     id INT AUTO_INCREMENT NOT NULL,
---     -- quantity VARCHAR(255) NOT NULL,
+--     quantity VARCHAR(255) NOT NULL,
 --     state VARCHAR(255) NOT NULL,
 --     receipt FLOAT NOT NULL,
 --     address_id INT,
