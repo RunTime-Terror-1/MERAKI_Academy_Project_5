@@ -12,7 +12,9 @@ const AllRestaurants = () => {
   const dispatch = useDispatch();
   const [restaurants, setRestaurants] = useState("");
   let [totalPages, setTotalPages] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
+
   const [pageBtn, setPageBtn] = useState([]);
   const [currentCategory, setCurrentCategory] = useState(
     state == "all" ? "" : state
@@ -25,7 +27,7 @@ const AllRestaurants = () => {
   const getRestaurants = async () => {
     let responseRest = await User.getAllRestaurants();
     setRestaurants(responseRest.result);
-    totalPages = Math.ceil(responseRest.result.length / 12);
+    totalPages = Math.ceil(responseRest.result.length / 9);
     const arr = [];
     for (let i = 0; i < totalPages; i++) {
       arr.push(i + 1);
@@ -74,11 +76,14 @@ const AllRestaurants = () => {
     return (
       <div style={{ display: "flex" }} key={i + "k"}>
         <button
+          style={currentPage === i ? { backgroundColor: "white",color:"black" } : {}}
           onClick={() => {
             if (currentPage < i) {
-              setCurrentPage(currentPage + 11);
-            } else if (i < currentPage) {
-              setCurrentPage(currentPage - 11);
+              setCurrentIndex(currentIndex + (i - currentPage) * 9);
+              setCurrentPage(i);
+            } else if (currentPage > i) {
+              setCurrentIndex(currentIndex - ((currentPage - i) * 9));
+              setCurrentPage(i);
             }
           }}
         >
@@ -137,8 +142,8 @@ const AllRestaurants = () => {
               {restaurants
                 ? restaurants.map((element, index) => {
                     if (
-                      index >= currentPage - 1 &&
-                      index < currentPage + 11 &&
+                      index >= currentIndex - 1 &&
+                      index < currentIndex + 8 &&
                       element.rest_category.includes(currentCategory)
                     ) {
                       return buildRestaurantCard({ element, index });

@@ -132,6 +132,25 @@ cursor:pointer;
   border: 0;
   cursor: pointer;
 }
+#main-nav-bar-btns a{
+  padding: 10px;
+  background-color: var(--second-color);
+  color: black;
+  border: 0.5px solid var(--second-color);
+  border-radius: 10px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#main-nav-bar-btns a:hover {
+  color: var(--first-color);
+  background-color: var(--third-color);
+  border: 0;
+  cursor: pointer;
+}
+
+
 .main-menu-btn {
   color: rgb(143, 41, 4);
   cursor: pointer;
