@@ -15,9 +15,9 @@ export const UserSlice = createSlice({
     restaurantIdId:localStorage.getItem("restaurantId") || "",
     Sumitems:0,
     showMenu: false,
-    name: "",
-    userId: "",
-    restaurantIdId: localStorage.getItem("restaurantId") || "",
+
+    
+   
 
   },
   reducers: {

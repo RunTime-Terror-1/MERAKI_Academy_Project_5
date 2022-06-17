@@ -11,6 +11,8 @@ const CompleteOrder = () => {
   // const { Name } = state
   const navigate = useNavigate()
 
+
+
   const [city, setCity] = useState('empty')
   const [Area, setArea] = useState('empty')
 
@@ -36,6 +38,8 @@ const CompleteOrder = () => {
   let testadress = 'false'
   //!.............
   const dispatch = useDispatch()
+ console.log(models ,"39   39")
+
 
   const Userinfor = useSelector((state) => {
     return {
@@ -59,7 +63,7 @@ const CompleteOrder = () => {
   //!..................Functions.............................................
 
   const saveAdress = async (id) => {
-    console.log(messageLocation, testComplete, '62 63 63')
+    // console.log(messageLocation, testComplete, '62 63 63')
     if (messageLocation == 'good' && testComplete == 'true') {
       const adress = await User.UpdateAdress({
         userid: id,
@@ -110,7 +114,7 @@ const CompleteOrder = () => {
       //   console.log(messageLocation,"109.109")
     }
   }
-  console.log(messageLocation, '112 112')
+//   console.log(messageLocation, '112 112')
 
   //!........................................................
   // const click = () => {
@@ -121,15 +125,15 @@ const CompleteOrder = () => {
   const toggleModel = () => {
     console.log('ghghg')
     setmodels(!models)
-    console.log(models)
+    // console.log(models)
   }
   //!........................................................
   const sentUserOrder = async (id) => {
-    console.log(messageLocation, testComplete, '144   128 128')
+    // console.log(messageLocation, testComplete, '144   128 128')
     // console.log( Userinfor.yourPrice[0].restaurant,"114")
     if (testComplete == 'true' && messageLocation == 'good') {
-      console.log('sentOrder')
-      const userOrder = await User.sentOrder({
+      console.log(Userinfor)
+       await User.sentOrder({
         userid: id,
         state: 'progess',
         receipt: Userinfor.sumPrice,
@@ -141,9 +145,11 @@ const CompleteOrder = () => {
   }
   //!........................................................
   const move = () => {
-    console.log(models, testComplete, popadress)
-    if (models && (testComplete == ' true' || popadress == 'true')) {
+    console.log(models ,testComplete ,messageLocation ,"146")
+    if ( testComplete == 'true' && messageLocation== 'good') {
+        console.log("in in")
       setTimeout(() => {
+        console.log("move move")
         navigate('/')
       }, 2000)
     }
@@ -484,11 +490,11 @@ const CompleteOrder = () => {
                   {' '}
                   <button
                     className="PlaceOrder"
-                    onClick={() => {
+                    onClick={async() => {
                       saveAdress(Userinfor.userId)
                       sentUserOrder(Userinfor.userId)
 
-                      toggleModel()
+                      await toggleModel()
 
                       move()
                     }}
