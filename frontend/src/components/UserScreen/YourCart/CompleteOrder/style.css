@@ -1,7 +1,25 @@
-html,
-body {
-  max-width: 100%;
-  /* overflow-x: hidden; */
+.table-row {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 10% 22% 22% 22% 24%;
+  text-align:center ;
+  
+}
+#summary2{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  gap: 10px;
+  padding: 5px;
+}
+#summery{
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  box-shadow: 0px 1px 3px 1px var(--third-color);
+  background-color: var(--first-color);
 }
 
 .completeOrder {
@@ -183,9 +201,6 @@ body {
   /* width: 40vw; */
   box-shadow: 0px 1px 3px 1px var(--third-color);
   background-color: var(--first-color);
-  /* box-shadow: 2px 1px 8px var(--second-color); */
-  /* border: 1px solid rgb(34, 33, 33); */
-  /* border: 1px solid  var(  --second-color);; */
 }
 .Enterh2_order {
   display: flex;
@@ -214,8 +229,8 @@ body {
 }
 
 .inputtag {
-    border-radius: 10px;
-    padding: 10px;
+  border-radius: 10px;
+  padding: 10px;
   height: 30px;
   width: 13vw;
 }
@@ -226,17 +241,17 @@ body {
 }
 
 .Number {
-    border-radius: 10px;
-    /* padding: 10px; */
+  border-radius: 10px;
+  /* padding: 10px; */
   /* width: 35vw; */
   height: 25px;
   width: 29.3vw;
 }
-.inputtagNumber{
-    border-radius: 10px;
-    padding: 10px;
-    height: 25px;
-    width: 29.3vw;
+.inputtagNumber {
+  border-radius: 10px;
+  padding: 10px;
+  height: 25px;
+  width: 29.3vw;
 }
 /* .divColorMessage{
     padding: 20px;
@@ -495,10 +510,8 @@ body {
   /* bottom: 30vh;  */
 }
 
-
-
 .h2h2PleaseCheck {
-    color: black;
+  color: black;
   position: relative;
   left: 50px;
   top: 50px;
@@ -520,43 +533,33 @@ body {
   cursor: pointer;
 }
 
-
-
 .instedModelOne {
-    /* padding: 40px; */
-    text-align: start;
-    display: block;
-    width: 100vw;
-    height: 155vh;
- 
-    background-color:var(--first-color);
-    opacity: 0.8;
-    position: relative;
-    right: 20vw;
-    bottom: 130vh;
-  
-    /* bottom: 30vh;  */
-  }
+  /* padding: 40px; */
+  text-align: start;
+  display: block;
+  width: 100vw;
+  height: 155vh;
 
-.BigBiginsted{
-    border-radius: 25px;
-    /* padding: 500px; */
-     width: 28vw;
-    height: 30vh;
-    position: relative; 
-    left: 36vw;
-    top:60vh;
-    /* bottom: 27vh; */
-    /* background-color:var(--first-color); */
-    background-color: var(--second-color);
-    opacity: 7;
-    box-shadow: 0px 1px 15px 4px var(--third-color);
+  background-color: var(--first-color);
+  opacity: 0.8;
+  position: relative;
+  right: 20vw;
+  bottom: 130vh;
 
-   
+  /* bottom: 30vh;  */
 }
 
-
-
-
-
-  
+.BigBiginsted {
+  border-radius: 25px;
+  /* padding: 500px; */
+  width: 28vw;
+  height: 30vh;
+  position: relative;
+  left: 36vw;
+  top: 60vh;
+  /* bottom: 27vh; */
+  /* background-color:var(--first-color); */
+  background-color: var(--second-color);
+  opacity: 7;
+  box-shadow: 0px 1px 15px 4px var(--third-color);
+}

@@ -1,45 +1,30 @@
-import './style.css'
-import React, { useState, useContext, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import NavBar from '../../NavBar'
-import { User } from '../../../../controllers/user'
-import { empty } from 'dom/lib/mutation'
+import "./style.css";
+import React, { useState, useContext, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import NavBar from "../../NavBar";
+import { User } from "../../../../controllers/user";
+import { empty } from "dom/lib/mutation";
 
 const CompleteOrder = () => {
-  // const { state } = useLocation()
-  // const { Name } = state
-  const navigate = useNavigate()
-
-
-
-  const [city, setCity] = useState('empty')
-  const [Area, setArea] = useState('empty')
-
-  const [Phone, setPhone] = useState('empty')
-  const [buildingNumber, setBuilding] = useState('empty')
-  const [street, setstreet] = useState('empty')
-
-  const [truevalue, settrue] = useState('false')
-
-  const [pastAdress, setPastAdress] = useState('empty')
-  const [messageLocation, setMessage] = useState('empty')
-
-  const [payment, setPayment] = useState('Cash')
-  const [testComplete, settestComplete] = useState('false')
-
-  const [models, setmodels] = useState(false)
-  const [popadress, setPopadress] = useState('false')
-  const [clickValue, setClick] = useState('No')
-
-  const [pymentMethod, setPaymentMethod] = useState('empty')
+  const navigate = useNavigate();
+  const [city, setCity] = useState("empty");
+  const [Area, setArea] = useState("empty");
+  const [Phone, setPhone] = useState("empty");
+  const [buildingNumber, setBuilding] = useState("empty");
+  const [street, setStreet] = useState("empty");
+  const [trueValue, setTrue] = useState("false");
+  const [pastAddress, setPastAddress] = useState("empty");
+  const [messageLocation, setMessage] = useState("empty");
+  const [payment, setPayment] = useState("Cash");
+  const [testComplete, setTestComplete] = useState("false");
+  const [models, setModels] = useState(false);
+  const [popAddress, setPopAddress] = useState("false");
 
   //!.....................................
-  let testadress = 'false'
+  let testAddress = "false";
   //!.............
-  const dispatch = useDispatch()
- console.log(models ,"39   39")
-
+  const dispatch = useDispatch();
 
   const Userinfor = useSelector((state) => {
     return {
@@ -51,172 +36,126 @@ const CompleteOrder = () => {
       name: state.User.name,
       userId: state.User.Iduser,
       sumItems: state.User.Sumitems,
-    }
-  })
+    };
+  });
 
-  // console.log(Userinfor.yourPrice, 'YourPrice fff  complete')
-  //!..............................
-
-  //   console.log(Userinfor.userId, 'Yourid   complete')
-  // console.log(Userinfor.sumItems, 'Yourid  SumSumSum complete')
-
-  //!..................Functions.............................................
-
-  const saveAdress = async (id) => {
-    // console.log(messageLocation, testComplete, '62 63 63')
-    if (messageLocation == 'good' && testComplete == 'true') {
-      const adress = await User.UpdateAdress({
+  const saveAddress = async (id) => {
+    if (messageLocation == "good" && testComplete == "true") {
+      const address = await User.UpdateAddress({
         userid: id,
         city: Area,
         buldingNumber: buildingNumber,
         street: street,
         notes: Phone,
-      })
+      });
     }
-  }
+  };
 
   //!........................................................
   const getAdress = async (userid) => {
-    // console.log("idiiddid", userid)
-    const pastadess = await User.getaddrssByuserTd({ userid })
+    const pastadess = await User.getaddrssByuserTd({ userid });
 
     if (pastadess.result[0].street != null) {
-      //   console.log('nulllll')
-      testadress = 'true'
-      settrue('true')
+      testAddress = "true";
+      setTrue("true");
     }
-    setPastAdress(pastadess.result[0])
-  }
+    setPastAddress(pastadess.result[0]);
+  };
   //!........................................................
   const pastmessage = () => {
-    if (truevalue == 'false') {
-      setMessage('sorry not have past location please enter')
-      setPopadress('false')
+    if (trueValue == "false") {
+      setMessage("sorry not have past location please enter");
+      setPopAddress("false");
     } else {
-      setMessage('good')
-      setPopadress('true')
+      setMessage("good");
+      setPopAddress("true");
     }
-  }
+  };
   //!........................................................
 
   const newmessage = async () => {
     if (
-      Area != 'empty' &&
-      Phone != 'empty' &&
-      street != 'empty' &&
-      Phone != 'empty' &&
-      city != 'empty'
+      Area != "empty" &&
+      Phone != "empty" &&
+      street != "empty" &&
+      Phone != "empty" &&
+      city != "empty"
     ) {
-      setMessage('good')
-      console.log(messageLocation, '105.105')
+      setMessage("good");
     } else {
-      await setMessage('enter all information')
-      //   console.log(messageLocation,"109.109")
+      await setMessage("enter all information");
     }
-  }
-//   console.log(messageLocation, '112 112')
-
-  //!........................................................
-  // const click = () => {
-  //     alert("ggggggggggggggg");
-
-  // }
+  };
 
   const toggleModel = () => {
-    console.log('ghghg')
-    setmodels(!models)
-    // console.log(models)
-  }
+    setModels(!models);
+  };
   //!........................................................
   const sentUserOrder = async (id) => {
-    // console.log(messageLocation, testComplete, '144   128 128')
-    // console.log( Userinfor.yourPrice[0].restaurant,"114")
-    if (testComplete == 'true' && messageLocation == 'good') {
-      console.log(Userinfor)
-       await User.sentOrder({
+    if (testComplete == "true" && messageLocation == "good") {
+      await User.sentOrder({
         userid: id,
-        state: 'progess',
+        state: "progess",
         receipt: Userinfor.sumPrice,
         resturantId: Userinfor.yourPrice[0].restaurant,
         mealarray: Userinfor.yourPrice,
         Quntity: Userinfor.sumItems,
-      })
+      });
     }
-  }
+  };
   //!........................................................
   const move = () => {
-    console.log(models ,testComplete ,messageLocation ,"146")
-    if ( testComplete == 'true' && messageLocation== 'good') {
-        console.log("in in")
+    if (testComplete == "true" && messageLocation == "good") {
       setTimeout(() => {
-        console.log("move move")
-        navigate('/')
-      }, 2000)
+        navigate("/");
+      }, 2000);
     }
 
     //    navigate("/")
-  }
+  };
 
   //!...............................................................
   useEffect(() => {
-    getAdress(localStorage.getItem('userid'))
-  }, [])
+    getAdress(localStorage.getItem("userid"));
+  }, []);
 
   //!...............................................................
   return (
     <div className="completeOrder">
       <NavBar />
-
       <div className="order">
-        <div className="summaryOrder">
-          <div className="divSummary">
-            <h2 className="h2_order">Order Summary</h2>
+        <div id="summery">
+          <h1>Order Summary</h1>
+          <h2>{Userinfor.name} Restaurant</h2>
+          <div id="summary2">
+          <div className="table-row">
+            <h3>#</h3>
+            <h3>Items</h3>
+            <h3>Quantity</h3>
+            <h3>Price</h3>
+            <h3>Total</h3>
           </div>
-          <div className="orderinformation">
-            <h1 className="restaauranttName">{Userinfor.name}</h1>
-            <div className="orderinformationtwo">
-              <h2 className="items">items</h2>
-              <div className="title_tow">
-                <h2 className="h2"> quantity</h2>
-                <h2 className="h2"> Price</h2>
-
-                <h2 className="h2">Total</h2>
-              </div>
-            </div>
-            <div className="orderinformationthree">
-              {/* {' '} */}
-              <div className="mealItems">
-                {Userinfor.yourPrice
-                  ? Userinfor.yourPrice.map((element, index) => {
-                      return (
-                        <div className="div_return_map" keys={index}>
-                          <h3 className="NameMeal">{element.name}</h3>
-                          <div className="insted__div_return_map">
-                            <div className="h3_Qun">
-                              {element.price / element.priceOne}
-                            </div>
-                            <div className="h3_Pri">
-                              {element.priceOne + ' JD'}
-                            </div>
-                            <div className="h3_totprice">
-                              {(element.price / element.priceOne) *
-                                element.priceOne +
-                                '  JD'}
-                            </div>
-                          </div>
-                        </div>
-                      )
-                    })
-                  : ''}
-              </div>{' '}
-            </div>
-
-            {/* <div className="sumprice">total:{Userinfor.sumPrice}</div> */}
-          </div>
+          {Userinfor.yourPrice ? (
+            Userinfor.yourPrice.map((element, index) => {
+              return (
+                <div key={index} className="table-row">
+                  <strong>{index + 1}</strong>
+                  <strong>{element.name}</strong>
+                  <strong>{element.price / element.priceOne}</strong>
+                  <strong>{element.priceOne}</strong>
+                  <strong>{element.price}</strong>
+                </div>
+              );
+            })
+          ) : (
+            <></>
+          )}
+           </div>
         </div>
+
         <div className="location">
           <div className="Enterh2_order">
-            {' '}
+            {" "}
             <h2 className="h2_order   Enter">Enter a new site</h2>
             <h2 className="h2_order  lastSite "> last site</h2>
           </div>
@@ -228,14 +167,14 @@ const CompleteOrder = () => {
                   className="inputtag"
                   placeholder="City"
                   onChange={(e) => {
-                    setCity(e.target.value)
+                    setCity(e.target.value);
                   }}
                 />
                 <input
                   className="inputtag"
                   placeholder="Area"
                   onChange={(e) => {
-                    setArea(e.target.value)
+                    setArea(e.target.value);
                   }}
                 />
               </div>
@@ -244,14 +183,14 @@ const CompleteOrder = () => {
                   className="inputtag"
                   placeholder="buldingNumber"
                   onChange={(e) => {
-                    setBuilding(e.target.value)
+                    setBuilding(e.target.value);
                   }}
                 />
                 <input
                   className="inputtag"
                   placeholder="stretName"
                   onChange={(e) => {
-                    setstreet(e.target.value)
+                    setStreet(e.target.value);
                   }}
                 />
               </div>
@@ -260,41 +199,41 @@ const CompleteOrder = () => {
                   className="inputtagNumber"
                   placeholder="Number"
                   onChange={(e) => {
-                    setPhone(e.target.value)
+                    setPhone(e.target.value);
                   }}
                 />
               </div>
             </div>
 
             <div className="userPastLocation">
-              {truevalue == 'true' ? (
+              {trueValue == "true" ? (
                 <div className="iftrue">
                   <div className="div45">
                     <div className="h2h2h2PastLocation">
-                      {' '}
+                      {" "}
                       <h2 className="h2h2h2333">City:</h2>
                     </div>
                     <h3 className="h2userLocation">Amman</h3>
                   </div>
                   <div className="div45">
                     <div className="h2h2h2PastLocation">
-                      {' '}
+                      {" "}
                       <h2 className="h2h2h2333">Area:</h2>
                     </div>
-                    <h3 className="h2userLocation">{pastAdress.city}</h3>
+                    <h3 className="h2userLocation">{pastAddress.city}</h3>
                   </div>
                   <div className="div45">
                     <div className="h2h2h2PastLocation">
                       <h2 className="h2h2h2333">street:</h2>
                     </div>
-                    <h3 className="h2userLocation">{pastAdress.street}</h3>
+                    <h3 className="h2userLocation">{pastAddress.street}</h3>
                   </div>
                   <div className="div45">
                     <div className="h2h2h2PastLocation">
                       <h2 className="h2h2h2333">buildingNumber:</h2>
                     </div>
                     <h3 className="h2userLocation">
-                      {pastAdress.buldingNumber}
+                      {pastAddress.buldingNumber}
                     </h3>
                   </div>
                   <div className="div45">
@@ -302,7 +241,7 @@ const CompleteOrder = () => {
                       <h2 className="h2h2h2333"> phone:</h2>
                     </div>
 
-                    <h3 className="h2userLocation">{pastAdress.notes}</h3>
+                    <h3 className="h2userLocation">{pastAddress.notes}</h3>
                   </div>
                 </div>
               ) : (
@@ -332,7 +271,7 @@ const CompleteOrder = () => {
               id="huey"
               name="drone"
               onChange={(e) => {
-                newmessage()
+                newmessage();
               }}
             />
             <label for="huey">new address</label>
@@ -345,17 +284,17 @@ const CompleteOrder = () => {
               id="huey"
               name="drone"
               onChange={(e) => {
-                pastmessage()
+                pastmessage();
               }}
             />
             <label for="huey">Past address</label>
           </div>
 
           <div className="divColorMessage">
-            {messageLocation != 'empty' ? (
+            {messageLocation != "empty" ? (
               <div className="messageColor">{messageLocation}</div>
             ) : (
-              ''
+              ""
             )}
           </div>
         </div>
@@ -374,9 +313,8 @@ const CompleteOrder = () => {
                     name="drone2"
                     value="huey1"
                     onChange={(e) => {
-                      setPayment('Visa')
-                      console.log(payment, 'lllll', 'Visa')
-                      settestComplete('true')
+                      setPayment("Visa");
+                      setTestComplete("true");
                       //   setPopadress("true")
                     }}
                   />
@@ -389,9 +327,8 @@ const CompleteOrder = () => {
                     name="drone2"
                     value="huey2"
                     onChange={(e) => {
-                      setPayment('Cash')
-                      console.log(payment, '22222')
-                      settestComplete('true')
+                      setPayment("Cash");
+                      setTestComplete("true");
                       //   setPopadress("false")
                     }}
                   />
@@ -399,14 +336,14 @@ const CompleteOrder = () => {
                 </div>
               </div>
               <div className="paymentcreditCardOremty">
-                {payment == 'Visa' ? (
+                {payment == "Visa" ? (
                   <div className="divcreditCard">
                     <div className="divcreditCard_one">
-                      <h3 className="cartVisah3">Card Number</h3>{' '}
+                      <h3 className="cartVisah3">Card Number</h3>{" "}
                       <input
                         className="inputCardNumber"
                         placeholder="    -   -  -  -  -   - "
-                      />{' '}
+                      />{" "}
                     </div>
 
                     <div className="divcreditCard_two">
@@ -433,12 +370,7 @@ const CompleteOrder = () => {
                           <option>12</option>
                         </select>
 
-                        <select
-                          className="inputmounth"
-                          onChange={(e) => {
-                            // setDestin(e.target.value);
-                          }}
-                        >
+                        <select className="inputmounth" onChange={(e) => {}}>
                           <option>yy</option>
                           <option>2022</option>
                           <option>2023</option>
@@ -462,7 +394,7 @@ const CompleteOrder = () => {
                     </div>
                   </div>
                 ) : (
-                  ''
+                  ""
                 )}
               </div>
             </div>
@@ -470,7 +402,7 @@ const CompleteOrder = () => {
               <div className="divTotalOrder">
                 <div className="divdivTotal">
                   <h2 className="h2h2Total">Subtotal</h2>
-                  <h3 className="h3h3h3total">{Userinfor.sumPrice + ' JD'}</h3>
+                  <h3 className="h3h3h3total">{Userinfor.sumPrice + " JD"}</h3>
                 </div>
                 <div className="divdivTotal">
                   <h2 className="h2h2Total">Delivery fee</h2>
@@ -487,16 +419,16 @@ const CompleteOrder = () => {
                   </h3>
                 </div>
                 <div>
-                  {' '}
+                  {" "}
                   <button
                     className="PlaceOrder"
-                    onClick={async() => {
-                      saveAdress(Userinfor.userId)
-                      sentUserOrder(Userinfor.userId)
+                    onClick={async () => {
+                      saveAddress(Userinfor.userId);
+                      sentUserOrder(Userinfor.userId);
 
-                      await toggleModel()
+                      await toggleModel();
 
-                      move()
+                      move();
                     }}
                   >
                     PLACE ORDER
@@ -508,11 +440,11 @@ const CompleteOrder = () => {
         </div>
 
         <div className="divdivModels">
-          {models && (testComplete == 'false' || popadress == 'false') ? (
+          {models && (testComplete == "false" || popAddress == "false") ? (
             <div
               className="instedModelOne"
               onClick={() => {
-                toggleModel()
+                toggleModel();
               }}
             >
               <div className="BigBiginsted">
@@ -523,7 +455,7 @@ const CompleteOrder = () => {
                   <button
                     className="CloseButton"
                     onClick={() => {
-                      toggleModel()
+                      toggleModel();
                     }}
                   >
                     close
@@ -533,45 +465,64 @@ const CompleteOrder = () => {
             </div>
           ) : (
             <div>
-              {models && testComplete == 'true' && popadress == 'true' ? (
-               
-                  <div
-                    className="instedModelOne"
-                    onClick={() => {
-                      toggleModel()
-                    }}
-                  >
-                    <div className="BigBiginsted">
-                      <div className="instedModel">
-                        <h2 className="h2h2PleaseCheck">
-                          Order Completed will access you
-                        </h2>
-                        <button
-                          className="CloseButton"
-                          onClick={() => {
-                            toggleModel()
-                          }}
-                        >
-                          close
-                        </button>
-                      </div>
+              {models && testComplete == "true" && popAddress == "true" ? (
+                <div
+                  className="instedModelOne"
+                  onClick={() => {
+                    toggleModel();
+                  }}
+                >
+                  <div className="BigBiginsted">
+                    <div className="instedModel">
+                      <h2 className="h2h2PleaseCheck">
+                        Order Completed will access you
+                      </h2>
+                      <button
+                        className="CloseButton"
+                        onClick={() => {
+                          toggleModel();
+                        }}
+                      >
+                        close
+                      </button>
                     </div>
                   </div>
-                
+                </div>
               ) : (
-                ''
+                ""
               )}
             </div>
           )}
         </div>
       </div>
     </div>
-  )
-}
-// ;<div>
-//   <div className="instedModel">
-//     <h2 className="h2h2PleaseCheck">Order Completed True </h2>
-//   </div>
-// </div>
+  );
+};
 
-export default CompleteOrder
+export default CompleteOrder;
+/* 
+ <div className="mealItems">
+                {Userinfor.yourPrice
+                  ? Userinfor.yourPrice.map((element, index) => {
+                      return (
+                        <div className="div_return_map" keys={index}>
+                          <h3 className="NameMeal">{element.name}</h3>
+                          <div className="insted__div_return_map">
+                            <div className="h3_Qun">
+                              {element.price / element.priceOne}
+                            </div>
+                            <div className="h3_Pri">
+                              {element.priceOne + " JD"}
+                            </div>
+                            <div className="h3_totprice">
+                              {(element.price / element.priceOne) *
+                                element.priceOne +
+                                "  JD"}
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })
+                  : ""}
+              </div>{" "}
+*/
