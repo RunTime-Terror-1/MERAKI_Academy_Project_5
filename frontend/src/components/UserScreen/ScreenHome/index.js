@@ -86,7 +86,7 @@ const ScreenHome = () => {
         <h4>Amman</h4>
        <h4>Zarqa</h4>
        <h4>Aqapa</h4>
-       <h4>Irbid</h4> 
+       <h4>Ajlwn</h4> 
         </div>
         <div>
         <h2>Follow us on</h2>
