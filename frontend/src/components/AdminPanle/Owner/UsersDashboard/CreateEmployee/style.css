@@ -7,7 +7,7 @@
     max-width: 600px;
     min-height: 350px;
     text-align: start;
-    padding: 2px;
+    padding: 10px;
     border: 0px solid black;
     border-radius: var(--border-radius);
     background-color: var(--first-color);

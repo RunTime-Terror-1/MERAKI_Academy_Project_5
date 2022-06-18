@@ -26,11 +26,11 @@ export const Users = () => {
   const createRow = (user, index) => {
     return (
       <div className="user-row" key={user.id + user.email}>
-        <h4>{user.id}</h4>
+        <h4>{index+1}</h4>
         <h4>{user.firstName + " " + user.lastName}</h4>
         <h4>{user.email}</h4>
         <h4>{user.role}</h4>
-        <h4>{"user.lastLogin"}</h4>
+        <h4>{user.lastLogin}</h4>
         <div id="edit-btns-div">
           {createButton({
             onClick: () => {
@@ -55,7 +55,7 @@ export const Users = () => {
   const createRow1 = (user, index) => {
     return (
       <div className="user-row1" key={user.id + user.email}>
-        <h4>{user.id}</h4>
+        <h4>{index+1}</h4>
         <h4>{user.firstName + " " + user.lastName}</h4>
         <h4>{user.name}</h4>
         <h4>{user.salary}</h4>
@@ -150,7 +150,7 @@ export const Users = () => {
         )}
       </div>
       <div className="user-dashboard" style={{ marginTop: "2px" }}>
-        <div id="dash-title-div" className="user-row1">
+        <div id="dash-title-div" className="user-row">
           <h4>ID</h4>
           <h4>NAME</h4>
           <h4>RESTAURANT</h4>
