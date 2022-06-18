@@ -1,53 +1,19 @@
-.div_yourCounter{
-    display: flex;
-    flex-direction: row;
-    gap:20px;
-  
-    /* background-color: rgb(235, 235, 235);
-     */
-};
-.returnDiv{
-    display: flex;
-    flex-direction: row;
-    background-color: brown;
+#cart-items-div {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  border: 0.5px solid rgba(0, 0, 0, 0.407);
 }
-.Number_controlee{
-    display: flex;
-    flex-direction: column;
-    
-};
-
-.Name_andP{
-    background-color: darkgreen;
-}
-.Name_andPrice{
-    display: flex;
-    /* flex-direction: column; */
-    gap:50px;
-  
-}
-
-.iconesCounter{
-    width:23px;
-    height: 23px;
-    opacity:0.8;
-}
-.deleteIcons{
-    width:25px;
-    height: 25px; 
-    position: relative;
-    top:25px;
-    opacity:0.5;
-}
-.h3_price{
-    position: relative;
-    top:25px
-}
-.con{
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    left:10px;
-    top:6px;
-    gap:16px;
+.backg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
 }

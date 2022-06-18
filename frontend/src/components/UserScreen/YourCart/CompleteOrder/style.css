@@ -2,22 +2,98 @@
   display: grid;
   width: 100%;
   grid-template-columns: 10% 22% 22% 22% 24%;
-  text-align:center ;
+  text-align: center;
+}
+#location-div-main {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
   
 }
-#summary2{
+.input3 {
+  padding: 10px;
+  
+  width: 100%;
+  margin-bottom: 2px;
+  border-radius: 10px;
+  border: 0.5px solid black;
+}
+.location-div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px;
+  margin:7px;
+  border-bottom: 0.5px solid black;
+}
+#summary2 {
   display: flex;
   flex-direction: column;
   border: 1px solid black;
   gap: 10px;
   padding: 5px;
 }
-#summery{
+#empty-addr{
+  display: flex;
+  flex: 1;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+#empty-addr h2{
+ position: absolute;
+ color: rgba(13, 13, 10, 0.551);
+}
+#empty-addr img{
+  width: 30%;
+}
+#pop{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  background-color: rgba(240, 248, 255, 0.656);
+  top: 0%;
+  left: 0%;
+}
+#inner-pop{
+  width: 50%;
+  height: fit-content;
+  height: fit-content;
+  padding: 5px;
+  width: 50%;
+  max-width:400px;
+  background-color: orange;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px black;
+}
+#inner-pop h2{
+  text-align: start;
+  padding: 5px;
+  font-size: 130%;
+}
+#inner-pop h5{
+  text-align: start;
+  padding: 5px;
+  font-size: 100%;
+}
+
+
+
+#summery {
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   padding: 10px;
+  max-width: 550px;
+  width: 100%;
   box-shadow: 0px 1px 3px 1px var(--third-color);
   background-color: var(--first-color);
 }
@@ -26,8 +102,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  /* background-color: var(  --second-color);; */
-  /* background-color: rgb(238, 238, 238); */
+  justify-content: center;
+  align-items: center;
   background: linear-gradient(
     var(--first-color),
     rgb(233, 207, 157),
@@ -36,20 +112,18 @@
 }
 
 .order {
-  width: 70vw;
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  /* background-color: rgb(255, 255, 255); */
+  gap: 10px;
+  width: 100%;
+  align-items: center;
   background-color: transparent;
-  /* background-color: rgb(255, 255, 255); */
   position: relative;
-  left: 15vw;
 
   text-align: start;
 
-  padding: 60px;
+  padding: 20px;
 
   /* border: 4px solid var(  --second-color); */
 }
@@ -353,213 +427,61 @@
 
 /*..... Payment      ..................                ............*/
 
-.Payment {
-  border-radius: 12px;
-  background-color: var(--first-color);
-  box-shadow: 0px 1px 5px 1px var(--third-color);
-
-  /* background-color: darkorange; */
-  /* border: 4px solid rgb(238, 238, 238); */
+#card-view {
   display: flex;
   flex-direction: column;
-}
-.PaymentOne {
+  justify-content: center;
+  gap: 10px;
   padding: 10px;
-  border-bottom: 4px solid rgb(238, 238, 238);
-}
-.Paymentwo {
-  padding: 10px;
-  display: flex;
-  flex-direction: row;
-  /* gap: 10px; */
-}
-.Paymenttow_One {
-  display: flex;
-  flex-direction: column;
-}
-.HowPayment {
-  width: 36vw;
-  /* border-right: 4px solid rgb(238,238,238); */
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  background-color: rgb(252, 241, 221);
+  border-radius: 5px;
 }
 
-/*..... Cart       ..................                ............*/
-.cartVisah3 {
-  font-size: 15px;
-  /* color: #212121; */
-  font-weight: 400 !important;
-  font-family: open_sanssemibold;
-}
-.divImageeee {
-  display: flex;
-  flex-direction: row;
-  gap: 40px;
-}
-.inputCardNumber {
-  width: 18vw;
-  height: 2vw;
-}
-.inputmounth {
-  width: 5vw;
-  height: 2vw;
+#card-view input {
+  padding: 10px;
+  width: 90%;
+  border: 0.5px solid rgba(0, 0, 0, 0.507);
+  border-radius: 10px;
 }
 
-.verification {
-  width: 6vw;
-  height: 32px;
+#card-view select {
+  padding: 5px;
+  margin: 5px;
+  border: 0.5px solid rgba(0, 0, 0, 0.507);
+  border-radius: 10px;
 }
-.divcreditCard {
-  padding: 10px;
-  background-color: rgb(231, 216, 216);
+
+#card-view h3 {
+  margin: 2px;
+  text-transform: capitalize;
+}
+#visa-card-img {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.cartimage {
-  width: 115px;
+  justify-content: space-between;
   height: 40px;
-}
-.divCreditCard_two_two {
-  display: flex;
-  flex-direction: row;
-  gap: 55px;
-}
-
-/*.............completOrder.. (place order)............*/
-
-.divdivTotal {
-  display: flex;
-  flex-direction: row;
-  /* gap: 180px; */
-  position: relative;
-  left: 20px;
-}
-.divTotalOrder {
-  /* border-left: 4px solid rgb(238,238,238); */
-  display: flex;
-  flex-direction: column;
   gap: 5px;
 }
-.h2h2Total {
-  width: 220px;
-  /* background-color: crimson; */
-  font-size: 18px;
-  /* color: #212121; */
-  font-weight: 400 !important;
-  font-family: open_sanssemibold;
+#payment-div-de {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
-.h3h3h3total {
-  font-size: 15px;
-  /* color: #212121; */
-  font-weight: 400 !important;
-  font-family: open_sanssemibold;
+.subTotal {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid black;
+  padding: 5px;
 }
 
-.Tax {
-  border-bottom: 4px solid rgb(238, 238, 238);
+.subTotal h2 {
+  width: 50%;
+  font-size: 100%;
 }
-
-.PlaceOrder {
-  width: 18vw;
-  height: 5vh;
-
-  font-size: 25px;
-  /* color: #212121; */
-  font-weight: 400 !important;
-  font-family: open_sanssemibold;
-
-  background-color: var(--second-color);
-  position: relative;
-  left: 20px;
-
-  cursor: pointer;
+.subTotal h3 {
+  width: 50%;
+  font-size: 100%;
+  text-align: center;
 }
-.PlaceOrder:hover {
-  width: 18vw;
-  height: 5vh;
-  color: rgb(253, 247, 247);
-  font-size: 25px;
-  /* color: #212121; */
-  font-weight: 400 !important;
-  font-family: open_sanssemibold;
-
-  background-color: var(--third-color);
-  position: relative;
-  left: 20px;
-
-  cursor: pointer;
-}
-
-.divDivdiv {
-  border-left: 4px solid rgb(238, 238, 238);
-  /* background-color: aqua; */
-  /* width: 40vw; */
-}
-
-.instedModel {
-  /* padding: 40px; */
-  display: block;
-  width: 60vh;
-  height: 20vh;
-  /* background-color: rgb(212, 147, 147); */
-
-  position: relative;
-
-  /* bottom: 30vh;  */
-}
-
-.h2h2PleaseCheck {
-  color: black;
-  position: relative;
-  left: 50px;
-  top: 50px;
-}
-.CloseButton {
-  width: 100px;
-  height: 30px;
-  position: relative;
-  left: 160px;
-  top: 70px;
-}
-.CloseButton:hover {
-  background-color: rgb(252, 4, 53);
-  width: 100px;
-  height: 30px;
-  position: relative;
-  left: 160px;
-  top: 70px;
-  cursor: pointer;
-}
-
-.instedModelOne {
-  /* padding: 40px; */
-  text-align: start;
-  display: block;
-  width: 100vw;
-  height: 155vh;
-
-  background-color: var(--first-color);
-  opacity: 0.8;
-  position: relative;
-  right: 20vw;
-  bottom: 130vh;
-
-  /* bottom: 30vh;  */
-}
-
-.BigBiginsted {
-  border-radius: 25px;
-  /* padding: 500px; */
-  width: 28vw;
-  height: 30vh;
-  position: relative;
-  left: 36vw;
-  top: 60vh;
-  /* bottom: 27vh; */
-  /* background-color:var(--first-color); */
-  background-color: var(--second-color);
-  opacity: 7;
-  box-shadow: 0px 1px 15px 4px var(--third-color);
+#place-btn {
+  margin-top: 10px;
 }

@@ -4,9 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Counter from "./Counter";
 import { useNavigate } from "react-router-dom";
-import { setsumPriceUser,setSumitems} from "../../../redux/reducers/User";
+import { setsumPriceUser, setSumitems } from "../../../redux/reducers/User";
 import { setShowLoginForm } from "../../../redux/reducers/auth";
-
 
 const YourCart = () => {
   const navigate = useNavigate();
@@ -19,7 +18,6 @@ const YourCart = () => {
       yourTotal: state.User.total,
       islogin: state.auth.isLoggedIn,
       name: state.User.name,
-      LoginForm:state.auth.showLoginForm,
     };
   });
 
@@ -29,39 +27,46 @@ const YourCart = () => {
     }, 0)
   );
 
-
   const complete = () => {
-    Userinfor.islogin == true ?dispatch(setShowLoginForm(true)) : navigate("/Login");
+    Userinfor.islogin == true
+      ? navigate("/CompleteOrder")
+      : dispatch(setShowLoginForm(true));
   };
 
-
   return (
-    <div className="YourCartinRest">
+    <div>
       {Userinfor.yourCart !== 0 && Userinfor.yourCart.length ? (
         Userinfor.yourCart.map((element, index) => {
           return (
-            <div key={index} className="div-Yourcart">
+            <div
+              key={index}
+              style={{
+                backgroundColor: "transparent",
+                marginTop: "2px",
+                margin: "0",
+                padding: "2px",
+              }}
+            >
               {<Counter element={element} />}
             </div>
           );
         })
       ) : (
-        <div className="cartempty ">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2RAmmS3yjdMkpGUh2S858rxj2HB4fzf-4CQ&usqp=CAU" />
-          <h2 className="textinYourCart">Your cart is empty</h2>
-          <br />
-          <h2 className="textinYourCart">Add items to get started</h2>
+        <div id="empty-cart">
+          <img src="https://freepngimg.com/thumb/categories/1325.png" />
+          <h4>Your cart is empty, add meals to get started 😋</h4>
         </div>
       )}
       <h1>
         {Userinfor.yourCart !== 0 && Userinfor.yourCart.length ? (
           <div>
-            <h3>total:{Userinfor.yourTotal}</h3>
+            <h5>Total:{Userinfor.yourTotal}</h5>
             <button
+              className="checkout-btn"
               onClick={() => {
                 complete();
                 dispatch(setsumPriceUser());
-                dispatch(setSumitems())
+                dispatch(setSumitems());
               }}
             >
               Go to the checkout

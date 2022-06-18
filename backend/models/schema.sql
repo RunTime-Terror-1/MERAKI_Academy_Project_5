@@ -105,8 +105,6 @@ USE RUNTIME_TERROR;
 -- );
 
 
-DROP TABLE orders_meals;
-DROP TABLE orders;
 CREATE TABLE orders (
     id INT AUTO_INCREMENT NOT NULL,
     quantity VARCHAR(255) NOT NULL,
@@ -121,7 +119,6 @@ CREATE TABLE orders (
 );
 
 
-
 CREATE TABLE orders_meals (
     id INT AUTO_INCREMENT NOT NULL,
     quantity VARCHAR(255) NOT NULL,
@@ -129,6 +126,15 @@ CREATE TABLE orders_meals (
     meal_id INT,
 	FOREIGN KEY (order_id) REFERENCES  orders(id),
     FOREIGN KEY ( meal_id) REFERENCES  meals(id),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE requests (
+    id INT AUTO_INCREMENT NOT NULL,
+    restaurantName VARCHAR(255) NOT NULL,
+    owner_Id INT,
+   state VARCHAR(255) NOT NULL,
+	FOREIGN KEY (owner_Id) REFERENCES  users(id),
     PRIMARY KEY (id)
 );
 INSERT INTO restaurants  (location,backImg,Logo,lat, lng,name, rest_category,owner_id) VALUES ('Amman','https://img.cdn4dd.com/cdn-cgi/image/fit=cover,width=1000,height=300,format=auto,quality=80/https://doordash-static.s3.amazonaws.com/media/store/header/fff33026-470a-444b-a248-9c0237da449f.jpg','https://img.cdn4dd.com/cdn-cgi/image/fit=cover,width=1000,height=300,format=auto,quality=80/https://doordash-static.s3.amazonaws.com/media/store/header/fff33026-470a-444b-a248-9c0237da449f.jpg','dd','ddd','The Ice Cream Parlor','pizza',1)

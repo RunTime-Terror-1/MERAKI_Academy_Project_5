@@ -1,13 +1,14 @@
 const connection = require("../models/db");
 
 const createMeal = (req, res) => {
+  
   const { name, imgUrl, category, price, restaurant_id } = req.body;
   const query = `INSERT INTO meals (name,imgUrl,category,price,restaurant_id) VALUES (?,?,?,?,?);`;
   const data = [name, imgUrl, category, price, restaurant_id];
 
   connection.query(query, data, (err, result) => {
     if (err) {
-      res.status(500).json({
+      return res.status(500).json({
         success: false,
         massage: "Server error",
         err: err,
