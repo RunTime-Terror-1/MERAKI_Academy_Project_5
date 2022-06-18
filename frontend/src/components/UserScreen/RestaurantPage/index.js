@@ -149,13 +149,12 @@ const RestaurantPage = () => {
           </div>
         </div>
         <div style={{ borderRight: "0.5px solid black" }}>
-         
           <div>
             {arrayDetails
               ? arrayDetails.map((element, index) => {
                   return (
-                    <div >
-                      <h2 id="each-cat-div">{element.catoName}</h2>
+                    <div id={index} >
+                      <h2 className="each-cat-div">{element.catoName}</h2>
                       <div id="caty-meals">
                         {element.mallloop
                           ? element.mallloop.map((elementMall, index) => {
@@ -175,108 +174,12 @@ const RestaurantPage = () => {
           </div>
         </div>
         <div>
-          {" "}
-          <h2>CATEGORIES</h2>
+          <h1 >Your Cart</h1>
+          {<YourCart />}
         </div>
       </div>
 
-      <div className="Allinformation_Two">
-        <div className="All_Two_categore_Cat">
-          <h1>CATEGORIES</h1>
-          <div className="All_Two-categore_map">
-            {categories ? (
-              categories.map((element, index) => {
-                return (
-                  <div key={index}>
-                    <a href={"#" + index}>
-                      <div>
-                        <button className="button">{element}</button>
-                      </div>
-                    </a>
-
-                    {/* <a href={"#" + index}   ><span>{element}</span><i></i></a> */}
-                  </div>
-                );
-              })
-            ) : (
-              <></>
-            )}
-          </div>
-        </div>
-
-        <div className="All_Two-menue">
-          {arrayDetails
-            ? arrayDetails.map((element, index) => {
-                return (
-                  <div className="div_Mealloop_One">
-                    <h1 className="h1_category_Nameq" id={index}>
-                      {element.catoName}
-                    </h1>
-
-                    <div className="div_Mealloop_1">
-                      {element.mallloop
-                        ? element.mallloop.map((elementMall, index) => {
-                            return (
-                              <div className="div_Mallloop_2">
-                                <div className="imgbox">
-                                  {" "}
-                                  <img
-                                    className="eachMealimg"
-                                    src={elementMall.imgUrl}
-                                  />
-                                </div>
-                                <div className="divNameandPriceeach">
-                                  <h2 className="h2andh4">
-                                    {elementMall.name}
-                                  </h2>
-                                  <h4 className="h2andh4">
-                                    {"$" + elementMall.price}
-                                  </h4>
-                                </div>
-
-                                <BsPlusCircleFill
-                                  className="PluseIcone"
-                                  onClick={() => {
-                                    dispatch(
-                                      setNameRest({ name: restaurant[0].name })
-                                    );
-                                    dispatch(setCart({ items: elementMall }));
-                                    // console.log(elementMall)
-                                    dispatch(
-                                      setPrice({
-                                        price: elementMall.price,
-                                        indexitem: elementMall.id,
-                                        priceOne: elementMall.price,
-                                        name: elementMall.name,
-                                        restaurantid: elementMall.restaurant_id,
-                                      })
-                                    );
-
-                                    dispatch(
-                                      setTotal({
-                                        opr: "+",
-                                        value: elementMall.price,
-                                      })
-                                    );
-                                    console.log("44");
-                                  }}
-                                />
-                              </div>
-                            );
-                          })
-                        : ""}
-                    </div>
-                  </div>
-                );
-              })
-            : ""}
-        </div>
-
-        <div className="All_Two_cart">
-          <h1 className="Your_cart_h1">Your Cart</h1>
-          {<YourCart className="YourCartinRest" />}
-        </div>
-      </div>
+     
     </div>
   );
 };

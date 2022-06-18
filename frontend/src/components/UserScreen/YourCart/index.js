@@ -34,21 +34,21 @@ const YourCart = () => {
 
 
   return (
-    <div className="YourCartinRest">
+    <div id="ssss">
       {Userinfor.yourCart !== 0 && Userinfor.yourCart.length ? (
         Userinfor.yourCart.map((element, index) => {
           return (
-            <div key={index} className="div-Yourcart">
+            <div key={index} >
               {<Counter element={element} />}
             </div>
           );
         })
       ) : (
-        <div className="cartempty ">
+        <div >
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2RAmmS3yjdMkpGUh2S858rxj2HB4fzf-4CQ&usqp=CAU" />
-          <h2 className="textinYourCart">Your cart is empty</h2>
+          <h2 >Your cart is empty</h2>
           <br />
-          <h2 className="textinYourCart">Add items to get started</h2>
+          <h2 >Add items to get started</h2>
         </div>
       )}
       <h1>
