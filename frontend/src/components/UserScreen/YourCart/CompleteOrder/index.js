@@ -351,7 +351,7 @@ const CompleteOrder = () => {
                     className="checkout-btn"
                     id="place-btn"
                     onClick={async () => {
-                      console.log(testComplete, "**", models, popAddress);
+                   
                       setShowPops(true);
                       await saveAddress(Userinfor.userId);
                       await sentUserOrder(Userinfor.userId);
