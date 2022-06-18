@@ -39,6 +39,7 @@ const Counter = ({ element }) => {
       <div id="cart-items-div">
         <div>
           <BsPlusCircleFill
+          className="cart-icon"
             onClick={() => {
               nextPrice();
               dispatch(
@@ -52,8 +53,9 @@ const Counter = ({ element }) => {
               dispatch(setTotal({ opr: "+", value: realPrice }));
             }}
           />
-          <h2>{priceNumber}</h2>
+          <h3 style={{margin:"5px"}}>{priceNumber}</h3>
           <BsDashCircleFill
+           className="cart-icon"
             onClick={() => {
               prevPrice();
               dispatch(
@@ -70,11 +72,12 @@ const Counter = ({ element }) => {
           />
         </div>
         <div>
-          <h3>{element.name}</h3>
-          <h3>{realPrice * priceNumber + "JD"}</h3>
+          <h2>{element.name}</h2>
+          <h4>{realPrice * priceNumber + "JD"}</h4>
         </div>
         <div>
           <AiTwotoneDelete
+           className="cart-icon1"
             onClick={() => {
               dispatch(deleteCart({ id: element.id }));
               dispatch(setTotal({ opr: "-", value: realPrice }));
