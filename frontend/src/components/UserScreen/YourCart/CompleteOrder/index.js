@@ -117,8 +117,8 @@ const CompleteOrder = () => {
   const createLocation = ({ Title, value }) => {
     return (
       <div key={value + Title} className="location-div">
-        <h3 style={{width:"75%"}}>{Title}: </h3>
-        <small style={{width:"25%"}}>{value}</small>
+        <h3 style={{ width: "75%" }}>{Title}: </h3>
+        <small style={{ width: "25%" }}>{value}</small>
       </div>
     );
   };
@@ -227,7 +227,7 @@ const CompleteOrder = () => {
 
             <div>
               {trueValue == "true" ? (
-                <div id= "location-div-main">
+                <div id="location-div-main">
                   {pastLocation.map((ele) => {
                     return createLocation({ ...ele });
                   })}
@@ -244,6 +244,143 @@ const CompleteOrder = () => {
                 </div>
               )}
             </div>
+          </div>
+        </div>
+
+        <div id="summery">
+          <h1>Payment Summary</h1>
+          <div id="payment-div-de">
+            <div style={{ width: "50%" }}>
+              <div
+                style={{ display: "flex", gap: "10px", alignItems: "center" }}
+              >
+                <input
+                  type="radio"
+                  id="huey1"
+                  name="drone2"
+                  value="huey1"
+                  onChange={(e) => {
+                    setPayment("Visa");
+                    setTestComplete("true");
+                    //   setPopadress("true")
+                  }}
+                />
+                <h4 for="huey1">Credit Card</h4>
+              </div>
+              <div
+                style={{ display: "flex", gap: "10px", alignItems: "center" }}
+              >
+                <input
+                  type="radio"
+                  id="huey2"
+                  name="drone2"
+                  value="huey2"
+                  onChange={(e) => {
+                    setPayment("Cash");
+                    setTestComplete("true");
+                    //   setPopadress("false")
+                  }}
+                />
+                <h4 for="huey2">Cash</h4>
+              </div>
+            </div>
+
+            <div style={{ width: "50%" }}>
+              <div>
+                <div className="subTotal">
+                  <h2>Subtotal</h2>
+                  <h3>{Userinfor.sumPrice + " JD"}</h3>
+                </div>
+                <div className="subTotal">
+                  <h2>Delivery fee</h2>
+                  <h3> 0.99 JD</h3>
+                </div>
+                <div className="subTotal">
+                  <h2>Tax</h2>
+                  <h3> 16 %</h3>
+                </div>
+                <div className="subTotal">
+                  <h2>Total Amount</h2>
+                  <h3>{Userinfor.sumPrice + Userinfor.sumPrice * 0.16 + 1}</h3>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <button
+                    className="checkout-btn"
+                    id="place-btn"
+                    onClick={async () => {
+                      saveAddress(Userinfor.userId);
+                      sentUserOrder(Userinfor.userId);
+                      await toggleModel();
+                      move();
+                    }}
+                  >
+                    PLACE ORDER
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            {payment == "Visa" ? (
+              <div id="card-view">
+                <div>
+                  <h3>Card Number</h3>
+                  <input placeholder="    -   -  -  -  -   -    -   -  -  -  -   - " />
+                </div>
+
+                <div>
+                  <h3>Card expiry date</h3>
+                  <div>
+                    <select
+                      onChange={(e) => {
+                        // setDestin(e.target.value);
+                      }}
+                    >
+                      <option>mm</option>
+                      <option>01</option>
+                      <option>02</option>
+                      <option>03</option>
+                      <option>04</option>
+                      <option>05</option>
+                      <option>06</option>
+                      <option>07</option>
+                      <option>08</option>
+                      <option>09</option>
+                      <option>10</option>
+                      <option>11</option>
+                      <option>12</option>
+                    </select>
+
+                    <select onChange={(e) => {}}>
+                      <option>yy</option>
+                      <option>2022</option>
+                      <option>2023</option>
+                      <option>2024</option>
+                      <option>2025</option>
+                      <option>2026</option>
+                      <option>2027</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <h3>Card verification value</h3>
+                  <div id="visa-card-img">
+                    <input placeholder="number" />
+                    <img src="https://www.talabat.com/images/talabat/cvv_guide.png" />
+                  </div>
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
 
