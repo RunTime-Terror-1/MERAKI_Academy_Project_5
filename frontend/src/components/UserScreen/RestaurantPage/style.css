@@ -702,7 +702,7 @@ a:hover i::after{
   /* background-color: darkgreen; */
 }
 
-@media all and (max-width: 500px) {
+@media all and (max-width: 900px) {
   #info-div {
     display: grid;
     grid-template-columns: 20% 55% 25%;
