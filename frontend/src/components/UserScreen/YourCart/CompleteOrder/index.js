@@ -40,6 +40,7 @@ const CompleteOrder = () => {
   });
 
   const saveAddress = async (id) => {
+    console.log(messageLocation == "good" && testComplete == "true",messageLocation, testComplete);
     if (messageLocation == "good" && testComplete == "true") {
       const address = await User.UpdateAddress({
         userid: id,
@@ -74,6 +75,7 @@ const CompleteOrder = () => {
   //!........................................................
 
   const newmessage = async () => {
+    
     if (
       Area != "empty" &&
       Phone != "empty" &&
@@ -83,7 +85,7 @@ const CompleteOrder = () => {
     ) {
       setMessage("good");
     } else {
-      await setMessage("enter all information");
+       setMessage("enter all information");
     }
   };
   const locationInputs = [
@@ -109,6 +111,7 @@ const CompleteOrder = () => {
         placeholder={placeholder}
         onChange={(e) => {
           setState(e.target.value);
+          newmessage();
         }}
       />
     );
@@ -198,10 +201,11 @@ const CompleteOrder = () => {
                 id="huey"
                 name="drone"
                 onChange={(e) => {
+                  setMessage("")
                   newmessage();
                 }}
               />
-              <label for="huey">New Address</label>
+              <label>New Address</label>
             </div>
 
             <div>
@@ -211,11 +215,14 @@ const CompleteOrder = () => {
                 id="huey"
                 name="drone"
                 onChange={(e) => {
+                  setMessage("good")
                   pastmessage();
                 }}
               />
-              <label for="huey">Past Address</label>
+              <label>Past Address</label>
+              
             </div>
+            
           </div>
 
           <div className="locationTow">
@@ -227,18 +234,19 @@ const CompleteOrder = () => {
 
             <div>
               {trueValue == "true" ? (
+                <div>
                 <div id="location-div-main">
                   {pastLocation.map((ele) => {
                     return createLocation({ ...ele });
                   })}
                 </div>
+                </div>
               ) : (
-                <div className="divimageee">
-                  <h2 className="pastlocationmessage">
+                <div id="empty-addr" >
+                  <h2 >
                     You dont have a previous site ..
                   </h2>
                   <img
-                    className="imgadresss"
                     src="http://cdn.onlinewebfonts.com/svg/img_554287.png"
                   />
                 </div>
@@ -248,7 +256,7 @@ const CompleteOrder = () => {
         </div>
 
         <div id="summery">
-          <h1>Payment Summary</h1>
+          <h1>Payment Method</h1>
           <div id="payment-div-de">
             <div style={{ width: "50%" }}>
               <div
@@ -265,7 +273,7 @@ const CompleteOrder = () => {
                     //   setPopadress("true")
                   }}
                 />
-                <h4 for="huey1">Credit Card</h4>
+                <h4>Credit Card</h4>
               </div>
               <div
                 style={{ display: "flex", gap: "10px", alignItems: "center" }}
@@ -278,10 +286,10 @@ const CompleteOrder = () => {
                   onChange={(e) => {
                     setPayment("Cash");
                     setTestComplete("true");
-                    //   setPopadress("false")
+                    
                   }}
                 />
-                <h4 for="huey2">Cash</h4>
+                <h4>Cash</h4>
               </div>
             </div>
 
@@ -338,11 +346,7 @@ const CompleteOrder = () => {
                 <div>
                   <h3>Card expiry date</h3>
                   <div>
-                    <select
-                      onChange={(e) => {
-                        // setDestin(e.target.value);
-                      }}
-                    >
+                    <select onChange={(e) => {}}>
                       <option>mm</option>
                       <option>01</option>
                       <option>02</option>
@@ -383,36 +387,10 @@ const CompleteOrder = () => {
             )}
           </div>
         </div>
-
       </div>
+       {models?<></>:<></>}
     </div>
   );
 };
 
 export default CompleteOrder;
-/* 
- <div className="mealItems">
-                {Userinfor.yourPrice
-                  ? Userinfor.yourPrice.map((element, index) => {
-                      return (
-                        <div className="div_return_map" keys={index}>
-                          <h3 className="NameMeal">{element.name}</h3>
-                          <div className="insted__div_return_map">
-                            <div className="h3_Qun">
-                              {element.price / element.priceOne}
-                            </div>
-                            <div className="h3_Pri">
-                              {element.priceOne + " JD"}
-                            </div>
-                            <div className="h3_totprice">
-                              {(element.price / element.priceOne) *
-                                element.priceOne +
-                                "  JD"}
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })
-                  : ""}
-              </div>{" "}
-*/
