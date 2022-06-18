@@ -105,12 +105,13 @@ export const NavigationMenu = ({ setIsUsersShown }) => {
         text: "Orders",
         icon: <MdFastfood />,
         onClick: async () => {
+          console.log(superAdminPanel.restaurants.length);
           const { orders } = await Employee.getAllOrder({
             token: auth.token,
             restaurantId:
               User.roleId == "2"
-                ? superAdminPanel.restaurants[0].id
-                : superAdminPanel.restaurants[0].restaurant_id,
+                ?superAdminPanel.restaurants.length? superAdminPanel.restaurants[0].id:1
+                :superAdminPanel.restaurants.length?  superAdminPanel.restaurants[0].restaurant_id:1,
           });
 
           setIsUsersShown(4);
