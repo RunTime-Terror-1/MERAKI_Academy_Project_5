@@ -86,23 +86,40 @@ const CompleteOrder = () => {
       await setMessage("enter all information");
     }
   };
-  const locations = [
+  const locationInputs = [
     { setState: setCity, placeholder: "City" },
     { setState: setArea, placeholder: "Area" },
     { setState: setBuilding, placeholder: "Building Number" },
     { setState: setStreet, placeholder: "Street Name" },
     { setState: setPhone, placeholder: "Phone Number" },
   ];
+  const pastLocation = [
+    { Title: "City", value: pastAddress.city },
+    { Title: "Area", value: pastAddress.area },
+    { Title: "Building #", value: pastAddress.buldingNumber },
+    { Title: "Street Name", value: pastAddress.street },
+    { Title: "Phone", value: pastAddress.notes },
+  ];
 
   const createInput = ({ setState, placeholder }) => {
     return (
       <input
         className="input3"
+        key={placeholder}
         placeholder={placeholder}
         onChange={(e) => {
           setState(e.target.value);
         }}
       />
+    );
+  };
+  //pastLocation
+  const createLocation = ({ Title, value }) => {
+    return (
+      <div key={value + Title} className="location-div">
+        <h3 style={{width:"75%"}}>{Title}: </h3>
+        <small style={{width:"25%"}}>{value}</small>
+      </div>
     );
   };
   const toggleModel = () => {
@@ -173,79 +190,47 @@ const CompleteOrder = () => {
 
         <div id="summery">
           <h1>Location</h1>
-          <div style={{display:"flex"}}>
-          <div style={{display:"flex"}}>
-            <input
-              className="inputSelect"
-              type="radio"
-              id="huey"
-              name="drone"
-              onChange={(e) => {
-                newmessage();
-              }}
-            />
-            <label for="huey">New Address</label>
+          <div style={{ display: "flex" }}>
+            <div style={{ display: "flex" }}>
+              <input
+                className="inputSelect"
+                type="radio"
+                id="huey"
+                name="drone"
+                onChange={(e) => {
+                  newmessage();
+                }}
+              />
+              <label for="huey">New Address</label>
+            </div>
+
+            <div>
+              <input
+                className="inputSelect"
+                type="radio"
+                id="huey"
+                name="drone"
+                onChange={(e) => {
+                  pastmessage();
+                }}
+              />
+              <label for="huey">Past Address</label>
+            </div>
           </div>
 
-          <div>
-            <input
-              className="inputSelect"
-              type="radio"
-              id="huey"
-              name="drone"
-              onChange={(e) => {
-                pastmessage();
-              }}
-            />
-            <label for="huey">Past Address</label>
-          </div>
-          </div>
-         
           <div className="locationTow">
-            <div>
-              {locations.map((element) => {
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              {locationInputs.map((element) => {
                 return createInput({ ...element });
               })}
             </div>
 
-            <div className="userPastLocation">
+            <div>
               {trueValue == "true" ? (
-                <div className="iftrue">
-                  <div className="div45">
-                    <div className="h2h2h2PastLocation">
-                      {" "}
-                      <h2 className="h2h2h2333">City:</h2>
-                    </div>
-                    <h3 className="h2userLocation">Amman</h3>
-                  </div>
-                  <div className="div45">
-                    <div className="h2h2h2PastLocation">
-                      {" "}
-                      <h2 className="h2h2h2333">Area:</h2>
-                    </div>
-                    <h3 className="h2userLocation">{pastAddress.city}</h3>
-                  </div>
-                  <div className="div45">
-                    <div className="h2h2h2PastLocation">
-                      <h2 className="h2h2h2333">street:</h2>
-                    </div>
-                    <h3 className="h2userLocation">{pastAddress.street}</h3>
-                  </div>
-                  <div className="div45">
-                    <div className="h2h2h2PastLocation">
-                      <h2 className="h2h2h2333">buildingNumber:</h2>
-                    </div>
-                    <h3 className="h2userLocation">
-                      {pastAddress.buldingNumber}
-                    </h3>
-                  </div>
-                  <div className="div45">
-                    <div className="h2h2h2PastLocation">
-                      <h2 className="h2h2h2333"> phone:</h2>
-                    </div>
-
-                    <h3 className="h2userLocation">{pastAddress.notes}</h3>
-                  </div>
+                <div id= "location-div-main">
+                  {pastLocation.map((ele) => {
+                    return createLocation({ ...ele });
+                  })}
                 </div>
               ) : (
                 <div className="divimageee">
