@@ -196,8 +196,9 @@ function createRestaurantMeals(elementMall, dispatch, restaurant) {
         <h2 >{elementMall.name}</h2>
         <h4>{"$" + elementMall.price}</h4>
       </div>
-      <div id="add-icon">
+      <div className="add-icon">
         <BsPlusCircleFill
+        className="cart-icon2"
           onClick={() => {
             dispatch(setNameRest({ name: restaurant[0].name }));
             dispatch(setCart({ items: elementMall }));

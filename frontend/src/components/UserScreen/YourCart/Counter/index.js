@@ -35,27 +35,30 @@ const Counter = ({ element }) => {
   };
 
   return (
-    <div >
+    <div>
       <div id="cart-items-div">
         <div>
-          <BsPlusCircleFill
-          className="cart-icon"
-            onClick={() => {
-              nextPrice();
-              dispatch(
-                setPrice({
-                  price: realPrice * priceNumber + realPrice,
-                  indexitem: element.id,
-                  priceOne: realPrice,
-                  name: element.name,
-                })
-              );
-              dispatch(setTotal({ opr: "+", value: realPrice }));
-            }}
-          />
-          <h3 style={{margin:"5px"}}>{priceNumber}</h3>
+          <div className="backg ">
+            <BsPlusCircleFill
+              className="cart-icon"
+              onClick={() => {
+                nextPrice();
+                dispatch(
+                  setPrice({
+                    price: realPrice * priceNumber + realPrice,
+                    indexitem: element.id,
+                    priceOne: realPrice,
+                    name: element.name,
+                  })
+                );
+                dispatch(setTotal({ opr: "+", value: realPrice }));
+              }}
+            />
+          </div>
+          <h3 style={{ margin: "5px" }}>{priceNumber}</h3>
+          <div className="backg ">
           <BsDashCircleFill
-           className="cart-icon"
+            className="cart-icon"
             onClick={() => {
               prevPrice();
               dispatch(
@@ -70,14 +73,16 @@ const Counter = ({ element }) => {
               dispatch(setTotal({ opr: "-", value: realPrice }));
             }}
           />
+          </div>
         </div>
         <div>
           <h2>{element.name}</h2>
           <h4>{realPrice * priceNumber + "JD"}</h4>
         </div>
         <div>
+            
           <AiTwotoneDelete
-           className="cart-icon1"
+            className="cart-icon1"
             onClick={() => {
               dispatch(deleteCart({ id: element.id }));
               dispatch(setTotal({ opr: "-", value: realPrice }));

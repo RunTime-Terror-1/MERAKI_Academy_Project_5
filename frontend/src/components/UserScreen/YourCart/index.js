@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Counter from "./Counter";
 import { useNavigate } from "react-router-dom";
 import { setsumPriceUser, setSumitems } from "../../../redux/reducers/User";
+import { setShowLoginForm } from "../../../redux/reducers/auth";
 
 const YourCart = () => {
   const navigate = useNavigate();
@@ -27,14 +28,28 @@ const YourCart = () => {
   );
 
   const complete = () => {
-    Userinfor.islogin == true ? navigate("/CompleteOrder") : navigate("/Login");
+    Userinfor.islogin == true
+      ? navigate("/CompleteOrder")
+      : dispatch(setShowLoginForm(true));
   };
 
   return (
     <div>
       {Userinfor.yourCart !== 0 && Userinfor.yourCart.length ? (
         Userinfor.yourCart.map((element, index) => {
-          return <div key={index}  style={{ marginTop: "10px", backgroundColor: "transparent",margin:"0",padding:"10px" }}>{<Counter element={element} />}</div>;
+          return (
+            <div
+              key={index}
+              style={{
+                backgroundColor: "transparent",
+                marginTop: "2px",
+                margin: "0",
+                padding: "2px",
+              }}
+            >
+              {<Counter element={element} />}
+            </div>
+          );
         })
       ) : (
         <div id="empty-cart">
@@ -42,15 +57,16 @@ const YourCart = () => {
           <h4>Your cart is empty, add meals to get started 😋</h4>
         </div>
       )}
-      {/* <h1>
+      <h1>
         {Userinfor.yourCart !== 0 && Userinfor.yourCart.length ? (
           <div>
-            <h3>total:{Userinfor.yourTotal}</h3>
+            <h5>Total:{Userinfor.yourTotal}</h5>
             <button
+            className="checkout-btn"
               onClick={() => {
                 complete();
                 dispatch(setsumPriceUser());
-                dispatch(setSumitems())
+                dispatch(setSumitems());
               }}
             >
               Go to the checkout
@@ -59,7 +75,7 @@ const YourCart = () => {
         ) : (
           ""
         )}
-      </h1> */}
+      </h1>
     </div>
   );
 };
