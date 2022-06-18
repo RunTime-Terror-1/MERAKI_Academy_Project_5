@@ -21,9 +21,8 @@ const CompleteOrder = () => {
   const [models, setModels] = useState(false);
   const [showPop, setShowPops] = useState(false);
   const [popAddress, setPopAddress] = useState("false");
-  const [isPast,setIsPast] = useState(false);
-  const [pastAddresses,setPastAddresses] = useState({});
-
+  const [isPast, setIsPast] = useState(false);
+  const [pastAddresses, setPastAddresses] = useState({});
 
   //!.....................................
   let testAddress = "false";
@@ -44,10 +43,8 @@ const CompleteOrder = () => {
   });
 
   const saveAddress = async (id) => {
-    if (messageLocation == "good" && testComplete == "true" ) {
-     
-      if(trueValue == "false"){
-       
+    if (messageLocation == "good" && testComplete == "true") {
+      if (trueValue == "false") {
         await User.UpdateAddress({
           userid: id,
           city: Area,
@@ -55,31 +52,29 @@ const CompleteOrder = () => {
           street: street,
           notes: Phone,
         });
-      }else{
+      } else {
         console.log("iojoijoij");
         await User.UpdateAddress({
           userid: id,
-          ...pastAddresses
+          ...pastAddresses,
         });
       }
-  
     }
   };
 
   //!........................................................
   const getAdress = async (userid) => {
-    const {result} = await User.getaddrssByuserTd({ userid });
+    const { result } = await User.getaddrssByuserTd({ userid });
     if (result[0].street != null) {
       testAddress = "true";
       setTrue("true");
-      setPastAddresses(result[0])
+      setPastAddresses(result[0]);
       console.log(result);
     }
     setPastAddress(result.result[0]);
   };
   //!........................................................
   const pastmessage = () => {
-  
     if (trueValue == "false") {
       setMessage("sorry not have past location please enter");
       setPopAddress("false");
@@ -135,8 +130,8 @@ const CompleteOrder = () => {
   const createLocation = ({ Title, value }) => {
     return (
       <div key={value + Title} className="location-div">
-        <h3 style={{ width: "75%" }}>{Title}: </h3>
-        <small style={{ width: "25%" }}>{value}</small>
+        <h5 style={{ width: "60%" }}>{Title}: </h5>
+        <small style={{ width: "40%",textAlign:"center" }}>{value}</small>
       </div>
     );
   };
@@ -181,10 +176,9 @@ const CompleteOrder = () => {
 
   //!...............................................................
   useEffect(() => {
-    (async()=>{
-      getAdress(localStorage.getItem("userid"));                
-    })()
-    
+    (async () => {
+      getAdress(localStorage.getItem("userid"));
+    })();
   }, []);
 
   //!...............................................................
@@ -253,17 +247,29 @@ const CompleteOrder = () => {
             </div>
           </div>
 
-          <div className="locationTow">
-            <div style={{ display: "flex", flexDirection: "column" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              width: "100%",
+              gap: "10px",
+            }}
+          >
+            <div
+              style={{ display: "flex", flexDirection: "column", width: "49%" }}
+            >
               {locationInputs.map((element) => {
                 return createInput({ ...element });
               })}
             </div>
 
-            <div>
+            <div id="location-div-main">
               {trueValue == "true" ? (
                 <div>
-                  <div id="location-div-main">
+                  <div>
+                    <h4 style={{ borderBottom: "0.5px solid black",margin:"5px" }}>
+                      Your Past Location
+                    </h4>
                     {pastLocation.map((ele) => {
                       return createLocation({ ...ele });
                     })}
@@ -418,17 +424,15 @@ const CompleteOrder = () => {
       </div>
       {showPop ? (
         <div>
-          {!(messageLocation == "good" && testComplete == "true")? (
-            buildPop({
-              title: "Missing Information",
-              text: "Please check your location and payment information",
-            })
-          ) :
-            buildPop({
-              title: "Order State",
-              text: "Order is sent successfully ",
-            })
-          }
+          {!(messageLocation == "good" && testComplete == "true")
+            ? buildPop({
+                title: "Missing Information",
+                text: "Please check your location and payment information",
+              })
+            : buildPop({
+                title: "Order State",
+                text: "Order is sent successfully ",
+              })}
         </div>
       ) : (
         <></>
