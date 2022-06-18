@@ -1,7 +1,8 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=200px height=200px src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fdepositphotos.com%2F84709916%2Fstock-illustration-food-and-restaurant-logo-design.html&psig=AOvVaw3wcrs62GJTyDqxXH-s7EKW&ust=1653246997772000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCKCv6Jin8fcCFQAAAAAdAAAAABAD" alt="Project logo"></a>
-</p>
+
+ <img width=200px height=200px src="https://img.freepik.com/free-vector/restaurant-logo-design-template_79169-56.jpg?w=2000
+"></a>
 
 <h3 align="center">KHK EATS</h3>
 
@@ -9,7 +10,9 @@
 
 <p align="center"> 
 
-    <br> 
+KHK EATS is a website where the user can show the restuarnts , the foods and choose the food by categore 
+ 
+   <br>
 </p>
 
 ## 📝 Table of Contents
