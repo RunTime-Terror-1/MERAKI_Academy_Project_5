@@ -86,7 +86,25 @@ const CompleteOrder = () => {
       await setMessage("enter all information");
     }
   };
+  const locations = [
+    { setState: setCity, placeholder: "City" },
+    { setState: setArea, placeholder: "Area" },
+    { setState: setBuilding, placeholder: "Building Number" },
+    { setState: setStreet, placeholder: "Street Name" },
+    { setState: setPhone, placeholder: "Phone Number" },
+  ];
 
+  const createInput = ({ setState, placeholder }) => {
+    return (
+      <input
+        className="input3"
+        placeholder={placeholder}
+        onChange={(e) => {
+          setState(e.target.value);
+        }}
+      />
+    );
+  };
   const toggleModel = () => {
     setModels(!models);
   };
@@ -128,81 +146,66 @@ const CompleteOrder = () => {
           <h1>Order Summary</h1>
           <h2>{Userinfor.name} Restaurant</h2>
           <div id="summary2">
-          <div className="table-row">
-            <h3>#</h3>
-            <h3>Items</h3>
-            <h3>Quantity</h3>
-            <h3>Price</h3>
-            <h3>Total</h3>
+            <div className="table-row">
+              <h3>#</h3>
+              <h3>Items</h3>
+              <h3>Quantity</h3>
+              <h3>Price</h3>
+              <h3>Total</h3>
+            </div>
+            {Userinfor.yourPrice ? (
+              Userinfor.yourPrice.map((element, index) => {
+                return (
+                  <div key={index} className="table-row">
+                    <strong>{index + 1}</strong>
+                    <strong>{element.name}</strong>
+                    <strong>{element.price / element.priceOne}</strong>
+                    <strong>{element.priceOne}</strong>
+                    <strong>{element.price}</strong>
+                  </div>
+                );
+              })
+            ) : (
+              <></>
+            )}
           </div>
-          {Userinfor.yourPrice ? (
-            Userinfor.yourPrice.map((element, index) => {
-              return (
-                <div key={index} className="table-row">
-                  <strong>{index + 1}</strong>
-                  <strong>{element.name}</strong>
-                  <strong>{element.price / element.priceOne}</strong>
-                  <strong>{element.priceOne}</strong>
-                  <strong>{element.price}</strong>
-                </div>
-              );
-            })
-          ) : (
-            <></>
-          )}
-           </div>
         </div>
 
-        <div className="location">
-          <div className="Enterh2_order">
-            {" "}
-            <h2 className="h2_order   Enter">Enter a new site</h2>
-            <h2 className="h2_order  lastSite "> last site</h2>
+        <div id="summery">
+          <h1>Location</h1>
+          <div style={{display:"flex"}}>
+          <div style={{display:"flex"}}>
+            <input
+              className="inputSelect"
+              type="radio"
+              id="huey"
+              name="drone"
+              onChange={(e) => {
+                newmessage();
+              }}
+            />
+            <label for="huey">New Address</label>
           </div>
 
+          <div>
+            <input
+              className="inputSelect"
+              type="radio"
+              id="huey"
+              name="drone"
+              onChange={(e) => {
+                pastmessage();
+              }}
+            />
+            <label for="huey">Past Address</label>
+          </div>
+          </div>
+         
           <div className="locationTow">
-            <div className="inputLocation">
-              <div className="cityandarea">
-                <input
-                  className="inputtag"
-                  placeholder="City"
-                  onChange={(e) => {
-                    setCity(e.target.value);
-                  }}
-                />
-                <input
-                  className="inputtag"
-                  placeholder="Area"
-                  onChange={(e) => {
-                    setArea(e.target.value);
-                  }}
-                />
-              </div>
-              <div className="cityandarea">
-                <input
-                  className="inputtag"
-                  placeholder="buldingNumber"
-                  onChange={(e) => {
-                    setBuilding(e.target.value);
-                  }}
-                />
-                <input
-                  className="inputtag"
-                  placeholder="stretName"
-                  onChange={(e) => {
-                    setStreet(e.target.value);
-                  }}
-                />
-              </div>
-              <div className="Number">
-                <input
-                  className="inputtagNumber"
-                  placeholder="Number"
-                  onChange={(e) => {
-                    setPhone(e.target.value);
-                  }}
-                />
-              </div>
+            <div>
+              {locations.map((element) => {
+                return createInput({ ...element });
+              })}
             </div>
 
             <div className="userPastLocation">
@@ -256,46 +259,6 @@ const CompleteOrder = () => {
                 </div>
               )}
             </div>
-          </div>
-        </div>
-
-        <div className="selelctadresss">
-          <div className="Selecth2_order">
-            <h2 className="h2_order">Select Address</h2>
-          </div>
-
-          <div className="divnewAdress">
-            <input
-              className="inputSelect"
-              type="radio"
-              id="huey"
-              name="drone"
-              onChange={(e) => {
-                newmessage();
-              }}
-            />
-            <label for="huey">new address</label>
-          </div>
-
-          <div>
-            <input
-              className="inputSelect"
-              type="radio"
-              id="huey"
-              name="drone"
-              onChange={(e) => {
-                pastmessage();
-              }}
-            />
-            <label for="huey">Past address</label>
-          </div>
-
-          <div className="divColorMessage">
-            {messageLocation != "empty" ? (
-              <div className="messageColor">{messageLocation}</div>
-            ) : (
-              ""
-            )}
           </div>
         </div>
 
@@ -465,31 +428,26 @@ const CompleteOrder = () => {
             </div>
           ) : (
             <div>
-              {models && testComplete == 'true' && popadress == 'true' ? (
-               
-                  <div
-                    className="instedModelOne"
-                    onClick={() => {
-                      toggleModel()
-                    }}
-                  >
-                    <div className="BigBiginsted">
-                      <div className="instedModel">
-                        <h2 className="h2h2PleaseCheck">
-                          Order Completed will access you
-                        </h2>
-                        <button
-                          className="CloseButton"
-                          onClick={() => {
-                            toggleModel();
-                            navigate('/');
-                          }}
-                        >
-                          HomePage
-                        </button>
-                      </div>
-
-              
+              {models && testComplete == "true" && popAddress == "true" ? (
+                <div
+                  className="instedModelOne"
+                  onClick={() => {
+                    toggleModel();
+                  }}
+                >
+                  <div className="BigBiginsted">
+                    <div className="instedModel">
+                      <h2 className="h2h2PleaseCheck">
+                        Order Completed will access you
+                      </h2>
+                      <button
+                        className="CloseButton"
+                        onClick={() => {
+                          toggleModel();
+                        }}
+                      >
+                        close
+                      </button>
                     </div>
                   </div>
                 </div>

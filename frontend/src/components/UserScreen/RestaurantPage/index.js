@@ -14,13 +14,13 @@ import { useLocation } from 'react-router-dom'
 
 const RestaurantPage = () => {
   const dispatch = useDispatch()
-  // console.log("start")
+// console.log("start")
   // const { state } = useLocation()
   // const {id} = state
-  // console.log(localStorage.getItem("restaurantId"),"idaaaa")
+    // console.log(localStorage.getItem("restaurantId"),"idaaaa")
 
   const [sumreal, setSumreal] = useState(0)
-  const [restaurant, setRestaurants] = useState([])
+  const [restaurant, setRestaurants] = useState('')
   const [name, setName] = useState('')
   const [menu, setMenu] = useState('')
   const [categories, setCategories] = useState('')
@@ -34,23 +34,19 @@ const RestaurantPage = () => {
       yourPrice: state.User.price,
       sumPrice: state.User.sumPriceUser,
       name: state.User.name,
-      Idrestaurant: state.User.restaurantIdId,
+      Idrestaurant:state.User.restaurantIdId,
     }
   })
 
   const getRestaurant = async () => {
-    // console.log( Userinfor.Idrestaurant,"4242")
+// console.log( Userinfor.Idrestaurant,"4242")
     const responseRestaurant = await User.getRestaurantById({
-      restaurantId: localStorage.getItem('restaurantId'),
+      restaurantId:localStorage.getItem("restaurantId"),
     })
 
-    setRestaurants(responseRestaurant.result)
-    //  console.log(responseRestaurant.result)
-    //  console.log(restaurant)
+    await setRestaurants(responseRestaurant.result)
 
-    const responseMeal = await User.getMealsByRestaurant({
-      restaurantId: localStorage.getItem('restaurantId'),
-    })
+    const responseMeal = await User.getMealsByRestaurant({ restaurantId:localStorage.getItem("restaurantId")})
     setMenu(responseMeal.result)
 
     setCategories(responseMeal.categories)
@@ -67,19 +63,21 @@ const RestaurantPage = () => {
     })
 
     setArrayDetails(arrayLoop)
+
+
   }
 
   useEffect(() => {
     getRestaurant()
   }, [])
-  console.log(restaurant)
+
   return (
     <div className="RestaurantPage">
-      <div>{<NavBar />}</div>
+      <div className="NavBarHere">{<NavBar />}</div>
 
       <div className="Allinformation_One">
         <div className="All_One_map">
-          {restaurant.length
+          {restaurant
             ? restaurant.map((element, index) => {
                 return (
                   <div className="All_One_One_map_returndiv">
@@ -115,9 +113,7 @@ const RestaurantPage = () => {
         </div>
         <div className="Allinformation_One_tow">
           <div className="Allinformation_One_tow_one">
-            <div className="divdivdidv">
-              <h1>{restaurant.length ? restaurant[0].rest_category : ''}</h1>
-            </div>
+            <h1 className="h1h1 G1 ">Group Order</h1>
           </div>
           <div className="Allinformation_One_tow_tow">
             <div className="div1">
@@ -142,7 +138,7 @@ const RestaurantPage = () => {
                   <div className="All_Two-categore_map_return" key={index}>
                     <a href={'#' + index} className="a_atAll">
                       <div className="divButton">
-                        <button className="button">{element}</button>
+                        <button className="button">{element + 'hjhdd'}</button>
                       </div>
                       <i className="i"></i>
                     </a>
@@ -173,6 +169,7 @@ const RestaurantPage = () => {
                             return (
                               <div className="div_Mallloop_2">
                                 <div className="imgbox">
+                                  {' '}
                                   <img
                                     className="eachMealimg"
                                     src={elementMall.imgUrl}
@@ -201,7 +198,7 @@ const RestaurantPage = () => {
                                         indexitem: elementMall.id,
                                         priceOne: elementMall.price,
                                         name: elementMall.name,
-                                        restaurantid: elementMall.restaurant_id,
+                                        restaurantid:elementMall.restaurant_id
                                       }),
                                     )
 
