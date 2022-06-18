@@ -19,7 +19,11 @@ const CompleteOrder = () => {
   const [payment, setPayment] = useState("Cash");
   const [testComplete, setTestComplete] = useState("false");
   const [models, setModels] = useState(false);
+  const [showPop, setShowPops] = useState(false);
   const [popAddress, setPopAddress] = useState("false");
+  const [isPast,setIsPast] = useState(false);
+  const [pastAddresses,setPastAddresses] = useState({});
+
 
   //!.....................................
   let testAddress = "false";
@@ -40,30 +44,42 @@ const CompleteOrder = () => {
   });
 
   const saveAddress = async (id) => {
-    console.log(messageLocation == "good" && testComplete == "true",messageLocation, testComplete);
-    if (messageLocation == "good" && testComplete == "true") {
-      const address = await User.UpdateAddress({
-        userid: id,
-        city: Area,
-        buldingNumber: buildingNumber,
-        street: street,
-        notes: Phone,
-      });
+    if (messageLocation == "good" && testComplete == "true" ) {
+     
+      if(trueValue == "false"){
+       
+        await User.UpdateAddress({
+          userid: id,
+          city: Area,
+          buldingNumber: buildingNumber,
+          street: street,
+          notes: Phone,
+        });
+      }else{
+        console.log("iojoijoij");
+        await User.UpdateAddress({
+          userid: id,
+          ...pastAddresses
+        });
+      }
+  
     }
   };
 
   //!........................................................
   const getAdress = async (userid) => {
-    const pastadess = await User.getaddrssByuserTd({ userid });
-
-    if (pastadess.result[0].street != null) {
+    const {result} = await User.getaddrssByuserTd({ userid });
+    if (result[0].street != null) {
       testAddress = "true";
       setTrue("true");
+      setPastAddresses(result[0])
+      console.log(result);
     }
-    setPastAddress(pastadess.result[0]);
+    setPastAddress(result.result[0]);
   };
   //!........................................................
   const pastmessage = () => {
+  
     if (trueValue == "false") {
       setMessage("sorry not have past location please enter");
       setPopAddress("false");
@@ -75,7 +91,6 @@ const CompleteOrder = () => {
   //!........................................................
 
   const newmessage = async () => {
-    
     if (
       Area != "empty" &&
       Phone != "empty" &&
@@ -85,22 +100,20 @@ const CompleteOrder = () => {
     ) {
       setMessage("good");
     } else {
-       setMessage("enter all information");
+      setMessage("enter all information");
     }
   };
   const locationInputs = [
     { setState: setCity, placeholder: "City" },
-    { setState: setArea, placeholder: "Area" },
     { setState: setBuilding, placeholder: "Building Number" },
     { setState: setStreet, placeholder: "Street Name" },
     { setState: setPhone, placeholder: "Phone Number" },
   ];
   const pastLocation = [
-    { Title: "City", value: pastAddress.city },
-    { Title: "Area", value: pastAddress.area },
-    { Title: "Building #", value: pastAddress.buldingNumber },
-    { Title: "Street Name", value: pastAddress.street },
-    { Title: "Phone", value: pastAddress.notes },
+    { Title: "City", value: pastAddresses.city },
+    { Title: "Building #", value: pastAddresses.buldingNumber },
+    { Title: "Street Name", value: pastAddresses.street },
+    { Title: "Phone", value: pastAddresses.notes },
   ];
 
   const createInput = ({ setState, placeholder }) => {
@@ -125,6 +138,17 @@ const CompleteOrder = () => {
       </div>
     );
   };
+
+  const buildPop = ({ title, text }) => {
+    return (
+      <div id="pop">
+        <div id="inner-pop">
+          <h2>{title}</h2>
+          <h5>{text}</h5>
+        </div>
+      </div>
+    );
+  };
   const toggleModel = () => {
     setModels(!models);
   };
@@ -145,6 +169,7 @@ const CompleteOrder = () => {
   const move = () => {
     if (testComplete == "true" && messageLocation == "good") {
       setTimeout(() => {
+        toggleModel();
         navigate("/");
       }, 2000);
     }
@@ -154,7 +179,10 @@ const CompleteOrder = () => {
 
   //!...............................................................
   useEffect(() => {
-    getAdress(localStorage.getItem("userid"));
+    (async()=>{
+      getAdress(localStorage.getItem("userid"));                
+    })()
+    
   }, []);
 
   //!...............................................................
@@ -201,7 +229,7 @@ const CompleteOrder = () => {
                 id="huey"
                 name="drone"
                 onChange={(e) => {
-                  setMessage("")
+                  setMessage("");
                   newmessage();
                 }}
               />
@@ -215,14 +243,12 @@ const CompleteOrder = () => {
                 id="huey"
                 name="drone"
                 onChange={(e) => {
-                  setMessage("good")
+                  setMessage("good");
                   pastmessage();
                 }}
               />
               <label>Past Address</label>
-              
             </div>
-            
           </div>
 
           <div className="locationTow">
@@ -235,20 +261,16 @@ const CompleteOrder = () => {
             <div>
               {trueValue == "true" ? (
                 <div>
-                <div id="location-div-main">
-                  {pastLocation.map((ele) => {
-                    return createLocation({ ...ele });
-                  })}
-                </div>
+                  <div id="location-div-main">
+                    {pastLocation.map((ele) => {
+                      return createLocation({ ...ele });
+                    })}
+                  </div>
                 </div>
               ) : (
-                <div id="empty-addr" >
-                  <h2 >
-                    You dont have a previous site ..
-                  </h2>
-                  <img
-                    src="http://cdn.onlinewebfonts.com/svg/img_554287.png"
-                  />
+                <div id="empty-addr">
+                  <h2>You dont have a previous site ..</h2>
+                  <img src="http://cdn.onlinewebfonts.com/svg/img_554287.png" />
                 </div>
               )}
             </div>
@@ -286,7 +308,6 @@ const CompleteOrder = () => {
                   onChange={(e) => {
                     setPayment("Cash");
                     setTestComplete("true");
-                    
                   }}
                 />
                 <h4>Cash</h4>
@@ -322,10 +343,15 @@ const CompleteOrder = () => {
                     className="checkout-btn"
                     id="place-btn"
                     onClick={async () => {
-                      saveAddress(Userinfor.userId);
-                      sentUserOrder(Userinfor.userId);
-                      await toggleModel();
+                      console.log(testComplete, "**", models, popAddress);
+                      setShowPops(true);
+                      await saveAddress(Userinfor.userId);
+                      await sentUserOrder(Userinfor.userId);
                       move();
+                      setTimeout(() => {
+                        setShowPops(false);
+                        console.log(testComplete, models, popAddress);
+                      }, 6000);
                     }}
                   >
                     PLACE ORDER
@@ -388,7 +414,23 @@ const CompleteOrder = () => {
           </div>
         </div>
       </div>
-       {models?<></>:<></>}
+      {showPop ? (
+        <div>
+          {!(messageLocation == "good" && testComplete == "true")? (
+            buildPop({
+              title: "Missing Information",
+              text: "Please check your location and payment information",
+            })
+          ) :
+            buildPop({
+              title: "Order State",
+              text: "Order is sent successfully ",
+            })
+          }
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

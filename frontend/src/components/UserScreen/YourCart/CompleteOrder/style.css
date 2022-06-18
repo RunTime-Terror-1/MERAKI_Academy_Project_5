@@ -48,6 +48,42 @@
 #empty-addr img{
   width: 30%;
 }
+#pop{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  background-color: rgba(240, 248, 255, 0.656);
+  top: 0%;
+  left: 0%;
+}
+#inner-pop{
+  width: 50%;
+  height: fit-content;
+  height: fit-content;
+  padding: 5px;
+  width: 50%;
+  max-width:400px;
+  background-color: orange;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px black;
+}
+#inner-pop h2{
+  text-align: start;
+  padding: 5px;
+  font-size: 130%;
+}
+#inner-pop h5{
+  text-align: start;
+  padding: 5px;
+  font-size: 100%;
+}
+
+
+
 #summery {
   border-radius: 10px;
   display: flex;
