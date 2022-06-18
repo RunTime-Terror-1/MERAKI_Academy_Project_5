@@ -78,7 +78,6 @@ const RestaurantPage = () => {
         <div className="All_One_map">
           {restaurant ? (
             restaurant.map((element, index) => {
-              console.log(element);
               return (
                 <div className="All_One_One_map_returndiv">
                   <div>

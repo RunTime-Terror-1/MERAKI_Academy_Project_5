@@ -62,7 +62,7 @@ const YourCart = () => {
           <div>
             <h5>Total:{Userinfor.yourTotal}</h5>
             <button
-            className="checkout-btn"
+              className="checkout-btn"
               onClick={() => {
                 complete();
                 dispatch(setsumPriceUser());

@@ -12,14 +12,9 @@
 
   background-color: rgba(249, 226, 182, 0.307);
   background: linear-gradient(
-    
     var(--first-color),
     rgba(233, 206, 157, 0.53),
-    rgba(249, 226, 182, 0.307)
- 
-    /* rgba(249, 226, 182, 0.307) */
-    
-  
+    rgba(249, 226, 182, 0.307) /* rgba(249, 226, 182, 0.307) */
   );
 }
 
@@ -36,9 +31,8 @@
 
 #info-div {
   display: grid;
-  grid-template-columns: 20% 55% 25%;
+  grid-template-columns: 15% 70% 15%;
   min-width: 100%;
-
   width: 100%;
   border-top: 0.5px solid black;
 }
@@ -123,7 +117,7 @@
 }
 #caty-meals {
   display: grid;
-  grid-template-columns: 48% 48%;
+  grid-template-columns: 31% 31% 31%;
   gap: 2%;
   padding: 10px;
 }
@@ -169,22 +163,20 @@
   scroll-snap-align: 0;
   top: 10%;
 }
-.checkout-btn{
+.checkout-btn {
   width: 90%;
   padding: 10px;
   border-radius: 10px;
-  border:0;
+  border: 0;
   background-color: orange;
   box-shadow: 1px 1px 2px 0.5px black;
   cursor: pointer;
-  
 }
 
-.checkout-btn:hover{
- background-color: green;
- color: white;
+.checkout-btn:hover {
+  background-color: green;
+  color: white;
 }
-
 
 .All_One_One_map_returndiv {
   display: flex;
@@ -235,8 +227,8 @@
 
 .imgback {
   width: 100%;
-  height: 200px;
-  /* border-radius: 20px; */
+  height: 300px;
+  
 }
 
 .textadd22 {
@@ -710,86 +702,18 @@ a:hover i::after{
   /* background-color: darkgreen; */
 }
 
-/*-----EEEend-----*/
-
-/* .Res_two_A_A{
-    display: flex;
-    flex-direction: row;
-    background-color: cyan;
+@media all and (max-width: 500px) {
+  #info-div {
+    display: grid;
+    grid-template-columns: 20% 55% 25%;
+    min-width: 100%;
+    width: 100%;
+    border-top: 0.5px solid black;
+  }
+  #caty-meals {
+    display: grid;
+    grid-template-columns: 48% 48%;
+    gap: 2%;
+    padding: 10px;
+  }
 }
-
-.Res_two_B{
-    display: flex;
-    flex-direction: row;
-  
-
-.Res_two_B_A{
-    width: 10vw;
-    
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-
-    
-
-}
-.Res_two_B_A_first{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    border-radius: 10px;
-    border:inset #f0fff8
-}
-.Res_two_B_A_One{
-    display: flex;
-    flex-direction: column;
-    gap:30px
-}
-.a_atAll{
-    font-size: xx-large;
-    color: #000;
-}
-.Res_two_B_B{
-    width: 60vw;
-
-}
-.Res_two_B_c{
-    width: 20vw;
-  
-}
-
-.Res_two_B_c_One{
-    display: flex;
-    flex-direction: column;
-    border:solid chocolate;
-}
-.Res_three {
-    width: 10vw;
-}
-.div_Mallloop_1{
-    display: flex;
-    flex-direction: row;
-}
-
-.div_Mallloop_2{
-    display: flex;
-    flex-direction: row;
-    background-color: darksalmon;
-}
-
-/* .imagetest{
-    width: 200px;
-    height: 250px;
-}
-
-.imagetest:hover{
-    width: 200px;
-    height: 250px;
-
-    transform: scale(1.3);
-} */
-
-/* 
-html{
-    scroll-behavior: auto;
-}   */
