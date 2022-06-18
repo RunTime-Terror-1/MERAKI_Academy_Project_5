@@ -127,12 +127,64 @@ const RestaurantPage = () => {
       <br />
       <br />
       <br />
-
       <div id="info-div">
-        <div>
-          <h1>CATEGORIES</h1>
+        <div id="main-caty-div">
+          <h2>CATEGORIES</h2>
+          <div id="caty-div">
+            {categories ? (
+              categories.map((element, index) => {
+                return (
+                  <div key={index}>
+                    <a href={"#" + index}>
+                      <div>
+                        <button className="button">{element}</button>
+                      </div>
+                    </a>
+                  </div>
+                );
+              })
+            ) : (
+              <></>
+            )}
+          </div>
+        </div>
+        <div style={{ borderRight: "0.5px solid black" }}>
+         
           <div>
-          {categories ? (
+            {arrayDetails
+              ? arrayDetails.map((element, index) => {
+                  return (
+                    <div >
+                      <h2 id="each-cat-div">{element.catoName}</h2>
+                      <div id="caty-meals">
+                        {element.mallloop
+                          ? element.mallloop.map((elementMall, index) => {
+                              return createRestaurantMeals(
+                                elementMall,
+                                dispatch,
+                                restaurant
+                              );
+                            })
+                          : ""}
+                      </div>
+                      <hr/>
+                    </div>
+                  );
+                })
+              : ""}
+          </div>
+        </div>
+        <div>
+          {" "}
+          <h2>CATEGORIES</h2>
+        </div>
+      </div>
+
+      <div className="Allinformation_Two">
+        <div className="All_Two_categore_Cat">
+          <h1>CATEGORIES</h1>
+          <div className="All_Two-categore_map">
+            {categories ? (
               categories.map((element, index) => {
                 return (
                   <div key={index}>
@@ -149,16 +201,6 @@ const RestaurantPage = () => {
             ) : (
               <></>
             )}
-          </div>
-        </div>
-        <div></div>
-        <div></div>
-      </div>
-      <div className="Allinformation_Two">
-        <div className="All_Two_categore_Cat">
-          <h1>CATEGORIES</h1>
-          <div className="All_Two-categore_map">
-           
           </div>
         </div>
 
@@ -240,3 +282,42 @@ const RestaurantPage = () => {
 };
 
 export default RestaurantPage;
+function createRestaurantMeals(elementMall, dispatch, restaurant) {
+  return (
+    <div id="rest-meal-div">
+      <div>
+        <img className="eachMealimg" src={elementMall.imgUrl} />
+      </div>
+      
+      <div id="meal-details-div">
+        <h2 >{elementMall.name}</h2>
+        <h4>{"$" + elementMall.price}</h4>
+      </div>
+      <div id="add-icon">
+        <BsPlusCircleFill
+          onClick={() => {
+            dispatch(setNameRest({ name: restaurant[0].name }));
+            dispatch(setCart({ items: elementMall }));
+            // console.log(elementMall)
+            dispatch(
+              setPrice({
+                price: elementMall.price,
+                indexitem: elementMall.id,
+                priceOne: elementMall.price,
+                name: elementMall.name,
+                restaurantid: elementMall.restaurant_id,
+              })
+            );
+
+            dispatch(
+              setTotal({
+                opr: "+",
+                value: elementMall.price,
+              })
+            );
+          }}
+        />
+      </div>
+    </div>
+  );
+}
