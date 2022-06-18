@@ -22,7 +22,7 @@ export const NavigationMenu = ({setIsUsersShown}) => {
 
   const userArea = ({
     name = User.userName,
-    imgUrl = User.imgUr,
+    imgUrl = User.imgUrl,
   }) => {
     return (
       <div id="user-img-div">

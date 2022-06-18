@@ -3,8 +3,21 @@ import { hostUrl } from "..";
 
 export class SuperAdmin {
   static async createOwner({ firstName, lastName, email, password, token }) {
+    let dateObj = new Date();
+    let month = dateObj.getUTCMonth() + 1;
+    let day = dateObj.getUTCDate();
+    let year = dateObj.getUTCFullYear();
+    let newDate = year + "/" + month + "/" + day;
     try {
-      const body = { firstName, lastName, email, password };
+      const body = {
+        firstName,
+        lastName,
+        email,
+        password,
+        lastLogin: newDate,
+        imgUrl:
+          "https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png",
+      };
       const response = await axios.post(`${hostUrl}/superAdmin/owner`, body, {
         headers: { authorization: `Bearer ${token}` },
       });
@@ -72,14 +85,14 @@ export class SuperAdmin {
       const response = await axios.get(`${hostUrl}/superAdmin/users`, {
         headers: { authorization: `Bearer ${token}` },
       });
-      
+
       return response.data;
     } catch (error) {
       return {
         success: false,
         massage: "Server Error",
         error,
-        users:[]
+        users: [],
       };
     }
   }

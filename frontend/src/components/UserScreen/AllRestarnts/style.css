@@ -148,19 +148,20 @@ gap: 5px;
 }
 #pagination-div button {
   cursor: pointer;
-  border-radius: 5px;
-  color: white;
-  background-color: var(--third-color);
-  padding: 20px;
+  border-radius: 0px;
+  color: rgb(11, 11, 11);
+  box-shadow: 1px 1px 1px 1px black;
+  background-color:rgb(253, 229, 174);
+  padding: 10px;
   border: 0;
 }
 #pagination-div button:hover {
   background-color: var(--first-color);
   color: black;
-  border-radius: 3px;
+  border-radius: 0px;
 }
 #border {
   height: 100%;
   width: 2px;
-  background-color: rgba(255, 255, 255, 0.379);
+  background-color:rgb(253, 229, 174);
 }

@@ -18,8 +18,8 @@ const AllRestaurants = () => {
   const [currentCategory, setCurrentCategory] = useState(
     state == "all" ? "" : state
   );
-
-  //useRef(initialValue)
+  const [isCategoryClicked, setIsCategoryClicked] = useState(false);
+  const [s, setS] = useState([]);
 
   useEffect(() => {
     getRestaurants();
@@ -33,7 +33,6 @@ const AllRestaurants = () => {
     for (let i = 0; i < totalPages; i++) {
       arr.push(i + 1);
     }
-    console.log(responseRest.result.length,totalPages);
     setTotalPages(totalPages);
     setPageBtn(arr);
   };
@@ -47,6 +46,18 @@ const AllRestaurants = () => {
             return ele.rest_category.toLowerCase().includes(text.toLowerCase());
           });
          
+          setS(arr);
+          setIsCategoryClicked(true);
+          setCurrentIndex(1);
+          setCurrentPage(1);
+          setTotalPages(Math.ceil(arr.length / 9));
+          setCurrentCategory(text.toLowerCase());
+          const arr1 =[];
+          for (let i = 0; i < Math.ceil(arr.length / 9); i++) {
+            arr1.push(i+1)
+          }
+          setPageBtn(arr1);
+
           navigate(`/AllRestarnts/${text.toLowerCase()}`);
         }}
       >
@@ -66,6 +77,7 @@ const AllRestaurants = () => {
         onClick={async () => {
           await localStorage.setItem("restaurantId", element.id);
           dispatch(setrestaurantId({ restId: element.id }));
+
           navigate("/RestaurantPage", {
             state: { id: localStorage.getItem("restaurantId") },
           });
@@ -117,7 +129,7 @@ const AllRestaurants = () => {
     },
     {
       url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLKopRRHoSDAgqTfKGo8tn1y_iggg0CtY-YPVx-5V9elOO0080P-eAJi8zbqtpytywskg&usqp=CAU",
-      text: "Burgess",
+      text: "Burgers",
     },
     {
       url: "https://thumbs.dreamstime.com/b/vector-illustration-heart-shape-red-fruits-vegetables-healthy-nutrition-organic-concept-flat-style-127159995.jpg",
@@ -148,8 +160,9 @@ const AllRestaurants = () => {
           </div>
           <div className="Continert">
             <div id="restaurants-div">
-              {restaurants
-                ? restaurants.map((element, index) => {
+              {!isCategoryClicked ? (
+                restaurants.length ? (
+                  restaurants.map((element, index) => {
                     if (
                       index >= currentIndex - 1 &&
                       index < currentIndex + 8 &&
@@ -160,7 +173,24 @@ const AllRestaurants = () => {
                       return buildRestaurantCard({ element, index });
                     }
                   })
-                : " "}
+                ) : (
+                  <></>
+                )
+              ) : s.length ? (
+                s.map((element, index) => {
+                  if (
+                    index >= currentIndex - 1 &&
+                    index < currentIndex + 8 &&
+                    element.rest_category
+                      .toLowerCase()
+                      .includes(currentCategory)
+                  ) {
+                    return buildRestaurantCard({ element, index });
+                  }
+                })
+              ) : (
+                <></>
+              )}
             </div>
             {pageBtn.length > 1 ? (
               <div id="pagination-div">

@@ -5,6 +5,7 @@ import { Owner } from "../../../../controllers/owner";
 import "./style.css";
 import { CreateRequest } from "./CreateRequest";
 import { CreateRestaurant } from "./CreateRestaurant";
+import{ User} from "../../../../controllers/user"
 
 export const Requests = () => {
   const dispatch = useDispatch();
@@ -37,8 +38,8 @@ export const Requests = () => {
   const createRow = (request, index) => {
     return (
       <div className="user-row" key={request.id + request.email}>
-        <h4>{request.id}</h4>
-        <h4>{request.firstName + " " + request.lastName}</h4>
+        <h4>{index+1}</h4>
+        <h4>{User.userName}</h4>
         <h4>{request.email}</h4>
         <h4>{request.state}</h4>
         <h4>{request.restaurantName}</h4>
@@ -155,7 +156,7 @@ export const Requests = () => {
           <h4>{"restaurant".toUpperCase()}</h4>
           <h4>ACTIONS</h4>
         </div>
-        {superAdminPanel.requests ? (
+        {superAdminPanel.requests.length ? (
           superAdminPanel.requests.map((request, index) => {
             return createRow(request, index);
           })

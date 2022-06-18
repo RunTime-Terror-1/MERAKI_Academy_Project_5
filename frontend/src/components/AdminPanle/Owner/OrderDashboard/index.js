@@ -22,7 +22,7 @@ export const Orders = () => {
   const { superAdminPanel, auth } = useSelector((state) => {
     return state;
   });
-  const [resId, setResId] = useState(superAdminPanel.restaurants[0].id);
+  const [resId, setResId] = useState(superAdminPanel.restaurants.length? superAdminPanel.restaurants[0].id:1);
 
   let ordersId = [];
   const orderMeals = {};

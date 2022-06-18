@@ -14,10 +14,7 @@ import { useLocation } from "react-router-dom";
 
 const RestaurantPage = () => {
   const dispatch = useDispatch();
-  // console.log("start")
-  // const { state } = useLocation()
-  // const {id} = state
-  // console.log(localStorage.getItem("restaurantId"),"idaaaa")
+ 
 
   const [sumreal, setSumreal] = useState(0);
   const [restaurant, setRestaurants] = useState("");
@@ -39,7 +36,7 @@ const RestaurantPage = () => {
   });
 
   const getRestaurant = async () => {
-    // console.log( Userinfor.Idrestaurant,"4242")
+  
     const responseRestaurant = await User.getRestaurantById({
       restaurantId: localStorage.getItem("restaurantId"),
     });
@@ -187,7 +184,7 @@ export default RestaurantPage;
 function createRestaurantMeals(elementMall, dispatch, restaurant) {
   return (
     <div id="rest-meal-div">
-      <div>
+      <div className="imgbox">
         <img className="eachMealimg" src={elementMall.imgUrl} />
       </div>
       
@@ -201,7 +198,7 @@ function createRestaurantMeals(elementMall, dispatch, restaurant) {
           onClick={() => {
             dispatch(setNameRest({ name: restaurant[0].name }));
             dispatch(setCart({ items: elementMall }));
-            // console.log(elementMall)
+      
             dispatch(
               setPrice({
                 price: elementMall.price,

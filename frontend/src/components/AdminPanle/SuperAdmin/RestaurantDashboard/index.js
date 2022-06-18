@@ -50,6 +50,7 @@ export const Restaurants = ({isOwner=false}) => {
   };
 
   const updateRestaurant = async () => {
+    console.log(isOwner);
     if(isOwner){
       await Owner.deleteRestaurant({
         id: currentRestaurant.id,

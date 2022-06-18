@@ -88,7 +88,7 @@ export const CreateRestaurant = ({
       ) : (
         <></>
       )}
-      <div id="signup-form-inner">
+      <div id="create-rest-form-inner">
         <div id="signup--exit-button">
           <button
             onClick={() => {

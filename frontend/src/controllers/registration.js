@@ -15,7 +15,19 @@ export class Registration {
       return error.response.data;
     }
   }
-  static async register({ firstName, lastName, email, password, gender, role =4 }) {
+  static async register({
+    firstName,
+    lastName,
+    email,
+    password,
+    gender,
+    role = 4,
+  }) {
+    let dateObj = new Date();
+    let month = dateObj.getUTCMonth() + 1;
+    let day = dateObj.getUTCDate();
+    let year = dateObj.getUTCFullYear();
+    let newDate = year + "/" + month + "/" + day;
     try {
       const user = {
         firstName,
@@ -23,6 +35,9 @@ export class Registration {
         email,
         password,
         gender,
+        lastLogin: newDate,
+        imgUrl:
+          "https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png",
       };
 
       const response = await axios.post(`${hostUrl}/register/${role}`, user);

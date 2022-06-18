@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import store from "./redux/store";
 
 export const hostUrl = "https://meraki-project5.herokuapp.com";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>

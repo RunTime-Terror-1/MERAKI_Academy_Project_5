@@ -631,9 +631,10 @@ a:hover i::after{
 }
 
 .imgbox {
-  width: 16vw;
+  width:100%;
   height: 30.2vh;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .eachMealimg {
@@ -699,7 +700,6 @@ a:hover i::after{
   width: 180px;
   gap: 30px;
 
-  /* background-color: darkgreen; */
 }
 
 @media all and (max-width: 900px) {

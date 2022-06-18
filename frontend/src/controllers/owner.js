@@ -54,6 +54,7 @@ export class Owner {
     }
   }
   static async createEmployee({
+   
     firstName,
     lastName,
     email,
@@ -64,7 +65,13 @@ export class Owner {
     salary,
     weeklyHours,
     token,
+    
   }) {
+    let dateObj = new Date();
+    let month = dateObj.getUTCMonth() + 1;
+    let day = dateObj.getUTCDate();
+    let year = dateObj.getUTCFullYear();
+    let newDate = year + "/" + month + "/" + day;
     try {
       const body = {
         firstName,
@@ -75,6 +82,8 @@ export class Owner {
         shift,
         salary,
         weeklyHours,
+        lastLogin:newDate,
+        imgUrl:"https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
       };
       const response = await axios.post(
         `${hostUrl}/owner/employee/${restaurant_id}`,
@@ -187,7 +196,9 @@ export class Owner {
     }
   }
   static async deleteRestaurant({ id, token }) {
+    console.log( "id, token");
     try {
+      console.log( id, token);
       const response = await axios.delete(`${hostUrl}/owner/restaurant`, {
         headers: { authorization: `Bearer ${token}` },
         data: { id },
