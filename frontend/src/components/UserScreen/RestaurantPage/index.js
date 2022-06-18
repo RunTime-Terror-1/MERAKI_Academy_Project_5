@@ -173,8 +173,8 @@ const RestaurantPage = () => {
               : ""}
           </div>
         </div>
-        <div>
-          <h1 >Your Cart</h1>
+        <div id ="your-cart-div">
+          <h2  className="each-cat-div">Your Cart</h2>
           {<YourCart />}
         </div>
       </div>

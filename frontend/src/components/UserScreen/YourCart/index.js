@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Counter from "./Counter";
 import { useNavigate } from "react-router-dom";
-import { setsumPriceUser,setSumitems} from "../../../redux/reducers/User";
-
+import { setsumPriceUser, setSumitems } from "../../../redux/reducers/User";
 
 const YourCart = () => {
   const navigate = useNavigate();
@@ -27,31 +26,23 @@ const YourCart = () => {
     }, 0)
   );
 
-
   const complete = () => {
     Userinfor.islogin == true ? navigate("/CompleteOrder") : navigate("/Login");
   };
 
-
   return (
-    <div id="ssss">
+    <div>
       {Userinfor.yourCart !== 0 && Userinfor.yourCart.length ? (
         Userinfor.yourCart.map((element, index) => {
-          return (
-            <div key={index} >
-              {<Counter element={element} />}
-            </div>
-          );
+          return <div key={index}  style={{ marginTop: "10px", backgroundColor: "transparent",margin:"0",padding:"10px" }}>{<Counter element={element} />}</div>;
         })
       ) : (
-        <div >
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2RAmmS3yjdMkpGUh2S858rxj2HB4fzf-4CQ&usqp=CAU" />
-          <h2 >Your cart is empty</h2>
-          <br />
-          <h2 >Add items to get started</h2>
+        <div id="empty-cart">
+          <img src="https://freepngimg.com/thumb/categories/1325.png" />
+          <h4>Your cart is empty, add meals to get started 😋</h4>
         </div>
       )}
-      <h1>
+      {/* <h1>
         {Userinfor.yourCart !== 0 && Userinfor.yourCart.length ? (
           <div>
             <h3>total:{Userinfor.yourTotal}</h3>
@@ -68,7 +59,7 @@ const YourCart = () => {
         ) : (
           ""
         )}
-      </h1>
+      </h1> */}
     </div>
   );
 };

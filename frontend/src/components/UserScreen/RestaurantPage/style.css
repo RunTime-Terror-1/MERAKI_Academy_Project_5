@@ -30,10 +30,9 @@
 
 #info-div {
   display: grid;
-  grid-template-columns: 20% 55% 20%;
+  grid-template-columns: 20% 55% 25%;
   min-width: 100%;
-  padding-left: 1.5%;
-  padding-right: 1.5%;
+
   width: 100%;
   border-top: 0.5px solid black;
 }
@@ -41,10 +40,9 @@
   border-right: 0.5px solid rgb(9, 9, 9);
   width: 100%;
   height: 100vh;
-
   scroll-snap-align: 0;
   position: sticky;
-  top: 0%;
+  top: 10%;
   padding: 5px;
 }
 #main-caty-div h2 {
@@ -87,6 +85,14 @@
   text-align: start;
   background-color: rgba(248, 219, 160, 0.96);
   box-shadow: 1px 1px 5px 0px black;
+}
+#cart-title {
+  font-size: 110%;
+  margin-bottom: 5px;
+  text-transform: capitalize;
+  text-shadow: 0px 1px 1px black;
+  color: rgb(16, 16, 15);
+  text-align: start;
 }
 #meal-details-div h2 {
   font-size: 110%;
@@ -141,6 +147,14 @@
   top: 10px;
   right: 10px;
   cursor: pointer;
+}
+#your-cart-div {
+  width: 100%;
+  position: sticky;
+  height: 100vh;
+  scroll-snap-align: 0;
+  top: 10%;
+
 }
 
 .All_One_One_map_returndiv {
@@ -212,7 +226,7 @@
   font-size: 18px;
   font-weight: normal;
   font-family: UberMoveText, sans-serif;
-  margin-left:90px;
+  margin-left: 90px;
   width: fit-content;
   /* opacity:; */
 }
@@ -228,7 +242,6 @@
   font-weight: 700;
   position: relative;
   margin-left: 10px;
- 
 }
 
 .rating {
@@ -276,7 +289,6 @@
   border-radius: 40px;
 
   position: relative;
- 
 }
 
 .h11 {
