@@ -75,7 +75,7 @@ const Counter = ({ element }) => {
           />
           </div>
         </div>
-        <div>
+        <div className="Kh">
           <h2>{element.name}</h2>
           <h4>{realPrice * priceNumber + "JD"}</h4>
         </div>
