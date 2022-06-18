@@ -123,7 +123,7 @@ export const EditForm = ({ user = {}, setIsEditFormShown }) => {
         </div>
 
         <h1>Update </h1>
-        <h4> it's quick and easy.</h4>
+
         <hr />
         <div id="register-username-div">
           {createInput({
@@ -157,13 +157,7 @@ export const EditForm = ({ user = {}, setIsEditFormShown }) => {
           setState: setPassword,
         })}
 
-        {createInput({
-          placeholder: "Role Id",
-          type: "number",
-          key: "number",
-          name: role_id,
-          setState: setRole,
-        })}
+      
         <Gender setGender={setGender} errors={errors} setErrors={setErrors} />
         <ErrorsDiv errors={errors} />
         <div id="signup-button-div">
