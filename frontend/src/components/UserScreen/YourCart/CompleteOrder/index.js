@@ -492,7 +492,7 @@ const CompleteOrder = () => {
               
                     </div>
                   </div>
-                </div>
+                
               ) : (
                 ""
               )}
