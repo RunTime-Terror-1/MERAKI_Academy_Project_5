@@ -196,7 +196,9 @@ export class Owner {
     }
   }
   static async deleteRestaurant({ id, token }) {
+    console.log( "id, token");
     try {
+      console.log( id, token);
       const response = await axios.delete(`${hostUrl}/owner/restaurant`, {
         headers: { authorization: `Bearer ${token}` },
         data: { id },

@@ -145,6 +145,7 @@ const deleteRequest = (req, res) => {
 };
 const deleteRestaurant = async (req, res) => {
   const { id } = req.body;
+ 
   const query = `UPDATE restaurants SET is_deleted=1 WHERE id=?`;
   connection.query(query, [id], (err, result) => {
     if (err) {
