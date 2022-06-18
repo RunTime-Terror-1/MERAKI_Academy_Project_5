@@ -105,12 +105,14 @@ const CompleteOrder = () => {
   };
   const locationInputs = [
     { setState: setCity, placeholder: "City" },
+    { setState: setArea, placeholder: "Area" },
     { setState: setBuilding, placeholder: "Building Number" },
     { setState: setStreet, placeholder: "Street Name" },
     { setState: setPhone, placeholder: "Phone Number" },
   ];
   const pastLocation = [
     { Title: "City", value: pastAddresses.city },
+    { Title: "Area", value: "Jobiha" },
     { Title: "Building #", value: pastAddresses.buldingNumber },
     { Title: "Street Name", value: pastAddresses.street },
     { Title: "Phone", value: pastAddresses.notes },
