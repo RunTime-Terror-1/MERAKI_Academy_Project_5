@@ -3,11 +3,20 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 const createOwner = async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, password, lastLogin, imgUrl } = req.body;
   const encryptedPassword = await bcrypt.hash(password, saltRounds);
 
-  const query = `INSERT INTO users (firstName, lastName,  email, password, role_id) VALUES (?,?,?,?,?)`;
-  const data = [firstName, lastName, email, encryptedPassword, 2];
+  const query = `INSERT INTO users (firstName, lastName,  email, password, role_id, lastLogin,
+    imgUrl) VALUES (?,?,?,?,?,?,?)`;
+  const data = [
+    firstName,
+    lastName,
+    email,
+    encryptedPassword,
+    2,
+    lastLogin,
+    imgUrl,
+  ];
   connection.query(query, data, (err, result) => {
     if (err) {
       return res.status(409).json({
@@ -48,7 +57,6 @@ const getAllRequests = (req, res) => {
     "SELECT firstName,lastName,restaurantName,state, email, requests.id  FROM users INNER JOIN requests ON requests.owner_id =users.id AND  requests.state=? ";
 
   connection.query(query, ["In Progress"], (err, result) => {
-  
     if (err) {
       return res.status(500).json({
         success: false,

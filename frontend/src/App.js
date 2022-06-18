@@ -22,6 +22,7 @@ const App = () => {
     (async () => {
       const user = await JSON.parse(localStorage.getItem("user"));
       if (user) {
+        console.log(user);
         User.userName = user.userName;
         User.roleId = user.roleId;
         User.imgUrl = user.imgUrl;
@@ -46,10 +47,10 @@ const App = () => {
         <Route path={"/"} element={<ScreenHome />} />
         <Route path={"/joinUs"} element={<ContactUs />} />
         <Route
-          path="/SuperAdminPanel/:name/:random"
+          path="/SuperAdminPanel/:name"
           element={<SuperAdminPanel />}
         />
-        <Route path="/OwnerPanel/:name/:random" element={<OwnerPanel />} />
+        <Route path="/OwnerPanel/:name" element={<OwnerPanel />} />
         <Route path={"/AllRestarnts/:category"} element={<AllRestaurants />} />
         <Route path={"/RestaurantPage"} element={<RestaurantPage />} />
         <Route path={"/login"} element={<LoginComponent />} />

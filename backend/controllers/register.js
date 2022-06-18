@@ -7,17 +7,18 @@ const saltRounds = 10;
 const register = async (req, res) => {
   
   const role_id = req.params.roleId;
-  const { firstName, lastName, email, password ,gender} = req.body;
+  const { firstName, lastName, email, password ,gender,lastLogin,imgUrl} = req.body;
 
   const encryptedPassword = await bcrypt.hash(password, saltRounds);
 
-  const query = `INSERT INTO users (firstName, lastName,  email, password,gender, role_id) VALUES (?,?,?,?,?,?)`;
-  const data = [firstName, lastName, email, encryptedPassword, gender,role_id];
+  const query = `INSERT INTO users (firstName, lastName,email, password,gender, role_id,lastLogin,imgUrl) VALUES (?,?,?,?,?,?,?,?)`;
+  const data = [firstName, lastName, email, encryptedPassword, gender,role_id,lastLogin,imgUrl];
   connection.query(query, data, (err, result) => {
     
     if (err) {
-      console.log(err.message)
+      console.log(err.message);
       return res.status(409).json({
+       
         success: false,
         message: "Email already taken",
         err:err.message

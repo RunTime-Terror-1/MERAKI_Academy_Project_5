@@ -25,7 +25,8 @@ export const NavigationMenu = ({ setIsUsersShown }) => {
     return state;
   });
 
-  const userArea = ({ name = User.userName, imgUrl = User.imgUr }) => {
+  const userArea = ({ name = User.userName, imgUrl = User.imgUrl }) => {
+
     return (
       <div id="user-img-div">
         <div>
@@ -124,8 +125,8 @@ export const NavigationMenu = ({ setIsUsersShown }) => {
             token: auth.token,
             restaurant_id:
               User.roleId == "2"
-                ? superAdminPanel.restaurants[0].id
-                : superAdminPanel.restaurants[0].restaurant_id,
+                ? superAdminPanel.restaurants.length? superAdminPanel.restaurants[0].id:1
+                : superAdminPanel.restaurants.length? superAdminPanel.restaurants[0].restaurant_id:1,
           });
           setIsUsersShown(3);
           dispatch(setMeals(meals));

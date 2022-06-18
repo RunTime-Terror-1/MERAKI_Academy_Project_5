@@ -66,6 +66,7 @@ export const LoginForm = () => {
       User.userName = response.userName;
       User.imgUrl = response.imgUrl;
       User.roleId = response.roleId;
+      console.log(response);
      await localStorage.setItem(
         "user",
         JSON.stringify({
@@ -85,13 +86,13 @@ export const LoginForm = () => {
         dispatch(setShowLoginForm());
         switch (User.roleId) {
           case 1:
-            navigate(`/superAdminPanel/${User.userName}/${User.imgUrl}`);
+            navigate(`/superAdminPanel/${User.userName}`);
             break;
           case 4:
             navigate("/");
             break;
           default:
-            navigate(`/ownerPanel/${User.userName}/${User.imgUrl}`);
+            navigate(`/ownerPanel/${User.userName}`);
             break;
         }
       }

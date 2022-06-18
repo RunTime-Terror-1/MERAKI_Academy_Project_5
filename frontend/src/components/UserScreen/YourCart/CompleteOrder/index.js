@@ -154,7 +154,7 @@ const CompleteOrder = () => {
     if (testComplete == "true" && messageLocation == "good") {
       await User.sentOrder({
         userid: id,
-        state: "progess",
+        state: "In Progress",
         receipt: Userinfor.sumPrice,
         resturantId: Userinfor.yourPrice[0].restaurant,
         mealarray: Userinfor.yourPrice,

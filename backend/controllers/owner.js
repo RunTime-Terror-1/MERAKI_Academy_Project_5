@@ -24,12 +24,13 @@ const createRequest = async (req, res) => {
 
 const createRestaurant = async (req, res) => {
   const ownerId = req.token.userId;
-  const { location, lat, lng, name, Logo, rest_category } = req.body;
-  const query = `INSERT INTO restaurants  ( location, lat, lng, name, Logo, backImg ,rest_category,owner_id) VALUES (?,?,?,?,?,?,?,?)`;
-  const data = [location, lat, lng, name, Logo, Logo, rest_category, ownerId];
+  const { location, name, Logo, rest_category } = req.body;
+  const query = `INSERT INTO restaurants  ( location,  name, Logo, backImg ,rest_category,owner_id) VALUES (?,?,?,?,?,?)`;
+  const data = [location, name, Logo, Logo, rest_category, ownerId];
 
   connection.query(query, data, (err, result) => {
     if (err) {
+      
       return res.status(500).json({
         success: false,
         massage: "Server Error",
@@ -45,6 +46,7 @@ const createRestaurant = async (req, res) => {
 };
 const createEmployee = async (req, res) => {
   const restaurant_id = req.params.restaurant_id;
+ 
   const {
     firstName,
     lastName,
@@ -54,11 +56,23 @@ const createEmployee = async (req, res) => {
     shift,
     salary,
     weeklyHours,
+    lastLogin,
+    imgUrl,
   } = req.body;
   const encryptedPassword = await bcrypt.hash(password, saltRounds);
-  const query = `INSERT INTO users (firstName, lastName,  email, password,gender, role_id) VALUES (?,?,?,?,?,?)`;
+  const query = `INSERT INTO users (firstName, lastName,  email, password,gender, role_id, lastLogin,
+    imgUrl) VALUES (?,?,?,?,?,?,?,?)`;
 
-  const data = [firstName, lastName, email, encryptedPassword, gender, 3];
+  const data = [
+    firstName,
+    lastName,
+    email,
+    encryptedPassword,
+    gender,
+    3,
+    lastLogin,
+    imgUrl,
+  ];
   connection.query(query, data, (err, result) => {
     if (err) {
       return res.status(409).json({

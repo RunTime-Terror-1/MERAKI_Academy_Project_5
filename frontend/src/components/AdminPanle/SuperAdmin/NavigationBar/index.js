@@ -7,7 +7,7 @@ import { User } from "../../../../controllers/user";
 export const NavigationBarPanel = ({setHideMenu ,hideMenu }) => {
   const userArea = ({
     name = User.userName,
-    imgUrl = User.imgUr,
+    imgUrl = User.imgUrl,
   }) => {
     return (
       <div id="user-img2-div">
