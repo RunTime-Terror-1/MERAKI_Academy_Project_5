@@ -1,5 +1,5 @@
 import "./style.css";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { User } from "../../../controllers/user";
 import NavBar from "../NavBar";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,11 +14,12 @@ const AllRestaurants = () => {
   let [totalPages, setTotalPages] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-
   const [pageBtn, setPageBtn] = useState([]);
   const [currentCategory, setCurrentCategory] = useState(
     state == "all" ? "" : state
   );
+
+  //useRef(initialValue)
 
   useEffect(() => {
     getRestaurants();
@@ -32,6 +33,7 @@ const AllRestaurants = () => {
     for (let i = 0; i < totalPages; i++) {
       arr.push(i + 1);
     }
+    console.log(responseRest.result.length,totalPages);
     setTotalPages(totalPages);
     setPageBtn(arr);
   };
@@ -41,7 +43,10 @@ const AllRestaurants = () => {
         key={text}
         id="categoryIcon"
         onClick={() => {
-          setCurrentCategory(text.toLowerCase());
+          const arr = restaurants.filter((ele) => {
+            return ele.rest_category.toLowerCase().includes(text.toLowerCase());
+          });
+         
           navigate(`/AllRestarnts/${text.toLowerCase()}`);
         }}
       >
@@ -76,13 +81,17 @@ const AllRestaurants = () => {
     return (
       <div style={{ display: "flex" }} key={i + "k"}>
         <button
-          style={currentPage === i ? { backgroundColor: "white",color:"black" } : {}}
+          style={
+            currentPage === i
+              ? { backgroundColor: "white", color: "black" }
+              : {}
+          }
           onClick={() => {
             if (currentPage < i) {
               setCurrentIndex(currentIndex + (i - currentPage) * 9);
               setCurrentPage(i);
             } else if (currentPage > i) {
-              setCurrentIndex(currentIndex - ((currentPage - i) * 9));
+              setCurrentIndex(currentIndex - (currentPage - i) * 9);
               setCurrentPage(i);
             }
           }}
@@ -144,7 +153,9 @@ const AllRestaurants = () => {
                     if (
                       index >= currentIndex - 1 &&
                       index < currentIndex + 8 &&
-                      element.rest_category.includes(currentCategory)
+                      element.rest_category
+                        .toLowerCase()
+                        .includes(currentCategory)
                     ) {
                       return buildRestaurantCard({ element, index });
                     }

@@ -1,16 +1,17 @@
 <p align="center">
   <a href="" rel="noopener">
+
  <img width=200px height=200px src="https://img.freepik.com/free-vector/restaurant-logo-design-template_79169-56.jpg?w=2000
 "></a>
-</p>
 
 <h3 align="center">KHK EATS</h3>
 
 ---
 
 <p align="center"> 
-KHK EATS is a website can the user show the restuarnts and the foods and choise the food by categore 
-   
+
+KHK EATS is a website where the user can show the restuarnts , the foods and choose the food by categore 
+ 
    <br>
 </p>
 
