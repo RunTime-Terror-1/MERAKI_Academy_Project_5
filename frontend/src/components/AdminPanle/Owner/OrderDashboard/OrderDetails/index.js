@@ -44,7 +44,7 @@ export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
     }
   };
   return (
-    <div id="signup-form">
+    <div id="order-form12">
       <div id="order-inner">
         <div id="signup--exit-button">
           <button
