@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://res.cloudinary.com/dkldpbnkn/image/upload/v1655601426/Screenshot_2_zqnjlc.png"/>
+  <img src="https://img.freepik.com/free-vector/restaurant-logo-design-template_79169-56.jpg?w=2000"/>
 
 
 <h3 align="center">KHK EATS</h3>
