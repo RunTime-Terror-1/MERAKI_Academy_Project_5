@@ -30,7 +30,7 @@ export const Users = () => {
         <h4>{user.firstName + " " + user.lastName}</h4>
         <h4>{user.email}</h4>
         <h4>{user.role}</h4>
-        <h4>{"user.lastLogin"}</h4>
+        <h4>{user.lastLogin}</h4>
         <div id="edit-btns-div">
           {createButton({
             onClick: () => {
