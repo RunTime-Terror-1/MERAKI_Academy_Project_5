@@ -7,7 +7,7 @@ import { User } from "../../../../controllers/user";
 export const NavigationBarPanel = ({setHideMenu ,hideMenu }) => {
   const userArea = ({
     name = User.userName,
-    imgUrl = User.imgUrl,
+    imgUrl = User.imgUrl?User.imgUrl:"https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png",
   }) => {
     return (
       <div id="user-img2-div">

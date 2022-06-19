@@ -51,6 +51,7 @@ export const CreateRequest = ({setIsRequestDialogShown}) => {
         restaurantName: name,
       });
       const requests = [...superAdminPanel.requests];
+     console.log(requests);
       requests.push({
         ...requests[0],
         id: results.insertId,
