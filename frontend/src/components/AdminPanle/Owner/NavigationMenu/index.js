@@ -26,7 +26,7 @@ export const NavigationMenu = ({ setIsUsersShown }) => {
   });
 
   const userArea = ({ name = User.userName, imgUrl = User.imgUrl }) => {
-
+    console.log(User.imgUrl,User.userName);
     return (
       <div id="user-img-div">
         <div>
