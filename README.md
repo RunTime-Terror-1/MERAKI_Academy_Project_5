@@ -1,8 +1,6 @@
 <p align="center">
-  <a href="" rel="noopener">
+  <img src="https://res.cloudinary.com/dkldpbnkn/image/upload/v1655601426/Screenshot_2_zqnjlc.png"/>
 
-    <img src="https://img.freepik.com/free-vector/restaurant-logo-design-template_79169-56.jpg"/>
- <img  style={{textAlign:center}} width=200px height=200px src="https://img.freepik.com/free-vector/restaurant-logo-design-template_79169-56.jpg?w=2000](https://img.freepik.com/free-vector/restaurant-logo-design-template_79169-56.jpg?w=2000"></a>
 
 <h3 align="center">KHK EATS</h3>
 
