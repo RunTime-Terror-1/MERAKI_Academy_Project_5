@@ -6,6 +6,7 @@ import { Owner } from "../../../../../controllers/owner";
 import { Gender } from "../../../../Registration/Register/GenderDiv";
 import { ErrorsDiv } from "../../../../Registration/Register/ErrorsDiv";
 import { Registration } from "../../../../../controllers/registration";
+import { createOption } from "../../OrderDashboard";
 
 export const CreateEmployee = ({ setIsEmployeeFormShown }) => {
   const [firstName, setFirstName] = useState("");
@@ -14,18 +15,19 @@ export const CreateEmployee = ({ setIsEmployeeFormShown }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   let [errors, setErrors] = useState([]);
-
   const [shift, setShift] = useState("");
   const [salary, setSalary] = useState("");
   const [weeklyHours, setWeeklyHours] = useState("");
   const [restaurant_id, setRestaurant_id] = useState("");
-
   const [isDialogShown, setIsDialogShown] = useState("");
   const dispatch = useDispatch();
 
   const { auth, superAdminPanel } = useSelector((state) => {
     return state;
   });
+  const [resId, setResId] = useState(
+    superAdminPanel.restaurants.length ? superAdminPanel.restaurants[0].id : 1
+  );
   const buildAlertDialog = ({ bgColor, color, text, text2 }) => {
     setTimeout(() => {
       setIsDialogShown(false);
@@ -69,6 +71,7 @@ export const CreateEmployee = ({ setIsEmployeeFormShown }) => {
   };
 
   const createEmployee = async () => {
+   
     const employee = {
       firstName,
       lastName,
@@ -77,7 +80,7 @@ export const CreateEmployee = ({ setIsEmployeeFormShown }) => {
       email,
       shift,
       salary: salary + "$",
-      restaurant_id,
+      restaurant_id:resId,
       weeklyHours,
       token: auth.token,
     };
@@ -165,12 +168,19 @@ export const CreateEmployee = ({ setIsEmployeeFormShown }) => {
           key: "Shift",
           setState: setShift,
         })}
-        {createInput({
-          placeholder: "Restaurant Id",
-          type: "number",
-          key: "Restaurant Id",
-          setState: setRestaurant_id,
-        })}
+      
+        <select
+        className="input"
+          onChange={async (e) => {
+            setResId(superAdminPanel.restaurants[e.target.value].id);
+            console.log(e.target.value);
+          }}
+        >
+          {superAdminPanel.restaurants.map((restaurant, index) => {
+            return createOption(restaurant, index);
+          })}
+        </select>
+
         <div id="register-username-div">
           {createInput({
             placeholder: "Salary",

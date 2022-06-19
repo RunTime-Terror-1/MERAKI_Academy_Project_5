@@ -22,7 +22,6 @@ const App = () => {
     (async () => {
       const user = await JSON.parse(localStorage.getItem("user"));
       if (user) {
-        console.log(user);
         User.userName = user.userName;
         User.roleId = user.roleId;
         User.imgUrl = user.imgUrl;

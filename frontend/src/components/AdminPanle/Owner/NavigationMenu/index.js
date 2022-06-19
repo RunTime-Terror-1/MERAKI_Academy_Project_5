@@ -26,7 +26,6 @@ export const NavigationMenu = ({ setIsUsersShown }) => {
   });
 
   const userArea = ({ name = User.userName, imgUrl = User.imgUrl }) => {
-    console.log(User.imgUrl,User.userName);
     return (
       <div id="user-img-div">
         <div>
@@ -110,8 +109,12 @@ export const NavigationMenu = ({ setIsUsersShown }) => {
             token: auth.token,
             restaurantId:
               User.roleId == "2"
-                ?superAdminPanel.restaurants.length? superAdminPanel.restaurants[0].id:1
-                :superAdminPanel.restaurants.length?  superAdminPanel.restaurants[0].restaurant_id:1,
+                ? superAdminPanel.restaurants.length
+                  ? superAdminPanel.restaurants[0].id
+                  : 1
+                : superAdminPanel.restaurants.length
+                ? superAdminPanel.restaurants[0].restaurant_id
+                : 1,
           });
 
           setIsUsersShown(4);
@@ -126,8 +129,12 @@ export const NavigationMenu = ({ setIsUsersShown }) => {
             token: auth.token,
             restaurant_id:
               User.roleId == "2"
-                ? superAdminPanel.restaurants.length? superAdminPanel.restaurants[0].id:1
-                : superAdminPanel.restaurants.length? superAdminPanel.restaurants[0].restaurant_id:1,
+                ? superAdminPanel.restaurants.length
+                  ? superAdminPanel.restaurants[0].id
+                  : 1
+                : superAdminPanel.restaurants.length
+                ? superAdminPanel.restaurants[0].restaurant_id
+                : 1,
           });
           setIsUsersShown(3);
           dispatch(setMeals(meals));

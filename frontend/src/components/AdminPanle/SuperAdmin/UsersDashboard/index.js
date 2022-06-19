@@ -26,7 +26,7 @@ export const Users = () => {
   const createRow = (user, index) => {
     return (
       <div className="user-row" key={user.id + user.email}>
-        <h4>{user.id}</h4>
+        <h4>{index + 1}</h4>
         <h4>{user.firstName + " " + user.lastName}</h4>
         <h4>{user.email}</h4>
         <h4>{user.role}</h4>
