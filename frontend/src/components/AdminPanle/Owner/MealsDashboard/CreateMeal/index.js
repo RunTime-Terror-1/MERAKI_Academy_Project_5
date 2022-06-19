@@ -3,7 +3,7 @@ import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Employee } from "../../../../../controllers/employee";
-import { SuperAdminPanel } from "../../../SuperAdmin";
+
 import { setMeals } from "../../../../../redux/reducers/superAdmin";
 import { createOption } from "..";
 
@@ -24,7 +24,7 @@ export const CreateMeal = ({
     isUpdate ? currentMeal.category : ""
   );
   const [price, setPrice] = useState(isUpdate ? currentMeal.price : "");
-  const [restaurant_id, setRestaurant_id] = useState(isUpdate ? resId :1);
+  const [restaurant_id, setRestaurant_id] = useState(isUpdate ? resId : 1);
   const [isDialogShown, setIsDialogShown] = useState("");
   const dispatch = useDispatch();
 
@@ -65,6 +65,11 @@ export const CreateMeal = ({
 
   const createMeal = async () => {
     const meal = { category, imgUrl, name, price };
+    console.log({
+      ...meal,
+      restaurant_id,
+      token: auth.token,
+    });
     if (!isUpdate) {
       const response = await Employee.createMeal({
         ...meal,
@@ -86,6 +91,7 @@ export const CreateMeal = ({
         mealId: currentMeal.id,
         token: auth.token,
       });
+
       if (response.success) {
         setIsDialogShown(true);
         const meals = [...superAdminPanel.meals];
@@ -159,6 +165,9 @@ export const CreateMeal = ({
         ) : (
           <select
             style={{ padding: "10px", borderRadius: "5px" }}
+            onClick={(e) => {
+              setRestaurant_id(superAdminPanel.restaurants[e.target.value].id);
+            }}
             onChange={async (e) => {
               setRestaurant_id(superAdminPanel.restaurants[e.target.value].id);
             }}
