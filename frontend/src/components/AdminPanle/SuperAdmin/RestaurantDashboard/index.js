@@ -19,9 +19,7 @@ export const Restaurants = ({isOwner=false}) => {
   const { superAdminPanel, auth } = useSelector((state) => {
     return state;
   });
-  useEffect(() => {
-    console.log(superAdminPanel.restaurants);
-  }, []);
+
 
   const createButton = ({ onClick, text }) => {
     return <button onClick={onClick}>{text}</button>;

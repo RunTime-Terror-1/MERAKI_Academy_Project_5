@@ -8,13 +8,22 @@ import { NavigationBarPanel } from "./NavigationBar";
 import { Restaurants } from "./RestaurantDashboard";
 import { User } from "../../../controllers/user";
 import { ErrorPage } from "../../ErrorPage";
+import { SuperAdmin } from "../../../controllers/superAdmin";
+import { setUsers } from "../../../redux/reducers/superAdmin";
 export const SuperAdminPanel = () => {
   const dispatch = useDispatch();
   const [hideMenu,setHideMenu] = useState(false);
   const [isUsersShown, setIsUsersShown] = useState(0);
-  const { superAdminPanel } = useSelector((state) => {
+  const { superAdminPanel,auth } = useSelector((state) => {
     return state;
   });
+  useEffect(()=>{
+    ( async () => {
+      const {users} = await SuperAdmin.getAllUsers({token:auth.token});
+      setIsUsersShown(0);
+      dispatch(setUsers(users))
+    })()
+  },[])
   
   return User.roleId === 1 ?(
     <div style={{ height:"100%", width: "100vw", display: "flex" }}>
@@ -26,5 +35,5 @@ export const SuperAdminPanel = () => {
           :(isUsersShown === 1?<Requests/>:<Restaurants/>)} 
       </div>
     </div>
-  ):<ErrorPage />;
+  ):<></>;
 };
