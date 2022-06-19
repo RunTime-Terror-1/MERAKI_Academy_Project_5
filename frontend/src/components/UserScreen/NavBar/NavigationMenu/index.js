@@ -16,6 +16,7 @@ import {
 } from "../../../../redux/reducers/auth";
 import { Navigate, useNavigate } from "react-router-dom";
 import { setIsShowMenu } from "../../../../redux/reducers/User";
+import { User } from "../../../../controllers/user";
 
 export const logOut = async ({ dispatch }) => {
   await localStorage.setItem("token", "");
@@ -33,7 +34,7 @@ export const MainNavigationMenu = () => {
   const logoArea = () => {
     return (
       <div id="main-nav-bar-logo-div">
-        <img src="https://img.freepik.com/free-vector/restaurant-logo-design-template_79169-56.jpg?w=2000" />
+        <img  src="https://img.freepik.com/free-vector/restaurant-logo-design-template_79169-56.jpg?w=2000" />
         <p>
           KHK<span>EATS</span>
         </p>
@@ -65,7 +66,7 @@ export const MainNavigationMenu = () => {
         {auth.isLoggedIn ? (
           <div>
             <br />
-            <h3>Welcome Khaled</h3>
+            <h3>Welcome {User.userName}</h3>
             <br />
           </div>
         ) : (
