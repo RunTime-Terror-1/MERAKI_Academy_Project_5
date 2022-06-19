@@ -25,7 +25,7 @@ export const NavigationMenu = ({ setIsUsersShown }) => {
     return state;
   });
 
-  const userArea = ({ name = User.userName, imgUrl = User.imgUrl }) => {
+  const userArea = ({ name = User.userName, imgUrl = User.imgUrl?User.imgUrl:"https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png" }) => {
     return (
       <div id="user-img-div">
         <div>

@@ -66,7 +66,7 @@ export const OwnerPanel = () => {
       </div>
     </div>
   ) : (
-    <ErrorPage />
+    <></>
   );
 };
 //Orders
