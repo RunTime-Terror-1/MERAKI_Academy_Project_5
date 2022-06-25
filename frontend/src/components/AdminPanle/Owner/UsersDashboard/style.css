@@ -28,13 +28,14 @@
   color: black;
   text-align: start;
   padding: 2px;
+  margin-right: 6px;
 }
 
 #adduser-div button {
   color: black;
   text-align: start;
   padding: 4px;
-  margin-right: 6px;
+  
   background-color: rgb(16, 113, 42);
   border-radius: 5px;
   border: 0px;
@@ -78,7 +79,7 @@
   text-align: center;
   font-size: 70%;
   color: white;
-  grid-template-columns:3% 15% 25% 15% 20% 22%;
+  grid-template-columns: 3% 15% 25% 15% 20% 22%;
   align-items: center;
   border-bottom: 2px solid rgba(19, 18, 18, 0.393);
 }
@@ -123,16 +124,16 @@
   color: white;
   background-color: rgba(255, 253, 251, 0.358);
   left: 0;
-  top:0;
+  top: 0;
 }
-#inner-delete-pop{
-height:fit-content;
-width: 300px;
-padding: 10px;
-border-radius: 10px;
-background-color: rgb(34, 35, 36);
+#inner-delete-pop {
+  height: fit-content;
+  width: 300px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgb(34, 35, 36);
 }
 
-#inner-delete-pop button{
+#inner-delete-pop button {
   margin-top: 16px;
-  }
+}

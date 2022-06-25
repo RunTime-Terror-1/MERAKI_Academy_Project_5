@@ -70,7 +70,7 @@ export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
               <div className="meal-row1">
                 <h5>{index + 1}</h5>
                 <h5>{meal.name}</h5>
-                <h5>{meal.quantity}</h5>
+                <h5>{meal.meal_quantity}</h5>
                 <h5>{meal.price} $</h5>
               </div>
             </div>
@@ -90,7 +90,7 @@ export const ShowDetails = ({ currentOrder, setShowDetails, currentIndex }) => {
           <h5>{currentOrder[0].street}</h5>
           <h5>{currentOrder[0].city}</h5>
           <h5>{currentOrder[0].notes}</h5>
-          <h5>{total} $</h5>
+          <h5>{currentOrder[0].receipt} $</h5>
         </div>
         <div id="order-btn">
           <button

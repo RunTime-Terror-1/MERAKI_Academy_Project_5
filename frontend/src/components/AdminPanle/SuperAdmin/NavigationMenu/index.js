@@ -6,7 +6,7 @@ import { MdFastfood } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
 import react, { useEffect, useState } from "react";
 import { SuperAdmin } from "../../../../controllers/superAdmin";
-import { setRequests, setUsers } from "../../../../redux/reducers/superAdmin";
+import { setRequests, setRestaurants, setUsers } from "../../../../redux/reducers/superAdmin";
 
 import { User } from "../../../../controllers/user";
 import { setlogout } from "../../../../redux/reducers/auth";
@@ -74,7 +74,7 @@ export const NavigationMenu = ({setIsUsersShown}) => {
         onClick: async () => {
           const {restaurants} = await SuperAdmin.getAllRestaurants({token:auth.token});
           setIsUsersShown(2);
-          dispatch(setRequests(restaurants))
+          dispatch(setRestaurants(restaurants));
         },
       })}
       <button  onClick = {()=>{

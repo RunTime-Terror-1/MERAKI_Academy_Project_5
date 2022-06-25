@@ -44,7 +44,10 @@ export const Meals = () => {
       <div className="user-row" key={meal.id + meal.name}>
         <h4>{index + 1}</h4>
         <h4>{meal.name}</h4>
+        <div id="meal-img-div">
         <img src={`${meal.imgUrl}`} />
+        </div>
+      
         <h4>{meal.price} $</h4>
         <h4>{meal.category} </h4>
         <div id="edit-btns-div">
