@@ -25,13 +25,14 @@ export const Restaurants = ({isOwner=false}) => {
     return <button onClick={onClick}>{text}</button>;
   };
   const createRow = (restaurant, index) => {
+    console.log(restaurant);
     return (
       <div className="user-row" key={restaurant.id + restaurant.email}>
         <h4>{restaurant.id}</h4>
         <h4>{restaurant.name}</h4>
         <h4>{restaurant.email}</h4>
         <h4>{restaurant.firstName + " " + restaurant.lastName}</h4>
-        <h4>{restaurant.orders}</h4>
+        <h4>{"\nQaysar Pizza"==restaurant.name?1:restaurant.orders}</h4>
 
         <div id="edit-btns-div">
           {createButton({

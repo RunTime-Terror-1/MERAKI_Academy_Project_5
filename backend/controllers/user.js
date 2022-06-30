@@ -165,7 +165,7 @@ const deleteMealFromCart = (req, res) => {
 
 const senOrder = (req, res) => {
   const user_id = req.params.userId;
-  const { state, receipt, resturantId, mealArray, Quntity } = req.body;
+  const { state, receipt, resturantId, mealarray, Quntity } = req.body;
   const query = `INSERT INTO orders(quantity,state,receipt,restaurant_id,user_id) VALUES (?,?,?,?,?);`;
   const data = [Quntity, state, receipt, resturantId, user_id];
   connection.query(query, data, (err, result) => {
@@ -178,13 +178,15 @@ const senOrder = (req, res) => {
       });
     }
     if (result) {
-      mealArray.map((element, index) => {
+      console.log("mealarray ", mealarray);
+      mealarray.map((element, index) => {
         let quantity = element.price / element.priceOne;
         let mealId = element.id;
-        const orderMeal = `INSERT INTO orders_meals (quantity,order_id,meal_id) VALUES (?,?,?)`;
+        const orderMeal = `INSERT INTO orders_meals (meal_quantity,order_id,meal_id) VALUES (?,?,?)`;
         const data = [quantity, result.insertId, mealId];
         connection.query(orderMeal, data, (err, re3) => {
           if (err) {
+            console.log("err ",err);
             return res.status(500).json({
               success: false,
               message: err,
@@ -193,7 +195,9 @@ const senOrder = (req, res) => {
         });
       });
     }
-    res.status(200).json({
+    console.log("result ", result);
+
+    return res.status(200).json({
       success: true,
       massage: `Succeeded to sent meal `,
       result: result,

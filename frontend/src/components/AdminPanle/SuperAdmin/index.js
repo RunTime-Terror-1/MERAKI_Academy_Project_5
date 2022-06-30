@@ -26,9 +26,9 @@ export const SuperAdminPanel = () => {
   },[])
   
   return User.roleId === 1 ?(
-    <div style={{ height:"100%", width: "100vw", display: "flex" }}>
+    <div style={{ height:"100%",display: "flex" }}>
       {hideMenu?<NavigationMenu setIsUsersShown={setIsUsersShown} />:<></>}
-      <div style={{ color: "red", width: "100%" }}>
+      <div style={{ height:"100%", width:"100%"}}>
         <NavigationBarPanel setHideMenu={setHideMenu} hideMenu={hideMenu}/>
         {isUsersShown === 0
           ? <Users/>

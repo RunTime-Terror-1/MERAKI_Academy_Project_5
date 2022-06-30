@@ -47,7 +47,7 @@ export const Orders = () => {
         <h4>{index + 1}</h4>
         <h4>{order.state}</h4>
         <h4>{order.notes}</h4>
-        <h4>{order.receipt} $</h4>
+        <h4>{order.receipt}</h4>
         <h4>{orderMeals[order.id][0].quantity} </h4>
         <div id="edit-btns-div">
           {order.state === "In Progress"
