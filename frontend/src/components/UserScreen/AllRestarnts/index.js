@@ -19,7 +19,7 @@ const AllRestaurants = () => {
     state == "all" ? "" : state
   );
   const [isCategoryClicked, setIsCategoryClicked] = useState(false);
-  const [s, setS] = useState([]);
+  const [categoriesRest, setS] = useState([]);
 
   useEffect(() => {
     getRestaurants();
@@ -176,8 +176,8 @@ const AllRestaurants = () => {
                 ) : (
                   <></>
                 )
-              ) : s.length ? (
-                s.map((element, index) => {
+              ) : categoriesRest.length ? (
+                categoriesRest.map((element, index) => {
                   if (
                     index >= currentIndex - 1 &&
                     index < currentIndex + 8 &&

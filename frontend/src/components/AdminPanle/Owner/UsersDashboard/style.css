@@ -48,12 +48,6 @@
   background-color: rgb(42, 165, 126);
 }
 
-.user-dashboard {
-  background-color: rgba(18, 59, 77, 0.915);
-  border: 2px solid black;
-  width: 100%;
-  margin-left: 1px;
-}
 
 .user-row {
   display: grid;

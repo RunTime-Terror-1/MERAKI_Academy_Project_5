@@ -85,7 +85,7 @@ export const Users = () => {
     );
   };
   return (
-    <div>
+    <div style={{width:"100%"}}>
       {isRegisterShown ? (
         <RegisterComponent
           superAdminRegister={true}

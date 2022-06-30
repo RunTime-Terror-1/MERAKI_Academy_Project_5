@@ -50,7 +50,7 @@ export const OwnerPanel = () => {
   return User.roleId == 2 || User.roleId == 3 ? (
     <div style={{ width: "100vw", display: "flex" }}>
       {hideMenu ? <NavigationMenu setIsUsersShown={setIsUsersShown} /> : <></>}
-      <div style={{ color: "red", width: "100%" }}>
+      <div style={{ height:"100%", width:"100%"}}>
         <NavigationBarPanel setHideMenu={setHideMenu} hideMenu={hideMenu} />
         {isUsersShown === 0 ? (
           <Users />
