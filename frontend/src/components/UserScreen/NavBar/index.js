@@ -66,7 +66,7 @@ const NavBar = () => {
             dispatch(setIsShowMenu());
           }}
         />
-        <a href="https://spectacular-sunflower-7b63c6.netlify.app/">
+        <a href="/">
           <img src="https://img.freepik.com/free-vector/restaurant-logo-design-template_79169-56.jpg?w=2000" />
           <p>
             KHK<span>EATS</span>
@@ -94,7 +94,7 @@ const NavBar = () => {
 
       <div id="main-nav-bar-btns">
         <a
-        href="https://spectacular-sunflower-7b63c6.netlify.app/AllRestarnts/all"
+        href="/AllRestarnts/all"
           onClick={() => {
             navigate("/AllRestarnts/all",{state:"all"});
           }}
