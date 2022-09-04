@@ -38,6 +38,7 @@ const App = () => {
   const auth = useSelector((state) => {
     return state.auth;
   });
+  //
   return (
     <div className="App">
       {auth.showLoginForm ? <LoginComponent /> : <></>}
